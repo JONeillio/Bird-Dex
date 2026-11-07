@@ -21,14 +21,14 @@ Evens lesson: probe cheaply and write down what the API really does before desig
 1. **eBird probe.** A tap-to-run GitHub Action (`workflow_dispatch`, key from the existing secret) that fetches hotspots and recent observations near Chorlton and prints a summary only: counts, field names, latest-per-species behaviour, rate behaviour. Raw responses are not committed. Output: an "eBird facts" section in CLAUDE.md.
 2. **Routing probe.** Same pattern against `api.heigit.org`: one origin (a public landmark, not a home address) to about 20 destinations. Check matrix limits, units (seconds, metres) and error behaviour.
 3. **Map source audit (handoff A0).** Read the real OpenFreeMap TileJSON and source layers; record the woodland/park/water/road mapping instead of guessing property names.
-4. **Anchor birds (handoff B0).** Robin, kingfisher, grey heron at 64 px (and 96 if needed), then freeze one grid. `art/prompts/anchor-birds.md` was not in the uploaded files; it needs recreating or sending.
+4. **Anchor birds (handoff B0).** Robin, kingfisher, grey heron at 64 px (and 96 if needed), then freeze one grid. Briefs are in `research/art-rendering/art/prompts/anchor-birds.md`; once one anchor is accepted it should be used as a style reference for the rest.
 
 Exit: a short facts doc for each, and a go/no-go on the 30/60/90 drive filter.
 
 ## 2. Demo-mode vertical slice (the real build starts here)
 
 Order within the slice:
-1. Scaffold, design tokens (green/cream palette from the art contract), PWA shell, three tabs, labelled demo fixtures.
+1. Scaffold, design tokens (start from `research/archive/design-tokens.json` and the art contract palette), domain types (start from `research/archive/contracts/domain.ts`), PWA shell, three tabs, labelled demo fixtures.
 2. Finite Chorlton-area species catalogue with stable species IDs and a fixed denominator.
 3. BirdDex grid and Bird profile using placeholders with species names always visible.
 4. Journal and "Log a sighting", stored in IndexedDB, with the collection reveal. Reload must keep it.
@@ -39,7 +39,7 @@ Exit: map → site → bird → log → reveal → reload works on a phone, enti
 
 ## 3. Go live
 
-1. Worker with eBird and routing adapters; validate responses into app-owned types; timeouts, bounded retries, short caching, request budgets (`skills/free-api-budgeting`).
+1. Worker with eBird and routing adapters; validate responses into app-owned types; timeouts, bounded retries, short caching, request budgets (`skills/free-api-budgeting`). Suggested cache expiries to check against the terms: hotspots daily, reports 15 minutes, drive times 24 hours. Add per-visitor request limits and a simple private access gate, so strangers who find the URL can't burn the eBird and routing quotas (foundation plan acceptance criterion 9).
 2. Explicit start-point picker; one-to-many drive times; 30/60/90 filter; unknown route = "unknown".
 3. Site sheet with real reports, dates and source links; "unrecorded" and target filters; ranking (distinct unrecorded species, newest report, drive time).
 4. Attribution at the point of display (eBird on sightings, HeiGIT/OpenStreetMap on routes).
@@ -73,6 +73,9 @@ Hosted test on his phone, real data check, backup explained, credits visible. No
 - Routing origin privacy: keep the public-start-point rule until the provider position is resolved.
 - AI-generated sprites need grid cleanup and species checks, not just resizing.
 
-## Known gaps in the files supplied
+## Files and where they live
 
-`art/prompts/anchor-birds.md` and `archive/` (earlier foundation pack and TypeScript contracts) are referenced but were not uploaded. Research is filed under `research/` (per its README) rather than `docs/`, which stays free as a possible Pages root.
+All supplied material is now in the repo. Research sits under `research/` (per its README) rather than `docs/`, which stays free as a possible Pages root.
+
+- `research/art-rendering/art/prompts/anchor-birds.md`: the three anchor bird briefs.
+- `research/archive/`: the earlier foundation plan, next-model handoff, `design-tokens.json` and `contracts/domain.ts`. The handoff takes precedence where they differ, but the domain types and tokens are the intended starting point for step 2 (they are proposals, not tested provider schemas).

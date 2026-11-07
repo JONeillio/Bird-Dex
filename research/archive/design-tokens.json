@@ -1,0 +1,52 @@
+{
+  "status": "proposed-design-tokens-not-an-implemented-theme",
+  "workingName": "BirdQuest",
+  "palette": {
+    "paper": "#F7F2DE",
+    "panel": "#FFFBEF",
+    "ink": "#213B32",
+    "forest": "#35614B",
+    "sage": "#A9C58A",
+    "grass": "#D2DDA9",
+    "water": "#7DB8C6",
+    "waterDeep": "#438CA8",
+    "road": "#EAD9AC",
+    "discovery": "#D8A84B",
+    "robinAccent": "#C96E53",
+    "mutedText": "#526454"
+  },
+  "typography": {
+    "headings": "legible pixel display face, chosen and licensed at implementation",
+    "body": "system sans-serif",
+    "bodyMinimumCssPx": 16,
+    "usePixelFaceForLongText": false
+  },
+  "art": {
+    "birdPortraitNativePx": 64,
+    "markerNativePx": 32,
+    "scale": "integer-multiples-with-nearest-neighbour-for-raster-art",
+    "portraitBackground": "transparent",
+    "style": "original-retro-handheld-real-bird-pixel-art",
+    "missingArt": "labelled-species-fallback-never-hide-species"
+  },
+  "interaction": {
+    "minimumTapTargetCssPx": 44,
+    "mapModes": ["Adventure", "Field"],
+    "mainTabs": ["Map", "BirdDex", "Journal"],
+    "driveLimitMinutes": [30, 60, 90],
+    "defaultDriveLimitMinutes": 60,
+    "defaultReportWindowDays": 7,
+    "audioDefault": "off",
+    "supportsReducedMotion": true
+  },
+  "map": {
+    "data": "real-vector-geography",
+    "gameSkinMustPreserveGeometry": true,
+    "birdsRepresent": "reports-associated-with-sites-not-live-bird-positions",
+    "keepAttributionVisible": true,
+    "preserveSelectionAndCameraOnModeChange": true
+  },
+  "review": {
+    "note": "Colour contrast, font licensing, mobile map performance and exact API-supported filter options require implementation validation."
+  }
+}

@@ -25,6 +25,6 @@ Keep this material under `research/`. Move/adapt production code and assets into
 
 The active handoff takes precedence over archived early planning. Do not create a second repo from an old name suggestion. Inspect existing app files and repository instructions before implementation; preserve unrelated changes. Workspace/Actions secrets do not automatically configure the deployed host, and must not be bundled into frontend code.
 
-## Archive
+## Archive (now included)
 
 [Original foundation material](archive/README.md) preserves the earlier product plan and proposed TypeScript contracts/design tokens. Its old next-model brief is historical; use the current build handoff above.
