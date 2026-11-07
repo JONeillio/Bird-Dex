@@ -374,36 +374,47 @@
 .map-note { position: absolute; inset: auto 0 45% 0; text-align: center; font-weight: 800; color: var(--muted); padding: 0 20px; }
 .maplibregl-ctrl-attrib { font-size: 11px; }
 
-.pin { z-index: 3; display: flex; flex-direction: column; align-items: center; padding: 0; background: none; border: 0; cursor: pointer; min-width: 44px; min-height: 44px; }
-.pin-body { position: relative; display: grid; place-items: center; width: 44px; height: 44px; background: var(--panel); border: 3px solid var(--ink); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 2px 2px 0 rgba(33, 59, 50, 0.35); }
-.pin-body img { transform: rotate(45deg); }
-.pin.target .pin-body { background: #fbe1d7; border-color: var(--coral); }
-.pin.selected .pin-body { box-shadow: 0 0 0 4px var(--forest); }
-.pin-badge { position: absolute; top: -10px; left: 30px; padding: 0 5px; background: var(--discovery); border: 2px solid var(--ink); border-radius: 6px; font-family: var(--font-display); font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--ink); }
-.start-pin { z-index: 2; padding: 2px 8px; background: var(--ink); color: var(--panel); border-radius: 6px; font-weight: 800; font-size: 13px; box-shadow: 0 0 0 2px var(--panel); }
+.start-pin { z-index: 1; width: 16px; height: 16px; background: var(--ink); border: 3px solid var(--panel); border-radius: 50%; box-shadow: 0 0 0 2px var(--ink); pointer-events: none; }
 
-.bird-sprite { z-index: 2; padding: 0; background: none; border: 0; pointer-events: auto; }
-.bird-sprite img { display: block; image-rendering: pixelated; }
-.bird-sprite.flip img { transform: scaleX(-1); }
-.bird-sprite.hop img { animation: bird-hop var(--dur, 1.8s) steps(1) var(--delay, 0s) infinite; }
-.bird-sprite.flip.hop img { animation-name: bird-hop-flip; }
-.bird-sprite.fly { z-index: 4; pointer-events: none; }
-.bird-sprite.fly img { animation: bird-flap 0.24s steps(1) infinite; }
-.bird-sprite.fly.flip img { animation-name: bird-flap-flip; }
-.bird-sprite.landed { opacity: 0; transition: opacity 1.2s steps(4); }
-@keyframes bird-hop { 0%, 60%, 100% { transform: translateY(0); } 70% { transform: translateY(-5px); } 80% { transform: translateY(-2px); } }
-@keyframes bird-hop-flip { 0%, 60%, 100% { transform: scaleX(-1) translateY(0); } 70% { transform: scaleX(-1) translateY(-5px); } 80% { transform: scaleX(-1) translateY(-2px); } }
-@keyframes bird-flap { 0% { transform: scaleY(1); } 50% { transform: scaleY(0.82) translateY(3px); } }
-@keyframes bird-flap-flip { 0% { transform: scaleX(-1); } 50% { transform: scaleX(-1) scaleY(0.82) translateY(3px); } }
+/* Map markers. Roles: ordinary site pin, target flag, grouped "N spots", and the one selected site. */
+.mk { position: relative; display: block; padding: 0; background: none; border: 0; cursor: pointer; }
+.mk img { position: absolute; display: block; image-rendering: pixelated; pointer-events: none; }
+.mk-site { z-index: 2; width: 44px; height: 46px; }
+.mk-site img { left: 7px; bottom: 0; }
+.mk-target { z-index: 3; width: 44px; height: 48px; }
+.mk-target img { left: 17px; bottom: 0; } /* the pole foot sits on the coordinate */
+.mk-cluster { z-index: 4; min-width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+.cl-body { display: flex; align-items: baseline; gap: 5px; padding: 3px 9px 4px; background: var(--panel); border: 3px solid var(--ink); border-radius: 10px; box-shadow: 2px 2px 0 rgba(33, 59, 50, 0.35); white-space: nowrap; }
+.cl-body b { font-weight: 900; font-size: 20px; line-height: 1; color: var(--ink); }
+.cl-body span { font-weight: 800; font-size: 13px; color: var(--muted); }
+.mk-cluster .cl-flag { position: absolute; right: -2px; top: -4px; left: auto; }
+.mk-selected { z-index: 6; width: 56px; height: 68px; filter: drop-shadow(0 3px 0 rgba(33, 59, 50, 0.3)); }
+.mk-sel-shape { position: absolute; left: 0; top: 0; }
+.sel-hit { position: absolute; inset: -4px -6px 0 -6px; padding: 0; background: none; border: 0; cursor: pointer; }
+.sel-more { position: absolute; left: 40px; top: -8px; min-width: 34px; height: 26px; padding: 0 6px; background: var(--panel); border: 3px solid var(--coral); border-radius: 9px; font-weight: 900; font-size: 15px; color: var(--ink); cursor: pointer; box-shadow: 2px 2px 0 rgba(33, 59, 50, 0.35); }
+.mk-selected .sel-bird { left: 12px; top: 10px; animation: sel-bob 2.4s steps(1) infinite; }
+.mk-selected .sel-glyph { left: 13px; top: 6px; }
+.mk-selected .sel-flag { left: -14px; top: 4px; }
+@keyframes sel-bob { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-3px); } 90% { transform: translateY(-1px); } }
+@media (prefers-reduced-motion: reduce) { .mk-selected .sel-bird { animation: none; } }
 
-.quest { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; display: flex; gap: 12px; align-items: center; padding: 10px 12px; }
-.quest-bird { flex: none; width: 64px; height: 64px; }
-.quest-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-.quest-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
-.quest-kicker { font-family: var(--font-display); font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.quest-title { font-size: 17px; line-height: 1.2; }
-.quest-actions { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
-
+/* The compact card for the selected site: same shape every time, so long names can't grow it. */
+.site-card { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; display: flex; flex-direction: column; gap: 3px; padding: 5px 12px 7px; }
+.card-stamp { position: absolute; top: -12px; left: 12px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; }
+.site-card .card-name { font-family: var(--font-display); font-size: 20px; line-height: 26px; height: 26px; min-height: 0; display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn.card-next { flex: none; min-height: 30px; padding: 0 8px; font-size: 14px; }
+.card-line { font-size: 14px; line-height: 1.25; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-count-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.card-count { font-weight: 800; font-size: 15px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn.card-view { flex: none; min-height: 36px; }
+.bird-strip { list-style: none; display: flex; align-items: center; gap: 4px; margin: 2px 0 0; padding: 0; overflow: hidden; }
+.strip-bird { position: relative; display: grid; place-items: center; width: 36px; height: 36px; background: var(--paper); border: 2px solid var(--ink); border-radius: 8px; opacity: 0.55; }
+.strip-bird.new { opacity: 1; background: #fff6d8; }
+.strip-bird.new::after { content: ''; position: absolute; top: -4px; right: -4px; width: 9px; height: 9px; background: var(--discovery); border: 2px solid var(--ink); border-radius: 50%; }
+.strip-bird img { image-rendering: pixelated; }
+.strip-more { flex: none; padding: 0 6px; font-weight: 800; font-size: 14px; color: var(--muted); }
+.site-designation { margin: 2px 0 0; }
 .site-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .site-name { font-size: 24px; line-height: 1.1; }
 .site-facts { margin: 8px 0 10px; }
@@ -417,7 +428,3 @@
 .other-birds summary { font-weight: 800; min-height: 40px; display: flex; align-items: center; cursor: pointer; }
 .credit { margin-top: 14px; }
 .map-error { inset: 8px 50px auto 10px; text-align: left; font-size: 13px; background: var(--panel); border: 2px solid var(--ink); border-radius: 8px; padding: 4px 8px; }
-.mini { z-index: 1; position: relative; display: flex; align-items: flex-end; justify-content: center; width: 44px; height: 52px; padding: 0; background: none; border: 0; cursor: pointer; }
-.mini img { image-rendering: pixelated; display: block; }
-.mini .mini-flag { position: absolute; left: 2px; top: 6px; }
-.pin-flag { position: absolute; left: -8px; top: -14px; pointer-events: none; image-rendering: pixelated; }

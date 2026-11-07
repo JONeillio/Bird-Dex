@@ -1,6 +1,8 @@
 import { dexById } from '../../data/catalogue'
 import type { RegionData } from '../../data/published-schema'
-import { ageLabel, daysAgo, type SiteView } from '../../domain/ranking'
+import { DEX_SIZE } from '../../data/catalogue'
+import { ageLabel, daysAgo, reportedCount, type SiteView } from '../../domain/ranking'
+import { fullDesignation, shortSiteName } from '../../domain/siteName'
 import { BottomSheet, DemoStamp, Pill } from '../../ui/components'
 import { birdSrc } from './birdArt'
 
@@ -17,20 +19,29 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
   const dex = site.reports.filter((r) => r.speciesId)
   const other = site.reports.filter((r) => !r.speciesId)
   const [lng, lat] = site.point
+  const designation = fullDesignation(site.name)
+  const reported = reportedCount(site)
+  const n = view.newIds.length
   return (
-    <BottomSheet open onClose={onClose} title={site.name}>
+    <BottomSheet open onClose={onClose} title={shortSiteName(site.name)}>
       <div className="site-head">
-        <h2 className="h-display site-name">{site.name}</h2>
+        <h2 className="h-display site-name">{shortSiteName(site.name)}</h2>
         {region.isDemo && <DemoStamp />}
       </div>
+      {designation && <p className="muted small site-designation">Listed on eBird as: {designation}</p>}
       <p className="site-facts">
         <strong>{minutes !== null ? `${minutes} min from ${startLabel}` : 'Drive time unknown'}</strong>
         <br />
+        <strong>
+          {n} of {reported} reported species new to you
+        </strong>
+        <br />
         <span className="muted small">
-          {region.isDemo ? 'Invented demo sightings' : `Updated ${ageLabel(region.generatedAt)}`} · reports from the last {region.windowDays} days
-          <br />
-          Access unknown, check before you go. Birds move about: these are recent reports, not live positions.
+          New to you means reported here in the last {region.windowDays} days and not yet in your collection. Counted from the {DEX_SIZE}-bird Starter Dex; other birds are listed separately below.
         </span>
+      </p>
+      <p className="muted small">
+        {region.isDemo ? 'Invented demo sightings' : `Updated ${ageLabel(region.generatedAt)}`}. Access unknown, check before you go. Birds move about: these are recent reports, not live positions.
       </p>
       <div className="row gap">
         <a className="btn primary small" href={`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`} target="_blank" rel="noopener">
@@ -55,7 +66,7 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
               <a href={`#/bird/${r.speciesId}`} className="report-main">
                 {src && <img src={src} width={40} height={40} alt="" />}
                 <span>
-                  <strong>{s?.name ?? r.name}</strong> {isNew && <Pill tone="warn">NEW</Pill>} {targets.includes(r.speciesId!) && <Pill>☆ Target</Pill>}
+                  <strong>{s?.name ?? r.name}</strong> {isNew && <Pill tone="warn">New to you</Pill>} {targets.includes(r.speciesId!) && <Pill>☆ Target</Pill>}
                   <br />
                   <span className="muted small">
                     Last reported {daysAgo(r.obsDate)}

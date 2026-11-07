@@ -89,6 +89,37 @@ export function rankSites(views: SiteView[], targets: readonly string[] = []): S
   )
 }
 
+export interface BirdChip {
+  speciesId: string
+  obsDate: string
+  isNew: boolean
+}
+
+/**
+ * Starter Dex birds reported at a site, for the card's collection strip: species new to you first, then the
+ * rest, each group newest report first. One entry per species. Reports are not live positions.
+ */
+export function recentBirds(site: Site, recorded: ReadonlySet<string>): BirdChip[] {
+  const seen = new Set<string>()
+  const out: BirdChip[] = []
+  for (const r of site.reports) {
+    if (!r.speciesId || seen.has(r.speciesId)) continue
+    seen.add(r.speciesId)
+    out.push({ speciesId: r.speciesId, obsDate: r.obsDate, isNew: !recorded.has(r.speciesId) })
+  }
+  return out.sort((a, b) => Number(b.isNew) - Number(a.isNew) || b.obsDate.localeCompare(a.obsDate) || a.speciesId.localeCompare(b.speciesId))
+}
+
+/** Distinct species new to you across several sites: a bird reported at three sites counts once. */
+export function uniqueNewCount(views: readonly SiteView[]): number {
+  return new Set(views.flatMap((v) => v.newIds)).size
+}
+
+/** Distinct Starter Dex species reported at one site. */
+export function reportedCount(site: Site): number {
+  return new Set(site.reports.map((r) => r.speciesId).filter(Boolean)).size
+}
+
 /** "today", "yesterday", "3 days ago" from an ISO date, relative to `now`. */
 export function daysAgo(date: string, now: Date = new Date()): string {
   const d = Date.UTC(+date.slice(0, 4), +date.slice(5, 7) - 1, +date.slice(8, 10))

@@ -1,23 +1,25 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { usePublished } from '../../data/published'
 import { dexById } from '../../data/catalogue'
 import { recordedIds } from '../../domain/collection'
 import { ageLabel, filterSites } from '../../domain/ranking'
+import { shortSiteName } from '../../domain/siteName'
 import { useStore, type DriveLimit } from '../../state/store'
 import { Banner, Chip, DemoStamp, Panel, Pill, Segmented } from '../../ui/components'
 import { SettingsButton } from '../shell/SettingsButton'
-import MapCanvas, { type PinView } from './MapCanvas'
-import type { LifeSite } from './birdLife'
+import MapCanvas, { type MapSite } from './MapCanvas'
 import { birdSrc } from './birdArt'
-import { QuestCard } from './QuestCard'
+import { SiteCard } from './SiteCard'
 import { SiteSheet } from './SiteSheet'
 
 const LIMITS: DriveLimit[] = [30, 60, 90]
-/** Full pins for the best sites; the rest are dots. Birds hop around the best few only. */
-const FULL_PINS = 20
-const LIVELY_SITES = 12
+/** Height reserved for the card until it has been measured. */
+const CARD_GUESS = 150
 
-/** The Map: Today's Quest, birding sites within the drive limit, and birds hopping about. Lazy-loaded. */
+/**
+ * The Map: birding sites within the drive limit. One site is always selected (the best one to start, or the
+ * one you tapped); its compact card sits at the bottom and "View spot" opens the details. Lazy-loaded.
+ */
 export default function MapScreen() {
   const prefs = useStore((s) => s.prefs)
   const setPref = useStore((s) => s.setPref)
@@ -25,8 +27,10 @@ export default function MapScreen() {
   const setFocus = useStore((s) => s.setFocusSpecies)
   const data = usePublished(prefs.regionId)
   const recorded = useMemo(() => recordedIds(prefs), [prefs])
-  const [selected, setSelected] = useState<string | null>(null)
-  const [questIdx, setQuestIdx] = useState(0)
+  const [picked, setPicked] = useState<string | null>(null)
+  const [detailsOpen, setDetailsOpen] = useState(false)
+  const [focusNonce, setFocusNonce] = useState(0)
+  const [cardH, setCardH] = useState(CARD_GUESS)
 
   const ready = data.status === 'ready' ? data : null
   const ref = ready ? ready.index.regions.find((r) => r.id === ready.regionId)! : null
@@ -44,29 +48,31 @@ export default function MapScreen() {
     })
   }, [ready, start, prefs.driveLimit, recorded, prefs.targets, prefs.unrecordedOnly, focus])
 
-  const pins = useMemo<PinView[]>(
+  const shown = filtered?.shown ?? []
+  // The selected site: your pick if it is still shown, otherwise the best-ranked site.
+  const activeIdx = Math.max(0, shown.findIndex((v) => v.site.id === picked))
+  const active = shown[activeIdx] ?? null
+
+  const sites = useMemo<MapSite[]>(
     () =>
-      (filtered?.shown ?? []).map((v, i) => ({
-        view: v,
-        compact: i >= FULL_PINS,
-        lureSrc: v.lure?.speciesId ? birdSrc(v.lure.speciesId) : null,
+      shown.map((v) => ({
+        id: v.site.id,
+        point: v.site.point,
+        newIds: v.newIds,
         isTarget: v.site.reports.some((r) => r.speciesId && prefs.targets.includes(r.speciesId)),
-        label: `${v.site.name}, ${v.newIds.length} new birds, ${v.minutes} minutes`,
+        label: `${shortSiteName(v.site.name)}, ${v.newIds.length} species new to you, ${v.minutes} minutes away`,
       })),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filtered, prefs.targets],
   )
 
-  const life = useMemo<LifeSite[]>(
-    () =>
-      (filtered?.shown ?? []).slice(0, LIVELY_SITES).map((v) => {
-        const ids = v.site.reports.map((r) => r.speciesId).filter((x): x is string => !!x && x !== v.lure?.speciesId)
-        const ordered = [...ids.filter((x) => !recorded.has(x)), ...ids.filter((x) => recorded.has(x))]
-        return { id: v.site.id, point: v.site.point, birds: ordered.slice(0, 4).map(birdSrc).filter((s): s is string => !!s) }
-      }),
-    [filtered, recorded],
-  )
+  const pick = useCallback((id: string) => {
+    setPicked(id)
+    setDetailsOpen(false)
+    setFocusNonce((n) => n + 1)
+  }, [])
+  const next = () => shown.length > 1 && pick(shown[(activeIdx + 1) % shown.length].site.id)
 
-  const selectedView = filtered?.shown.find((v) => v.site.id === selected) ?? null
   const focusName = focus ? dexById(focus)?.name : null
   const fitKey = `${ready?.regionId}|${prefs.driveLimit}|${prefs.unrecordedOnly}|${focus}|${ready ? 'r' : ''}`
 
@@ -80,8 +86,8 @@ export default function MapScreen() {
             options={ready.index.regions.map((r) => ({ value: r.id, label: r.label }))}
             value={ready.regionId}
             onChange={(id) => {
-              setSelected(null)
-              setQuestIdx(0)
+              setPicked(null)
+              setDetailsOpen(false)
               setPref('regionId', id)
               setPref('startId', id)
             }}
@@ -89,7 +95,7 @@ export default function MapScreen() {
         )}
         <div className="chips">
           {LIMITS.map((l) => (
-            <Chip key={l} active={prefs.driveLimit === l} onClick={() => (setQuestIdx(0), setPref('driveLimit', l))}>
+            <Chip key={l} active={prefs.driveLimit === l} onClick={() => (setPicked(null), setPref('driveLimit', l))}>
               {l} min
             </Chip>
           ))}
@@ -102,11 +108,11 @@ export default function MapScreen() {
             </Chip>
           )}
         </div>
-        {ready && filtered && (
+        {ready && filtered && start && (
           <div className="map-status small">
             <span>
-              {filtered.shown.length} sites
-              {filtered.unknownDrive ? ` · ${filtered.unknownDrive} with unknown drive time` : ''}
+              Driving from {start.label} · {filtered.shown.length} sites
+              {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive time)` : ''}
             </span>
             {ready.region.isDemo ? <DemoStamp /> : <Pill>Updated {ageLabel(ready.region.generatedAt)}</Pill>}
           </div>
@@ -129,34 +135,35 @@ export default function MapScreen() {
             zoom={ref.zoom}
             start={start.point}
             startLabel={start.label}
-            pins={pins}
-            life={life}
-            selectedId={selected}
-            onSelect={setSelected}
+            sites={sites}
+            activeId={active?.site.id ?? null}
+            featuredSrc={active?.lure?.speciesId ? birdSrc(active.lure.speciesId) : null}
+            onSelect={pick}
+            onOpen={() => setDetailsOpen(true)}
+            focusNonce={focusNonce}
             fitKey={fitKey}
+            insetBottom={cardH + 10}
           />
-          {!selected && (
-            <QuestCard
-              views={filtered.shown}
-              index={questIdx}
-              onIndex={setQuestIdx}
-              onView={setSelected}
-              limit={prefs.driveLimit}
-              onWiden={prefs.driveLimit < 90 ? () => setPref('driveLimit', 90) : null}
-              isDemo={ready.region.isDemo}
-              startLabel={start.label}
-            />
-          )}
+          <SiteCard
+            view={active}
+            position={activeIdx + 1}
+            total={shown.length}
+            onNext={next}
+            onDetails={() => setDetailsOpen(true)}
+            recorded={recorded}
+            isDemo={ready.region.isDemo}
+            onHeight={setCardH}
+          />
         </div>
       )}
       {ready && start && (
         <SiteSheet
-          view={selectedView}
+          view={detailsOpen ? active : null}
           region={ready.region}
           startLabel={start.label}
           recorded={recorded}
           targets={prefs.targets}
-          onClose={() => setSelected(null)}
+          onClose={() => setDetailsOpen(false)}
         />
       )}
     </div>
