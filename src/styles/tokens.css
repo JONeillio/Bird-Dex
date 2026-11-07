@@ -1,0 +1,26 @@
+:root {
+  --paper: #f7f2de;
+  --panel: #fffbef;
+  --ink: #213b32;
+  --forest: #35614b;
+  --sage: #a9c58a;
+  --grass: #d2dda9;
+  --water: #7db8c6;
+  --water-deep: #438ca8;
+  --road: #ead9ac;
+  --discovery: #d8a84b;
+  --coral: #c96e53;
+  --muted: #526454;
+  --silhouette: #8e938a;
+
+  --radius: 12px;
+  --border: 3px;
+  --tap: 44px;
+
+  --font-display: 'Pixelify Sans', system-ui, sans-serif; /* headings, banners, dex numbers only; 18px+ */
+  --font-body: 'Nunito', system-ui, sans-serif; /* everything else, min 16px */
+
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --tabbar-h: 68px;
+}

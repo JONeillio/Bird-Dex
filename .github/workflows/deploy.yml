@@ -1,0 +1,99 @@
+name: Deploy BirdQuest
+
+# Push to main redeploys the site. Run it by hand from the GitHub app:
+# Actions > Deploy BirdQuest > Run workflow > pick a task.
+#   deploy    build and publish the site (default)
+#   refresh   same as deploy, but also refetches live data (from M5 onwards)
+#   probe     check what eBird and openrouteservice really return (no deploy)
+#   map-audit check the OpenFreeMap style and tiles (no deploy)
+# Times in any cron are UTC. A schedule is added only after a manual refresh works.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      task:
+        description: What to run
+        type: choice
+        default: deploy
+        options: [deploy, refresh, probe, map-audit]
+  # schedule:
+  #   - cron: "17 5 * * *"   # 05:17 UTC daily, enable after a manual refresh works
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One run at a time. Never cancel a deploy half way through.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  TASK: ${{ github.event.inputs.task || 'deploy' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+      # Probe and audit only read from the providers and write a short report.
+      # Keys are passed to these steps only, and the scripts never print them.
+      - name: Probe eBird and openrouteservice
+        if: env.TASK == 'probe'
+        env:
+          EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
+          ORS_API_KEY: ${{ secrets.ORS_API_KEY }}
+        run: npm run probe
+      - name: Audit OpenFreeMap style
+        if: env.TASK == 'map-audit'
+        run: npm run map-audit
+      - name: Keep the report
+        if: env.TASK == 'probe' || env.TASK == 'map-audit'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.TASK == 'probe' && 'probe-report' || 'map-audit' }}
+          path: reports/
+          if-no-files-found: error
+
+      # Build and publish (skipped for probe and map-audit).
+      - name: Prepare data
+        if: env.TASK == 'deploy' || env.TASK == 'refresh'
+        env:
+          EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
+          ORS_API_KEY: ${{ secrets.ORS_API_KEY }}
+        run: npm run pipeline -- --task=${{ env.TASK }}
+      - name: Build
+        if: env.TASK == 'deploy' || env.TASK == 'refresh'
+        run: npm run build
+      - name: Add demo and pipeline data to the site
+        if: env.TASK == 'deploy' || env.TASK == 'refresh'
+        run: |
+          mkdir -p dist/data
+          if [ -d public/demo/data ]; then cp -r public/demo/data/. dist/data/; fi
+          if [ -d pipeline/out ]; then cp -r pipeline/out/. dist/data/; fi
+      - uses: actions/upload-pages-artifact@v3
+        if: env.TASK == 'deploy' || env.TASK == 'refresh'
+        with:
+          path: dist
+
+  deploy:
+    needs: check
+    if: github.event.inputs.task == '' || github.event.inputs.task == 'deploy' || github.event.inputs.task == 'refresh'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
