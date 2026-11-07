@@ -3,7 +3,7 @@ name: Deploy BirdQuest
 # Push to main redeploys the site. Run it by hand from the GitHub app:
 # Actions > Deploy BirdQuest > Run workflow > pick a task.
 #   deploy    build and publish the site (default)
-#   refresh   same as deploy, but also refetches live data (from M5 onwards)
+#   refresh   refetch eBird reports and drive times, then build and publish
 #   probe     check what eBird and openrouteservice really return (no deploy)
 #   map-audit check the OpenFreeMap style and tiles (no deploy)
 #   taxonomy-check  check every Starter Dex scientific name against eBird (no deploy)
@@ -33,7 +33,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  TASK: ${{ github.event.inputs.task || 'deploy' }}
+  TASK: ${{ github.event_name == 'schedule' && 'refresh' || github.event.inputs.task || 'deploy' }}
 
 jobs:
   check:
@@ -73,21 +73,34 @@ jobs:
           if-no-files-found: error
 
       # Build and publish (skipped for probe and map-audit).
+      # Live data is kept in the Actions cache, never in git. A code-only deploy reuses it (0 API calls).
+      - name: Restore last data
+        if: env.TASK == 'deploy' || env.TASK == 'refresh'
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/bq-data
+          key: bq-data-${{ github.run_id }}
+          restore-keys: bq-data-
       - name: Prepare data
         if: env.TASK == 'deploy' || env.TASK == 'refresh'
         env:
           EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
           ORS_API_KEY: ${{ secrets.ORS_API_KEY }}
         run: npm run pipeline -- --task=${{ env.TASK }}
+      - name: Save data for the next deploy
+        if: (env.TASK == 'deploy' || env.TASK == 'refresh') && hashFiles('.cache/bq-data/index.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/bq-data
+          key: bq-data-${{ github.run_id }}
       - name: Build
         if: env.TASK == 'deploy' || env.TASK == 'refresh'
         run: npm run build
-      - name: Add demo and pipeline data to the site
+      - name: Add live data to the site
         if: env.TASK == 'deploy' || env.TASK == 'refresh'
         run: |
-          mkdir -p dist/data
-          if [ -d public/demo/data ]; then cp -r public/demo/data/. dist/data/; fi
-          if [ -d pipeline/out ]; then cp -r pipeline/out/. dist/data/; fi
+          # Demo data ships at /demo/data/ (from public/); the app falls back to it when /data/ is missing.
+          if [ -d pipeline/out ]; then mkdir -p dist/data && cp -r pipeline/out/. dist/data/; fi
       - uses: actions/upload-pages-artifact@v3
         if: env.TASK == 'deploy' || env.TASK == 'refresh'
         with:
@@ -95,7 +108,7 @@ jobs:
 
   deploy:
     needs: check
-    if: github.event.inputs.task == '' || github.event.inputs.task == 'deploy' || github.event.inputs.task == 'refresh'
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.task == 'deploy' || github.event.inputs.task == 'refresh'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -23,8 +23,8 @@ export const DEFAULT_PREFS: Prefs = {
   unrecordedOnly: true,
   targetsOnly: false,
   soundOn: false, // audio is opt-in
-  regionId: 'greater-manchester',
-  startId: 'chorlton-green',
+  regionId: 'location-1',
+  startId: 'location-1',
   demoCollection: false,
   targets: [],
 }

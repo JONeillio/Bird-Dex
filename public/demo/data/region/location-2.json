@@ -1,0 +1,1534 @@
+{
+ "schema": 1,
+ "regionId": "location-2",
+ "generatedAt": "2026-11-07T06:40:00Z",
+ "isDemo": true,
+ "windowDays": 14,
+ "coverage": {
+  "hotspotsListed": 11,
+  "hotspotsActive": 11,
+  "reportsFetchedFor": 11,
+  "truncated": false,
+  "note": "Demo data: invented sites and sightings for trying the app."
+ },
+ "sites": [
+  {
+   "id": "LDEMO14",
+   "name": "Demo Riverside Marsh",
+   "point": [
+    0.145,
+    51.483
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-07",
+   "speciesAllTime": 169,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "rock-dove-feral-pigeon",
+     "ebirdCode": "demorockdov",
+     "name": "Feral Pigeon",
+     "sciName": "Columba livia",
+     "obsDate": "2026-11-07",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "reed-bunting",
+     "ebirdCode": "demoreedbun",
+     "name": "Reed Bunting",
+     "sciName": "Schoeniclus schoeniclus",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "northern-shoveler",
+     "ebirdCode": "demonorthern",
+     "name": "Northern Shoveler",
+     "sciName": "Spatula clypeata",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "herring-gull",
+     "ebirdCode": "demoherring",
+     "name": "Herring Gull",
+     "sciName": "Larus argentatus",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-redshank",
+     "ebirdCode": "democommonr",
+     "name": "Redshank",
+     "sciName": "Tringa totanus",
+     "obsDate": "2026-11-01",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "whooper-swan",
+     "ebirdCode": "demowhooper",
+     "name": "Whooper Swan",
+     "sciName": "Cygnus cygnus",
+     "obsDate": "2026-10-30",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "pink-footed-goose",
+     "ebirdCode": "demopinkfoo",
+     "name": "Pink-footed Goose",
+     "sciName": "Anser brachyrhynchus",
+     "obsDate": "2026-10-29",
+     "obsTime": "08:15",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-coot",
+     "ebirdCode": "demoeurasian",
+     "name": "Coot",
+     "sciName": "Fulica atra",
+     "obsDate": "2026-10-28",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-sparrowhawk",
+     "ebirdCode": "demoeurasian",
+     "name": "Sparrowhawk",
+     "sciName": "Accipiter nisus",
+     "obsDate": "2026-10-27",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-jay",
+     "ebirdCode": "demoeurasian",
+     "name": "Jay",
+     "sciName": "Garrulus glandarius",
+     "obsDate": "2026-10-27",
+     "obsTime": "15:05",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "goldcrest",
+     "ebirdCode": "demogoldcres",
+     "name": "Goldcrest",
+     "sciName": "Regulus regulus",
+     "obsDate": "2026-10-25",
+     "obsTime": "15:05",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO15",
+   "name": "Demo Estuary Reserve",
+   "point": [
+    0.22,
+    51.49
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-07",
+   "speciesAllTime": 177,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "great-cormorant",
+     "ebirdCode": "demogreatco",
+     "name": "Cormorant",
+     "sciName": "Phalacrocorax carbo",
+     "obsDate": "2026-11-07",
+     "obsTime": null,
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-bullfinch",
+     "ebirdCode": "demoeurasian",
+     "name": "Bullfinch",
+     "sciName": "Pyrrhula pyrrhula",
+     "obsDate": "2026-11-07",
+     "obsTime": "08:15",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-robin",
+     "ebirdCode": "demoeuropean",
+     "name": "Robin",
+     "sciName": "Erithacus rubecula",
+     "obsDate": "2026-11-04",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "fieldfare",
+     "ebirdCode": "demofieldfar",
+     "name": "Fieldfare",
+     "sciName": "Turdus pilaris",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "dunnock",
+     "ebirdCode": "demodunnock",
+     "name": "Dunnock",
+     "sciName": "Prunella modularis",
+     "obsDate": "2026-11-02",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-chaffinch",
+     "ebirdCode": "democommonc",
+     "name": "Chaffinch",
+     "sciName": "Fringilla coelebs",
+     "obsDate": "2026-10-30",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "house-sparrow",
+     "ebirdCode": "demohousesp",
+     "name": "House Sparrow",
+     "sciName": "Passer domesticus",
+     "obsDate": "2026-10-26",
+     "obsTime": null,
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "redwing",
+     "ebirdCode": "demoredwing",
+     "name": "Redwing",
+     "sciName": "Turdus iliacus",
+     "obsDate": "2026-10-25",
+     "obsTime": "15:05",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO16",
+   "name": "Demo Abbey Woods",
+   "point": [
+    0.13,
+    51.489
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-05",
+   "speciesAllTime": 217,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": null,
+     "ebirdCode": "demoother",
+     "name": "Demo visitor (not in the Dex)",
+     "sciName": "Demoavis exotica",
+     "obsDate": "2026-11-05",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-bullfinch",
+     "ebirdCode": "demoeurasian",
+     "name": "Bullfinch",
+     "sciName": "Pyrrhula pyrrhula",
+     "obsDate": "2026-10-31",
+     "obsTime": "10:40",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-sparrowhawk",
+     "ebirdCode": "demoeurasian",
+     "name": "Sparrowhawk",
+     "sciName": "Accipiter nisus",
+     "obsDate": "2026-10-29",
+     "obsTime": "08:15",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "coal-tit",
+     "ebirdCode": "democoaltit",
+     "name": "Coal Tit",
+     "sciName": "Periparus ater",
+     "obsDate": "2026-10-29",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-siskin",
+     "ebirdCode": "demoeurasian",
+     "name": "Siskin",
+     "sciName": "Spinus spinus",
+     "obsDate": "2026-10-27",
+     "obsTime": "08:15",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-jay",
+     "ebirdCode": "demoeurasian",
+     "name": "Jay",
+     "sciName": "Garrulus glandarius",
+     "obsDate": "2026-10-27",
+     "obsTime": "15:05",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-starling",
+     "ebirdCode": "democommons",
+     "name": "Starling",
+     "sciName": "Sturnus vulgaris",
+     "obsDate": "2026-10-25",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO17",
+   "name": "Demo Lakeside Park",
+   "point": [
+    0.12,
+    51.456
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-06",
+   "speciesAllTime": 201,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "common-starling",
+     "ebirdCode": "democommons",
+     "name": "Starling",
+     "sciName": "Sturnus vulgaris",
+     "obsDate": "2026-11-06",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "song-thrush",
+     "ebirdCode": "demosongthr",
+     "name": "Song Thrush",
+     "sciName": "Turdus philomelos",
+     "obsDate": "2026-11-06",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": null,
+     "ebirdCode": "demoother",
+     "name": "Demo visitor (not in the Dex)",
+     "sciName": "Demoavis exotica",
+     "obsDate": "2026-11-05",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-siskin",
+     "ebirdCode": "demoeurasian",
+     "name": "Siskin",
+     "sciName": "Spinus spinus",
+     "obsDate": "2026-11-03",
+     "obsTime": "10:40",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-magpie",
+     "ebirdCode": "demoeurasian",
+     "name": "Magpie",
+     "sciName": "Pica pica",
+     "obsDate": "2026-11-03",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "great-tit",
+     "ebirdCode": "demogreatti",
+     "name": "Great Tit",
+     "sciName": "Parus major",
+     "obsDate": "2026-11-01",
+     "obsTime": "08:15",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-blackcap",
+     "ebirdCode": "demoeurasian",
+     "name": "Blackcap",
+     "sciName": "Sylvia atricapilla",
+     "obsDate": "2026-10-31",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-wood-pigeon",
+     "ebirdCode": "democommonw",
+     "name": "Woodpigeon",
+     "sciName": "Columba palumbus",
+     "obsDate": "2026-10-30",
+     "obsTime": "08:15",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-greenfinch",
+     "ebirdCode": "demoeuropean",
+     "name": "Greenfinch",
+     "sciName": "Chloris chloris",
+     "obsDate": "2026-10-27",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "redwing",
+     "ebirdCode": "demoredwing",
+     "name": "Redwing",
+     "sciName": "Turdus iliacus",
+     "obsDate": "2026-10-25",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO18",
+   "name": "Demo Saltmarsh Walk",
+   "point": [
+    0.235,
+    51.465
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-07",
+   "speciesAllTime": 201,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "eurasian-wren",
+     "ebirdCode": "demoeurasian",
+     "name": "Wren",
+     "sciName": "Nannus troglodytes",
+     "obsDate": "2026-11-07",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-goldfinch",
+     "ebirdCode": "demoeuropean",
+     "name": "Goldfinch",
+     "sciName": "Carduelis carduelis",
+     "obsDate": "2026-11-06",
+     "obsTime": "10:40",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-collared-dove",
+     "ebirdCode": "demoeurasian",
+     "name": "Collared Dove",
+     "sciName": "Streptopelia decaocto",
+     "obsDate": "2026-11-06",
+     "obsTime": "08:15",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-chaffinch",
+     "ebirdCode": "democommonc",
+     "name": "Chaffinch",
+     "sciName": "Fringilla coelebs",
+     "obsDate": "2026-11-05",
+     "obsTime": "08:15",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "lesser-black-backed-gull",
+     "ebirdCode": "demolesserb",
+     "name": "Lesser Black-backed Gull",
+     "sciName": "Larus fuscus",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "great-spotted-woodpecker",
+     "ebirdCode": "demogreatsp",
+     "name": "Great Spotted Woodpecker",
+     "sciName": "Dendrocopos major",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-greenfinch",
+     "ebirdCode": "demoeuropean",
+     "name": "Greenfinch",
+     "sciName": "Chloris chloris",
+     "obsDate": "2026-11-02",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-blue-tit",
+     "ebirdCode": "demoeurasian",
+     "name": "Blue Tit",
+     "sciName": "Cyanistes caeruleus",
+     "obsDate": "2026-11-02",
+     "obsTime": "10:40",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "black-headed-gull",
+     "ebirdCode": "demoblackhe",
+     "name": "Black-headed Gull",
+     "sciName": "Chroicocephalus ridibundus",
+     "obsDate": "2026-11-02",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "long-tailed-tit",
+     "ebirdCode": "demolongtai",
+     "name": "Long-tailed Tit",
+     "sciName": "Aegithalos caudatus",
+     "obsDate": "2026-11-01",
+     "obsTime": null,
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "great-cormorant",
+     "ebirdCode": "demogreatco",
+     "name": "Cormorant",
+     "sciName": "Phalacrocorax carbo",
+     "obsDate": "2026-11-01",
+     "obsTime": "10:40",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-chiffchaff",
+     "ebirdCode": "democommonc",
+     "name": "Chiffchaff",
+     "sciName": "Phylloscopus collybita",
+     "obsDate": "2026-11-01",
+     "obsTime": "10:40",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-tree-sparrow",
+     "ebirdCode": "demoeurasian",
+     "name": "Tree Sparrow",
+     "sciName": "Passer montanus",
+     "obsDate": "2026-10-26",
+     "obsTime": "10:40",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-shelduck",
+     "ebirdCode": "democommons",
+     "name": "Shelduck",
+     "sciName": "Tadorna tadorna",
+     "obsDate": "2026-10-25",
+     "obsTime": "10:40",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO19",
+   "name": "Demo Old Oak Wood",
+   "point": [
+    0.07,
+    51.463
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-05",
+   "speciesAllTime": 127,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "fieldfare",
+     "ebirdCode": "demofieldfar",
+     "name": "Fieldfare",
+     "sciName": "Turdus pilaris",
+     "obsDate": "2026-11-05",
+     "obsTime": "08:15",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": null,
+     "ebirdCode": "demoother",
+     "name": "Demo visitor (not in the Dex)",
+     "sciName": "Demoavis exotica",
+     "obsDate": "2026-11-05",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-blackcap",
+     "ebirdCode": "demoeurasian",
+     "name": "Blackcap",
+     "sciName": "Sylvia atricapilla",
+     "obsDate": "2026-11-05",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "lesser-redpoll",
+     "ebirdCode": "demolesserr",
+     "name": "Lesser Redpoll",
+     "sciName": "Acanthis flammea",
+     "obsDate": "2026-11-04",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "rock-dove-feral-pigeon",
+     "ebirdCode": "demorockdov",
+     "name": "Feral Pigeon",
+     "sciName": "Columba livia",
+     "obsDate": "2026-11-04",
+     "obsTime": "15:05",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-blue-tit",
+     "ebirdCode": "demoeurasian",
+     "name": "Blue Tit",
+     "sciName": "Cyanistes caeruleus",
+     "obsDate": "2026-11-03",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "redwing",
+     "ebirdCode": "demoredwing",
+     "name": "Redwing",
+     "sciName": "Turdus iliacus",
+     "obsDate": "2026-10-31",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "mistle-thrush",
+     "ebirdCode": "demomistlet",
+     "name": "Mistle Thrush",
+     "sciName": "Turdus viscivorus",
+     "obsDate": "2026-10-31",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "white-wagtail-pied-wagtail",
+     "ebirdCode": "demowhitewa",
+     "name": "Pied Wagtail",
+     "sciName": "Motacilla alba",
+     "obsDate": "2026-10-30",
+     "obsTime": "08:15",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-wren",
+     "ebirdCode": "demoeurasian",
+     "name": "Wren",
+     "sciName": "Nannus troglodytes",
+     "obsDate": "2026-10-28",
+     "obsTime": "08:15",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-green-woodpecker",
+     "ebirdCode": "demoeurasian",
+     "name": "Green Woodpecker",
+     "sciName": "Picus viridis",
+     "obsDate": "2026-10-27",
+     "obsTime": "10:40",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "tawny-owl",
+     "ebirdCode": "demotawnyow",
+     "name": "Tawny Owl",
+     "sciName": "Strix aluco",
+     "obsDate": "2026-10-26",
+     "obsTime": "15:05",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO20",
+   "name": "Demo Barrier Gardens",
+   "point": [
+    0.03,
+    51.5
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-07",
+   "speciesAllTime": 173,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "eurasian-nuthatch",
+     "ebirdCode": "demoeurasian",
+     "name": "Nuthatch",
+     "sciName": "Sitta europaea",
+     "obsDate": "2026-11-07",
+     "obsTime": "15:05",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": null,
+     "ebirdCode": "demoother",
+     "name": "Demo visitor (not in the Dex)",
+     "sciName": "Demoavis exotica",
+     "obsDate": "2026-11-05",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-robin",
+     "ebirdCode": "demoeuropean",
+     "name": "Robin",
+     "sciName": "Erithacus rubecula",
+     "obsDate": "2026-11-04",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "fieldfare",
+     "ebirdCode": "demofieldfar",
+     "name": "Fieldfare",
+     "sciName": "Turdus pilaris",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-collared-dove",
+     "ebirdCode": "demoeurasian",
+     "name": "Collared Dove",
+     "sciName": "Streptopelia decaocto",
+     "obsDate": "2026-11-03",
+     "obsTime": "10:40",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "carrion-crow",
+     "ebirdCode": "democarrion",
+     "name": "Carrion Crow",
+     "sciName": "Corvus corone",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-siskin",
+     "ebirdCode": "demoeurasian",
+     "name": "Siskin",
+     "sciName": "Spinus spinus",
+     "obsDate": "2026-11-01",
+     "obsTime": "15:05",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-goldfinch",
+     "ebirdCode": "demoeuropean",
+     "name": "Goldfinch",
+     "sciName": "Carduelis carduelis",
+     "obsDate": "2026-11-01",
+     "obsTime": "15:05",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "coal-tit",
+     "ebirdCode": "democoaltit",
+     "name": "Coal Tit",
+     "sciName": "Periparus ater",
+     "obsDate": "2026-10-31",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-tree-sparrow",
+     "ebirdCode": "demoeurasian",
+     "name": "Tree Sparrow",
+     "sciName": "Passer montanus",
+     "obsDate": "2026-10-28",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "mistle-thrush",
+     "ebirdCode": "demomistlet",
+     "name": "Mistle Thrush",
+     "sciName": "Turdus viscivorus",
+     "obsDate": "2026-10-26",
+     "obsTime": "15:05",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-blue-tit",
+     "ebirdCode": "demoeurasian",
+     "name": "Blue Tit",
+     "sciName": "Cyanistes caeruleus",
+     "obsDate": "2026-10-26",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO21",
+   "name": "Demo Country Park Pools",
+   "point": [
+    0.505,
+    51.555
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-07",
+   "speciesAllTime": 114,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "bohemian-waxwing",
+     "ebirdCode": "demobohemian",
+     "name": "Waxwing",
+     "sciName": "Bombycilla garrulus",
+     "obsDate": "2026-11-07",
+     "obsTime": null,
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "white-throated-dipper",
+     "ebirdCode": "demowhiteth",
+     "name": "Dipper",
+     "sciName": "Cinclus cinclus",
+     "obsDate": "2026-11-07",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-goldeneye",
+     "ebirdCode": "democommong",
+     "name": "Goldeneye",
+     "sciName": "Bucephala clangula",
+     "obsDate": "2026-11-06",
+     "obsTime": "10:40",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": null,
+     "ebirdCode": "demoother",
+     "name": "Demo visitor (not in the Dex)",
+     "sciName": "Demoavis exotica",
+     "obsDate": "2026-11-05",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "black-headed-gull",
+     "ebirdCode": "demoblackhe",
+     "name": "Black-headed Gull",
+     "sciName": "Chroicocephalus ridibundus",
+     "obsDate": "2026-11-04",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-shelduck",
+     "ebirdCode": "democommons",
+     "name": "Shelduck",
+     "sciName": "Tadorna tadorna",
+     "obsDate": "2026-11-03",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "northern-shoveler",
+     "ebirdCode": "demonorthern",
+     "name": "Northern Shoveler",
+     "sciName": "Spatula clypeata",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "lesser-black-backed-gull",
+     "ebirdCode": "demolesserb",
+     "name": "Lesser Black-backed Gull",
+     "sciName": "Larus fuscus",
+     "obsDate": "2026-11-03",
+     "obsTime": "08:15",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "pink-footed-goose",
+     "ebirdCode": "demopinkfoo",
+     "name": "Pink-footed Goose",
+     "sciName": "Anser brachyrhynchus",
+     "obsDate": "2026-11-02",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "goosander",
+     "ebirdCode": "demogoosande",
+     "name": "Goosander",
+     "sciName": "Mergus merganser",
+     "obsDate": "2026-11-02",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "fieldfare",
+     "ebirdCode": "demofieldfar",
+     "name": "Fieldfare",
+     "sciName": "Turdus pilaris",
+     "obsDate": "2026-11-01",
+     "obsTime": "10:40",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "long-tailed-tit",
+     "ebirdCode": "demolongtai",
+     "name": "Long-tailed Tit",
+     "sciName": "Aegithalos caudatus",
+     "obsDate": "2026-10-31",
+     "obsTime": null,
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "great-crested-grebe",
+     "ebirdCode": "demogreatcr",
+     "name": "Great Crested Grebe",
+     "sciName": "Podiceps cristatus",
+     "obsDate": "2026-10-30",
+     "obsTime": "08:15",
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-chiffchaff",
+     "ebirdCode": "democommonc",
+     "name": "Chiffchaff",
+     "sciName": "Phylloscopus collybita",
+     "obsDate": "2026-10-29",
+     "obsTime": "08:15",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "tufted-duck",
+     "ebirdCode": "demotuftedd",
+     "name": "Tufted Duck",
+     "sciName": "Aythya fuligula",
+     "obsDate": "2026-10-28",
+     "obsTime": "15:05",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-chaffinch",
+     "ebirdCode": "democommonc",
+     "name": "Chaffinch",
+     "sciName": "Fringilla coelebs",
+     "obsDate": "2026-10-28",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "whooper-swan",
+     "ebirdCode": "demowhooper",
+     "name": "Whooper Swan",
+     "sciName": "Cygnus cygnus",
+     "obsDate": "2026-10-27",
+     "obsTime": "10:40",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO22",
+   "name": "Demo Valley Meadows",
+   "point": [
+    0.23,
+    51.535
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-06",
+   "speciesAllTime": 93,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "european-greenfinch",
+     "ebirdCode": "demoeuropean",
+     "name": "Greenfinch",
+     "sciName": "Chloris chloris",
+     "obsDate": "2026-11-06",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "northern-wheatear",
+     "ebirdCode": "demonorthern",
+     "name": "Wheatear",
+     "sciName": "Oenanthe oenanthe",
+     "obsDate": "2026-11-05",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-stonechat",
+     "ebirdCode": "demoeuropean",
+     "name": "Stonechat",
+     "sciName": "Saxicola rubicola",
+     "obsDate": "2026-11-05",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "meadow-pipit",
+     "ebirdCode": "demomeadowp",
+     "name": "Meadow Pipit",
+     "sciName": "Anthus pratensis",
+     "obsDate": "2026-11-05",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "brambling",
+     "ebirdCode": "demobramblin",
+     "name": "Brambling",
+     "sciName": "Fringilla montifringilla",
+     "obsDate": "2026-11-05",
+     "obsTime": "10:40",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "redwing",
+     "ebirdCode": "demoredwing",
+     "name": "Redwing",
+     "sciName": "Turdus iliacus",
+     "obsDate": "2026-11-04",
+     "obsTime": null,
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "fieldfare",
+     "ebirdCode": "demofieldfar",
+     "name": "Fieldfare",
+     "sciName": "Turdus pilaris",
+     "obsDate": "2026-11-04",
+     "obsTime": "15:05",
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "stock-dove",
+     "ebirdCode": "demostockdo",
+     "name": "Stock Dove",
+     "sciName": "Columba oenas",
+     "obsDate": "2026-11-03",
+     "obsTime": "15:05",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-snipe",
+     "ebirdCode": "democommons",
+     "name": "Snipe",
+     "sciName": "Gallinago gallinago",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-siskin",
+     "ebirdCode": "demoeurasian",
+     "name": "Siskin",
+     "sciName": "Spinus spinus",
+     "obsDate": "2026-11-02",
+     "obsTime": "15:05",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "dunnock",
+     "ebirdCode": "demodunnock",
+     "name": "Dunnock",
+     "sciName": "Prunella modularis",
+     "obsDate": "2026-11-02",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "european-pied-flycatcher",
+     "ebirdCode": "demoeuropean",
+     "name": "Pied Flycatcher",
+     "sciName": "Ficedula hypoleuca",
+     "obsDate": "2026-11-01",
+     "obsTime": "15:05",
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "goldcrest",
+     "ebirdCode": "demogoldcres",
+     "name": "Goldcrest",
+     "sciName": "Regulus regulus",
+     "obsDate": "2026-11-01",
+     "obsTime": null,
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "western-barn-owl",
+     "ebirdCode": "demowestern",
+     "name": "Barn Owl",
+     "sciName": "Tyto alba",
+     "obsDate": "2026-10-28",
+     "obsTime": null,
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-sparrowhawk",
+     "ebirdCode": "demoeurasian",
+     "name": "Sparrowhawk",
+     "sciName": "Accipiter nisus",
+     "obsDate": "2026-10-27",
+     "obsTime": null,
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO23",
+   "name": "Demo Reservoir Bank",
+   "point": [
+    0.127,
+    51.215
+   ],
+   "url": null,
+   "latestObsDate": "2026-11-06",
+   "speciesAllTime": 159,
+   "access": "unknown",
+   "reports": [
+    {
+     "speciesId": "eurasian-wigeon",
+     "ebirdCode": "demoeurasian",
+     "name": "Wigeon",
+     "sciName": "Mareca penelope",
+     "obsDate": "2026-11-06",
+     "obsTime": null,
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "goldcrest",
+     "ebirdCode": "demogoldcres",
+     "name": "Goldcrest",
+     "sciName": "Regulus regulus",
+     "obsDate": "2026-11-04",
+     "obsTime": null,
+     "count": 6,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "western-house-martin",
+     "ebirdCode": "demowestern",
+     "name": "House Martin",
+     "sciName": "Delichon urbicum",
+     "obsDate": "2026-11-03",
+     "obsTime": null,
+     "count": 12,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "northern-lapwing",
+     "ebirdCode": "demonorthern",
+     "name": "Lapwing",
+     "sciName": "Vanellus vanellus",
+     "obsDate": "2026-11-02",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "great-spotted-woodpecker",
+     "ebirdCode": "demogreatsp",
+     "name": "Great Spotted Woodpecker",
+     "sciName": "Dendrocopos major",
+     "obsDate": "2026-11-02",
+     "obsTime": null,
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "rock-dove-feral-pigeon",
+     "ebirdCode": "demorockdov",
+     "name": "Feral Pigeon",
+     "sciName": "Columba livia",
+     "obsDate": "2026-11-02",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-pochard",
+     "ebirdCode": "democommonp",
+     "name": "Pochard",
+     "sciName": "Aythya ferina",
+     "obsDate": "2026-11-01",
+     "obsTime": null,
+     "count": 3,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "reed-bunting",
+     "ebirdCode": "demoreedbun",
+     "name": "Reed Bunting",
+     "sciName": "Schoeniclus schoeniclus",
+     "obsDate": "2026-10-28",
+     "obsTime": "15:05",
+     "count": 1,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "common-starling",
+     "ebirdCode": "democommons",
+     "name": "Starling",
+     "sciName": "Sturnus vulgaris",
+     "obsDate": "2026-10-27",
+     "obsTime": "10:40",
+     "count": 2,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "eurasian-oystercatcher",
+     "ebirdCode": "demoeurasian",
+     "name": "Oystercatcher",
+     "sciName": "Haematopus ostralegus",
+     "obsDate": "2026-10-26",
+     "obsTime": null,
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "long-tailed-tit",
+     "ebirdCode": "demolongtai",
+     "name": "Long-tailed Tit",
+     "sciName": "Aegithalos caudatus",
+     "obsDate": "2026-10-26",
+     "obsTime": "15:05",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    },
+    {
+     "speciesId": "grey-wagtail",
+     "ebirdCode": "demogreywag",
+     "name": "Grey Wagtail",
+     "sciName": "Motacilla cinerea",
+     "obsDate": "2026-10-25",
+     "obsTime": "08:15",
+     "count": null,
+     "checklistUrl": null,
+     "reviewed": false
+    }
+   ]
+  },
+  {
+   "id": "LDEMO24",
+   "name": "Demo Quiet Copse",
+   "point": [
+    0.19,
+    51.45
+   ],
+   "url": null,
+   "latestObsDate": null,
+   "speciesAllTime": 138,
+   "access": "unknown",
+   "reports": []
+  }
+ ],
+ "drive": {
+  "computedAt": "2026-11-07T06:40:00Z",
+  "byStart": {
+   "location-2": {
+    "LDEMO14": {
+     "status": "ok",
+     "s": 558,
+     "m": 2969
+    },
+    "LDEMO15": {
+     "status": "ok",
+     "s": 657,
+     "m": 4446
+    },
+    "LDEMO16": {
+     "status": "ok",
+     "s": 664,
+     "m": 4547
+    },
+    "LDEMO17": {
+     "status": "ok",
+     "s": 748,
+     "m": 5809
+    },
+    "LDEMO18": {
+     "status": "ok",
+     "s": 731,
+     "m": 5548
+    },
+    "LDEMO19": {
+     "status": "ok",
+     "s": 1011,
+     "m": 9736
+    },
+    "LDEMO20": {
+     "status": "ok",
+     "s": 1270,
+     "m": 13601
+    },
+    "LDEMO21": {
+     "status": "ok",
+     "s": 2483,
+     "m": 31730
+    },
+    "LDEMO22": {
+     "status": "ok",
+     "s": 1014,
+     "m": 9776
+    },
+    "LDEMO23": {
+     "status": "unknown"
+    },
+    "LDEMO24": {
+     "status": "ok",
+     "s": 623,
+     "m": 3944
+    }
+   }
+  }
+ },
+ "unmatchedSpecies": [
+  {
+   "sciName": "Demoavis exotica",
+   "name": "Demo visitor (not in the Dex)",
+   "sites": 1
+  }
+ ]
+}

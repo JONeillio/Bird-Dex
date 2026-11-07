@@ -354,3 +354,69 @@
 .stack > * { flex-shrink: 0; }
 .card, .btn, .tab, .icon-btn { text-decoration: none; color: inherit; }
 .btn.primary { color: var(--panel); }
+
+/* Map screen */
+.btn.small { min-height: 40px; padding: 0 12px; font-size: 15px; border-width: 2px; }
+.btn.ghost { background: transparent; border-color: transparent; }
+.row.gap { gap: 8px; }
+.map-screen { flex: 1; display: flex; flex-direction: column; min-height: 0; padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom)); }
+.map-controls { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px 6px; background: var(--paper); border-bottom: 2px solid var(--ink); }
+.map-controls .segmented { align-self: center; }
+.map-controls .segmented button { min-height: 36px; padding: 0 16px; font-size: 15px; }
+.map-controls .chips { padding-bottom: 0; }
+.map-controls .chip { min-height: 34px; padding: 0 12px; font-size: 14px; }
+.map-status { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--muted); font-weight: 700; }
+.map-status .pill { font-size: 12px; padding: 1px 8px; border-width: 1.5px; }
+.map-area { position: relative; flex: 1; min-height: 0; }
+.map-box { position: absolute; inset: 0; }
+.map-canvas { width: 100%; height: 100%; background: #c9de97; }
+.map-canvas canvas { image-rendering: pixelated; }
+.map-note { position: absolute; inset: auto 0 45% 0; text-align: center; font-weight: 800; color: var(--muted); padding: 0 20px; }
+.maplibregl-ctrl-attrib { font-size: 11px; }
+
+.pin { z-index: 3; display: flex; flex-direction: column; align-items: center; padding: 0; background: none; border: 0; cursor: pointer; min-width: 44px; min-height: 44px; }
+.pin-body { position: relative; display: grid; place-items: center; width: 44px; height: 44px; background: var(--panel); border: 3px solid var(--ink); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 2px 2px 0 rgba(33, 59, 50, 0.35); }
+.pin-body img { transform: rotate(45deg); }
+.pin.target .pin-body { background: #fbe1d7; border-color: var(--coral); }
+.pin.selected .pin-body { box-shadow: 0 0 0 4px var(--forest); }
+.pin-badge { position: absolute; top: -10px; left: 30px; padding: 0 5px; background: var(--discovery); border: 2px solid var(--ink); border-radius: 6px; font-family: var(--font-display); font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--ink); }
+.start-pin { z-index: 2; padding: 2px 8px; background: var(--ink); color: var(--panel); border-radius: 6px; font-weight: 800; font-size: 13px; box-shadow: 0 0 0 2px var(--panel); }
+
+.bird-sprite { z-index: 2; padding: 0; background: none; border: 0; pointer-events: auto; }
+.bird-sprite img { display: block; image-rendering: pixelated; }
+.bird-sprite.flip img { transform: scaleX(-1); }
+.bird-sprite.hop img { animation: bird-hop var(--dur, 1.8s) steps(1) var(--delay, 0s) infinite; }
+.bird-sprite.flip.hop img { animation-name: bird-hop-flip; }
+.bird-sprite.fly { z-index: 4; pointer-events: none; }
+.bird-sprite.fly img { animation: bird-flap 0.24s steps(1) infinite; }
+.bird-sprite.fly.flip img { animation-name: bird-flap-flip; }
+.bird-sprite.landed { opacity: 0; transition: opacity 1.2s steps(4); }
+@keyframes bird-hop { 0%, 60%, 100% { transform: translateY(0); } 70% { transform: translateY(-5px); } 80% { transform: translateY(-2px); } }
+@keyframes bird-hop-flip { 0%, 60%, 100% { transform: scaleX(-1) translateY(0); } 70% { transform: scaleX(-1) translateY(-5px); } 80% { transform: scaleX(-1) translateY(-2px); } }
+@keyframes bird-flap { 0% { transform: scaleY(1); } 50% { transform: scaleY(0.82) translateY(3px); } }
+@keyframes bird-flap-flip { 0% { transform: scaleX(-1); } 50% { transform: scaleX(-1) scaleY(0.82) translateY(3px); } }
+
+.quest { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; display: flex; gap: 12px; align-items: center; padding: 10px 12px; }
+.quest-bird { flex: none; width: 64px; height: 64px; }
+.quest-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.quest-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.quest-kicker { font-family: var(--font-display); font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.quest-title { font-size: 17px; line-height: 1.2; }
+.quest-actions { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+
+.site-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.site-name { font-size: 24px; line-height: 1.1; }
+.site-facts { margin: 8px 0 10px; }
+.sheet-sub { font-family: var(--font-display); font-size: 18px; margin: 16px 0 6px; }
+.report-list { list-style: none; margin: 0; padding: 0; }
+.report { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px dashed rgba(33, 59, 50, 0.25); }
+.report-main { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; min-height: 44px; }
+.report-main .pill { font-size: 11px; padding: 0 6px; border-width: 1.5px; }
+.report-link { flex: none; font-weight: 800; }
+.other-birds { margin-top: 10px; }
+.other-birds summary { font-weight: 800; min-height: 40px; display: flex; align-items: center; cursor: pointer; }
+.credit { margin-top: 14px; }
+.map-error { inset: 8px 50px auto 10px; text-align: left; font-size: 13px; background: var(--panel); border: 2px solid var(--ink); border-radius: 8px; padding: 4px 8px; }
+.dot { z-index: 1; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; }
+.dot span { width: 14px; height: 14px; background: var(--panel); border: 3px solid var(--ink); border-radius: 50%; }
+.dot.target span { background: var(--coral); }

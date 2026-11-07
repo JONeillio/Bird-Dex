@@ -1,0 +1,12 @@
+{
+  "_comment": "Public start points only (the repo is public). Location 1 is Chorlton Green; Location 2 is the centre of the DA8 postcode district. Never put a home address or full postcode here. Points are [lng, lat].",
+  "windowDays": 14,
+  "hotspotRadiusKm": 50,
+  "maxSites": 80,
+  "regions": [
+    { "id": "location-1", "label": "Location 1", "centre": [-2.2836, 53.4413], "zoom": 11,
+      "startPoints": [{ "id": "location-1", "label": "Location 1", "point": [-2.2836, 53.4413] }] },
+    { "id": "location-2", "label": "Location 2", "centre": [0.176, 51.476], "zoom": 11,
+      "startPoints": [{ "id": "location-2", "label": "Location 2", "point": [0.176, 51.476] }] }
+  ]
+}
