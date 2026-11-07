@@ -50,6 +50,8 @@ OpenFreeMap Liberty style (`https://tiles.openfreemap.org/styles/liberty`):
 
 Starter Dex names: `taxonomy-check` task (run 42376421641) confirmed all 104 scientific names against eBird's taxonomy. eBird renamed Wren to `Nannus troglodytes`, Reed Bunting to `Schoeniclus schoeniclus`, and lumps Lesser Redpoll into `Acanthis flammea` (Redpoll). Match by scientific name, not common name (eBird uses US spellings such as Gray Heron, Common Merganser for Goosander).
 
+Map + live data (built 7 Nov 2026, first live run 42379334862): two preset locations in `pipeline/config/regions.json`, labelled "Location 1" (Chorlton Green) and "Location 2" (DA8 postcode-district centre). Joseph gave postcodes for these; never put postcodes or home addresses in the repo. Per location: `/ref/hotspot/geo?dist=50&back=14` returned 292 and 436 active hotspots; we keep the top 80 by `numSpeciesAllTime` and call `/data/obs/{locId}/recent?back=14&sppLocale=en_GB` for each (300 ms apart, no errors). 91–92 of 104 Starter Dex species were reported. ORS matrix for 80 destinations: one request, no nulls. Data is cached in Actions (`.cache/bq-data`), so a code-only push makes 0 API calls. MapLibre gotcha: after bundling it can't find its worker, so `MapCanvas.tsx` imports `maplibre-gl/dist/maplibre-gl-worker.mjs?url` and calls `setWorkerUrl`. The sandbox can't reach tiles or the live site, so local screenshots show the plain-grass fallback with demo data.
+
 Still unverified: eBird hotspot cap on `geo` (900 may or may not be a limit), whether eBird returns more than 14 days for `back`, and eBird quota in practice.
 
 ## Working rules

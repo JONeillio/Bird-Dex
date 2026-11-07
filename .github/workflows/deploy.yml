@@ -7,7 +7,7 @@ name: Deploy BirdQuest
 #   probe     check what eBird and openrouteservice really return (no deploy)
 #   map-audit check the OpenFreeMap style and tiles (no deploy)
 #   taxonomy-check  check every Starter Dex scientific name against eBird (no deploy)
-# Times in any cron are UTC. A schedule is added only after a manual refresh works.
+# Times in any cron are UTC. Scheduled runs do a refresh.
 
 on:
   push:
@@ -19,8 +19,10 @@ on:
         type: choice
         default: deploy
         options: [deploy, refresh, probe, map-audit, taxonomy-check]
-  # schedule:
-  #   - cron: "17 5 * * *"   # 05:17 UTC daily, enable after a manual refresh works
+  # Fresh sightings twice a day (times are UTC; GitHub may start a few minutes late).
+  schedule:
+    - cron: "40 5 * * *"
+    - cron: "40 15 * * *"
 
 permissions:
   contents: read
