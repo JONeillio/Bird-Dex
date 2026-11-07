@@ -429,11 +429,11 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 | Milestone | State | Notes |
 |---|---|---|
 | M0 Foundations | done 7 Nov 2026 | Shell, tokens, pixelSprite, router, prefs, UI kit, deploy workflow, probe and map audit run green. Site goes live once Pages source is set to GitHub Actions. |
-| M1 Starter Dex + BirdDex | not started | |
+| M1 Starter Dex + BirdDex | built 7 Nov 2026, awaiting phone review 1 | 104-species Starter Dex (all scientific names verified against eBird), BirdDex screen, bird profile with habitat scenes, 12-template placeholder birds, 3 real Bold Pixel draft portraits (robin, kingfisher, grey heron), demo collection toggle. Review needs the site live (Pages setting). |
 | M2 Your records | not started | |
 | M3 Map, Field, demo | not started | |
 | M4 Adventure skin | not started | |
 | M5 Live data | not started | |
 | M6 Import | not started | |
-| M7 Real art | waiting on drafts | |
+| M7 Real art | started | Style locked: Bold Pixel (7 Nov). 3 anchor drafts filed in `research/art-drafts/bold-pixel/`, `scripts/art/prepare_sprite.py` works, drafts used in-app. Individual approval and the other 101 birds pending. |
 | M8 Polish + hand-over | not started | |

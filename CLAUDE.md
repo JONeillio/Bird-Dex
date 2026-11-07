@@ -48,6 +48,8 @@ OpenFreeMap Liberty style (`https://tiles.openfreemap.org/styles/liberty`):
 - Classes seen in style filters: landcover grass/wood/wetland/sand/ice; landuse cemetery/hospital/pitch/residential/school/track; waterway river; transportation motorway/trunk/primary/secondary/tertiary/minor/street/service/path/pedestrian/track/rail/link/transit. Pitch and park are available for green-space styling.
 - Attribution string from TileJSON: "OpenFreeMap © OpenMapTiles Data from OpenStreetMap".
 
+Starter Dex names: `taxonomy-check` task (run 42376421641) confirmed all 104 scientific names against eBird's taxonomy. eBird renamed Wren to `Nannus troglodytes`, Reed Bunting to `Schoeniclus schoeniclus`, and lumps Lesser Redpoll into `Acanthis flammea` (Redpoll). Match by scientific name, not common name (eBird uses US spellings such as Gray Heron, Common Merganser for Goosander).
+
 Still unverified: eBird hotspot cap on `geo` (900 may or may not be a limit), whether eBird returns more than 14 days for `back`, and eBird quota in practice.
 
 ## Working rules
