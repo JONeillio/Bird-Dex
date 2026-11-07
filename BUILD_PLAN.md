@@ -428,7 +428,7 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 
 | Milestone | State | Notes |
 |---|---|---|
-| M0 Foundations | not started | |
+| M0 Foundations | done 7 Nov 2026 | Shell, tokens, pixelSprite, router, prefs, UI kit, deploy workflow, probe and map audit run green. Site goes live once Pages source is set to GitHub Actions. |
 | M1 Starter Dex + BirdDex | not started | |
 | M2 Your records | not started | |
 | M3 Map, Field, demo | not started | |
