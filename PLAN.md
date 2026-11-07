@@ -8,10 +8,10 @@ Target: the three-screen concept board (Map with Adventure/Field and 30/60/90 mi
 
 | # | Decision | Recommendation |
 |---|---|---|
-| D1 | Hosting shape | **Static site + small Cloudflare Worker (free tier)**, as the handoff proposes. Evens' "Actions write JSON, Pages serves it" works only for a fixed list of areas and would put eBird data into a public repo, which the eBird terms discourage. A Worker also lets the brother move to London and get that area live. Cost: a free Cloudflare account, and the two keys re-entered there as Worker secrets (the GitHub secrets do not carry over). Fallback if you want zero new accounts: Pages + Actions with 2–3 preset regions and derived summaries only. |
-| D2 | Front-end stack | **Vite + React + TypeScript + MapLibre**, IndexedDB for personal records. Evens' vanilla JS suited one screen; this app has filters, selection that survives a style toggle, an importer and a catalogue. Phone-first PWA rules from `skills/phone-first-pwa` still apply. |
-| D3 | Brother's details | Which logging app (Merlin / eBird / BirdTrack), his region, and one personal export when he can send it. Not blocking until step 4. |
-| D4 | Push access | The Claude GitHub App is not installed on this repo, so Claude cannot push. Install it (or reconnect GitHub in Claude settings). Until then, commits stay local and the plan is also saved in the Claude project. |
+| D1 | Hosting shape | **SETTLED 7 Nov (Joseph): GitHub Pages + scheduled GitHub Action, as in Evens**, so friends just open a link. The Action holds the eBird and routing keys (already added as repo secrets), fetches data for a fixed list of regions and public start points, and publishes derived JSON; the phone only reads it. Consequences: (a) only preset regions/start points work, so "move to London" means London is on the list; (b) no live per-user routing, which fits the public-start-point rule anyway; (c) publishing data on a public site means keeping it to compact derived summaries with eBird attribution and source links, never raw API dumps (check the eBird terms before anything bulk); (d) no access gate needed, because visitors never touch the APIs. A Cloudflare Worker stays an option later if live arbitrary-city queries become important. |
+| D2 | Front-end stack | **Vite + React + TypeScript + MapLibre**, IndexedDB for personal records, built and deployed by a GitHub Action (Pages source set to "GitHub Actions", one settings toggle). Evens' vanilla JS suited one screen; this app has filters, selection that survives a style toggle, an importer and a catalogue. Phone-first PWA rules from `skills/phone-first-pwa` still apply. Stay no-build vanilla JS only if Joseph prefers the Evens way. |
+| D3 | Brother's details | Which logging app (Merlin / eBird / BirdTrack), his region, and one personal export when he can send it. His region decides which preset areas the Action covers. Not blocking until step 4. |
+| D4 | Push access | **Done 7 Nov.** Claude GitHub App is installed for Bird-Dex and pushes work. Evens-model is not covered yet; add it to the app's repo list if Claude should push there. |
 | D5 | Art route | The concept board shows the style. Individual 64×64 sprites need an image-generation tool plus cleanup; Claude cannot make these in this environment. Decide where drafts come from. Art must not block the build. |
 
 ## 1. Feasibility probes (no UI; can run in parallel)
@@ -39,12 +39,12 @@ Exit: map → site → bird → log → reveal → reload works on a phone, enti
 
 ## 3. Go live
 
-1. Worker with eBird and routing adapters; validate responses into app-owned types; timeouts, bounded retries, short caching, request budgets (`skills/free-api-budgeting`). Suggested cache expiries to check against the terms: hotspots daily, reports 15 minutes, drive times 24 hours. Add per-visitor request limits and a simple private access gate, so strangers who find the URL can't burn the eBird and routing quotas (foundation plan acceptance criterion 9).
-2. Explicit start-point picker; one-to-many drive times; 30/60/90 filter; unknown route = "unknown".
+1. Scheduled Action (`workflow_dispatch` with `probe` / `rebuild` tasks, as in `skills/github-pages-data-pipeline`) with eBird and routing adapters; validate responses into app-owned types; timeouts, bounded retries, request budgets and a saved snapshot so rebuilds cost 0 requests (`skills/free-api-budgeting`). Refresh a few times a day, not on every page view. Publish compact derived JSON only (per-site species, dates, drive minutes, source links), never raw responses or account payloads.
+2. Preset start points per region (public landmarks, e.g. a town centre); one-to-many drive times from each; 30/60/90 filter; unknown route = "unknown".
 3. Site sheet with real reports, dates and source links; "unrecorded" and target filters; ranking (distinct unrecorded species, newest report, drive time).
 4. Attribution at the point of display (eBird on sightings, HeiGIT/OpenStreetMap on routes).
 5. Stale, sparse-coverage and provider-failure states visible.
-6. Try a second city (London) to prove the map and data follow the user.
+6. Add a second preset region (London) to prove the map and data follow the selected area.
 
 ## 4. Personal history
 
@@ -67,7 +67,8 @@ Hosted test on his phone, real data check, backup explained, credits visible. No
 
 ## Risks to watch
 
-- eBird terms: public repo + committed API data is the biggest trap (see D1).
+- eBird terms: a public repo and public site mean anything published is visible to everyone. Keep to derived summaries with attribution and source links, and re-read the data terms before publishing anything bulk (see D1).
+- Pages-only limits: preset regions and start points only; data is as fresh as the last Action run; scheduled jobs can start a few minutes late.
 - Adventure-map quality: may need the stricter pixel-render experiment (handoff A3); budget for a spike.
 - Unverified eBird "recent" endpoint semantics: test before using for multi-site claims.
 - Routing origin privacy: keep the public-start-point rule until the provider position is resolved.

@@ -9,7 +9,7 @@ Owner: Joseph (manages everything from his phone via the Claude app). Plain Engl
 - `PLAN.md`: the sequenced build plan and open decisions. Start here.
 - `research/BirdQuest_Build_Handoff.md`: the active consolidated brief (terms-of-use findings, architecture, acceptance criteria). Takes precedence over anything older.
 - `research/art-rendering/`: art contract, asset manifest (22 planned, 0 made), map theme rules, agent briefs, read-only validator. Specification only: not a renderer.
-- `skills/`: copied from JONeillio/Evens-model on 7 Nov 2026. Read the relevant one before starting that kind of work (`free-api-budgeting`, `phone-first-pwa`, `github-pages-data-pipeline`, `validate-model-before-trusting`). Only `github-pages-data-pipeline` depends on the hosting decision in PLAN.md.
+- `skills/`: copied from JONeillio/Evens-model on 7 Nov 2026. Read the relevant one before starting that kind of work (`free-api-budgeting`, `phone-first-pwa`, `github-pages-data-pipeline`, `validate-model-before-trusting`). Hosting is decided: GitHub Pages + scheduled GitHub Action (PLAN.md D1), so `github-pages-data-pipeline` applies in full. Only publish compact derived data, never raw eBird responses.
 - `research/archive/`: earlier foundation plan and next-model handoff (historical; the active handoff wins), plus `design-tokens.json` and `contracts/domain.ts`, the proposed starting point for tokens and app types. Anchor bird briefs: `research/art-rendering/art/prompts/anchor-birds.md`.
 - App code does not exist yet. When it does, add layout, request costs and run/test commands here.
 
