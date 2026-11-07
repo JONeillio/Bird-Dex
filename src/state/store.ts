@@ -13,8 +13,16 @@ export interface Prefs {
   startId: string
   /** Show the labelled demo collection instead of real records (real records arrive in M2). */
   demoCollection: boolean
-  /** Species ids the user is hunting for. Moves to IndexedDB in M2. */
+  /** Species ids the user is hunting for. */
   targets: string[]
+  /** Short buzzes on catches and taps (Android). */
+  hapticsOn: boolean
+  /** Tilt effects: parallax scenes and shiny recorded cards. */
+  tiltOn: boolean
+  /** Keep the screen on while the app is open. */
+  keepAwake: boolean
+  /** When the last backup file was downloaded (ISO), for the gentle reminder. */
+  lastBackupAt: string | null
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -27,6 +35,10 @@ export const DEFAULT_PREFS: Prefs = {
   startId: 'location-1',
   demoCollection: false,
   targets: [],
+  hapticsOn: true,
+  tiltOn: true,
+  keepAwake: false,
+  lastBackupAt: null,
 }
 
 const KEY = 'bq.prefs'

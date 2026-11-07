@@ -428,3 +428,67 @@
 .other-birds summary { font-weight: 800; min-height: 40px; display: flex; align-items: center; cursor: pointer; }
 .credit { margin-top: 14px; }
 .map-error { inset: 8px 50px auto 10px; text-align: left; font-size: 13px; background: var(--panel); border: 2px solid var(--ink); border-radius: 8px; padding: 4px 8px; }
+
+/* ---- Logging, journal, settings, reveal (M2) ---- */
+.form { margin-top: 8px; }
+.field { display: flex; flex-direction: column; gap: 4px; font-weight: 800; }
+.field > span { font-size: 15px; color: var(--muted); }
+.field select, .field input[type='text'], .field input[type='date'], .field textarea {
+  font: inherit; font-weight: 600; color: var(--ink); background: #fff; min-height: var(--tap);
+  border: 2px solid var(--ink); border-radius: 10px; padding: 8px 10px; width: 100%;
+}
+.field textarea { resize: vertical; }
+.form-error { color: #8d2f1c; font-weight: 800; margin: 0; }
+.photo-btn { cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; }
+.photo-pick { display: flex; gap: 12px; align-items: center; }
+.photo-pick img { object-fit: cover; border: 2px solid var(--ink); border-radius: 10px; }
+
+.journal-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.journal-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px; background: var(--panel); border: 2px solid var(--ink); border-radius: var(--radius); }
+.journal-list.compact .journal-item { padding: 8px; }
+.journal-bird { flex: none; }
+.journal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.journal-photo { width: 100%; max-width: 240px; border: 2px solid var(--ink); border-radius: 10px; margin-top: 4px; }
+.report-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex: none; }
+.report-actions .btn.small { min-height: 36px; padding: 0 10px; font-size: 14px; }
+
+.toast {
+  position: fixed; left: 12px; right: 12px; bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 12px); z-index: 60;
+  max-width: 520px; margin: 0 auto; padding: 12px 14px; background: var(--ink); color: var(--panel);
+  border-radius: var(--radius); font-weight: 800; animation: toast-in 0.2s ease-out;
+}
+@keyframes toast-in { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.reveal { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; background: rgba(33, 59, 50, 0.82); animation: fade-in 0.2s ease-out; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.reveal-card { width: 100%; max-width: 360px; text-align: center; padding: 18px 16px; display: flex; flex-direction: column; gap: 8px; background: var(--panel); border: var(--border) solid var(--ink); border-radius: 18px; }
+.reveal-kicker { margin: 0; font-family: var(--font-display); font-size: 22px; color: var(--coral); }
+.reveal-bird { display: grid; place-items: center; animation: reveal-pop 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes reveal-pop {
+  0% { transform: scale(0.4); filter: grayscale(1) brightness(0.4); }
+  45% { transform: scale(1.18); filter: grayscale(1) brightness(0.4); }
+  60% { filter: none; }
+  100% { transform: scale(1); filter: none; }
+}
+
+.radar { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; text-align: center; }
+.radar-dial { position: relative; width: 190px; height: 190px; display: grid; place-items: center; border: 4px solid var(--ink); border-radius: 50%; background: var(--grass); }
+.radar-dial.on-target { background: var(--sage); box-shadow: 0 0 0 4px var(--discovery); }
+.radar-dial svg { transition: transform 0.15s linear; }
+.radar-n { position: absolute; top: 4px; font-family: var(--font-display); font-size: 14px; opacity: 0; }
+.radar-main { font-size: 20px; margin: 0; }
+
+/* Tilt: CSS variables --tilt-x / --tilt-y (-1..1) are written on the element by useTilt. */
+.tilt-scene { position: relative; overflow: hidden; background-position-x: calc(50% + var(--tilt-x) * -14px); }
+.tilt-scene .scene-bird { transform: translate(calc(var(--tilt-x) * 10px), calc(var(--tilt-y) * 6px)); transition: transform 0.05s linear; }
+.foil { position: relative; overflow: hidden; }
+.foil::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light; opacity: 0.55;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 240, 160, 0.9) 40%, rgba(160, 230, 255, 0.9) 50%, rgba(255, 170, 200, 0.9) 60%, transparent 80%);
+  background-size: 250% 100%; background-position: calc(50% + var(--tilt-x) * 70%) 0;
+}
+:root { --tilt-x: 0; --tilt-y: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-bird, .toast, .reveal { animation: none; }
+  .foil::after { opacity: 0.25; }
+}

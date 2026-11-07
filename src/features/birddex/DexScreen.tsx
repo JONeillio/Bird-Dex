@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 import { DEX_SIZE, STARTER_DEX } from '../../data/catalogue'
 import { SETS, SET_LABELS, type SetId } from '../../data/schema'
-import { recordedIds } from '../../domain/collection'
 import { useStore } from '../../state/store'
+import { useRecorded } from '../../state/useRecorded'
+import { useTilt } from '../../phone/tilt'
 import { Banner, Chip, DemoStamp, Pill } from '../../ui/components'
 import { SettingsButton } from '../shell/SettingsButton'
 import { BirdPortrait } from './BirdPortrait'
@@ -14,7 +15,8 @@ export default function DexScreen() {
   const setPref = useStore((s) => s.setPref)
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
-  const recorded = useMemo(() => recordedIds(prefs), [prefs])
+  const recorded = useRecorded()
+  const tiltRef = useTilt<HTMLElement>(prefs.tiltOn)
 
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -32,7 +34,7 @@ export default function DexScreen() {
   return (
     <>
       <Banner title="BirdDex" right={<SettingsButton />} />
-      <main className="screen stack">
+      <main className="screen stack" ref={tiltRef}>
         <div className="row spread">
           <h2 className="h-display">Your BirdDex</h2>
           <Pill tone="good">
@@ -83,7 +85,7 @@ export default function DexScreen() {
             {shown.map((s) => {
               const isRecorded = recorded.has(s.id)
               return (
-                <a key={s.id} className="card" href={`#/bird/${s.id}`}>
+                <a key={s.id} className={`card ${isRecorded ? 'foil' : ''}`.trim()} href={`#/bird/${s.id}`}>
                   {isRecorded && <span className="tick" role="img" aria-label="Recorded">✓</span>}
                   {prefs.targets.includes(s.id) && <span className="target-dot" role="img" aria-label="Target">★</span>}
                   <BirdPortrait species={s} silhouette={!isRecorded} size={96} />

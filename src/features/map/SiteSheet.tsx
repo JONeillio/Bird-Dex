@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { dexById } from '../../data/catalogue'
 import type { RegionData } from '../../data/published-schema'
 import { DEX_SIZE } from '../../data/catalogue'
 import { ageLabel, daysAgo, reportedCount, type SiteView } from '../../domain/ranking'
 import { fullDesignation, shortSiteName } from '../../domain/siteName'
+import { useUi } from '../../state/ui'
 import { BottomSheet, DemoStamp, Pill } from '../../ui/components'
+import { RadarSheet } from './RadarSheet'
 import { birdSrc } from './birdArt'
 
 export function SiteSheet({ view, region, startLabel, recorded, targets, onClose }: {
@@ -14,6 +17,8 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
   targets: readonly string[]
   onClose: () => void
 }) {
+  const openLog = useUi((u) => u.openLog)
+  const [radar, setRadar] = useState(false)
   if (!view) return null
   const { site, minutes } = view
   const dex = site.reports.filter((r) => r.speciesId)
@@ -23,7 +28,9 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
   const reported = reportedCount(site)
   const n = view.newIds.length
   return (
-    <BottomSheet open onClose={onClose} title={shortSiteName(site.name)}>
+    <>
+    {radar && <RadarSheet name={shortSiteName(site.name)} point={site.point} onClose={() => setRadar(false)} />}
+    <BottomSheet open={!radar} onClose={onClose} title={shortSiteName(site.name)}>
       <div className="site-head">
         <h2 className="h-display site-name">{shortSiteName(site.name)}</h2>
         {region.isDemo && <DemoStamp />}
@@ -47,6 +54,9 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
         <a className="btn primary small" href={`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`} target="_blank" rel="noopener">
           Directions
         </a>
+        <button type="button" className="btn small" onClick={() => setRadar(true)}>
+          Point me there
+        </button>
         {site.url && (
           <a className="btn small" href={site.url} target="_blank" rel="noopener">
             View on eBird ↗
@@ -74,11 +84,16 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
                   </span>
                 </span>
               </a>
-              {r.checklistUrl && (
-                <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist for ${s?.name ?? r.name}`}>
-                  eBird ↗
-                </a>
-              )}
+              <span className="report-actions">
+                <button type="button" className="btn small" onClick={() => openLog({ speciesId: r.speciesId!, place: shortSiteName(site.name) })}>
+                  I saw it
+                </button>
+                {r.checklistUrl && (
+                  <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist for ${s?.name ?? r.name}`}>
+                    eBird ↗
+                  </a>
+                )}
+              </span>
             </li>
           )
         })}
@@ -110,5 +125,6 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
         {region.isDemo ? 'Demo data, invented for trying the app.' : <>Sightings: <a href="https://ebird.org" target="_blank" rel="noopener">eBird (ebird.org)</a>.</>} Drive times © openrouteservice by HeiGIT | Data from OpenStreetMap.
       </p>
     </BottomSheet>
+    </>
   )
 }

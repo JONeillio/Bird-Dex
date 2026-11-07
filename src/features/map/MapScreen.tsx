@@ -1,10 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 import { usePublished } from '../../data/published'
 import { dexById } from '../../data/catalogue'
-import { recordedIds } from '../../domain/collection'
 import { ageLabel, filterSites } from '../../domain/ranking'
 import { shortSiteName } from '../../domain/siteName'
 import { useStore, type DriveLimit } from '../../state/store'
+import { useRecorded } from '../../state/useRecorded'
+import { useShake } from '../../phone/shake'
+import { play } from '../../audio/sfx'
+import { buzz, BUZZ } from '../../phone/haptics'
 import { Banner, Chip, DemoStamp, Panel, Pill, Segmented } from '../../ui/components'
 import { SettingsButton } from '../shell/SettingsButton'
 import MapCanvas, { type MapSite } from './MapCanvas'
@@ -26,7 +29,7 @@ export default function MapScreen() {
   const focus = useStore((s) => s.focusSpeciesId)
   const setFocus = useStore((s) => s.setFocusSpecies)
   const data = usePublished(prefs.regionId)
-  const recorded = useMemo(() => recordedIds(prefs), [prefs])
+  const recorded = useRecorded()
   const [picked, setPicked] = useState<string | null>(null)
   const [detailsOpen, setDetailsOpen] = useState(false)
   const [focusNonce, setFocusNonce] = useState(0)
@@ -72,6 +75,13 @@ export default function MapScreen() {
     setFocusNonce((n) => n + 1)
   }, [])
   const next = () => shown.length > 1 && pick(shown[(activeIdx + 1) % shown.length].site.id)
+  // Shake the phone to hop to the next-best spot (only while no sheet is open).
+  useShake(() => {
+    if (detailsOpen || shown.length < 2) return
+    next()
+    play('blip', prefs.soundOn)
+    buzz(BUZZ.select, prefs.hapticsOn)
+  }, prefs.tiltOn)
 
   const focusName = focus ? dexById(focus)?.name : null
   const fitKey = `${ready?.regionId}|${prefs.driveLimit}|${prefs.unrecordedOnly}|${focus}|${ready ? 'r' : ''}`
