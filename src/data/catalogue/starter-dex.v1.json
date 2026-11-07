@@ -2390,7 +2390,7 @@
    "dexNo": 75,
    "name": "Wren",
    "ebirdName": "Eurasian Wren",
-   "sciName": "Troglodytes troglodytes",
+   "sciName": "Nannus troglodytes",
    "family": "Wrens",
    "sets": [
     "garden",
@@ -3121,8 +3121,8 @@
    "id": "lesser-redpoll",
    "dexNo": 98,
    "name": "Lesser Redpoll",
-   "ebirdName": "Lesser Redpoll",
-   "sciName": "Acanthis cabaret",
+   "ebirdName": "Redpoll",
+   "sciName": "Acanthis flammea",
    "family": "Finches",
    "sets": [
     "woodland",
@@ -3217,7 +3217,7 @@
    "dexNo": 101,
    "name": "Reed Bunting",
    "ebirdName": "Reed Bunting",
-   "sciName": "Emberiza schoeniclus",
+   "sciName": "Schoeniclus schoeniclus",
    "family": "Buntings",
    "sets": [
     "wetland"
