@@ -53,3 +53,16 @@ describe('pipeline transforms', () => {
     })
   })
 })
+
+describe('pipeline config', () => {
+  it('has valid public start points in [lng, lat] and a file per region', async () => {
+    const { readFileSync } = await import('node:fs')
+    const { RegionRefSchema } = await import('../src/data/published-schema')
+    const cfg = JSON.parse(readFileSync('pipeline/config/regions.json', 'utf8')) as { regions: unknown[] }
+    for (const r of cfg.regions) {
+      const ref = RegionRefSchema.parse(r)
+      expect(ref.file).toMatch(/^region\/[a-z0-9-]+\.json$/)
+      expect(ref.centre[1]).toBeGreaterThan(49)
+    }
+  })
+})

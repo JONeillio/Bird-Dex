@@ -4,9 +4,45 @@
   "hotspotRadiusKm": 50,
   "maxSites": 80,
   "regions": [
-    { "id": "location-1", "label": "Location 1", "centre": [-2.2836, 53.4413], "zoom": 11,
-      "startPoints": [{ "id": "location-1", "label": "Location 1", "point": [-2.2836, 53.4413] }] },
-    { "id": "location-2", "label": "Location 2", "centre": [0.176, 51.476], "zoom": 11,
-      "startPoints": [{ "id": "location-2", "label": "Location 2", "point": [0.176, 51.476] }] }
+    {
+      "id": "location-1",
+      "label": "Location 1",
+      "centre": [
+        -2.2836,
+        53.4413
+      ],
+      "zoom": 11,
+      "startPoints": [
+        {
+          "id": "location-1",
+          "label": "Location 1",
+          "point": [
+            -2.2836,
+            53.4413
+          ]
+        }
+      ],
+      "file": "region/location-1.json"
+    },
+    {
+      "id": "location-2",
+      "label": "Location 2",
+      "centre": [
+        0.176,
+        51.476
+      ],
+      "zoom": 11,
+      "startPoints": [
+        {
+          "id": "location-2",
+          "label": "Location 2",
+          "point": [
+            0.176,
+            51.476
+          ]
+        }
+      ],
+      "file": "region/location-2.json"
+    }
   ]
 }

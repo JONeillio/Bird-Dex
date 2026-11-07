@@ -7,7 +7,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, app
 import { join } from 'node:path'
 import { timedFetch, redact } from './lib/http.ts'
 import { cleanHotspot, rankHotspots, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
-import { IndexSchema, RegionSchema, type PublishedIndex, type RegionData, type Site } from '../src/data/published-schema.ts'
+import { IndexSchema, RegionRefSchema, RegionSchema, type PublishedIndex, type RegionData, type Site } from '../src/data/published-schema.ts'
 import { StarterDexSchema } from '../src/data/schema.ts'
 
 const OUT = 'pipeline/out'
@@ -105,6 +105,7 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
 async function refresh(): Promise<void> {
   if (!ebirdKey) throw new Error('EBIRD_API_KEY is not available to this run')
   const cfg = JSON.parse(readFileSync('pipeline/config/regions.json', 'utf8')) as Config
+  cfg.regions.forEach((r) => RegionRefSchema.parse(r)) // fail before spending any requests
   const dex = StarterDexSchema.parse(JSON.parse(readFileSync('src/data/catalogue/starter-dex.v1.json', 'utf8')))
   const dexBySci = new Map(dex.species.map((s) => [s.sciName, s.id]))
   const t0 = Date.now()
