@@ -2,6 +2,8 @@
 
 Written 7 Nov 2026 from `research/BirdQuest_Build_Handoff.md`, the concept board and the Evens skills. Status today: specifications only. No app, no live API check, 0 of 22 art assets made.
 
+**The executable version of this plan is `BUILD_PLAN.md`** (tickets, contracts, order of work). Where the order differs, follow BUILD_PLAN.
+
 Target: the three-screen concept board (Map with Adventure/Field and 30/60/90 min chips, BirdDex with recorded cards and silhouettes, Bird profile with Target / Find nearby / Listen / Log a sighting).
 
 ## 0. Decisions to settle first (about an hour of Joseph's time)

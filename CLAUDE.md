@@ -6,7 +6,8 @@ Owner: Joseph (manages everything from his phone via the Claude app). Plain Engl
 "Where could I go today, within my driving limit, to look for birds missing from my collection?" Pixel-art map, real species, illustrated BirdDex, nearby reports, drive-time filter. Visual target: `research/design/BirdQuest_Concept_Board.png` (Map / BirdDex / Bird profile, bottom tabs Map · BirdDex · Journal).
 
 ## Where things are
-- `PLAN.md`: the sequenced build plan and open decisions. Start here.
+- `BUILD_PLAN.md`: **start here when building.** Design principles from the wireframe, architecture, JSON contracts, milestones M0–M8 with tickets tagged [C] (cheap model fine) or [S] (use a stronger model), gotchas and the status table. Update its status table at the end of each milestone.
+- `PLAN.md`: the strategy and settled decisions behind it.
 - `research/BirdQuest_Build_Handoff.md`: the active consolidated brief (terms-of-use findings, architecture, acceptance criteria). Takes precedence over anything older.
 - `research/art-rendering/`: art contract, asset manifest (22 planned, 0 made), map theme rules, agent briefs, read-only validator. Specification only: not a renderer.
 - `skills/`: copied from JONeillio/Evens-model on 7 Nov 2026. Read the relevant one before starting that kind of work (`free-api-budgeting`, `phone-first-pwa`, `github-pages-data-pipeline`, `validate-model-before-trusting`). Hosting is decided: GitHub Pages + scheduled GitHub Action (PLAN.md D1), so `github-pages-data-pipeline` applies in full. Only publish compact derived data, never raw eBird responses.
@@ -23,7 +24,11 @@ Owner: Joseph (manages everything from his phone via the Claude app). Plain Engl
 - Real personal exports go in `private-data/` (gitignored), never in the repo.
 - Don't create paid subscriptions, domains or a public launch as a side effect. Ask Joseph before switching providers or spending beyond a free plan.
 
+## Facts learned
+(none verified yet; the T0.6 probe fills this in. Known from docs: ORS matrix max 3,500 routes per request, use `sources:[0]` + `destinations` for one-to-many; eBird auth header `X-eBirdApiToken`; OpenFreeMap styles at `https://tiles.openfreemap.org/styles/{liberty|bright|positron}`.)
+
 ## Working rules
+- Merge to `main` and push yourself once a milestone's checks pass (Joseph's request); pushing `main` redeploys the site.
 - Test art inventory: `python research/art-rendering/tools/validate_assets.py --root research/art-rendering` (must report 0 production images until real art is approved; that is not an art QA pass).
 - Build against demo fixtures first, probe real APIs cheaply before designing around them, and record what each endpoint really returns and costs here.
 - Joseph often can't run commands: prefer GitHub Actions `workflow_dispatch` tasks (probe, rebuild) he can tap from his phone.
