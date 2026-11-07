@@ -12,7 +12,8 @@
     "test": "vitest run",
     "pipeline": "tsx pipeline/run.ts",
     "probe": "tsx pipeline/probe.ts",
-    "map-audit": "tsx pipeline/map-audit.ts"
+    "map-audit": "tsx pipeline/map-audit.ts",
+    "taxonomy-check": "tsx pipeline/taxonomy-check.ts"
   },
   "dependencies": {
     "@fontsource/nunito": "^5.3.0",

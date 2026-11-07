@@ -6,6 +6,7 @@ name: Deploy BirdQuest
 #   refresh   same as deploy, but also refetches live data (from M5 onwards)
 #   probe     check what eBird and openrouteservice really return (no deploy)
 #   map-audit check the OpenFreeMap style and tiles (no deploy)
+#   taxonomy-check  check every Starter Dex scientific name against eBird (no deploy)
 # Times in any cron are UTC. A schedule is added only after a manual refresh works.
 
 on:
@@ -17,7 +18,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, refresh, probe, map-audit]
+        options: [deploy, refresh, probe, map-audit, taxonomy-check]
   # schedule:
   #   - cron: "17 5 * * *"   # 05:17 UTC daily, enable after a manual refresh works
 
@@ -58,11 +59,16 @@ jobs:
       - name: Audit OpenFreeMap style
         if: env.TASK == 'map-audit'
         run: npm run map-audit
+      - name: Check Starter Dex names against eBird
+        if: env.TASK == 'taxonomy-check'
+        env:
+          EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
+        run: npm run taxonomy-check
       - name: Keep the report
-        if: env.TASK == 'probe' || env.TASK == 'map-audit'
+        if: always() && (env.TASK == 'probe' || env.TASK == 'map-audit' || env.TASK == 'taxonomy-check')
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.TASK == 'probe' && 'probe-report' || 'map-audit' }}
+          name: ${{ env.TASK == 'probe' && 'probe-report' || env.TASK == 'taxonomy-check' && 'taxonomy-check' || 'map-audit' }}
           path: reports/
           if-no-files-found: error
 

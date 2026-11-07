@@ -1,0 +1,3344 @@
+{
+ "schema": 1,
+ "version": "starter-dex.v1",
+ "species": [
+  {
+   "id": "pink-footed-goose",
+   "dexNo": 1,
+   "name": "Pink-footed Goose",
+   "ebirdName": "Pink-footed Goose",
+   "sciName": "Anser brachyrhynchus",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "farmland-upland",
+    "wetland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#8a7a6a",
+     "wing": "#7a6a5a",
+     "cap": "#5a4a42",
+     "neck": "#6a5a50",
+     "cheek": "#5a4a42",
+     "breast": "#a89a88",
+     "belly": "#d8d0c0",
+     "bill": "#d98a94",
+     "legs": "#d98a94",
+     "tail": "#7a6a5a"
+    },
+    "tweak": {
+     "scale": 0.8,
+     "neck": -1
+    }
+   },
+   "portraitAssetId": "bird.pink-footed-goose.portrait.adult.v1"
+  },
+  {
+   "id": "greylag-goose",
+   "dexNo": 2,
+   "name": "Greylag Goose",
+   "ebirdName": "Greylag Goose",
+   "sciName": "Anser anser",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland",
+    "farmland-upland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#8b7d6b",
+     "wing": "#7d6f5d",
+     "cap": "#9a8c7a",
+     "neck": "#9a8c7a",
+     "cheek": "#9a8c7a",
+     "breast": "#b5a89a",
+     "belly": "#d9d0c0",
+     "bill": "#e8913a",
+     "legs": "#e8a0a0",
+     "tail": "#8b7d6b"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "neck": -1
+    }
+   },
+   "portraitAssetId": "bird.greylag-goose.portrait.adult.v1"
+  },
+  {
+   "id": "canada-goose",
+   "dexNo": 3,
+   "name": "Canada Goose",
+   "ebirdName": "Canada Goose",
+   "sciName": "Branta canadensis",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#7a6a58",
+     "wing": "#6f5f4e",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#f2efe6",
+     "breast": "#b8a890",
+     "belly": "#e0d8c8",
+     "bill": "#1a1a1a",
+     "legs": "#2a2a2a",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "neck": -1
+    }
+   },
+   "portraitAssetId": "bird.canada-goose.portrait.adult.v1"
+  },
+  {
+   "id": "mute-swan",
+   "dexNo": 4,
+   "name": "Mute Swan",
+   "ebirdName": "Mute Swan",
+   "sciName": "Cygnus olor",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#f7f7f2",
+     "wing": "#e9e9e2",
+     "cap": "#f7f7f2",
+     "neck": "#f7f7f2",
+     "cheek": "#f7f7f2",
+     "breast": "#f7f7f2",
+     "belly": "#f2f2ea",
+     "bill": "#e8742a",
+     "legs": "#2a2a2a",
+     "tail": "#f2f2ea"
+    }
+   },
+   "portraitAssetId": "bird.mute-swan.portrait.adult.v1"
+  },
+  {
+   "id": "whooper-swan",
+   "dexNo": 5,
+   "name": "Whooper Swan",
+   "ebirdName": "Whooper Swan",
+   "sciName": "Cygnus cygnus",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#f7f7f2",
+     "wing": "#e9e9e2",
+     "cap": "#f7f7f2",
+     "neck": "#f7f7f2",
+     "cheek": "#f7f7f2",
+     "breast": "#f7f7f2",
+     "belly": "#f2f2ea",
+     "bill": "#f2d23a",
+     "legs": "#2a2a2a",
+     "tail": "#f2f2ea"
+    },
+    "tweak": {
+     "neck": 1
+    }
+   },
+   "portraitAssetId": "bird.whooper-swan.portrait.adult.v1"
+  },
+  {
+   "id": "common-shelduck",
+   "dexNo": 6,
+   "name": "Shelduck",
+   "ebirdName": "Common Shelduck",
+   "sciName": "Tadorna tadorna",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#f4f1ea",
+     "wing": "#2a2a2a",
+     "cap": "#1f5a45",
+     "neck": "#1f5a45",
+     "cheek": "#1f5a45",
+     "breast": "#b5532a",
+     "belly": "#f4f1ea",
+     "bill": "#d9423a",
+     "legs": "#e8a0a0",
+     "tail": "#f4f1ea"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.common-shelduck.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-wigeon",
+   "dexNo": 7,
+   "name": "Wigeon",
+   "ebirdName": "Eurasian Wigeon",
+   "sciName": "Mareca penelope",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#8a8a8a",
+     "wing": "#7a7a7a",
+     "cap": "#b8602f",
+     "neck": "#b8602f",
+     "cheek": "#b8602f",
+     "breast": "#c88a7a",
+     "belly": "#f2efe6",
+     "bill": "#8aa0a8",
+     "legs": "#555555",
+     "tail": "#3a3a3a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.eurasian-wigeon.portrait.adult.v1"
+  },
+  {
+   "id": "gadwall",
+   "dexNo": 8,
+   "name": "Gadwall",
+   "ebirdName": "Gadwall",
+   "sciName": "Mareca strepera",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#8a7f72",
+     "wing": "#7a6f62",
+     "cap": "#8a7f72",
+     "neck": "#8a7f72",
+     "cheek": "#8a7f72",
+     "breast": "#6f6558",
+     "belly": "#e8e4da",
+     "bill": "#3a3a3a",
+     "legs": "#e0a050",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.gadwall.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-teal",
+   "dexNo": 9,
+   "name": "Teal",
+   "ebirdName": "Eurasian Teal",
+   "sciName": "Anas crecca",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#8e8e8e",
+     "wing": "#7e7e7e",
+     "cap": "#8a3a2a",
+     "neck": "#8a3a2a",
+     "cheek": "#2f7a4a",
+     "breast": "#d8b090",
+     "belly": "#f2efe6",
+     "bill": "#2a2a2a",
+     "legs": "#5a5a5a",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.75
+    }
+   },
+   "portraitAssetId": "bird.eurasian-teal.portrait.adult.v1"
+  },
+  {
+   "id": "mallard",
+   "dexNo": 10,
+   "name": "Mallard",
+   "ebirdName": "Mallard",
+   "sciName": "Anas platyrhynchos",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#8a7f6a",
+     "wing": "#7a6f5a",
+     "cap": "#1f6b3a",
+     "neck": "#1f6b3a",
+     "cheek": "#1f6b3a",
+     "breast": "#7a3e2a",
+     "belly": "#cfcfcf",
+     "bill": "#e8c62a",
+     "legs": "#e8913a",
+     "tail": "#f2f2ea"
+    }
+   },
+   "portraitAssetId": "bird.mallard.portrait.adult.v1"
+  },
+  {
+   "id": "northern-shoveler",
+   "dexNo": 11,
+   "name": "Northern Shoveler",
+   "ebirdName": "Northern Shoveler",
+   "sciName": "Spatula clypeata",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#2a2a2a",
+     "wing": "#3a5a7a",
+     "cap": "#1f5a45",
+     "neck": "#1f5a45",
+     "cheek": "#1f5a45",
+     "breast": "#f2efe6",
+     "belly": "#a8542a",
+     "bill": "#2a2a2a",
+     "legs": "#e8913a",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "bill": 2
+    }
+   },
+   "portraitAssetId": "bird.northern-shoveler.portrait.adult.v1"
+  },
+  {
+   "id": "common-pochard",
+   "dexNo": 12,
+   "name": "Pochard",
+   "ebirdName": "Common Pochard",
+   "sciName": "Aythya ferina",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#a8a8a8",
+     "wing": "#9a9a9a",
+     "cap": "#a8452a",
+     "neck": "#a8452a",
+     "cheek": "#a8452a",
+     "breast": "#2a2a2a",
+     "belly": "#b8b8b8",
+     "bill": "#3a4a5a",
+     "legs": "#6a6a6a",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.common-pochard.portrait.adult.v1"
+  },
+  {
+   "id": "tufted-duck",
+   "dexNo": 13,
+   "name": "Tufted Duck",
+   "ebirdName": "Tufted Duck",
+   "sciName": "Aythya fuligula",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#1a1a22",
+     "wing": "#1a1a22",
+     "cap": "#1a1a22",
+     "neck": "#1a1a22",
+     "cheek": "#1a1a22",
+     "breast": "#1a1a22",
+     "belly": "#f6f6f0",
+     "bill": "#6a8fa8",
+     "legs": "#555555",
+     "tail": "#1a1a22"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "crest": 1
+    }
+   },
+   "portraitAssetId": "bird.tufted-duck.portrait.adult.v1"
+  },
+  {
+   "id": "common-goldeneye",
+   "dexNo": 14,
+   "name": "Goldeneye",
+   "ebirdName": "Common Goldeneye",
+   "sciName": "Bucephala clangula",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#1a1a1a",
+     "wing": "#f0f0ea",
+     "cap": "#1f4a3a",
+     "neck": "#1f4a3a",
+     "cheek": "#1f4a3a",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#2a2a2a",
+     "legs": "#e8a02a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.common-goldeneye.portrait.adult.v1"
+  },
+  {
+   "id": "goosander",
+   "dexNo": 15,
+   "name": "Goosander",
+   "ebirdName": "Goosander",
+   "sciName": "Mergus merganser",
+   "family": "Ducks, geese and swans",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#2a2a2a",
+     "wing": "#bcbcbc",
+     "cap": "#1f4a3a",
+     "neck": "#1f4a3a",
+     "cheek": "#1f4a3a",
+     "breast": "#f6dcc8",
+     "belly": "#f6dcc8",
+     "bill": "#d9423a",
+     "legs": "#d9423a",
+     "tail": "#8a8a8a"
+    },
+    "tweak": {
+     "bill": 2,
+     "crest": 1
+    }
+   },
+   "portraitAssetId": "bird.goosander.portrait.adult.v1"
+  },
+  {
+   "id": "red-legged-partridge",
+   "dexNo": 16,
+   "name": "Red-legged Partridge",
+   "ebirdName": "Red-legged Partridge",
+   "sciName": "Alectoris rufa",
+   "family": "Pheasants and allies",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#a08060",
+     "wing": "#8a6a4a",
+     "cap": "#8a6a4a",
+     "neck": "#f2efe6",
+     "cheek": "#f2efe6",
+     "breast": "#7a8a96",
+     "belly": "#d8a060",
+     "bill": "#d9423a",
+     "legs": "#d9423a",
+     "tail": "#a8603a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.red-legged-partridge.portrait.adult.v1"
+  },
+  {
+   "id": "grey-partridge",
+   "dexNo": 17,
+   "name": "Grey Partridge",
+   "ebirdName": "Grey Partridge",
+   "sciName": "Perdix perdix",
+   "family": "Pheasants and allies",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#8a7a62",
+     "wing": "#7a6a52",
+     "cap": "#8a7a62",
+     "neck": "#9a9a9a",
+     "cheek": "#b8803a",
+     "breast": "#9a9a9a",
+     "belly": "#d9c8a0",
+     "bill": "#8a8a6a",
+     "legs": "#8a8a6a",
+     "tail": "#b8603a"
+    },
+    "tweak": {
+     "scale": 0.8
+    }
+   },
+   "portraitAssetId": "bird.grey-partridge.portrait.adult.v1"
+  },
+  {
+   "id": "common-pheasant",
+   "dexNo": 18,
+   "name": "Pheasant",
+   "ebirdName": "Common Pheasant",
+   "sciName": "Phasianus colchicus",
+   "family": "Pheasants and allies",
+   "sets": [
+    "farmland-upland",
+    "woodland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#8a4a2a",
+     "wing": "#b8803a",
+     "cap": "#1f5a45",
+     "neck": "#f2efe6",
+     "cheek": "#a8201a",
+     "breast": "#8a3a1a",
+     "belly": "#7a4a2a",
+     "bill": "#d8d0a0",
+     "legs": "#8a7a62",
+     "tail": "#a8703a"
+    },
+    "tweak": {
+     "tail": 6
+    }
+   },
+   "portraitAssetId": "bird.common-pheasant.portrait.adult.v1"
+  },
+  {
+   "id": "little-grebe",
+   "dexNo": 19,
+   "name": "Little Grebe",
+   "ebirdName": "Little Grebe",
+   "sciName": "Tachybaptus ruficollis",
+   "family": "Grebes",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "duck",
+    "palette": {
+     "back": "#5a4a3a",
+     "wing": "#4a3a30",
+     "cap": "#4a3a30",
+     "neck": "#8a3a2a",
+     "cheek": "#8a3a2a",
+     "breast": "#8a6a50",
+     "belly": "#b8a890",
+     "bill": "#3a3a3a",
+     "legs": "#4a5a4a",
+     "tail": "#4a3a30"
+    },
+    "tweak": {
+     "scale": 0.65
+    }
+   },
+   "portraitAssetId": "bird.little-grebe.portrait.adult.v1"
+  },
+  {
+   "id": "great-crested-grebe",
+   "dexNo": 20,
+   "name": "Great Crested Grebe",
+   "ebirdName": "Great Crested Grebe",
+   "sciName": "Podiceps cristatus",
+   "family": "Grebes",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#6a5a4a",
+     "wing": "#6a5a4a",
+     "cap": "#1a1a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#c8602a",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#d9604a",
+     "legs": "#5a6a5a",
+     "tail": "#6a5a4a"
+    },
+    "tweak": {
+     "scale": 0.7,
+     "crest": 1,
+     "neck": -1
+    }
+   },
+   "portraitAssetId": "bird.great-crested-grebe.portrait.adult.v1"
+  },
+  {
+   "id": "great-cormorant",
+   "dexNo": 21,
+   "name": "Cormorant",
+   "ebirdName": "Great Cormorant",
+   "sciName": "Phalacrocorax carbo",
+   "family": "Cormorants and shags",
+   "sets": [
+    "wetland",
+    "coast"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "swan",
+    "palette": {
+     "back": "#1a2228",
+     "wing": "#3a4a52",
+     "cap": "#1a2228",
+     "neck": "#1a2228",
+     "cheek": "#e8dcb0",
+     "breast": "#1a2228",
+     "belly": "#1a2228",
+     "bill": "#5a5a52",
+     "legs": "#1a1a1a",
+     "tail": "#1a2228"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "bill": 1,
+     "neck": -1
+    }
+   },
+   "portraitAssetId": "bird.great-cormorant.portrait.adult.v1"
+  },
+  {
+   "id": "grey-heron",
+   "dexNo": 22,
+   "name": "Grey Heron",
+   "ebirdName": "Grey Heron",
+   "sciName": "Ardea cinerea",
+   "family": "Herons, egrets and bitterns",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "heron",
+    "palette": {
+     "back": "#8a90a8",
+     "wing": "#a0a4c0",
+     "cap": "#f2efe6",
+     "neck": "#f2efe6",
+     "cheek": "#f2efe6",
+     "breast": "#f2efe6",
+     "belly": "#e8e0d0",
+     "bill": "#f2a82a",
+     "legs": "#a8603a",
+     "tail": "#6a7088"
+    }
+   },
+   "portraitAssetId": "bird.grey-heron.portrait.adult.v1"
+  },
+  {
+   "id": "little-egret",
+   "dexNo": 23,
+   "name": "Little Egret",
+   "ebirdName": "Little Egret",
+   "sciName": "Egretta garzetta",
+   "family": "Herons, egrets and bitterns",
+   "sets": [
+    "wetland",
+    "coast"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "heron",
+    "palette": {
+     "back": "#f6f6f0",
+     "wing": "#e8e8e2",
+     "cap": "#f6f6f0",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "crest": 1
+    }
+   },
+   "portraitAssetId": "bird.little-egret.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-bittern",
+   "dexNo": 24,
+   "name": "Bittern",
+   "ebirdName": "Eurasian Bittern",
+   "sciName": "Botaurus stellaris",
+   "family": "Herons, egrets and bitterns",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "heron",
+    "palette": {
+     "back": "#b8863a",
+     "wing": "#8a5a2a",
+     "cap": "#3a2a1a",
+     "neck": "#c8a060",
+     "cheek": "#c8a060",
+     "breast": "#d8b070",
+     "belly": "#d8b070",
+     "bill": "#b8a050",
+     "legs": "#8aa050",
+     "tail": "#8a5a2a"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "legs": -3
+    }
+   },
+   "portraitAssetId": "bird.eurasian-bittern.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-sparrowhawk",
+   "dexNo": 25,
+   "name": "Sparrowhawk",
+   "ebirdName": "Eurasian Sparrowhawk",
+   "sciName": "Accipiter nisus",
+   "family": "Hawks, eagles and kites",
+   "sets": [
+    "raptors",
+    "woodland",
+    "garden"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#6a7a8a",
+     "wing": "#5a6a7a",
+     "cap": "#5a6a7a",
+     "neck": "#5a6a7a",
+     "cheek": "#d8b08a",
+     "breast": "#d89a6a",
+     "belly": "#e8d0b0",
+     "bill": "#3a3a3a",
+     "legs": "#e8c42a",
+     "tail": "#5a6a7a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 2
+    }
+   },
+   "portraitAssetId": "bird.eurasian-sparrowhawk.portrait.adult.v1"
+  },
+  {
+   "id": "common-buzzard",
+   "dexNo": 26,
+   "name": "Buzzard",
+   "ebirdName": "Common Buzzard",
+   "sciName": "Buteo buteo",
+   "family": "Hawks, eagles and kites",
+   "sets": [
+    "raptors",
+    "farmland-upland",
+    "woodland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#6a4a2a",
+     "wing": "#5a3a22",
+     "cap": "#6a4a2a",
+     "neck": "#6a4a2a",
+     "cheek": "#8a6a4a",
+     "breast": "#d8c8a8",
+     "belly": "#f0e6d2",
+     "bill": "#3a3a3a",
+     "legs": "#e8c42a",
+     "tail": "#7a5a3a"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.common-buzzard.portrait.adult.v1"
+  },
+  {
+   "id": "red-kite",
+   "dexNo": 27,
+   "name": "Red Kite",
+   "ebirdName": "Red Kite",
+   "sciName": "Milvus milvus",
+   "family": "Hawks, eagles and kites",
+   "sets": [
+    "raptors",
+    "farmland-upland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#8a4a22",
+     "wing": "#7a3a1a",
+     "cap": "#d8d0c0",
+     "neck": "#d8d0c0",
+     "cheek": "#d8d0c0",
+     "breast": "#b8602a",
+     "belly": "#b8602a",
+     "bill": "#d8b030",
+     "legs": "#e8c42a",
+     "tail": "#b8602a"
+    },
+    "tweak": {
+     "scale": 1.1,
+     "tail": 3
+    }
+   },
+   "portraitAssetId": "bird.red-kite.portrait.adult.v1"
+  },
+  {
+   "id": "common-kestrel",
+   "dexNo": 28,
+   "name": "Kestrel",
+   "ebirdName": "Common Kestrel",
+   "sciName": "Falco tinnunculus",
+   "family": "Falcons",
+   "sets": [
+    "raptors",
+    "farmland-upland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#b8602a",
+     "wing": "#a85022",
+     "cap": "#8a98a8",
+     "neck": "#8a98a8",
+     "cheek": "#8a98a8",
+     "breast": "#e0b070",
+     "belly": "#e8c890",
+     "bill": "#3a3a3a",
+     "legs": "#e8c42a",
+     "tail": "#8a98a8"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 2
+    }
+   },
+   "portraitAssetId": "bird.common-kestrel.portrait.adult.v1"
+  },
+  {
+   "id": "peregrine-falcon",
+   "dexNo": 29,
+   "name": "Peregrine",
+   "ebirdName": "Peregrine Falcon",
+   "sciName": "Falco peregrinus",
+   "family": "Falcons",
+   "sets": [
+    "raptors",
+    "coast"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#4a5a6a",
+     "wing": "#3f4f5f",
+     "cap": "#2a2a32",
+     "neck": "#2a2a32",
+     "cheek": "#1f1f25",
+     "breast": "#f0e6d6",
+     "belly": "#ece0cc",
+     "bill": "#3a3a3a",
+     "legs": "#e8c42a",
+     "tail": "#3f4f5f"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.peregrine-falcon.portrait.adult.v1"
+  },
+  {
+   "id": "western-barn-owl",
+   "dexNo": 30,
+   "name": "Barn Owl",
+   "ebirdName": "Western Barn Owl",
+   "sciName": "Tyto alba",
+   "family": "Barn owls",
+   "sets": [
+    "raptors",
+    "farmland-upland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#d8a060",
+     "wing": "#c89850",
+     "cap": "#f6efe2",
+     "neck": "#f6efe2",
+     "cheek": "#f6efe2",
+     "breast": "#f6efe2",
+     "belly": "#f6efe2",
+     "bill": "#e8d8b8",
+     "legs": "#e8d8b8",
+     "tail": "#d8a060"
+    },
+    "tweak": {
+     "head": 1.5,
+     "bill": -2,
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.western-barn-owl.portrait.adult.v1"
+  },
+  {
+   "id": "tawny-owl",
+   "dexNo": 31,
+   "name": "Tawny Owl",
+   "ebirdName": "Tawny Owl",
+   "sciName": "Strix aluco",
+   "family": "Owls",
+   "sets": [
+    "raptors",
+    "woodland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#8a5a3a",
+     "wing": "#7a4a2a",
+     "cap": "#8a5a3a",
+     "neck": "#8a5a3a",
+     "cheek": "#c8a888",
+     "breast": "#c8a878",
+     "belly": "#d8c098",
+     "bill": "#d8c8a0",
+     "legs": "#b8a888",
+     "tail": "#7a4a2a"
+    },
+    "tweak": {
+     "head": 1.5,
+     "bill": -2
+    }
+   },
+   "portraitAssetId": "bird.tawny-owl.portrait.adult.v1"
+  },
+  {
+   "id": "little-owl",
+   "dexNo": 32,
+   "name": "Little Owl",
+   "ebirdName": "Little Owl",
+   "sciName": "Athene noctua",
+   "family": "Owls",
+   "sets": [
+    "raptors",
+    "farmland-upland"
+   ],
+   "habitat": "raptors",
+   "art": {
+    "template": "raptor",
+    "palette": {
+     "back": "#8a6a4a",
+     "wing": "#7a5a3a",
+     "cap": "#8a6a4a",
+     "neck": "#8a6a4a",
+     "cheek": "#e8dcc0",
+     "breast": "#d8c8a8",
+     "belly": "#f0e6d2",
+     "bill": "#d8c860",
+     "legs": "#d8c8a0",
+     "tail": "#7a5a3a"
+    },
+    "tweak": {
+     "scale": 0.7,
+     "head": 1,
+     "bill": -2
+    }
+   },
+   "portraitAssetId": "bird.little-owl.portrait.adult.v1"
+  },
+  {
+   "id": "water-rail",
+   "dexNo": 33,
+   "name": "Water Rail",
+   "ebirdName": "Water Rail",
+   "sciName": "Rallus aquaticus",
+   "family": "Rails, gallinules and coots",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#6a5a42",
+     "wing": "#5a4a32",
+     "cap": "#6a5a42",
+     "neck": "#7a8a98",
+     "cheek": "#8a9aa8",
+     "breast": "#7a8a98",
+     "belly": "#4a4a4a",
+     "bill": "#d9423a",
+     "legs": "#c8604a",
+     "tail": "#4a4a4a"
+    },
+    "tweak": {
+     "scale": 0.8,
+     "bill": 2,
+     "legs": -1
+    }
+   },
+   "portraitAssetId": "bird.water-rail.portrait.adult.v1"
+  },
+  {
+   "id": "common-moorhen",
+   "dexNo": 34,
+   "name": "Moorhen",
+   "ebirdName": "Common Moorhen",
+   "sciName": "Gallinula chloropus",
+   "family": "Rails, gallinules and coots",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#5a4a32",
+     "wing": "#4a3a22",
+     "cap": "#2a3038",
+     "neck": "#2a3038",
+     "cheek": "#2a3038",
+     "breast": "#2a3038",
+     "belly": "#2a3038",
+     "bill": "#d9423a",
+     "legs": "#b8c82a",
+     "tail": "#2a3038"
+    },
+    "tweak": {
+     "scale": 0.8,
+     "legs": 2
+    }
+   },
+   "portraitAssetId": "bird.common-moorhen.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-coot",
+   "dexNo": 35,
+   "name": "Coot",
+   "ebirdName": "Eurasian Coot",
+   "sciName": "Fulica atra",
+   "family": "Rails, gallinules and coots",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#1a1e24",
+     "wing": "#1a1e24",
+     "cap": "#1a1e24",
+     "neck": "#1a1e24",
+     "cheek": "#1a1e24",
+     "breast": "#1a1e24",
+     "belly": "#1a1e24",
+     "bill": "#f6f6f0",
+     "legs": "#8aa0a8",
+     "tail": "#1a1e24"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "legs": 1
+    }
+   },
+   "portraitAssetId": "bird.eurasian-coot.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-oystercatcher",
+   "dexNo": 36,
+   "name": "Oystercatcher",
+   "ebirdName": "Eurasian Oystercatcher",
+   "sciName": "Haematopus ostralegus",
+   "family": "Oystercatchers",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#1a1a1a",
+     "wing": "#1a1a1a",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#1a1a1a",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#e8501a",
+     "legs": "#e0809a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "bill": 3,
+     "legs": -1,
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.eurasian-oystercatcher.portrait.adult.v1"
+  },
+  {
+   "id": "northern-lapwing",
+   "dexNo": 37,
+   "name": "Lapwing",
+   "ebirdName": "Northern Lapwing",
+   "sciName": "Vanellus vanellus",
+   "family": "Lapwings and plovers",
+   "sets": [
+    "farmland-upland",
+    "wetland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#2a4a3a",
+     "wing": "#3a5a4a",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#f2efe6",
+     "breast": "#1a1a1a",
+     "belly": "#f6f6f0",
+     "bill": "#3a3a3a",
+     "legs": "#c8604a",
+     "tail": "#2a4a3a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "crest": 2,
+     "bill": -1,
+     "legs": -1
+    }
+   },
+   "portraitAssetId": "bird.northern-lapwing.portrait.adult.v1"
+  },
+  {
+   "id": "common-snipe",
+   "dexNo": 38,
+   "name": "Snipe",
+   "ebirdName": "Common Snipe",
+   "sciName": "Gallinago gallinago",
+   "family": "Sandpipers and allies",
+   "sets": [
+    "wetland",
+    "farmland-upland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#6a4a2a",
+     "wing": "#5a3a22",
+     "cap": "#3a2a1a",
+     "neck": "#c8a070",
+     "cheek": "#c8a070",
+     "breast": "#c8a878",
+     "belly": "#f0e6d2",
+     "bill": "#8a6a4a",
+     "legs": "#8a9a6a",
+     "tail": "#6a4a2a"
+    },
+    "tweak": {
+     "scale": 0.8,
+     "bill": 6,
+     "legs": -2
+    }
+   },
+   "portraitAssetId": "bird.common-snipe.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-curlew",
+   "dexNo": 39,
+   "name": "Curlew",
+   "ebirdName": "Eurasian Curlew",
+   "sciName": "Numenius arquata",
+   "family": "Sandpipers and allies",
+   "sets": [
+    "farmland-upland",
+    "coast"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#8a6a4a",
+     "wing": "#7a5a3a",
+     "cap": "#8a6a4a",
+     "neck": "#c8a888",
+     "cheek": "#c8a888",
+     "breast": "#c8a888",
+     "belly": "#e8dcc4",
+     "bill": "#8a6a58",
+     "legs": "#7a8a98",
+     "tail": "#8a6a4a"
+    },
+    "tweak": {
+     "scale": 1.05,
+     "bill": 8,
+     "legs": 1
+    }
+   },
+   "portraitAssetId": "bird.eurasian-curlew.portrait.adult.v1"
+  },
+  {
+   "id": "common-redshank",
+   "dexNo": 40,
+   "name": "Redshank",
+   "ebirdName": "Common Redshank",
+   "sciName": "Tringa totanus",
+   "family": "Sandpipers and allies",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#8a7a62",
+     "wing": "#7a6a52",
+     "cap": "#8a7a62",
+     "neck": "#c8bfa8",
+     "cheek": "#c8bfa8",
+     "breast": "#c8bfa8",
+     "belly": "#e8e4d8",
+     "bill": "#d96a3a",
+     "legs": "#d9423a",
+     "tail": "#8a7a62"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "bill": 2,
+     "legs": 1
+    }
+   },
+   "portraitAssetId": "bird.common-redshank.portrait.adult.v1"
+  },
+  {
+   "id": "common-sandpiper",
+   "dexNo": 41,
+   "name": "Common Sandpiper",
+   "ebirdName": "Common Sandpiper",
+   "sciName": "Actitis hypoleucos",
+   "family": "Sandpipers and allies",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#8a7a62",
+     "wing": "#7a6a52",
+     "cap": "#8a7a62",
+     "neck": "#e8e4d8",
+     "cheek": "#e8e4d8",
+     "breast": "#e8e4d8",
+     "belly": "#f6f6f0",
+     "bill": "#6a6a5a",
+     "legs": "#a8a888",
+     "tail": "#7a6a52"
+    },
+    "tweak": {
+     "scale": 0.65,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.common-sandpiper.portrait.adult.v1"
+  },
+  {
+   "id": "black-headed-gull",
+   "dexNo": 42,
+   "name": "Black-headed Gull",
+   "ebirdName": "Black-headed Gull",
+   "sciName": "Chroicocephalus ridibundus",
+   "family": "Gulls, terns and skimmers",
+   "sets": [
+    "wetland",
+    "coast"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#b8c4cc",
+     "wing": "#b8c4cc",
+     "cap": "#4a2a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#4a2a1a",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#b8301a",
+     "legs": "#b8301a",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.black-headed-gull.portrait.adult.v1"
+  },
+  {
+   "id": "mew-gull",
+   "dexNo": 43,
+   "name": "Common Gull",
+   "ebirdName": "Mew Gull",
+   "sciName": "Larus canus",
+   "family": "Gulls, terns and skimmers",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#a8b4bc",
+     "wing": "#a8b4bc",
+     "cap": "#f6f6f0",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#e8d060",
+     "legs": "#d8d060",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.mew-gull.portrait.adult.v1"
+  },
+  {
+   "id": "herring-gull",
+   "dexNo": 44,
+   "name": "Herring Gull",
+   "ebirdName": "Herring Gull",
+   "sciName": "Larus argentatus",
+   "family": "Gulls, terns and skimmers",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#a8b4bc",
+     "wing": "#a8b4bc",
+     "cap": "#f6f6f0",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#e8c42a",
+     "legs": "#e8a0a0",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 1.1
+    }
+   },
+   "portraitAssetId": "bird.herring-gull.portrait.adult.v1"
+  },
+  {
+   "id": "lesser-black-backed-gull",
+   "dexNo": 45,
+   "name": "Lesser Black-backed Gull",
+   "ebirdName": "Lesser Black-backed Gull",
+   "sciName": "Larus fuscus",
+   "family": "Gulls, terns and skimmers",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#3a4048",
+     "wing": "#2a3038",
+     "cap": "#f6f6f0",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#e8c42a",
+     "legs": "#e8c42a",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.lesser-black-backed-gull.portrait.adult.v1"
+  },
+  {
+   "id": "common-tern",
+   "dexNo": 46,
+   "name": "Common Tern",
+   "ebirdName": "Common Tern",
+   "sciName": "Sterna hirundo",
+   "family": "Gulls, terns and skimmers",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "habitat": "coast",
+   "art": {
+    "template": "gull",
+    "palette": {
+     "back": "#a8b4bc",
+     "wing": "#a8b4bc",
+     "cap": "#1a1a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#d9423a",
+     "legs": "#d9423a",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 0.8,
+     "tail": 3,
+     "legs": -2
+    }
+   },
+   "portraitAssetId": "bird.common-tern.portrait.adult.v1"
+  },
+  {
+   "id": "stock-dove",
+   "dexNo": 47,
+   "name": "Stock Dove",
+   "ebirdName": "Stock Dove",
+   "sciName": "Columba oenas",
+   "family": "Pigeons and doves",
+   "sets": [
+    "woodland",
+    "farmland-upland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#7a8896",
+     "wing": "#6a7886",
+     "cap": "#7a8896",
+     "neck": "#7a8896",
+     "cheek": "#7a8896",
+     "breast": "#b88a9a",
+     "belly": "#8a96a2",
+     "bill": "#e8c46a",
+     "legs": "#c8607a",
+     "tail": "#5a6876"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.stock-dove.portrait.adult.v1"
+  },
+  {
+   "id": "common-wood-pigeon",
+   "dexNo": 48,
+   "name": "Woodpigeon",
+   "ebirdName": "Common Wood-Pigeon",
+   "sciName": "Columba palumbus",
+   "family": "Pigeons and doves",
+   "sets": [
+    "garden",
+    "woodland",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#7a8896",
+     "wing": "#6a7886",
+     "cap": "#7a8896",
+     "neck": "#7a8896",
+     "cheek": "#f6f6f0",
+     "breast": "#b88a9a",
+     "belly": "#9aa4ae",
+     "bill": "#e8a02a",
+     "legs": "#c8607a",
+     "tail": "#5a6876"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.common-wood-pigeon.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-collared-dove",
+   "dexNo": 49,
+   "name": "Collared Dove",
+   "ebirdName": "Eurasian Collared-Dove",
+   "sciName": "Streptopelia decaocto",
+   "family": "Pigeons and doves",
+   "sets": [
+    "garden"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#c8b8a0",
+     "wing": "#b8a890",
+     "cap": "#d8c8b0",
+     "neck": "#d8c8b0",
+     "cheek": "#d8c8b0",
+     "breast": "#d8c0b0",
+     "belly": "#e0d4c4",
+     "bill": "#3a3a3a",
+     "legs": "#b86a7a",
+     "tail": "#a89878"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.eurasian-collared-dove.portrait.adult.v1"
+  },
+  {
+   "id": "rock-dove-feral-pigeon",
+   "dexNo": 50,
+   "name": "Feral Pigeon",
+   "ebirdName": "Rock Dove",
+   "sciName": "Columba livia",
+   "family": "Pigeons and doves",
+   "sets": [
+    "garden"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#7a8896",
+     "wing": "#5a6878",
+     "cap": "#5a6a80",
+     "neck": "#5a7a6a",
+     "cheek": "#5a6a80",
+     "breast": "#6a7a90",
+     "belly": "#8a96a4",
+     "bill": "#3a3a3a",
+     "legs": "#c8607a",
+     "tail": "#4a5a6a"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.rock-dove-feral-pigeon.portrait.adult.v1"
+  },
+  {
+   "id": "common-swift",
+   "dexNo": 51,
+   "name": "Swift",
+   "ebirdName": "Common Swift",
+   "sciName": "Apus apus",
+   "family": "Swifts",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#2a2a2e",
+     "wing": "#2a2a2e",
+     "cap": "#2a2a2e",
+     "neck": "#2a2a2e",
+     "cheek": "#cfcfcf",
+     "breast": "#2a2a2e",
+     "belly": "#2a2a2e",
+     "bill": "#1a1a1a",
+     "legs": "#2a2a2e",
+     "tail": "#2a2a2e"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "tail": 3,
+     "bill": -1,
+     "legs": -3
+    }
+   },
+   "portraitAssetId": "bird.common-swift.portrait.adult.v1"
+  },
+  {
+   "id": "common-kingfisher",
+   "dexNo": 52,
+   "name": "Kingfisher",
+   "ebirdName": "Common Kingfisher",
+   "sciName": "Alcedo atthis",
+   "family": "Kingfishers",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "kingfisher",
+    "palette": {
+     "back": "#1f9ac8",
+     "wing": "#1a8ab8",
+     "cap": "#1f9ac8",
+     "neck": "#1f9ac8",
+     "cheek": "#f08a1a",
+     "breast": "#f08a1a",
+     "belly": "#f08a1a",
+     "bill": "#2a2a2a",
+     "legs": "#f06a1a",
+     "tail": "#1a8ab8"
+    }
+   },
+   "portraitAssetId": "bird.common-kingfisher.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-green-woodpecker",
+   "dexNo": 53,
+   "name": "Green Woodpecker",
+   "ebirdName": "Eurasian Green Woodpecker",
+   "sciName": "Picus viridis",
+   "family": "Woodpeckers",
+   "sets": [
+    "woodland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "woodpecker",
+    "palette": {
+     "back": "#6a9a4a",
+     "wing": "#5a8a3a",
+     "cap": "#d8302a",
+     "neck": "#b8c898",
+     "cheek": "#1a1a1a",
+     "breast": "#b8c898",
+     "belly": "#c8d4a8",
+     "bill": "#5a5a5a",
+     "legs": "#6a6a5a",
+     "tail": "#6a9a4a"
+    }
+   },
+   "portraitAssetId": "bird.eurasian-green-woodpecker.portrait.adult.v1"
+  },
+  {
+   "id": "great-spotted-woodpecker",
+   "dexNo": 54,
+   "name": "Great Spotted Woodpecker",
+   "ebirdName": "Great Spotted Woodpecker",
+   "sciName": "Dendrocopos major",
+   "family": "Woodpeckers",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "woodpecker",
+    "palette": {
+     "back": "#1a1a1a",
+     "wing": "#2a2a2a",
+     "cap": "#1a1a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f2eadb",
+     "belly": "#e8d8c0",
+     "bill": "#3a3a3a",
+     "legs": "#5a5a5a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.great-spotted-woodpecker.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-jay",
+   "dexNo": 55,
+   "name": "Jay",
+   "ebirdName": "Eurasian Jay",
+   "sciName": "Garrulus glandarius",
+   "family": "Crows, jays and magpies",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#b8806a",
+     "wing": "#3a6ab0",
+     "cap": "#cfc0b0",
+     "neck": "#cfc0b0",
+     "cheek": "#cfc0b0",
+     "breast": "#c8907a",
+     "belly": "#d8b8a0",
+     "bill": "#2a2a2a",
+     "legs": "#c8a888",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 1
+    }
+   },
+   "portraitAssetId": "bird.eurasian-jay.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-magpie",
+   "dexNo": 56,
+   "name": "Magpie",
+   "ebirdName": "Eurasian Magpie",
+   "sciName": "Pica pica",
+   "family": "Crows, jays and magpies",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#1a1a22",
+     "wing": "#1f5a7a",
+     "cap": "#1a1a22",
+     "neck": "#1a1a22",
+     "cheek": "#1a1a22",
+     "breast": "#1a1a22",
+     "belly": "#f6f6f0",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#1f4a6a"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "tail": 5
+    }
+   },
+   "portraitAssetId": "bird.eurasian-magpie.portrait.adult.v1"
+  },
+  {
+   "id": "western-jackdaw",
+   "dexNo": 57,
+   "name": "Jackdaw",
+   "ebirdName": "Western Jackdaw",
+   "sciName": "Coloeus monedula",
+   "family": "Crows, jays and magpies",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#2a2e34",
+     "wing": "#2a2e34",
+     "cap": "#2a2e34",
+     "neck": "#8a96a2",
+     "cheek": "#8a96a2",
+     "breast": "#3a3e44",
+     "belly": "#3a3e44",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#2a2e34"
+    },
+    "tweak": {
+     "scale": 0.75
+    }
+   },
+   "portraitAssetId": "bird.western-jackdaw.portrait.adult.v1"
+  },
+  {
+   "id": "rook",
+   "dexNo": 58,
+   "name": "Rook",
+   "ebirdName": "Rook",
+   "sciName": "Corvus frugilegus",
+   "family": "Crows, jays and magpies",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#22242c",
+     "wing": "#2f3340",
+     "cap": "#22242c",
+     "neck": "#22242c",
+     "cheek": "#22242c",
+     "breast": "#22242c",
+     "belly": "#22242c",
+     "bill": "#9a9a98",
+     "legs": "#1a1a1a",
+     "tail": "#22242c"
+    },
+    "tweak": {
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.rook.portrait.adult.v1"
+  },
+  {
+   "id": "carrion-crow",
+   "dexNo": 59,
+   "name": "Carrion Crow",
+   "ebirdName": "Carrion Crow",
+   "sciName": "Corvus corone",
+   "family": "Crows, jays and magpies",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "pigeon",
+    "palette": {
+     "back": "#1a1c22",
+     "wing": "#262a34",
+     "cap": "#1a1c22",
+     "neck": "#1a1c22",
+     "cheek": "#1a1c22",
+     "breast": "#1a1c22",
+     "belly": "#1a1c22",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#1a1c22"
+    },
+    "tweak": {
+     "scale": 1.05,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.carrion-crow.portrait.adult.v1"
+  },
+  {
+   "id": "coal-tit",
+   "dexNo": 60,
+   "name": "Coal Tit",
+   "ebirdName": "Coal Tit",
+   "sciName": "Periparus ater",
+   "family": "Tits and chickadees",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8a96a2",
+     "wing": "#6a7682",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#f6f6f0",
+     "breast": "#d8c8b0",
+     "belly": "#e8dcc4",
+     "bill": "#2a2a2a",
+     "legs": "#5a6a78",
+     "tail": "#6a7682"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.coal-tit.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-blue-tit",
+   "dexNo": 61,
+   "name": "Blue Tit",
+   "ebirdName": "Eurasian Blue Tit",
+   "sciName": "Cyanistes caeruleus",
+   "family": "Tits and chickadees",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8aa04a",
+     "wing": "#3a6ab8",
+     "cap": "#3a6ab8",
+     "neck": "#3a6ab8",
+     "cheek": "#f6f6f0",
+     "breast": "#f2d23a",
+     "belly": "#f2d23a",
+     "bill": "#2a2a2a",
+     "legs": "#5a6a78",
+     "tail": "#3a6ab8"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.eurasian-blue-tit.portrait.adult.v1"
+  },
+  {
+   "id": "great-tit",
+   "dexNo": 62,
+   "name": "Great Tit",
+   "ebirdName": "Great Tit",
+   "sciName": "Parus major",
+   "family": "Tits and chickadees",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8aa04a",
+     "wing": "#5a7a8a",
+     "cap": "#1a1a22",
+     "neck": "#1a1a22",
+     "cheek": "#f6f6f0",
+     "breast": "#f2d23a",
+     "belly": "#f2d23a",
+     "bill": "#2a2a2a",
+     "legs": "#5a6a78",
+     "tail": "#5a7a8a"
+    },
+    "tweak": {
+     "scale": 1.1
+    }
+   },
+   "portraitAssetId": "bird.great-tit.portrait.adult.v1"
+  },
+  {
+   "id": "long-tailed-tit",
+   "dexNo": 63,
+   "name": "Long-tailed Tit",
+   "ebirdName": "Long-tailed Tit",
+   "sciName": "Aegithalos caudatus",
+   "family": "Long-tailed tits",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#2a2a30",
+     "wing": "#d8909a",
+     "cap": "#f6f6f0",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#e8d0d0",
+     "belly": "#f2e0e0",
+     "bill": "#1a1a1a",
+     "legs": "#4a4a4a",
+     "tail": "#1f1f26"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 7,
+     "bill": -1
+    }
+   },
+   "portraitAssetId": "bird.long-tailed-tit.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-nuthatch",
+   "dexNo": 64,
+   "name": "Nuthatch",
+   "ebirdName": "Eurasian Nuthatch",
+   "sciName": "Sitta europaea",
+   "family": "Nuthatches",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "woodpecker",
+    "palette": {
+     "back": "#7a98b0",
+     "wing": "#6a88a0",
+     "cap": "#7a98b0",
+     "neck": "#e8d0b0",
+     "cheek": "#e8d0b0",
+     "breast": "#e8d0b0",
+     "belly": "#d8a06a",
+     "bill": "#3a3a4a",
+     "legs": "#6a5a4a",
+     "tail": "#6a88a0"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "tail": -3
+    }
+   },
+   "portraitAssetId": "bird.eurasian-nuthatch.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-treecreeper",
+   "dexNo": 65,
+   "name": "Treecreeper",
+   "ebirdName": "Eurasian Treecreeper",
+   "sciName": "Certhia familiaris",
+   "family": "Treecreepers",
+   "sets": [
+    "woodland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "woodpecker",
+    "palette": {
+     "back": "#8a6a42",
+     "wing": "#7a5a32",
+     "cap": "#8a6a42",
+     "neck": "#f6f6f0",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#8a7a62",
+     "legs": "#8a6a52",
+     "tail": "#8a6a42"
+    },
+    "tweak": {
+     "scale": 0.7,
+     "bill": 2,
+     "tail": 3
+    }
+   },
+   "portraitAssetId": "bird.eurasian-treecreeper.portrait.adult.v1"
+  },
+  {
+   "id": "skylark",
+   "dexNo": 66,
+   "name": "Skylark",
+   "ebirdName": "Skylark",
+   "sciName": "Alauda arvensis",
+   "family": "Larks",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#8a6a42",
+     "wing": "#7a5a32",
+     "cap": "#7a5a32",
+     "neck": "#8a6a42",
+     "cheek": "#c8a878",
+     "breast": "#d8c098",
+     "belly": "#f0e6d0",
+     "bill": "#8a7a62",
+     "legs": "#c8a888",
+     "tail": "#7a5a32"
+    },
+    "tweak": {
+     "crest": 1
+    }
+   },
+   "portraitAssetId": "bird.skylark.portrait.adult.v1"
+  },
+  {
+   "id": "barn-swallow",
+   "dexNo": 67,
+   "name": "Swallow",
+   "ebirdName": "Barn Swallow",
+   "sciName": "Hirundo rustica",
+   "family": "Swallows and martins",
+   "sets": [
+    "farmland-upland",
+    "wetland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#1f3a6a",
+     "wing": "#1f3a6a",
+     "cap": "#1f3a6a",
+     "neck": "#1f3a6a",
+     "cheek": "#c8301a",
+     "breast": "#f0dcc0",
+     "belly": "#f0dcc0",
+     "bill": "#1a1a1a",
+     "legs": "#3a3a3a",
+     "tail": "#1f3a6a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 8,
+     "bill": -1,
+     "legs": -2
+    }
+   },
+   "portraitAssetId": "bird.barn-swallow.portrait.adult.v1"
+  },
+  {
+   "id": "western-house-martin",
+   "dexNo": 68,
+   "name": "House Martin",
+   "ebirdName": "Western House Martin",
+   "sciName": "Delichon urbicum",
+   "family": "Swallows and martins",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#1f2a4a",
+     "wing": "#1f2a4a",
+     "cap": "#1f2a4a",
+     "neck": "#1f2a4a",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#1a1a1a",
+     "legs": "#f6f6f0",
+     "tail": "#1f2a4a"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "tail": 2,
+     "bill": -1,
+     "legs": -3
+    }
+   },
+   "portraitAssetId": "bird.western-house-martin.portrait.adult.v1"
+  },
+  {
+   "id": "common-chiffchaff",
+   "dexNo": 69,
+   "name": "Chiffchaff",
+   "ebirdName": "Common Chiffchaff",
+   "sciName": "Phylloscopus collybita",
+   "family": "Leaf warblers",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8a8a52",
+     "wing": "#7a7a45",
+     "cap": "#8a8a52",
+     "neck": "#d8d4a0",
+     "cheek": "#d8d4a0",
+     "breast": "#d8d4b8",
+     "belly": "#e8e4d0",
+     "bill": "#2a2a2a",
+     "legs": "#3a3a3a",
+     "tail": "#7a7a45"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.common-chiffchaff.portrait.adult.v1"
+  },
+  {
+   "id": "willow-warbler",
+   "dexNo": 70,
+   "name": "Willow Warbler",
+   "ebirdName": "Willow Warbler",
+   "sciName": "Phylloscopus trochilus",
+   "family": "Leaf warblers",
+   "sets": [
+    "woodland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#9a9a50",
+     "wing": "#8a8a45",
+     "cap": "#9a9a50",
+     "neck": "#e8e4a8",
+     "cheek": "#e8e4a8",
+     "breast": "#e8e4a8",
+     "belly": "#f0ecd0",
+     "bill": "#2a2a2a",
+     "legs": "#9a7a5a",
+     "tail": "#8a8a45"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.willow-warbler.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-blackcap",
+   "dexNo": 71,
+   "name": "Blackcap",
+   "ebirdName": "Eurasian Blackcap",
+   "sciName": "Sylvia atricapilla",
+   "family": "Sylviid warblers",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#7a7a72",
+     "wing": "#6a6a62",
+     "cap": "#1a1a1a",
+     "neck": "#8a8a84",
+     "cheek": "#8a8a84",
+     "breast": "#a8a8a0",
+     "belly": "#d8d8d0",
+     "bill": "#3a3a3a",
+     "legs": "#5a5a62",
+     "tail": "#6a6a62"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.eurasian-blackcap.portrait.adult.v1"
+  },
+  {
+   "id": "common-whitethroat",
+   "dexNo": 72,
+   "name": "Whitethroat",
+   "ebirdName": "Common Whitethroat",
+   "sciName": "Curruca communis",
+   "family": "Sylviid warblers",
+   "sets": [
+    "farmland-upland",
+    "wetland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#8a6a4a",
+     "wing": "#b8803a",
+     "cap": "#8a8a8a",
+     "neck": "#8a8a8a",
+     "cheek": "#f6f6f0",
+     "breast": "#e8c8c0",
+     "belly": "#f6f6f0",
+     "bill": "#3a3a3a",
+     "legs": "#c8a888",
+     "tail": "#6a5a4a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.common-whitethroat.portrait.adult.v1"
+  },
+  {
+   "id": "sedge-warbler",
+   "dexNo": 73,
+   "name": "Sedge Warbler",
+   "ebirdName": "Sedge Warbler",
+   "sciName": "Acrocephalus schoenobaenus",
+   "family": "Reed warblers",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8a6a42",
+     "wing": "#7a5a32",
+     "cap": "#5a4a32",
+     "neck": "#e8dcc4",
+     "cheek": "#e8dcc4",
+     "breast": "#e8d8c0",
+     "belly": "#f0e6d4",
+     "bill": "#3a3a3a",
+     "legs": "#8a7a62",
+     "tail": "#7a5a32"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.sedge-warbler.portrait.adult.v1"
+  },
+  {
+   "id": "goldcrest",
+   "dexNo": 74,
+   "name": "Goldcrest",
+   "ebirdName": "Goldcrest",
+   "sciName": "Regulus regulus",
+   "family": "Kinglets",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8a9a42",
+     "wing": "#6a7a3a",
+     "cap": "#f2c42a",
+     "neck": "#c8c8a8",
+     "cheek": "#c8c8a8",
+     "breast": "#d8d8b8",
+     "belly": "#e8e8d0",
+     "bill": "#1a1a1a",
+     "legs": "#6a5a4a",
+     "tail": "#6a7a3a"
+    },
+    "tweak": {
+     "scale": 0.6
+    }
+   },
+   "portraitAssetId": "bird.goldcrest.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-wren",
+   "dexNo": 75,
+   "name": "Wren",
+   "ebirdName": "Eurasian Wren",
+   "sciName": "Troglodytes troglodytes",
+   "family": "Wrens",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "tit",
+    "palette": {
+     "back": "#8a5a32",
+     "wing": "#7a4a28",
+     "cap": "#8a5a32",
+     "neck": "#c8a070",
+     "cheek": "#c8a070",
+     "breast": "#c8a070",
+     "belly": "#d8b890",
+     "bill": "#5a4a3a",
+     "legs": "#8a6a4a",
+     "tail": "#7a4a28"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "tailAng": -35,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.eurasian-wren.portrait.adult.v1"
+  },
+  {
+   "id": "dunnock",
+   "dexNo": 76,
+   "name": "Dunnock",
+   "ebirdName": "Dunnock",
+   "sciName": "Prunella modularis",
+   "family": "Accentors",
+   "sets": [
+    "garden"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#7a5a3a",
+     "wing": "#6a4a2a",
+     "cap": "#8a8a96",
+     "neck": "#8a8a96",
+     "cheek": "#8a8a96",
+     "breast": "#8a8a96",
+     "belly": "#c8c0b0",
+     "bill": "#3a3a3a",
+     "legs": "#c8806a",
+     "tail": "#6a4a2a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.dunnock.portrait.adult.v1"
+  },
+  {
+   "id": "european-robin",
+   "dexNo": 77,
+   "name": "Robin",
+   "ebirdName": "European Robin",
+   "sciName": "Erithacus rubecula",
+   "family": "Chats and Old World flycatchers",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#8a6a4a",
+     "wing": "#7a5a3a",
+     "cap": "#8a6a4a",
+     "neck": "#d9663a",
+     "cheek": "#d9663a",
+     "breast": "#d9663a",
+     "belly": "#ede3cf",
+     "bill": "#3a2e28",
+     "legs": "#6b4e3a",
+     "tail": "#7a5a3a"
+    }
+   },
+   "portraitAssetId": "bird.european-robin.portrait.adult.v1"
+  },
+  {
+   "id": "common-redstart",
+   "dexNo": 78,
+   "name": "Redstart",
+   "ebirdName": "Common Redstart",
+   "sciName": "Phoenicurus phoenicurus",
+   "family": "Chats and Old World flycatchers",
+   "sets": [
+    "woodland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#7a8896",
+     "wing": "#5a5a62",
+     "cap": "#7a8896",
+     "neck": "#7a8896",
+     "cheek": "#1a1a1a",
+     "breast": "#d8602a",
+     "belly": "#e8a060",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#d8501a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.common-redstart.portrait.adult.v1"
+  },
+  {
+   "id": "european-pied-flycatcher",
+   "dexNo": 79,
+   "name": "Pied Flycatcher",
+   "ebirdName": "European Pied Flycatcher",
+   "sciName": "Ficedula hypoleuca",
+   "family": "Chats and Old World flycatchers",
+   "sets": [
+    "woodland",
+    "farmland-upland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#1a1a1a",
+     "wing": "#1a1a1a",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#1a1a1a",
+     "breast": "#f6f6f0",
+     "belly": "#f6f6f0",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.european-pied-flycatcher.portrait.adult.v1"
+  },
+  {
+   "id": "european-stonechat",
+   "dexNo": 80,
+   "name": "Stonechat",
+   "ebirdName": "European Stonechat",
+   "sciName": "Saxicola rubicola",
+   "family": "Chats and Old World flycatchers",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#3a2a22",
+     "wing": "#2a1f1a",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#1a1a1a",
+     "breast": "#c8602a",
+     "belly": "#e8d0b0",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#2a1f1a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.european-stonechat.portrait.adult.v1"
+  },
+  {
+   "id": "northern-wheatear",
+   "dexNo": 81,
+   "name": "Wheatear",
+   "ebirdName": "Northern Wheatear",
+   "sciName": "Oenanthe oenanthe",
+   "family": "Chats and Old World flycatchers",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#98a8b0",
+     "wing": "#2a2a2a",
+     "cap": "#98a8b0",
+     "neck": "#98a8b0",
+     "cheek": "#1a1a1a",
+     "breast": "#e8c090",
+     "belly": "#f0e0c8",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#f6f6f0"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.northern-wheatear.portrait.adult.v1"
+  },
+  {
+   "id": "white-throated-dipper",
+   "dexNo": 82,
+   "name": "Dipper",
+   "ebirdName": "White-throated Dipper",
+   "sciName": "Cinclus cinclus",
+   "family": "Dippers",
+   "sets": [
+    "wetland",
+    "farmland-upland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#4a3a32",
+     "wing": "#3a2a22",
+     "cap": "#4a3a32",
+     "neck": "#4a3a32",
+     "cheek": "#f6f6f0",
+     "breast": "#f6f6f0",
+     "belly": "#5a3a2a",
+     "bill": "#1a1a1a",
+     "legs": "#4a4a52",
+     "tail": "#3a2a22"
+    },
+    "tweak": {
+     "scale": 0.75,
+     "tail": -2
+    }
+   },
+   "portraitAssetId": "bird.white-throated-dipper.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-blackbird",
+   "dexNo": 83,
+   "name": "Blackbird",
+   "ebirdName": "Eurasian Blackbird",
+   "sciName": "Turdus merula",
+   "family": "Thrushes and allies",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#1a1a1e",
+     "wing": "#1a1a1e",
+     "cap": "#1a1a1e",
+     "neck": "#1a1a1e",
+     "cheek": "#1a1a1e",
+     "breast": "#1a1a1e",
+     "belly": "#1a1a1e",
+     "bill": "#f2a82a",
+     "legs": "#4a3a2a",
+     "tail": "#1a1a1e"
+    }
+   },
+   "portraitAssetId": "bird.eurasian-blackbird.portrait.adult.v1"
+  },
+  {
+   "id": "song-thrush",
+   "dexNo": 84,
+   "name": "Song Thrush",
+   "ebirdName": "Song Thrush",
+   "sciName": "Turdus philomelos",
+   "family": "Thrushes and allies",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#8a6a42",
+     "wing": "#7a5a32",
+     "cap": "#8a6a42",
+     "neck": "#8a6a42",
+     "cheek": "#d8b888",
+     "breast": "#e8d8b8",
+     "belly": "#f6efe0",
+     "bill": "#6a5a4a",
+     "legs": "#d8a888",
+     "tail": "#7a5a32"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.song-thrush.portrait.adult.v1"
+  },
+  {
+   "id": "redwing",
+   "dexNo": 85,
+   "name": "Redwing",
+   "ebirdName": "Redwing",
+   "sciName": "Turdus iliacus",
+   "family": "Thrushes and allies",
+   "sets": [
+    "garden",
+    "farmland-upland",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#7a5a3a",
+     "wing": "#6a4a2a",
+     "cap": "#7a5a3a",
+     "neck": "#7a5a3a",
+     "cheek": "#e8dcc0",
+     "breast": "#e8dcc8",
+     "belly": "#f6efe0",
+     "bill": "#6a5a4a",
+     "legs": "#8a6a4a",
+     "tail": "#6a4a2a"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.redwing.portrait.adult.v1"
+  },
+  {
+   "id": "fieldfare",
+   "dexNo": 86,
+   "name": "Fieldfare",
+   "ebirdName": "Fieldfare",
+   "sciName": "Turdus pilaris",
+   "family": "Thrushes and allies",
+   "sets": [
+    "farmland-upland",
+    "garden"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#7a4a2a",
+     "wing": "#6a3a22",
+     "cap": "#8a98a8",
+     "neck": "#8a98a8",
+     "cheek": "#8a98a8",
+     "breast": "#d8a878",
+     "belly": "#f6efe0",
+     "bill": "#e8b82a",
+     "legs": "#4a3a2a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.fieldfare.portrait.adult.v1"
+  },
+  {
+   "id": "mistle-thrush",
+   "dexNo": 87,
+   "name": "Mistle Thrush",
+   "ebirdName": "Mistle Thrush",
+   "sciName": "Turdus viscivorus",
+   "family": "Thrushes and allies",
+   "sets": [
+    "garden",
+    "farmland-upland",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#8a7a5a",
+     "wing": "#7a6a4a",
+     "cap": "#8a7a5a",
+     "neck": "#8a7a5a",
+     "cheek": "#e8dcc0",
+     "breast": "#f0e6cc",
+     "belly": "#f6efe0",
+     "bill": "#6a5a4a",
+     "legs": "#d8a888",
+     "tail": "#7a6a4a"
+    },
+    "tweak": {
+     "scale": 1.1
+    }
+   },
+   "portraitAssetId": "bird.mistle-thrush.portrait.adult.v1"
+  },
+  {
+   "id": "common-starling",
+   "dexNo": 88,
+   "name": "Starling",
+   "ebirdName": "Common Starling",
+   "sciName": "Sturnus vulgaris",
+   "family": "Starlings",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#2a2a3a",
+     "wing": "#2f4a4a",
+     "cap": "#2a2a3a",
+     "neck": "#2a2a3a",
+     "cheek": "#2a2a3a",
+     "breast": "#2a2e3a",
+     "belly": "#2a2e3a",
+     "bill": "#e8c42a",
+     "legs": "#c8607a",
+     "tail": "#2a2a3a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": -3,
+     "bill": 1
+    }
+   },
+   "portraitAssetId": "bird.common-starling.portrait.adult.v1"
+  },
+  {
+   "id": "bohemian-waxwing",
+   "dexNo": 89,
+   "name": "Waxwing",
+   "ebirdName": "Bohemian Waxwing",
+   "sciName": "Bombycilla garrulus",
+   "family": "Waxwings",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "thrush",
+    "palette": {
+     "back": "#a8806a",
+     "wing": "#5a5a62",
+     "cap": "#b8806a",
+     "neck": "#a8806a",
+     "cheek": "#1a1a1a",
+     "breast": "#b8908a",
+     "belly": "#8a8a8a",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#e8c42a"
+    },
+    "tweak": {
+     "scale": 0.9,
+     "crest": 2,
+     "tail": -1
+    }
+   },
+   "portraitAssetId": "bird.bohemian-waxwing.portrait.adult.v1"
+  },
+  {
+   "id": "house-sparrow",
+   "dexNo": 90,
+   "name": "House Sparrow",
+   "ebirdName": "House Sparrow",
+   "sciName": "Passer domesticus",
+   "family": "Old World sparrows",
+   "sets": [
+    "garden"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a5a32",
+     "wing": "#7a4a28",
+     "cap": "#8a8a8a",
+     "neck": "#8a8a8a",
+     "cheek": "#e8e0d0",
+     "breast": "#c8c0b0",
+     "belly": "#d8d0c0",
+     "bill": "#2a2a2a",
+     "legs": "#c8a888",
+     "tail": "#7a4a28"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.house-sparrow.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-tree-sparrow",
+   "dexNo": 91,
+   "name": "Tree Sparrow",
+   "ebirdName": "Eurasian Tree Sparrow",
+   "sciName": "Passer montanus",
+   "family": "Old World sparrows",
+   "sets": [
+    "farmland-upland",
+    "garden"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a5a32",
+     "wing": "#7a4a28",
+     "cap": "#8a4a28",
+     "neck": "#8a4a28",
+     "cheek": "#f6f6f0",
+     "breast": "#d8d0c0",
+     "belly": "#e0d8c8",
+     "bill": "#2a2a2a",
+     "legs": "#c8a888",
+     "tail": "#7a4a28"
+    },
+    "tweak": {
+     "scale": 0.85
+    }
+   },
+   "portraitAssetId": "bird.eurasian-tree-sparrow.portrait.adult.v1"
+  },
+  {
+   "id": "common-chaffinch",
+   "dexNo": 92,
+   "name": "Chaffinch",
+   "ebirdName": "Common Chaffinch",
+   "sciName": "Fringilla coelebs",
+   "family": "Finches",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a5a42",
+     "wing": "#3a3a42",
+     "cap": "#6a8aa0",
+     "neck": "#6a8aa0",
+     "cheek": "#d8908a",
+     "breast": "#d8908a",
+     "belly": "#e8c8c0",
+     "bill": "#c8b8a8",
+     "legs": "#8a6a5a",
+     "tail": "#3a3a42"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.common-chaffinch.portrait.adult.v1"
+  },
+  {
+   "id": "brambling",
+   "dexNo": 93,
+   "name": "Brambling",
+   "ebirdName": "Brambling",
+   "sciName": "Fringilla montifringilla",
+   "family": "Finches",
+   "sets": [
+    "woodland",
+    "farmland-upland"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#2a2a32",
+     "wing": "#1a1a22",
+     "cap": "#2a2a32",
+     "neck": "#2a2a32",
+     "cheek": "#d87a2a",
+     "breast": "#d87a2a",
+     "belly": "#f6f6f0",
+     "bill": "#d8b82a",
+     "legs": "#8a6a5a",
+     "tail": "#1a1a22"
+    },
+    "tweak": {
+     "scale": 0.95
+    }
+   },
+   "portraitAssetId": "bird.brambling.portrait.adult.v1"
+  },
+  {
+   "id": "european-greenfinch",
+   "dexNo": 94,
+   "name": "Greenfinch",
+   "ebirdName": "European Greenfinch",
+   "sciName": "Chloris chloris",
+   "family": "Finches",
+   "sets": [
+    "garden"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8aa032",
+     "wing": "#3a4a3a",
+     "cap": "#8aa032",
+     "neck": "#8aa032",
+     "cheek": "#9aae42",
+     "breast": "#a8b84a",
+     "belly": "#c8d070",
+     "bill": "#e8c8b0",
+     "legs": "#c8a888",
+     "tail": "#3a4a3a"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.european-greenfinch.portrait.adult.v1"
+  },
+  {
+   "id": "european-goldfinch",
+   "dexNo": 95,
+   "name": "Goldfinch",
+   "ebirdName": "European Goldfinch",
+   "sciName": "Carduelis carduelis",
+   "family": "Finches",
+   "sets": [
+    "garden",
+    "farmland-upland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#b8803a",
+     "wing": "#2a2a2a",
+     "cap": "#1a1a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#d8302a",
+     "breast": "#f0dcc0",
+     "belly": "#f6f0e6",
+     "bill": "#f0d8b0",
+     "legs": "#c8a888",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.european-goldfinch.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-siskin",
+   "dexNo": 96,
+   "name": "Siskin",
+   "ebirdName": "Eurasian Siskin",
+   "sciName": "Spinus spinus",
+   "family": "Finches",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8aa032",
+     "wing": "#2a2a2a",
+     "cap": "#1a1a1a",
+     "neck": "#8aa032",
+     "cheek": "#c8d442",
+     "breast": "#e8e040",
+     "belly": "#e8e8d0",
+     "bill": "#5a5a52",
+     "legs": "#5a5a52",
+     "tail": "#2a2a2a"
+    },
+    "tweak": {
+     "scale": 0.75
+    }
+   },
+   "portraitAssetId": "bird.eurasian-siskin.portrait.adult.v1"
+  },
+  {
+   "id": "common-linnet",
+   "dexNo": 97,
+   "name": "Linnet",
+   "ebirdName": "Common Linnet",
+   "sciName": "Linaria cannabina",
+   "family": "Finches",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#b8803a",
+     "wing": "#5a4a3a",
+     "cap": "#8a8a92",
+     "neck": "#8a8a92",
+     "cheek": "#8a8a92",
+     "breast": "#d8606a",
+     "belly": "#f0e6d8",
+     "bill": "#8a8a82",
+     "legs": "#8a6a5a",
+     "tail": "#5a4a3a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.common-linnet.portrait.adult.v1"
+  },
+  {
+   "id": "lesser-redpoll",
+   "dexNo": 98,
+   "name": "Lesser Redpoll",
+   "ebirdName": "Lesser Redpoll",
+   "sciName": "Acanthis cabaret",
+   "family": "Finches",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "habitat": "woodland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a6a52",
+     "wing": "#6a4a3a",
+     "cap": "#d8302a",
+     "neck": "#8a6a52",
+     "cheek": "#8a6a52",
+     "breast": "#d8909a",
+     "belly": "#f0e6d8",
+     "bill": "#d8b82a",
+     "legs": "#4a3a2a",
+     "tail": "#6a4a3a"
+    },
+    "tweak": {
+     "scale": 0.8
+    }
+   },
+   "portraitAssetId": "bird.lesser-redpoll.portrait.adult.v1"
+  },
+  {
+   "id": "eurasian-bullfinch",
+   "dexNo": 99,
+   "name": "Bullfinch",
+   "ebirdName": "Eurasian Bullfinch",
+   "sciName": "Pyrrhula pyrrhula",
+   "family": "Finches",
+   "sets": [
+    "garden",
+    "woodland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a96a2",
+     "wing": "#2a2a32",
+     "cap": "#1a1a22",
+     "neck": "#1a1a22",
+     "cheek": "#1a1a22",
+     "breast": "#d8504a",
+     "belly": "#e8886a",
+     "bill": "#1a1a1a",
+     "legs": "#4a3a3a",
+     "tail": "#1a1a22"
+    },
+    "tweak": {
+     "scale": 1.05
+    }
+   },
+   "portraitAssetId": "bird.eurasian-bullfinch.portrait.adult.v1"
+  },
+  {
+   "id": "yellowhammer",
+   "dexNo": 100,
+   "name": "Yellowhammer",
+   "ebirdName": "Yellowhammer",
+   "sciName": "Emberiza citrinella",
+   "family": "Buntings",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#a8683a",
+     "wing": "#8a5a32",
+     "cap": "#f2d82a",
+     "neck": "#f2d82a",
+     "cheek": "#f2d82a",
+     "breast": "#e8c42a",
+     "belly": "#f0d860",
+     "bill": "#8a8a82",
+     "legs": "#c8a888",
+     "tail": "#8a5a32"
+    },
+    "tweak": {
+     "tail": 2
+    }
+   },
+   "portraitAssetId": "bird.yellowhammer.portrait.adult.v1"
+  },
+  {
+   "id": "reed-bunting",
+   "dexNo": 101,
+   "name": "Reed Bunting",
+   "ebirdName": "Reed Bunting",
+   "sciName": "Emberiza schoeniclus",
+   "family": "Buntings",
+   "sets": [
+    "wetland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "finch",
+    "palette": {
+     "back": "#8a5a32",
+     "wing": "#6a4a2a",
+     "cap": "#1a1a1a",
+     "neck": "#f6f6f0",
+     "cheek": "#1a1a1a",
+     "breast": "#e8e0d0",
+     "belly": "#f0e8dc",
+     "bill": "#2a2a2a",
+     "legs": "#8a6a4a",
+     "tail": "#6a4a2a"
+    },
+    "tweak": {
+     "scale": 0.9
+    }
+   },
+   "portraitAssetId": "bird.reed-bunting.portrait.adult.v1"
+  },
+  {
+   "id": "meadow-pipit",
+   "dexNo": 102,
+   "name": "Meadow Pipit",
+   "ebirdName": "Meadow Pipit",
+   "sciName": "Anthus pratensis",
+   "family": "Wagtails and pipits",
+   "sets": [
+    "farmland-upland"
+   ],
+   "habitat": "farmland-upland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#8a7a52",
+     "wing": "#7a6a42",
+     "cap": "#8a7a52",
+     "neck": "#8a7a52",
+     "cheek": "#c8b888",
+     "breast": "#e0d0a8",
+     "belly": "#f0e8d0",
+     "bill": "#3a3a3a",
+     "legs": "#c8a888",
+     "tail": "#7a6a42"
+    },
+    "tweak": {
+     "scale": 0.8
+    }
+   },
+   "portraitAssetId": "bird.meadow-pipit.portrait.adult.v1"
+  },
+  {
+   "id": "white-wagtail-pied-wagtail",
+   "dexNo": 103,
+   "name": "Pied Wagtail",
+   "ebirdName": "White Wagtail",
+   "sciName": "Motacilla alba",
+   "family": "Wagtails and pipits",
+   "sets": [
+    "garden",
+    "wetland"
+   ],
+   "habitat": "garden",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#3a3a40",
+     "wing": "#8a8a90",
+     "cap": "#1a1a1a",
+     "neck": "#1a1a1a",
+     "cheek": "#f6f6f0",
+     "breast": "#1a1a1a",
+     "belly": "#f6f6f0",
+     "bill": "#1a1a1a",
+     "legs": "#1a1a1a",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 6
+    }
+   },
+   "portraitAssetId": "bird.white-wagtail-pied-wagtail.portrait.adult.v1"
+  },
+  {
+   "id": "grey-wagtail",
+   "dexNo": 104,
+   "name": "Grey Wagtail",
+   "ebirdName": "Grey Wagtail",
+   "sciName": "Motacilla cinerea",
+   "family": "Wagtails and pipits",
+   "sets": [
+    "wetland",
+    "farmland-upland"
+   ],
+   "habitat": "wetland",
+   "art": {
+    "template": "songbird",
+    "palette": {
+     "back": "#7a8896",
+     "wing": "#4a4a52",
+     "cap": "#7a8896",
+     "neck": "#7a8896",
+     "cheek": "#1a1a1a",
+     "breast": "#f2d82a",
+     "belly": "#f2d82a",
+     "bill": "#1a1a1a",
+     "legs": "#c8a888",
+     "tail": "#1a1a1a"
+    },
+    "tweak": {
+     "scale": 0.85,
+     "tail": 6
+    }
+   },
+   "portraitAssetId": "bird.grey-wagtail.portrait.adult.v1"
+  }
+ ]
+}

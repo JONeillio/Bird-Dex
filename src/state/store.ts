@@ -11,6 +11,10 @@ export interface Prefs {
   soundOn: boolean
   regionId: string
   startId: string
+  /** Show the labelled demo collection instead of real records (real records arrive in M2). */
+  demoCollection: boolean
+  /** Species ids the user is hunting for. Moves to IndexedDB in M2. */
+  targets: string[]
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -21,6 +25,8 @@ export const DEFAULT_PREFS: Prefs = {
   soundOn: false, // audio is opt-in
   regionId: 'greater-manchester',
   startId: 'chorlton-green',
+  demoCollection: false,
+  targets: [],
 }
 
 const KEY = 'bq.prefs'
@@ -49,6 +55,10 @@ function savePrefs(p: Prefs): void {
 interface Store {
   prefs: Prefs
   setPref: <K extends keyof Prefs>(key: K, value: Prefs[K]) => void
+  toggleTarget: (speciesId: string) => void
+  /** Species the map should focus on (set by Find nearby). Not persisted. */
+  focusSpeciesId: string | null
+  setFocusSpecies: (id: string | null) => void
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -58,4 +68,13 @@ export const useStore = create<Store>((set, get) => ({
     savePrefs(prefs)
     set({ prefs })
   },
+  toggleTarget: (id) => {
+    const cur = get().prefs.targets
+    const targets = cur.includes(id) ? cur.filter((t) => t !== id) : [...cur, id]
+    const prefs = { ...get().prefs, targets }
+    savePrefs(prefs)
+    set({ prefs })
+  },
+  focusSpeciesId: null,
+  setFocusSpecies: (id) => set({ focusSpeciesId: id }),
 }))

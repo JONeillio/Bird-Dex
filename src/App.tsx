@@ -2,12 +2,10 @@ import { lazy, Suspense } from 'react'
 import { PixelIcon } from './ui/components'
 import { useRoute, type Route } from './router'
 import { DevUi } from './features/dev/DevUi'
-import {
-  BirdPlaceholder,
-  DexPlaceholder,
-  JournalPlaceholder,
-  SettingsPlaceholder,
-} from './features/shell/Placeholders'
+import { JournalPlaceholder, SettingsPlaceholder } from './features/shell/Placeholders'
+import DexScreen from './features/birddex/DexScreen'
+import BirdProfile from './features/bird/BirdProfile'
+import DevArt from './features/dev/DevArt'
 import type { IconName } from './art/icons'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
@@ -33,15 +31,15 @@ function Screen({ route }: { route: Route }) {
         </Suspense>
       )
     case 'dex':
-      return <DexPlaceholder />
+      return <DexScreen />
     case 'journal':
       return <JournalPlaceholder />
     case 'bird':
-      return <BirdPlaceholder id={route.id} />
+      return <BirdProfile id={route.id} />
     case 'settings':
       return <SettingsPlaceholder />
     case 'dev':
-      return <DevUi />
+      return route.page === 'art' ? <DevArt /> : <DevUi />
   }
 }
 

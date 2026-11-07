@@ -1,0 +1,120 @@
+{
+  "package": "Bird-Dex Bold Pixel anchor review v1",
+  "status": "design-review-not-production",
+  "styleApprovedByUser": true,
+  "individualDraftsApprovedByUser": false,
+  "filesAreFlat": true,
+  "assets": [
+    {
+      "speciesKey": "european-robin",
+      "file": "robin_bold_pixel_draft_v1.png",
+      "status": "draft-for-user-review",
+      "style": "Bold Pixel",
+      "styleDecisionDate": "2026-11-07",
+      "canvasPixels": {
+        "width": 1254,
+        "height": 1254
+      },
+      "sourceMode": "RGBA",
+      "checks": {
+        "pngValid": true,
+        "realTransparency": true,
+        "alphaRange": [
+          0,
+          255
+        ],
+        "softAlphaPixelCount": 443735,
+        "visibleBounds": [
+          0,
+          93,
+          1234,
+          1254
+        ]
+      },
+      "nativePixelGrid": "unverified; not a 64x64 approved export",
+      "productionApproval": false,
+      "speciesReview": "pending",
+      "inAppReview": "pending",
+      "origin": "AI-assisted edit from the user-selected top Bold Pixel reference row",
+      "referenceFile": "selected_style_reference.png",
+      "generationTool": "built-in image generation",
+      "generationDate": "2026-11-07",
+      "suggestedMergeArea": "research/art-drafts/bold-pixel",
+      "providerSpeciesCode": null
+    },
+    {
+      "speciesKey": "common-kingfisher",
+      "file": "kingfisher_bold_pixel_draft_v1.png",
+      "status": "draft-for-user-review",
+      "style": "Bold Pixel",
+      "styleDecisionDate": "2026-11-07",
+      "canvasPixels": {
+        "width": 1254,
+        "height": 1254
+      },
+      "sourceMode": "RGBA",
+      "checks": {
+        "pngValid": true,
+        "realTransparency": true,
+        "alphaRange": [
+          0,
+          255
+        ],
+        "softAlphaPixelCount": 496090,
+        "visibleBounds": [
+          0,
+          20,
+          1224,
+          1230
+        ]
+      },
+      "nativePixelGrid": "unverified; not a 64x64 approved export",
+      "productionApproval": false,
+      "speciesReview": "pending",
+      "inAppReview": "pending",
+      "origin": "AI-assisted edit from the user-selected top Bold Pixel reference row",
+      "referenceFile": "selected_style_reference.png",
+      "generationTool": "built-in image generation",
+      "generationDate": "2026-11-07",
+      "suggestedMergeArea": "research/art-drafts/bold-pixel",
+      "providerSpeciesCode": null
+    },
+    {
+      "speciesKey": "grey-heron",
+      "file": "grey_heron_bold_pixel_draft_v1.png",
+      "status": "draft-for-user-review",
+      "style": "Bold Pixel",
+      "styleDecisionDate": "2026-11-07",
+      "canvasPixels": {
+        "width": 1254,
+        "height": 1254
+      },
+      "sourceMode": "RGBA",
+      "checks": {
+        "pngValid": true,
+        "realTransparency": true,
+        "alphaRange": [
+          0,
+          255
+        ],
+        "softAlphaPixelCount": 423986,
+        "visibleBounds": [
+          23,
+          17,
+          1238,
+          1238
+        ]
+      },
+      "nativePixelGrid": "unverified; not a 64x64 approved export",
+      "productionApproval": false,
+      "speciesReview": "pending",
+      "inAppReview": "pending",
+      "origin": "AI-assisted edit from the user-selected top Bold Pixel reference row",
+      "referenceFile": "selected_style_reference.png",
+      "generationTool": "built-in image generation",
+      "generationDate": "2026-11-07",
+      "suggestedMergeArea": "research/art-drafts/bold-pixel",
+      "providerSpeciesCode": null
+    }
+  ]
+}

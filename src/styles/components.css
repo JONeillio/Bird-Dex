@@ -30,7 +30,7 @@
   justify-content: center;
   gap: 10px;
   min-height: 52px;
-  padding: var(--safe-top) 56px 0;
+  padding: var(--safe-top) 52px 0;
   position: relative;
   background: var(--forest);
   color: var(--panel);
@@ -42,6 +42,9 @@
 }
 .banner-title {
   font-weight: 700;
+  white-space: nowrap;
+  font-size: clamp(18px, 6vw, 26px);
+  letter-spacing: 0.1em;
 }
 .banner img {
   flex: none;
@@ -322,3 +325,32 @@
   text-align: center;
   padding: 28px 14px;
 }
+
+/* BirdDex + profile */
+.row.spread { justify-content: space-between; }
+.row.two > * { flex: 1; }
+.stack.tight { gap: 8px; }
+.center { text-align: center; }
+.small { font-size: 14px; }
+.small-h { font-size: 20px; }
+.sci { font-style: italic; margin-top: -6px; }
+.dexno-big { font-family: var(--font-display); font-size: 20px; color: var(--muted); }
+.card-name { font-size: 15px; line-height: 1.15; min-height: 2.3em; display: flex; align-items: center; justify-content: center; }
+.card .target-dot { position: absolute; top: 6px; left: 8px; color: var(--coral); font-size: 16px; }
+.portrait { image-rendering: pixelated; display: block; max-width: 100%; height: auto; }
+.portrait-sil { filter: brightness(0) invert(0.56); }
+.progress { height: 12px; border: 2px solid var(--ink); border-radius: 8px; background: var(--panel); overflow: hidden; }
+.progress > div { height: 100%; background: var(--forest); transition: width 0.3s; }
+.linkish { background: none; border: 0; padding: 4px 0; font: inherit; font-weight: 800; color: var(--forest); text-decoration: underline; min-height: 44px; }
+.search { width: 100%; min-height: 44px; padding: 8px 12px; font: inherit; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--panel); color: var(--ink); }
+.scene { display: grid; place-items: end center; min-height: 240px; padding: 12px 0 6px; border: 3px solid var(--ink); border-radius: var(--radius); background-size: cover; background-position: center bottom; image-rendering: pixelated; }
+.art-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.art-cell { border: 2px solid var(--ink); border-radius: var(--radius); background: var(--panel); padding: 6px; text-align: center; }
+.art-pair { display: flex; justify-content: center; gap: 4px; }
+.art-name { font-size: 14px; font-weight: 800; }
+@media (prefers-reduced-motion: reduce) { .progress > div { transition: none; } }
+
+/* Flex-column stacks must not squash their children (chips, progress bar). */
+.stack > * { flex-shrink: 0; }
+.card, .btn, .tab, .icon-btn { text-decoration: none; color: inherit; }
+.btn.primary { color: var(--panel); }

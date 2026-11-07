@@ -1,4 +1,5 @@
-import { Banner, Panel } from '../../ui/components'
+import { Banner, Chip, Panel } from '../../ui/components'
+import { useStore } from '../../state/store'
 import { BackButton, SettingsButton } from './SettingsButton'
 
 function Coming({ title, note }: { title: string; note: string }) {
@@ -7,17 +8,6 @@ function Coming({ title, note }: { title: string; note: string }) {
       <h2 className="h-display">{title}</h2>
       <p className="muted">{note}</p>
     </Panel>
-  )
-}
-
-export function DexPlaceholder() {
-  return (
-    <>
-      <Banner title="BirdDex" right={<SettingsButton />} />
-      <main className="screen stack">
-        <Coming title="Your BirdDex" note="The Starter Dex and bird cards arrive in milestone 1." />
-      </main>
-    </>
   )
 }
 
@@ -32,22 +22,24 @@ export function JournalPlaceholder() {
   )
 }
 
-export function BirdPlaceholder({ id }: { id: string }) {
-  return (
-    <>
-      <Banner title="Bird profile" left={<BackButton to="#/dex" />} />
-      <main className="screen stack">
-        <Coming title={id} note="Bird profiles arrive in milestone 1." />
-      </main>
-    </>
-  )
-}
-
 export function SettingsPlaceholder() {
+  const demo = useStore((s) => s.prefs.demoCollection)
+  const setPref = useStore((s) => s.setPref)
   return (
     <>
       <Banner title="Settings" left={<BackButton to="#/map" />} />
       <main className="screen stack">
+        <Panel className="stack">
+          <h2 className="h-display" style={{ fontSize: 22 }}>
+            Demo collection
+          </h2>
+          <p className="muted">Fills your BirdDex with 24 labelled demo birds so you can see how it looks. It never counts as real progress.</p>
+          <div className="row">
+            <Chip active={demo} onClick={() => setPref('demoCollection', !demo)}>
+              {demo ? 'Demo collection on' : 'Demo collection off'}
+            </Chip>
+          </div>
+        </Panel>
         <Panel className="stack">
           <h2 className="h-display" style={{ fontSize: 22 }}>
             About
@@ -57,7 +49,7 @@ export function SettingsPlaceholder() {
             from openrouteservice by HeiGIT, and map data from OpenStreetMap contributors via OpenFreeMap.
           </p>
           <p className="muted">
-            Your records will live on this phone only. Backups arrive in milestone 2. <a href="#/dev/ui">UI kit</a>
+            Your records will live on this phone only. Backups arrive in milestone 2. <a href="#/dev/ui">UI kit</a> · <a href="#/dev/art">Bird art</a>
           </p>
         </Panel>
       </main>
