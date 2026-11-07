@@ -435,5 +435,5 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 | M4 Adventure skin | not started | |
 | M5 Live data | live 7 Nov 2026 | `pipeline/run.ts` + `build.ts`: per location, eBird hotspots active in 14 days within 50 km, top 80 by species, recent reports per hotspot (en_GB names), one ORS matrix per start point. Derived JSON only, kept in the Actions cache (`bq-data-<run id>`), never git. First run: 162 eBird calls + 2 ORS, 77 s; ~80 sites and ~3,400–3,800 reports per location. Schedule on: 05:40 and 15:40 UTC. |
 | M6 Import | not started | |
-| M7 Real art | started | Style locked: Bold Pixel (7 Nov). 3 anchor drafts filed in `research/art-drafts/bold-pixel/`, `scripts/art/prepare_sprite.py` works, drafts used in-app. Individual approval and the other 101 birds pending. |
+| M7 Real art | started | Style locked: Bold Pixel (7 Nov). 12 bird portraits converted to 64×64 and in the app (3 anchors + 9 from `expansion-v1/`), plus converted markers, scenery and a grass tile in `public/assets/map/` (`src/art/mapAssets.ts`). All still drafts: individual approval pending. Missing from the batch: water and woodland textures. 92 birds still use generated placeholders. |
 | M8 Polish + hand-over | not started | |

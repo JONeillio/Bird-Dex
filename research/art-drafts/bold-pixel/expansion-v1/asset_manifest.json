@@ -1,0 +1,721 @@
+{
+  "pack": "Bird-Dex Bold Pixel Expansion v1",
+  "created_utc_date": "2026-11-07",
+  "asset_count": 19,
+  "category_counts": {
+    "bird": 9,
+    "terrain": 3,
+    "marker": 3,
+    "scenery": 4
+  },
+  "art_direction": "Bold Pixel: chunky stepped geometry, dark outlines and bright natural colours, matching the chosen robin and map-kit references.",
+  "origin": "AI-generated raster design masters, individually generated against the existing project references; source PNG bytes preserved.",
+  "references": [
+    "Previously delivered robin_bold_pixel_draft_v1.png",
+    "Previously delivered Bold Pixel Bird-Dex Map Kit concept"
+  ],
+  "review_state": "Bold Pixel direction selected by user. This expansion batch awaits user review; no production approval implied.",
+  "not_included": [
+    "Previously supplied robin, kingfisher and grey heron anchors",
+    "Live map data, API integration or runtime renderer",
+    "Native-resolution sprite exports or animation frames"
+  ],
+  "assets": [
+    {
+      "id": "blue_tit",
+      "category": "bird",
+      "file": "bird_blue_tit_bold_pixel_v1.png",
+      "role": "Adult blue tit; blue cap, white cheeks and yellow belly.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 537282,
+      "sha256": "fcb873efdf21051fbebb330cc050af84d1e99e3c35d1028f311086d2a5aa5c7a",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 454793,
+      "visible_bbox_alpha_ge_128": [
+        117,
+        202,
+        1060,
+        1147
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "great_tit",
+      "category": "bird",
+      "file": "bird_great_tit_bold_pixel_v1.png",
+      "role": "Adult great tit; black cap and throat, white cheek and yellow belly with black stripe.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 527901,
+      "sha256": "336e83a1628d1b8410374fe32f4d45b16458e5dbc4ef97a31bcb8f417d9b61c5",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 464963,
+      "visible_bbox_alpha_ge_128": [
+        140,
+        196,
+        1064,
+        1132
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "blackbird",
+      "category": "bird",
+      "file": "bird_blackbird_bold_pixel_v1.png",
+      "role": "Adult male common blackbird; dark plumage, orange-yellow bill and eye ring.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 538412,
+      "sha256": "af7094982f47e731f157aed5e75d67cb379664c7c46d46ce8d8a17eca7a60f3f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 448538,
+      "visible_bbox_alpha_ge_128": [
+        87,
+        214,
+        1137,
+        1132
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "mallard",
+      "category": "bird",
+      "file": "bird_mallard_bold_pixel_v1.png",
+      "role": "Adult male mallard in breeding plumage; green head, white neck ring and orange feet.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 565800,
+      "sha256": "63724fc1a1b785df7ac4c4d0ee49404a054c4f77f26b1b4282e836cd0822d29e",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 501122,
+      "visible_bbox_alpha_ge_128": [
+        77,
+        179,
+        1118,
+        1166
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 0,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "mute_swan",
+      "category": "bird",
+      "file": "bird_mute_swan_bold_pixel_v1.png",
+      "role": "Adult mute swan; white plumage, long neck and orange bill with black base.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 601889,
+      "sha256": "b1c293735db5584426c12e255b9e5470e9bb6de26b984aed37f144082b408c21",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 494368,
+      "visible_bbox_alpha_ge_128": [
+        94,
+        116,
+        1064,
+        1223
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "wren",
+      "category": "bird",
+      "file": "bird_wren_bold_pixel_v1.png",
+      "role": "Adult Eurasian wren; brown plumage, pale eyebrow and upright cocked tail.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 552943,
+      "sha256": "650e76eaaf281b730392fc02a934347c973eb1b0563183bb4f2d60e3e6948550",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 462147,
+      "visible_bbox_alpha_ge_128": [
+        180,
+        234,
+        1084,
+        1138
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 0,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "great_spotted_woodpecker",
+      "category": "bird",
+      "file": "bird_great_spotted_woodpecker_bold_pixel_v1.png",
+      "role": "Adult male great spotted woodpecker; red nape and undertail, black-and-white body.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 509871,
+      "sha256": "53799ce5fa741e672b6782e65df3275b226fb8a0ffeaabb3377de710cbc001dc",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 443992,
+      "visible_bbox_alpha_ge_128": [
+        200,
+        175,
+        1082,
+        1165
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "kestrel",
+      "category": "bird",
+      "file": "bird_kestrel_bold_pixel_v1.png",
+      "role": "Adult male common kestrel; grey head, spotted chestnut back and long tail.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 557287,
+      "sha256": "add4b6bb3d96857ec614747a9a6adb9ca37fb72c2aabdfcb700759d0e0c7972a",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 457092,
+      "visible_bbox_alpha_ge_128": [
+        112,
+        136,
+        1040,
+        1178
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "buzzard",
+      "category": "bird",
+      "file": "bird_buzzard_bold_pixel_v1.png",
+      "role": "Adult common buzzard; representative brown plumage variant, not all natural variants.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 609458,
+      "sha256": "359ba2f4a10ba92bba07240c350a91fc0796f8ef522aadaaaf7c8cf4f67cd8f2",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 518099,
+      "visible_bbox_alpha_ge_128": [
+        131,
+        156,
+        1040,
+        1168
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": "right",
+      "max_canvas_edge_alpha": 0,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "terrain_grass",
+      "category": "terrain",
+      "file": "terrain_grass_bold_pixel_v1.png",
+      "role": "Low-noise ground fill for grass and open green areas.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGB",
+      "bytes": 1223494,
+      "sha256": "f0a26f8e3de0d2c4d7c664f98d4e5e2a282981a4b0ecd6aab030c7aae6c01ea2",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "partial_alpha_pixels": 0,
+      "visible_bbox_alpha_ge_128": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "opaque": true,
+      "opposite_border_pixels_identical": false,
+      "opposite_border_mean_absolute_rgb_gap": {
+        "left_right": 2.017,
+        "top_bottom": 2.946
+      },
+      "seamless_repeat_verified": false,
+      "needs": [
+        "Choose a small native tile grid",
+        "Flatten palette and remove subtle texture",
+        "Repair wraparound motifs and inspect repeated grid"
+      ]
+    },
+    {
+      "id": "terrain_water",
+      "category": "terrain",
+      "file": "terrain_water_bold_pixel_v1.png",
+      "role": "Low-noise blue fill with pixel ripples for water polygons.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGB",
+      "bytes": 1182651,
+      "sha256": "23381b09d2060966b3635435ae42c5e72180d25da5317c91d75b9dd5b85892de",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "partial_alpha_pixels": 0,
+      "visible_bbox_alpha_ge_128": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "opaque": true,
+      "opposite_border_pixels_identical": false,
+      "opposite_border_mean_absolute_rgb_gap": {
+        "left_right": 0.928,
+        "top_bottom": 1.247
+      },
+      "seamless_repeat_verified": false,
+      "needs": [
+        "Choose a small native tile grid",
+        "Flatten palette and remove subtle texture",
+        "Repair wraparound motifs and inspect repeated grid"
+      ]
+    },
+    {
+      "id": "terrain_woodland",
+      "category": "terrain",
+      "file": "terrain_woodland_bold_pixel_v1.png",
+      "role": "Darker moss-and-leaf woodland floor fill; separate from tree decoration.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGB",
+      "bytes": 1226035,
+      "sha256": "6d238e51ff003909ff3ec9b5390e9655206bc4710b3e4542cff080abae815e69",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "partial_alpha_pixels": 0,
+      "visible_bbox_alpha_ge_128": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "opaque": true,
+      "opposite_border_pixels_identical": false,
+      "opposite_border_mean_absolute_rgb_gap": {
+        "left_right": 0.91,
+        "top_bottom": 0.776
+      },
+      "seamless_repeat_verified": false,
+      "needs": [
+        "Choose a small native tile grid",
+        "Flatten palette and remove subtle texture",
+        "Repair wraparound motifs and inspect repeated grid"
+      ]
+    },
+    {
+      "id": "marker_normal",
+      "category": "marker",
+      "file": "marker_normal_bold_pixel_v1.png",
+      "role": "Normal birding site: cream binocular pin.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 503251,
+      "sha256": "d3cabaa8c6857badf95f365ad5c719db449e9835b1fb1f7d606443a07c96939e",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 503512,
+      "visible_bbox_alpha_ge_128": [
+        272,
+        147,
+        984,
+        1119
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "marker_target",
+      "category": "marker",
+      "file": "marker_target_bold_pixel_v1.png",
+      "role": "Target site: amber star flag; a recent reported bird may help fill a collection gap.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 347196,
+      "sha256": "b7af931e0aed7d1dd46c4b54df504fc7ffb7c8464f2c113b196ec4cd2442686e",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 320462,
+      "visible_bbox_alpha_ge_128": [
+        278,
+        221,
+        955,
+        1039
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 0,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "marker_selected",
+      "category": "marker",
+      "file": "marker_selected_bold_pixel_v1.png",
+      "role": "Currently selected site: coral binocular pin plus selection ring.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 556701,
+      "sha256": "6df20a44f776b445fbb4ce05ac14018385c2101525f1f47cbfee94e3f6eba627",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 528273,
+      "visible_bbox_alpha_ge_128": [
+        277,
+        127,
+        977,
+        1152
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 0,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "scenery_broadleaf_tree",
+      "category": "scenery",
+      "file": "scenery_broadleaf_tree_bold_pixel_v1.png",
+      "role": "Decorative broadleaf tree, bottom trunk anchored to suitable land.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 709578,
+      "sha256": "f020e034b0b0e68abd9a1e24b03fce07ff53d9d8388204aa19c8bc5c9ea79c34",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 638503,
+      "visible_bbox_alpha_ge_128": [
+        160,
+        164,
+        1094,
+        1157
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "scenery_conifer",
+      "category": "scenery",
+      "file": "scenery_conifer_bold_pixel_v1.png",
+      "role": "Decorative conifer, bottom trunk anchored to suitable land.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 412658,
+      "sha256": "4d3f9952a8e3c731982e5d66b16b8d81ebac7e25708cdbd5ea8c9f97d1b76131",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 362287,
+      "visible_bbox_alpha_ge_128": [
+        321,
+        160,
+        931,
+        1147
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "scenery_bush",
+      "category": "scenery",
+      "file": "scenery_bush_bold_pixel_v1.png",
+      "role": "Decorative low bush, base anchored to suitable land.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 430097,
+      "sha256": "8069bf1828ca22f72b7f7cf914ee42b29cdb9eb159a9db6c303df8826ac223c1",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 391531,
+      "visible_bbox_alpha_ge_128": [
+        192,
+        405,
+        1063,
+        1010
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    },
+    {
+      "id": "scenery_reeds",
+      "category": "scenery",
+      "file": "scenery_reeds_bold_pixel_v1.png",
+      "role": "Decorative cattail reeds for appropriate waterside habitat.",
+      "status": "design_master_for_review",
+      "production_approved": false,
+      "file_format": "PNG",
+      "width_px": 1254,
+      "height_px": 1254,
+      "colour_mode": "RGBA",
+      "bytes": 430356,
+      "sha256": "10521f77729b7fe197a655b1819807b7ca19749e2e04a0ea9196d70f05ecea28",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "partial_alpha_pixels": 385974,
+      "visible_bbox_alpha_ge_128": [
+        252,
+        173,
+        1003,
+        1106
+      ],
+      "visible_bbox_convention": "[left, top, right_exclusive, bottom_exclusive]",
+      "native_pixel_grid_verified": false,
+      "runtime_export_file": null,
+      "transparent_background": true,
+      "facing": null,
+      "max_canvas_edge_alpha": 1,
+      "needs": [
+        "Snap to agreed native pixel grid and palette",
+        "Clean soft alpha and faint stray pixels",
+        "Check thumbnail legibility on light and dark backgrounds"
+      ]
+    }
+  ]
+}

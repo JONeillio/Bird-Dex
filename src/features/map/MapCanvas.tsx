@@ -4,6 +4,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import { FALLBACK_STYLE, loadBirdQuestStyle } from './mapStyle'
 import { BirdLife, type LifeSite } from './birdLife'
+import { MAP_ART, spriteImg } from '../../art/mapAssets'
 import type { LngLat } from '../../data/published-schema'
 import type { SiteView } from '../../domain/ranking'
 
@@ -118,21 +119,24 @@ export default function MapCanvas({ centre, zoom, start, startLabel, pins, life,
       el.type = 'button'
       const sel = p.view.site.id === selectedId
       el.setAttribute('aria-label', p.label)
-      if (p.compact && !sel) {
-        el.className = `dot${p.isTarget ? ' target' : ''}`
-        el.innerHTML = '<span></span>'
+      if (p.compact) {
+        // Lower-ranked sites: the small pixel binoculars pin (tip = the coordinate). Selected beats target
+        // beats normal: the selected art carries a ring; a flag keeps marking a target.
+        el.className = `mini${sel ? ' selected' : ''}${p.isTarget ? ' target' : ''}`
+        el.innerHTML = spriteImg(sel ? MAP_ART.siteMarkerSelected : MAP_ART.siteMarker, 2) + (p.isTarget ? spriteImg(MAP_ART.targetFlag, 1, 'mini-flag') : '')
       } else {
         el.className = `pin${sel ? ' selected' : ''}${p.isTarget ? ' target' : ''}`
         const n = p.view.newIds.length
         el.innerHTML =
           `<span class="pin-body">${p.lureSrc ? `<img src="${p.lureSrc}" width="32" height="32" alt="" draggable="false">` : ''}</span>` +
-          (n ? `<span class="pin-badge">${n} NEW</span>` : '')
+          (n ? `<span class="pin-badge">${n} NEW</span>` : '') +
+          (p.isTarget ? spriteImg(MAP_ART.targetFlag, 2, 'pin-flag') : '')
       }
       el.addEventListener('click', (e) => {
         e.stopPropagation()
         onSelectRef.current(p.view.site.id)
       })
-      return new maplibregl.Marker({ element: el, anchor: el.className.startsWith('dot') ? 'center' : 'bottom' }).setLngLat(p.view.site.point).addTo(map)
+      return new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat(p.view.site.point).addTo(map)
     })
   }, [ready, pins, selectedId])
 

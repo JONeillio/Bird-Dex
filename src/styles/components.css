@@ -417,6 +417,7 @@
 .other-birds summary { font-weight: 800; min-height: 40px; display: flex; align-items: center; cursor: pointer; }
 .credit { margin-top: 14px; }
 .map-error { inset: 8px 50px auto 10px; text-align: left; font-size: 13px; background: var(--panel); border: 2px solid var(--ink); border-radius: 8px; padding: 4px 8px; }
-.dot { z-index: 1; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; }
-.dot span { width: 14px; height: 14px; background: var(--panel); border: 3px solid var(--ink); border-radius: 50%; }
-.dot.target span { background: var(--coral); }
+.mini { z-index: 1; position: relative; display: flex; align-items: flex-end; justify-content: center; width: 44px; height: 52px; padding: 0; background: none; border: 0; cursor: pointer; }
+.mini img { image-rendering: pixelated; display: block; }
+.mini .mini-flag { position: absolute; left: 2px; top: 6px; }
+.pin-flag { position: absolute; left: -8px; top: -14px; pointer-events: none; image-rendering: pixelated; }
