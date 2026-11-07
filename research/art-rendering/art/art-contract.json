@@ -1,0 +1,87 @@
+{
+  "contractVersion": "art-v0.2-provisional",
+  "status": "provisional-anchor-review",
+  "owner": "integrator",
+  "direction": "original retro handheld pixel art of real birds and real geographic maps",
+  "portrait": {
+    "nativeWidth": 64,
+    "nativeHeight": 64,
+    "candidateGridsForAnchorReview": [
+      64,
+      96
+    ],
+    "minimumPaddingPx": 4,
+    "facing": "right",
+    "pose": "calm side or three-quarter",
+    "alpha": "binary transparent",
+    "opaqueColourReviewTarget": 24,
+    "freezeOneGridBeforeBulkProduction": true
+  },
+  "siteMarker": {
+    "nativeWidth": 32,
+    "nativeHeight": 32,
+    "minimumPaddingPx": 1,
+    "alpha": "binary transparent",
+    "visibleSizeDoesNotDetermineTapTarget": true
+  },
+  "decoration": {
+    "allowedNativeSizes": [
+      [
+        16,
+        16
+      ],
+      [
+        32,
+        32
+      ]
+    ],
+    "alpha": "binary transparent",
+    "groundAnchor": "bottom-centre",
+    "placement": "decorative not surveyed"
+  },
+  "pattern": {
+    "nativeWidth": 32,
+    "nativeHeight": 32,
+    "alpha": "opaque",
+    "repeat": "seamless-review-required",
+    "powerOfTwoRequired": true
+  },
+  "uiPalette": {
+    "paper": "#F7F2DE",
+    "panel": "#FFFBEF",
+    "ink": "#213B32",
+    "forest": "#35614B",
+    "sage": "#A9C58A",
+    "grass": "#D2DDA9",
+    "water": "#7DB8C6",
+    "waterDeep": "#438CA8",
+    "road": "#EAD9AC",
+    "discovery": "#D8A84B",
+    "robinAccent": "#C96E53"
+  },
+  "birdColours": "species diagnostic colours take priority over the UI palette",
+  "export": {
+    "format": "PNG",
+    "oneAssetPerFile": true,
+    "nativeGridRequiredForApproved": true,
+    "mastersRoot": "art/",
+    "runtimeRoot": "public/assets/",
+    "manifestPaths": "relative to repo root",
+    "logicalVsPhysicalPixels": "atlas pixelRatio must be explicit"
+  },
+  "lifecycle": [
+    "planned",
+    "draft",
+    "reviewed",
+    "approved",
+    "retired"
+  ],
+  "approvals": "Integrator reviews conformance; no per-image user approval workflow is required by this pack.",
+  "unknowns": [
+    "Exact portrait grid not frozen",
+    "No approved anchor references yet",
+    "No runtime images supplied",
+    "Map source schema not audited",
+    "No atlas or renderer implemented"
+  ]
+}

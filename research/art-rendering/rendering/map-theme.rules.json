@@ -1,0 +1,76 @@
+{
+  "schema": "birdquest-semantic-theme/v0.2",
+  "status": "proposed-not-a-runnable-maplibre-style",
+  "contractVersion": "art-v0.2-provisional",
+  "sourceSchemaVerified": false,
+  "sourcePropertyMapping": null,
+  "camera": {
+    "pitch": 0,
+    "bearing": 0,
+    "rotationInMvp": false
+  },
+  "rules": [
+    {
+      "semantic": "woodland",
+      "baseColour": "#A9C58A",
+      "patternAssetId": "map.pattern.woodland.v1",
+      "outline": "separate-line-layer",
+      "optionalDecoration": [
+        "map.decoration.broadleaf-tree.v1",
+        "map.decoration.conifer-tree.v1"
+      ]
+    },
+    {
+      "semantic": "park",
+      "baseColour": "#D2DDA9",
+      "patternAssetId": "map.pattern.grass.v1",
+      "optionalDecoration": [
+        "map.decoration.bush.v1"
+      ]
+    },
+    {
+      "semantic": "water",
+      "baseColour": "#7DB8C6",
+      "patternAssetId": "map.pattern.water.v1",
+      "outline": "separate-line-layer"
+    },
+    {
+      "semantic": "road",
+      "surfaceColour": "#EAD9AC",
+      "casingColour": "#213B32",
+      "geometry": "true-source-geometry"
+    },
+    {
+      "semantic": "building",
+      "fillColour": "#EAD9AC",
+      "detail": "neighbourhood-zoom-only"
+    },
+    {
+      "semantic": "site",
+      "markerAssetId": "map.marker.site.v1",
+      "selectedMarkerAssetId": "map.marker.selected-site.v1"
+    }
+  ],
+  "decorationPlacement": {
+    "stage": "optional-after-pattern-map",
+    "coordinateSpace": "chosen-projected-world-space-not-screen",
+    "candidateKey": [
+      "themeVersion",
+      "cellX",
+      "cellY",
+      "kind"
+    ],
+    "neverSeedFrom": [
+      "viewport",
+      "time",
+      "currentZoom",
+      "transientClippedPolygonId"
+    ],
+    "unknownMask": "omit-decoration",
+    "deduplicateBy": "globalCandidateId",
+    "zoomDetail": "nested-subsets-of-same-candidates",
+    "maskImplementation": "not-supplied"
+  },
+  "missingArtFallback": "plain-usable-colours-and-labelled-site-symbols",
+  "attributionVisible": true
+}

@@ -1,0 +1,882 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "art-v0.2-provisional",
+  "inventoryStatus": "planned-no-runtime-images",
+  "pathBase": "repo-root",
+  "assets": [
+    {
+      "assetId": "bird.european-robin.portrait.adult.v1",
+      "label": "European robin",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/european-robin/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": "art/prompts/anchor-birds.md",
+        "referenceUrls": [
+          "https://www.rspb.org.uk/birds-and-wildlife/robin"
+        ],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "european-robin",
+      "scientificName": "Erithacus rubecula",
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.common-kingfisher.portrait.adult.v1",
+      "label": "Common kingfisher",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/common-kingfisher/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": "art/prompts/anchor-birds.md",
+        "referenceUrls": [
+          "https://www.rspb.org.uk/birds-and-wildlife/kingfisher"
+        ],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "common-kingfisher",
+      "scientificName": "Alcedo atthis",
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "select-documented-adult-variant",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.grey-heron.portrait.adult.v1",
+      "label": "Grey heron",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/grey-heron/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": "art/prompts/anchor-birds.md",
+        "referenceUrls": [
+          "https://www.rspb.org.uk/birds-and-wildlife/grey-heron",
+          "https://www.allaboutbirds.org/guide/Gray_Heron/id"
+        ],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "grey-heron",
+      "scientificName": "Ardea cinerea",
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.blue-tit.portrait.adult.v1",
+      "label": "Blue tit",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/blue-tit/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "blue-tit",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.great-tit.portrait.adult.v1",
+      "label": "Great tit",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/great-tit/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "great-tit",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.common-blackbird.portrait.adult.v1",
+      "label": "Blackbird",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/common-blackbird/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "common-blackbird",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "male",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.mallard.portrait.adult.v1",
+      "label": "Mallard",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/mallard/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "mallard",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "male",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.mute-swan.portrait.adult.v1",
+      "label": "Mute swan",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/mute-swan/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "mute-swan",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.wren.portrait.adult.v1",
+      "label": "Wren",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/wren/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "wren",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "unspecified",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.great-spotted-woodpecker.portrait.adult.v1",
+      "label": "Great spotted woodpecker",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/great-spotted-woodpecker/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "great-spotted-woodpecker",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "choose-reference-variant",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.kestrel.portrait.adult.v1",
+      "label": "Kestrel",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/kestrel/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "kestrel",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "choose-reference-variant",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "bird.common-buzzard.portrait.adult.v1",
+      "label": "Buzzard",
+      "kind": "bird-portrait",
+      "path": "public/assets/birds/common-buzzard/adult-portrait-v1.png",
+      "nativeWidth": 64,
+      "nativeHeight": 64,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 4,
+      "anchor": {
+        "x": 32,
+        "y": 60
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "speciesKey": "common-buzzard",
+      "scientificName": null,
+      "providerSpeciesCode": null,
+      "variant": {
+        "age": "adult",
+        "sex": "choose-representative-plumage",
+        "region": "UK",
+        "plumage": "reference-review-required"
+      }
+    },
+    {
+      "assetId": "map.pattern.grass.v1",
+      "label": "grass pattern",
+      "kind": "terrain-pattern",
+      "path": "public/assets/map/patterns/grass-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "opaque",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 0,
+      "anchor": null,
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    },
+    {
+      "assetId": "map.pattern.water.v1",
+      "label": "water pattern",
+      "kind": "terrain-pattern",
+      "path": "public/assets/map/patterns/water-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "opaque",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 0,
+      "anchor": null,
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    },
+    {
+      "assetId": "map.pattern.woodland.v1",
+      "label": "woodland pattern",
+      "kind": "terrain-pattern",
+      "path": "public/assets/map/patterns/woodland-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "opaque",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 0,
+      "anchor": null,
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    },
+    {
+      "assetId": "map.decoration.broadleaf-tree.v1",
+      "label": "broadleaf-tree",
+      "kind": "map-decoration",
+      "path": "public/assets/map/decorations/broadleaf-tree-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 16,
+        "y": 31
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "footprint": {
+        "width": 16,
+        "height": 8,
+        "units": "logical-pixels-at-reference-scale"
+      }
+    },
+    {
+      "assetId": "map.decoration.conifer-tree.v1",
+      "label": "conifer-tree",
+      "kind": "map-decoration",
+      "path": "public/assets/map/decorations/conifer-tree-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 16,
+        "y": 31
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "footprint": {
+        "width": 16,
+        "height": 8,
+        "units": "logical-pixels-at-reference-scale"
+      }
+    },
+    {
+      "assetId": "map.decoration.bush.v1",
+      "label": "bush",
+      "kind": "map-decoration",
+      "path": "public/assets/map/decorations/bush-v1.png",
+      "nativeWidth": 16,
+      "nativeHeight": 16,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 8,
+        "y": 15
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "footprint": {
+        "width": 8,
+        "height": 4,
+        "units": "logical-pixels-at-reference-scale"
+      }
+    },
+    {
+      "assetId": "map.decoration.reeds.v1",
+      "label": "reeds",
+      "kind": "map-decoration",
+      "path": "public/assets/map/decorations/reeds-v1.png",
+      "nativeWidth": 16,
+      "nativeHeight": 16,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 8,
+        "y": 15
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      },
+      "footprint": {
+        "width": 8,
+        "height": 4,
+        "units": "logical-pixels-at-reference-scale"
+      }
+    },
+    {
+      "assetId": "map.marker.site.v1",
+      "label": "site",
+      "kind": "site-marker",
+      "path": "public/assets/map/markers/site-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 16,
+        "y": 31
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    },
+    {
+      "assetId": "map.marker.target-site.v1",
+      "label": "target-site",
+      "kind": "site-marker",
+      "path": "public/assets/map/markers/target-site-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 16,
+        "y": 31
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    },
+    {
+      "assetId": "map.marker.selected-site.v1",
+      "label": "selected-site",
+      "kind": "site-marker",
+      "path": "public/assets/map/markers/selected-site-v1.png",
+      "nativeWidth": 32,
+      "nativeHeight": 32,
+      "alphaMode": "transparent",
+      "binaryAlpha": true,
+      "minimumPaddingPx": 1,
+      "anchor": {
+        "x": 16,
+        "y": 31
+      },
+      "colourReviewTarget": 24,
+      "contractVersion": "art-v0.2-provisional",
+      "status": "planned",
+      "reviews": {
+        "identity": "pending",
+        "pixelGrid": "pending",
+        "transparency": "pending",
+        "inApp": "pending"
+      },
+      "provenance": {
+        "origin": "planned",
+        "creator": null,
+        "tool": null,
+        "createdAt": null,
+        "promptFile": null,
+        "referenceUrls": [],
+        "rightsStatus": "unreviewed",
+        "rightsNote": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "contractVersion": "art-v0.2-provisional",
+  "status": "planning-only",
+  "portraitCount": 12,
+  "gridDecision": "64 provisional; compare anchors before freezing",
+  "batches": [
+    "anchors",
+    "small-birds",
+    "wetland",
+    "final-initial-batch"
+  ],
+  "queue": [
+    {
+      "assetId": "bird.european-robin.portrait.adult.v1",
+      "speciesKey": "european-robin",
+      "name": "European robin",
+      "batch": "anchors",
+      "status": "planned",
+      "referenceStatus": "starter-links-present",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.common-kingfisher.portrait.adult.v1",
+      "speciesKey": "common-kingfisher",
+      "name": "Common kingfisher",
+      "batch": "anchors",
+      "status": "planned",
+      "referenceStatus": "starter-links-present",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.grey-heron.portrait.adult.v1",
+      "speciesKey": "grey-heron",
+      "name": "Grey heron",
+      "batch": "anchors",
+      "status": "planned",
+      "referenceStatus": "starter-links-present",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.blue-tit.portrait.adult.v1",
+      "speciesKey": "blue-tit",
+      "name": "Blue tit",
+      "batch": "small-birds",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.great-tit.portrait.adult.v1",
+      "speciesKey": "great-tit",
+      "name": "Great tit",
+      "batch": "small-birds",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.common-blackbird.portrait.adult.v1",
+      "speciesKey": "common-blackbird",
+      "name": "Blackbird",
+      "batch": "small-birds",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.mallard.portrait.adult.v1",
+      "speciesKey": "mallard",
+      "name": "Mallard",
+      "batch": "wetland",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.mute-swan.portrait.adult.v1",
+      "speciesKey": "mute-swan",
+      "name": "Mute swan",
+      "batch": "wetland",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.wren.portrait.adult.v1",
+      "speciesKey": "wren",
+      "name": "Wren",
+      "batch": "final-initial-batch",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.great-spotted-woodpecker.portrait.adult.v1",
+      "speciesKey": "great-spotted-woodpecker",
+      "name": "Great spotted woodpecker",
+      "batch": "final-initial-batch",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.kestrel.portrait.adult.v1",
+      "speciesKey": "kestrel",
+      "name": "Kestrel",
+      "batch": "final-initial-batch",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    },
+    {
+      "assetId": "bird.common-buzzard.portrait.adult.v1",
+      "speciesKey": "common-buzzard",
+      "name": "Buzzard",
+      "batch": "final-initial-batch",
+      "status": "planned",
+      "referenceStatus": "research-required",
+      "providerMappingStatus": "unverified",
+      "requiredReviews": [
+        "species and represented variant",
+        "pixel grid",
+        "alpha and padding",
+        "in-card consistency"
+      ]
+    }
+  ]
+}
