@@ -6,7 +6,6 @@ import { shortSiteName } from '../../domain/siteName'
 import { useRegionStart } from '../../state/useRegionStart'
 import { useRecorded } from '../../state/useRecorded'
 import { useStore, type DriveLimit } from '../../state/store'
-import { useUi } from '../../state/ui'
 import { Banner, DemoStamp, Panel, Pill } from '../../ui/components'
 import { BirdPortrait } from '../birddex/BirdPortrait'
 import { BackButton } from '../shell/SettingsButton'
@@ -22,7 +21,6 @@ export default function FindScreen({ birdKey }: { birdKey: string }) {
   const setPref = useStore((s) => s.setPref)
   const setFocus = useStore((s) => s.setFocusSpecies)
   const recorded = useRecorded()
-  const openLog = useUi((s) => s.openLog)
 
   if (d.status !== 'ready') {
     return (
@@ -80,9 +78,6 @@ export default function FindScreen({ birdKey }: { birdKey: string }) {
                     </span>
                   </button>
                   <span className="report-actions">
-                    <button type="button" className="btn small" onClick={() => openLog({ speciesId: dex?.id, place: shortSiteName(site.name), siteId: site.id, outside: dex ? undefined : { name, sciName: report.sciName } })}>
-                      I saw it
-                    </button>
                     {report.checklistUrl && (
                       <a className="report-link small" href={report.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist at ${shortSiteName(site.name)}`}>eBird ↗</a>
                     )}

@@ -4,7 +4,6 @@ import type { RegionData } from '../../data/published-schema'
 import { DEX_SIZE } from '../../data/catalogue'
 import { ageLabel, daysAgo, reportedCount, type SiteView } from '../../domain/ranking'
 import { fullDesignation, shortSiteName } from '../../domain/siteName'
-import { useUi } from '../../state/ui'
 import { BottomSheet, DemoStamp, Pill } from '../../ui/components'
 import { RadarSheet } from './RadarSheet'
 import { birdSrc } from './birdArt'
@@ -17,7 +16,6 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
   targets: readonly string[]
   onClose: () => void
 }) {
-  const openLog = useUi((u) => u.openLog)
   const [radar, setRadar] = useState(false)
   if (!view) return null
   const { site, minutes } = view
@@ -85,9 +83,6 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
                 </span>
               </a>
               <span className="report-actions">
-                <button type="button" className="btn small" onClick={() => openLog({ speciesId: r.speciesId!, place: shortSiteName(site.name), siteId: site.id })}>
-                  I saw it
-                </button>
                 {r.checklistUrl && (
                   <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist for ${s?.name ?? r.name}`}>
                     eBird ↗
@@ -112,9 +107,6 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
                   </span>
                 </span>
                 <span className="report-actions">
-                  <button type="button" className="btn small" onClick={() => openLog({ outside: { name: r.name, sciName: r.sciName }, place: shortSiteName(site.name), siteId: site.id })}>
-                    I saw it
-                  </button>
                   {r.checklistUrl && (
                     <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist for ${r.name}`}>
                       eBird ↗
@@ -126,6 +118,7 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
           </ul>
         </details>
       )}
+      <p className="muted small">Been here? Add your eBird export in <a href="#/journal">Journal</a> and your BirdDex updates in one go.</p>
       <p className="muted small credit">
         {region.isDemo ? 'Demo data, invented for trying the app.' : <>Sightings: <a href="https://ebird.org" target="_blank" rel="noopener">eBird (ebird.org)</a>.</>} Drive times © openrouteservice by HeiGIT | Data from OpenStreetMap.
       </p>

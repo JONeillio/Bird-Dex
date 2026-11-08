@@ -4,6 +4,7 @@ import { assignHomes, homesByNpc, meetHint, stages } from '../../domain/folk'
 import { earnedBadges } from '../../domain/badges'
 import { personaById } from '../../data/personas'
 import { npcArt } from '../../art/npcs'
+import { shortSiteName } from '../../domain/siteName'
 import { trust } from '../../domain/wardenJobs'
 import { useGame } from '../../state/game'
 import { useStore } from '../../state/store'
@@ -32,6 +33,12 @@ export default function FolkScreen() {
   const wins = Object.keys(f.callWins).length
   const pending = f.calls.filter((c) => c.settlement.result === 'pending')
   const homes = homesByNpc(Object.values(docs))
+  const placeOf = (npcId: string): string | null => {
+    const site = f.region?.sites.find((x) => (homes[npcId] ?? []).includes(x.id))
+    return site ? shortSiteName(site.name) : null
+  }
+  // In a real area, show the folk who live there; in demo data nobody has a home yet, so show everyone.
+  const folk = f.region && !f.region.isDemo ? NPC_DATA.filter((n) => placeOf(n.id)) : NPC_DATA
   const stage = stages(NPC_DATA, homes, f.encounters, Object.values(docs))
 
   return (
@@ -54,15 +61,19 @@ export default function FolkScreen() {
           </Panel>
         )}
 
-        <h2 className="h-display">Reserve Wardens</h2>
-        {f.wardens.length === 0 && <p className="muted">No wardens here yet.</p>}
+        {f.wardens.length > 0 && <h2 className="h-display">Reserve Wardens</h2>}
         {f.wardens.map((w) => (
           <WardenCard key={w.id} w={w} met={f.visited.has(w.siteId)} level={trust(w, f.real, f.now).level} tier={badges.wardens.find((b) => b.wardenId === w.id)?.tier ?? 'none'} />
         ))}
 
-        <h2 className="h-display">Story folk</h2>
-        <p className="muted small">People who live near the places you bird. You meet them by visiting.</p>
-        {NPC_DATA.map((n) => {
+        {f.wardens.length === 0 && folk.length === 0 && !f.loading && <p className="muted">No wardens or story folk in this area yet.</p>}
+        {folk.length > 0 && (
+          <>
+            <h2 className="h-display">Story folk</h2>
+            <p className="muted small">Each lives at a real place in this area. Visit, add the trip to your Journal, and you meet them.</p>
+          </>
+        )}
+        {folk.map((n) => {
           const art = npcArt(n.id, 'neutral')
           const met = stage[n.id] !== 'unmet'
           return (
@@ -71,7 +82,7 @@ export default function FolkScreen() {
               <div>
                 <strong>{met ? n.name : 'Not met yet'}</strong>
                 <br />
-                <span className="muted small">{met ? n.role : meetHint(n)}</span>
+                <span className="muted small">{met ? n.role : meetHint(n, placeOf(n.id))}</span>
               </div>
               {stage[n.id] === 'done' || stage[n.id] === 'returned' ? <Pill tone="good">Keepsake</Pill> : null}
             </a>
@@ -92,7 +103,7 @@ function WardenCard({ w, met, level, tier }: { w: Warden; met: boolean; level: s
         <br />
         <span className="muted small">{w.siteName}</span>
         <br />
-        <span className="small">{met ? level : 'Visit to meet them'}</span>
+        <span className="small">{met ? level : 'Visit to meet them, then add the trip to your Journal'}</span>
       </div>
       <BadgePin tier={tier} />
     </a>

@@ -166,8 +166,9 @@ describe('npcsOnMap', () => {
     expect(npcsOnMap({ ...base, homes: { nell: 'gone', kit: 's1' } }).map((x) => x.npcId)).toEqual(['kit'])
   })
   it('hints at how to meet someone', () => {
-    expect(meetHint(dexNpc('nell'))).toBe('Nell is usually here at dawn. Log an outing here to meet them.')
-    expect(meetHint(dexNpc('kit'))).toBe('Kit lives near here. Log an outing here to meet them.')
+    expect(meetHint(dexNpc('nell'), 'Rainham Marshes')).toBe('Nell is usually at Rainham Marshes at dawn. Visit, then add the trip to your Journal to meet them.')
+    expect(meetHint(dexNpc('kit'), 'Crossness')).toContain('Kit is usually at Crossness')
+    expect(meetHint(dexNpc('kit'))).toBe('Kit lives near the places you bird. Visit and add the trip to your Journal to meet them.')
   })
 })
 

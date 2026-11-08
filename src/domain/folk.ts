@@ -175,9 +175,11 @@ export function npcsOnMap(o: MapNpcInput): MapNpc[] {
 
 const BAND_WORDS: Record<TimeBand, string> = { dawn: 'at dawn', day: 'in the daytime', dusk: 'at dusk', night: 'after dark' }
 
-/** The line shown when you tap someone you have not met yet. */
-export function meetHint(npc: Pick<Npc, 'name' | 'band'>): string {
-  return npc.band ? `${npc.name} is usually here ${BAND_WORDS[npc.band]}. Log an outing here to meet them.` : `${npc.name} lives near here. Log an outing here to meet them.`
+/** The line shown for someone you have not met yet. `place` is the short name of the site where they live in this area. */
+export function meetHint(npc: Pick<Npc, 'name' | 'band'>, place?: string | null): string {
+  const when = npc.band ? ` ${BAND_WORDS[npc.band]}` : ''
+  if (place) return `${npc.name} is usually at ${place}${when}. Visit, then add the trip to your Journal to meet them.`
+  return `${npc.name} lives near the places you bird. Visit and add the trip to your Journal to meet them.`
 }
 
 // ---------- Challenges ----------

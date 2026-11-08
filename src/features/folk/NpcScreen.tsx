@@ -3,6 +3,7 @@ import { npcArt } from '../../art/npcs'
 import { KEEPSAKES } from '../../art/keepsakes'
 import { homesByNpc, meetHint, stages } from '../../domain/folk'
 import { useGame } from '../../state/game'
+import { shortSiteName } from '../../domain/siteName'
 import { Banner, Panel } from '../../ui/components'
 import { BackButton } from '../shell/SettingsButton'
 import { useFolk } from './useFolk'
@@ -20,7 +21,9 @@ export default function NpcScreen({ id }: { id: string }) {
       </>
     )
   }
-  const stage = stages([n], homesByNpc(Object.values(docs)), f.encounters, Object.values(docs))[n.id]
+  const homes = homesByNpc(Object.values(docs))
+  const home = f.region?.sites.find((x) => (homes[n.id] ?? []).includes(x.id))
+  const stage = stages([n], homes, f.encounters, Object.values(docs))[n.id]
   const met = stage !== 'unmet'
   const art = npcArt(n.id, met ? 'talk' : 'neutral')
   const keep = KEEPSAKES.find((k) => k.npcId === n.id)
@@ -33,7 +36,8 @@ export default function NpcScreen({ id }: { id: string }) {
           {art && <img className={`warden-img ${met ? '' : 'portrait-sil'}`} src={art.src} srcSet={`${art.src} 1x, ${art.src2x} 2x`} width={112} height={112} alt={met ? n.name : 'Someone you have not met'} draggable={false} />}
           <div>
             <h2 className="h-display">{met ? n.name : 'Not met yet'}</h2>
-            <p className="muted small">{met ? n.role : meetHint(n)}</p>
+            <p className="muted small">{met ? n.role : meetHint(n, home ? shortSiteName(home.name) : null)}</p>
+            {met && home && <p className="muted small">Lives at {shortSiteName(home.name)}.</p>}
           </div>
         </Panel>
         {met && <Panel><p>"{stage === 'returned' ? n.returnLine : n.opening}"</p></Panel>}
