@@ -1,8 +1,8 @@
 // Reads the file eBird gives you under "Download My Data" (MyEBirdData.csv) into sightings for this phone.
 // Pure and synchronous apart from the file streaming in parseEbirdFile; nothing leaves the phone.
 //
-// Privacy: only the species, date, time, eBird site id and site name are read. Latitude, longitude, comments,
-// observer details and checklist details are never looked at, so they cannot be stored or backed up.
+// Privacy: only the species, date, time, count, checklist id, duration, eBird site id and site name are read. Latitude, longitude, comments,
+// observer details and other checklist details are never looked at, so they cannot be stored or backed up.
 import Papa from 'papaparse'
 import { validSiteId, type Encounter } from '../personal-schema'
 import { dexIdFor, isNotASpecies, outsideId } from '../../domain/taxon'
@@ -19,6 +19,12 @@ export interface ImportRow {
   siteId: string | null
   place: string
   importKey: string
+  /** From eBird's Count column: a number, null for "X", or absent when the column is missing or unreadable. */
+  count?: number | null
+  /** eBird Submission ID, when it looks like one. */
+  checklistId?: string
+  /** Duration (Min), when present and sensible. */
+  durationMin?: number
 }
 
 export interface ReviewRow {
@@ -69,6 +75,24 @@ export function parseEbirdTime(raw: string): string | null {
   return `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`
 }
 
+/** eBird's Count: a whole number of 1 or more, "X" for present-but-not-counted (null), anything else is left out. */
+export function parseEbirdCount(raw: string): number | null | undefined {
+  const t = raw.trim()
+  if (!t) return undefined
+  if (/^x$/i.test(t)) return null
+  if (!/^\d{1,8}$/.test(t)) return undefined
+  const n = Number(t)
+  return n >= 1 ? n : undefined
+}
+
+/** Duration (Min) as whole minutes from 0 to 1440, or undefined. */
+export function parseEbirdDuration(raw: string): number | undefined {
+  const t = raw.trim()
+  if (!/^\d{1,4}(\.\d+)?$/.test(t)) return undefined
+  const n = Math.round(Number(t))
+  return n >= 0 && n <= 1440 ? n : undefined
+}
+
 /** "Brent Goose (Dark-bellied)" -> "Brent Goose"; the form in brackets is not a different bird for a life list. */
 const plainName = (n: string) => n.replace(/\s*\([^)]*\)\s*$/, '').trim() || n
 
@@ -117,6 +141,9 @@ export function createEbirdImport(opts: EbirdImportOptions) {
       const submission = clean(row['submission id'])
       const place = clean(row['location']).slice(0, 120)
       const importKey = (submission ? `ebird:${submission}:${sciRaw}` : `ebird:${date}:${place}:${sciRaw}`).slice(0, 200)
+      const count = parseEbirdCount(clean(row['count']))
+      const durationMin = parseEbirdDuration(clean(row['duration (min)']))
+      const checklistId = /^S[A-Za-z0-9]{1,31}$/.test(submission) ? submission : undefined
       rows.push({
         speciesId: dexId ?? outsideId(sci),
         ...(dexId ? {} : { name: plainName(comName || sci).slice(0, 80), sciName: sci.slice(0, 80) }),
@@ -125,6 +152,9 @@ export function createEbirdImport(opts: EbirdImportOptions) {
         siteId: validSiteId(clean(row['location id'])),
         place,
         importKey,
+        ...(count !== undefined ? { count } : {}),
+        ...(checklistId ? { checklistId } : {}),
+        ...(durationMin !== undefined ? { durationMin } : {}),
       })
     },
     result(): EbirdParsed {
@@ -243,5 +273,8 @@ export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, cr
     source,
     importBatchId: batchId,
     importKey: r.importKey,
+    ...(r.count !== undefined ? { count: r.count } : {}),
+    ...(r.checklistId ? { checklistId: r.checklistId } : {}),
+    ...(r.durationMin !== undefined ? { durationMin: r.durationMin } : {}),
   }))
 }

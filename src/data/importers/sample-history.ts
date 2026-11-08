@@ -169,9 +169,11 @@ export function generateSampleHistory(o: SampleOptions): string {
     if (rng() < 0.04) rows.push({ name: 'Carrion/Hooded Crow', sci: 'Corvus corone/cornix', n: 2 })
     if (site.habitat === 'wetland' && rng() < 0.08) rows.push({ name: 'Mallard (Domestic type)', sci: 'Anas platyrhynchos (Domestic type)', n: 2 })
 
-    for (const r of rows) {
+    // Now and then a bird is only marked present ("X") with no count, as eBird allows. No random draw, so nothing else changes.
+    const presentOnly = subNo % 23 === 0 ? 0 : -1
+    for (const [i, r] of rows.entries()) {
       lines.push(
-        [subId, r.name, r.sci, '', String(r.n), 'GB-SMP', 'Sample County', site.id, site.name, '0', '0', date, time12(hour, minute), site.short ? 'Stationary' : 'Traveling', String(duration), '1', site.short ? '' : '3.0', '', '1', '', '', '', '']
+        [subId, r.name, r.sci, '', i === presentOnly ? 'X' : String(r.n), 'GB-SMP', 'Sample County', site.id, site.name, '0', '0', date, time12(hour, minute), site.short ? 'Stationary' : 'Traveling', String(duration), '1', site.short ? '' : '3.0', '', '1', '', '', '', '']
           .map(csvField)
           .join(','),
       )

@@ -36,6 +36,12 @@ export const EncounterSchema = z.object({
   source: z.enum(['log', 'ebird', 'list', 'sample']).optional(),
   /** Which import added it, so one import can be undone. */
   importBatchId: z.string().max(64).optional(),
+  /** How many were counted. null = eBird says the bird was present but not counted ("X"). Missing = unknown. Never invented. */
+  count: z.number().int().min(1).max(10_000_000).nullable().optional(),
+  /** The eBird checklist (Submission ID, such as S123456789), so sightings from one trip can be grouped. */
+  checklistId: z.string().regex(/^S[A-Za-z0-9]+$/).max(32).optional(),
+  /** The checklist's duration in minutes, copied onto each of its sightings. */
+  durationMin: z.number().int().min(0).max(1440).optional(),
   /** Identifies the source row, so importing the same export twice adds nothing. */
   importKey: z.string().max(200).optional(),
 })
