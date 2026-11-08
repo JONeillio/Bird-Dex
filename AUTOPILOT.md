@@ -52,7 +52,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
 - [x] N3 Stats and exploration engines
 - [x] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
-- [ ] D1 Site character
+- [x] D1 Site character
 - [ ] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
 - [ ] E1 Duel engine
 - [ ] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
@@ -235,6 +235,8 @@ Screens: `npm run screens -- "#/map >> click:Plan a day"` (add a tiny `between` 
 ### Phase D: Reserve Wardens and badges
 
 **D1 Site character** `src/domain/siteCharacter.ts`: `siteCharacter(site) → SetId[]`: count the site's reported Dex species per set (a species counts in each of its sets); sort sets by count, keep those with ≥ 25% of the site's Dex species, at most 2; fallback `['garden']`. Tests with synthetic sites.
+
+**D1 notes (built 8 Nov).** `src/domain/siteCharacter.ts` (`siteCharacter(site)`). Ties between sets go in the order of `SETS` (garden, woodland, wetland, coast, raptors, farmland-upland), so the answer never flips between runs. Only Starter Dex birds count, each bird once however often it is reported.
 
 **D2 Wardens.**
 1. Add an Actions task `warden-draft` to `deploy.yml` running `tsx pipeline/warden-draft.ts` on the cached data (reuse step only; 0 API calls). It prints JSON to the job log and step summary.
