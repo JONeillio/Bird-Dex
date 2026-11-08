@@ -12,7 +12,7 @@ const STRIP_MAX = 6
  * how many species are new to you, then a strip of recently reported birds. Full designation and access
  * notes live in the expanded details ("View spot").
  */
-export function SiteCard({ view, position, total, onNext, onDetails, recorded, isDemo, onHeight }: {
+export function SiteCard({ view, position, total, onNext, onDetails, recorded, isDemo, onHeight, explored }: {
   view: SiteView | null
   position: number
   total: number
@@ -21,6 +21,8 @@ export function SiteCard({ view, position, total, onNext, onDetails, recorded, i
   recorded: ReadonlySet<string>
   isDemo: boolean
   onHeight: (px: number) => void
+  /** You have birded here (from your own logs or an eBird import). */
+  explored?: boolean
 }) {
   const box = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -65,7 +67,7 @@ export function SiteCard({ view, position, total, onNext, onDetails, recorded, i
         )}
       </div>
       <span className="card-line muted">
-        {reported} · {away}
+        {reported} · {away}{explored === undefined ? '' : explored ? ' · Explored' : ' · Not visited yet'}
       </span>
       <div className="card-count-row">
         <span className="card-count">{n === 0 ? 'Nothing new to you here' : `${n} species new to you`}</span>

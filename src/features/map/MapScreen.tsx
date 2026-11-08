@@ -16,6 +16,9 @@ import { SiteCard } from './SiteCard'
 import { SiteSheet } from './SiteSheet'
 import { FindBirdSheet } from './FindBirdSheet'
 import { useNews } from '../../state/useNews'
+import { useParcels } from '../../state/parcels'
+import { useRecords } from '../../state/records'
+import { exploration, visitedSiteIds } from '../../domain/explore'
 import { nameForKey } from '../../domain/findBird'
 
 const LIMITS: DriveLimit[] = [30, 60, 90]
@@ -34,6 +37,9 @@ export default function MapScreen() {
   const focusSiteId = useStore((s) => s.focusSiteId)
   const [findOpen, setFindOpen] = useState(false)
   const { dot: newsDot } = useNews()
+  const parcels = useParcels()
+  const encounters = useRecords((st) => st.encounters)
+  const visited = useMemo(() => visitedSiteIds(encounters), [encounters])
   const data = usePublished(prefs.regionId)
   const recorded = useRecorded()
   const [picked, setPicked] = useState<string | null>(focusSiteId)
@@ -58,6 +64,9 @@ export default function MapScreen() {
   }, [ready, start, prefs.driveLimit, recorded, prefs.targets, prefs.unrecordedOnly, focus])
 
   const shown = filtered?.shown ?? []
+  const explore = useMemo(() => (ready && start ? exploration(ready.region, visited, start.id) : null), [ready, start, visited])
+  const unexploredShown = shown.filter((v) => !visited.has(v.site.id))
+  const [newIdx, setNewIdx] = useState(0)
   // The selected site: your pick if it is still shown, otherwise the best-ranked site.
   const activeIdx = Math.max(0, shown.findIndex((v) => v.site.id === picked))
   const active = shown[activeIdx] ?? null
@@ -124,6 +133,11 @@ export default function MapScreen() {
             Bird News{newsDot && <span className="chip-dot" role="img" aria-label="Something new" />}
           </Chip>
           <Chip active={false} onClick={() => (window.location.hash = '#/plan')}>Plan a day</Chip>
+          {unexploredShown.length > 0 && !ready?.region.isDemo && (
+            <Chip active={false} onClick={() => { pick(unexploredShown[newIdx % unexploredShown.length].site.id); setNewIdx(newIdx + 1) }}>
+              Somewhere new
+            </Chip>
+          )}
           <Chip active={false} onClick={() => setFindOpen(true)}>Find a bird</Chip>
           <Chip active={prefs.unrecordedOnly} onClick={() => setPref('unrecordedOnly', !prefs.unrecordedOnly)}>
             New to me
@@ -135,12 +149,18 @@ export default function MapScreen() {
               Driving from {start.label} · {filtered.shown.length} sites
               {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive time)` : ''}
               {focus && filtered.beyondLimit ? ` · ${filtered.beyondLimit} more beyond ${prefs.driveLimit} min` : ''}
+              {explore && !ready.region.isDemo ? ` · Explored ${explore.explored.length} of ${explore.total} spots` : ''}
             </span>
             {ready.region.isDemo ? <DemoStamp /> : <Pill>Updated {ageLabel(ready.region.generatedAt)}</Pill>}
           </div>
         )}
       </div>
 
+      {parcels.length > 0 && (
+        <a className="parcel-banner" href="#/journal">
+          {parcels.length} new {parcels.length === 1 ? 'checklist' : 'checklists'} to open · Your Field Report
+        </a>
+      )}
       {data.status === 'loading' && <div className="map-note">Loading sightings…</div>}
       {data.status === 'error' && (
         <main className="screen">
@@ -175,6 +195,7 @@ export default function MapScreen() {
             recorded={recorded}
             isDemo={ready.region.isDemo}
             onHeight={setCardH}
+            explored={ready.region.isDemo || !active ? undefined : visited.has(active.site.id)}
           />
         </div>
       )}

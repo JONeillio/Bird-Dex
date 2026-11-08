@@ -19,6 +19,7 @@ import DevArt from './features/dev/DevArt'
 import DevEngine from './features/dev/DevEngine'
 import ReportFlow from './features/report/ReportFlow'
 import NewsScreen from './features/news/NewsScreen'
+import PlanScreen from './features/plan/PlanScreen'
 import FindScreen from './features/find/FindScreen'
 import { DevDialogue } from './features/dev/DevDialogue'
 import type { IconName } from './art/icons'
@@ -57,6 +58,8 @@ function Screen({ route }: { route: Route }) {
       return <ReportFlow key={route.key} outingKey={route.key} />
     case 'news':
       return <NewsScreen />
+    case 'plan':
+      return <PlanScreen />
     case 'find':
       return <FindScreen birdKey={route.key} />
     case 'settings':

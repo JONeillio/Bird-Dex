@@ -620,3 +620,8 @@
 .rel-strip i.on { background: var(--forest); }
 .wanted-row { align-items: flex-start; }
 .chip-dot { display: inline-block; width: 9px; height: 9px; margin-left: 6px; border-radius: 50%; background: var(--coral); border: 1px solid var(--ink); vertical-align: middle; }
+.plan-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.plan-stop { display: grid; grid-template-columns: 64px 1fr; gap: 8px; align-items: start; }
+.plan-time { display: flex; flex-direction: column; align-items: center; padding-top: 12px; font-size: 13px; }
+.plan-time b { font-family: var(--font-display); }
+.parcel-banner { display: block; margin: 0 12px 6px; padding: 8px 12px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--discovery); color: var(--ink); font-weight: 800; text-decoration: none; text-align: center; }
