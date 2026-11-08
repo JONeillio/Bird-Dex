@@ -14,6 +14,7 @@ import { useWakeLock } from './phone/wakeLock'
 import DexScreen from './features/birddex/DexScreen'
 import BirdProfile from './features/bird/BirdProfile'
 import DevArt from './features/dev/DevArt'
+import DevEngine from './features/dev/DevEngine'
 import type { IconName } from './art/icons'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
@@ -47,7 +48,7 @@ function Screen({ route }: { route: Route }) {
     case 'settings':
       return <SettingsScreen />
     case 'dev':
-      return route.page === 'art' ? <DevArt /> : <DevUi />
+      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : <DevUi />
   }
 }
 

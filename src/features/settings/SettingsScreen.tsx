@@ -203,7 +203,7 @@ export default function SettingsScreen() {
             BirdQuest is a personal, non-commercial project. Sightings come from eBird (ebird.org), drive times from openrouteservice by HeiGIT, and map data from OpenStreetMap contributors via OpenFreeMap.
           </p>
           <p className="muted">
-            Your sightings stay on this phone. Your location, if you use the bird radar, is only used on the phone to point an arrow and is never saved or sent. <a href="#/dev/ui">UI kit</a> · <a href="#/dev/art">Bird art</a>
+            Your sightings stay on this phone. Your location, if you use the bird radar, is only used on the phone to point an arrow and is never saved or sent. <a href="#/dev/ui">UI kit</a> · <a href="#/dev/art">Bird art</a> · <a href="#/dev/engine">Engine</a>
           </p>
         </Panel>
       </main>

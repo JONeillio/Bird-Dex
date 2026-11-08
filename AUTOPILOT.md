@@ -51,7 +51,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] N1 Outings and rarity values
 - [x] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
 - [x] N3 Stats and exploration engines
-- [ ] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
+- [x] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
 - [ ] D1 Site character
 - [ ] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
 - [ ] E1 Duel engine
@@ -182,6 +182,8 @@ Tests: visited from logs and imports, demo and sample site ids ignored, unknown 
 **N3 notes (built 8 Nov).** `src/domain/stats.ts` (`collectionStats(encounters, reports, bond, rarity, today)`, `streakOf`, `weekIndex`) and `src/domain/explore.ts` (`visitedSiteIds`, `exploration`). `today` is a `YYYY-MM-DD` string so the engine stays clock-free. `years` is newest first; its `species` counts distinct birds with a dated sighting that year, and `lifers`/`outings` come from the Field Reports. `visitedSiteIds` ignores `source: 'sample'` records as well as demo ids, so made-up sites can never explore a real place. `exploration.total` is every site in the region, and unknown or missing drive times are skipped, never 0.
 
 **N4 Engine readout** `#/dev/engine` (linked from Settings next to the art gallery). Plain lists using existing components, no new styling: totals; tier counts; top 5 most seen, top Bond, coolest; the 5 latest Field Reports as text ("2 Nov · Sample Reedbed Reserve · 18 species · 143 pts (rarity 61, lifers 40, firsts 15, bond 27) · best: Water Rail · par —"); exploration % for the current location and the 5 nearest unexplored sites. Header line says whether sample data is in use. Screens: `npm run screens -- "#/journal >> click:Import >> click:Try a sample history >> wait:400 >> click:Add sample >> wait:2500 >> click:Done" "#/dev/engine"`.
+
+**N4 notes (built 8 Nov).** `src/features/dev/DevEngine.tsx`, linked from Settings next to the UI kit and Bird art. It reads your records and the current region's data, and shows totals, streak, birds by rarity tier, years, top 5 most seen / Bond / coolest, the 5 latest Field Reports as text, best outings and exploration for the current location. With the demo region, rarity is based on sparse made-up reports, so most sample birds read as "not reported nearby lately"; the live site will differ. Checked at 412 and 360 px, empty and with the sample history.
 
 **N5 Field Report screen (UI phase).** After an import or a log, a "Your Field Report" sheet for outings since `prefs.lastReportSeenAt` (newest first, swipe between them): headline, best bird, lifers and firsts, rank-ups, points breakdown, par line ("Reported here lately: 31. You found 23, plus 2 nobody else logged."), site best. Then set `lastReportSeenAt`. Journal gets a "Reports" view of past outings. Visual design from Joseph's assets.
 
