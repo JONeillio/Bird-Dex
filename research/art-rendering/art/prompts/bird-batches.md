@@ -33,6 +33,8 @@ Paste one of these after the style block. Ids match the app's Starter Dex exactl
 
 ### Batch 01: everyday garden and park birds
 
+**Status: done and in the app 8 Nov 2026** (all 10 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-01/`).
+
 ```
 Batch 01. Ten birds:
 1. common-wood-pigeon (Woodpigeon): plump blue-grey pigeon, white neck patch with green-purple gloss above it, pinkish breast, white bar along the edge of the closed wing, pale yellow eye, small orange-red bill with white base.

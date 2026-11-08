@@ -1,0 +1,55 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 01",
+  "assets": [
+    {
+      "id": "common-wood-pigeon",
+      "file": "bird_common-wood-pigeon_bold_pixel_v1.png",
+      "role": "Adult with blue-grey plumage, a pink breast, white neck patch and white wing edging."
+    },
+    {
+      "id": "eurasian-magpie",
+      "file": "bird_eurasian-magpie_bold_pixel_v1.png",
+      "role": "Adult pied plumage with white shoulders and belly, glossy wings and a graduated tail."
+    },
+    {
+      "id": "carrion-crow",
+      "file": "bird_carrion-crow_bold_pixel_v1.png",
+      "role": "Adult in glossy black plumage with a heavy, feather-based black bill."
+    },
+    {
+      "id": "black-headed-gull",
+      "file": "bird_black-headed-gull_bold_pixel_v1.png",
+      "role": "Breeding adult with chocolate hood, white eye-crescent, grey mantle and dark red bill and legs."
+    },
+    {
+      "id": "house-sparrow",
+      "file": "bird_house-sparrow_bold_pixel_v1.png",
+      "role": "Adult male with grey crown and cheeks, chestnut nape, black bib and one white wing bar."
+    },
+    {
+      "id": "common-starling",
+      "file": "bird_common-starling_bold_pixel_v1.png",
+      "role": "Spotted adult with purple-green iridescence, pointed yellow bill and pinkish legs."
+    },
+    {
+      "id": "common-chaffinch",
+      "file": "bird_common-chaffinch_bold_pixel_v1.png",
+      "role": "Adult male with blue-grey crown, pink-orange breast, greenish rump and two white wing bars."
+    },
+    {
+      "id": "european-goldfinch",
+      "file": "bird_european-goldfinch_bold_pixel_v1.png",
+      "role": "Adult with a red facial mask, black-and-white head and a broad yellow wing bar."
+    },
+    {
+      "id": "dunnock",
+      "file": "bird_dunnock_bold_pixel_v1.png",
+      "role": "Adult with blue-grey head and breast, streaked brown back and flanks, and a fine dark bill."
+    },
+    {
+      "id": "long-tailed-tit",
+      "file": "bird_long-tailed-tit_bold_pixel_v1.png",
+      "role": "Adult British plumage with dark head stripes, pink shoulders and belly, and a long black-and-white tail."
+    }
+  ]
+}
