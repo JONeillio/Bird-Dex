@@ -1,0 +1,41 @@
+{
+  "pack": "Bird-Dex game art set 6",
+  "assets": [
+    {
+      "file": "warden_bev.png",
+      "role": "Bev, Bait-digger"
+    },
+    {
+      "file": "warden_tomasz.png",
+      "role": "Tomasz, Tideline Counter"
+    },
+    {
+      "file": "warden_rowan.png",
+      "role": "Rowan, Woodland Ranger"
+    },
+    {
+      "file": "warden_sunita.png",
+      "role": "Sunita, Stubble-field Surveyor"
+    },
+    {
+      "file": "warden_pat.png",
+      "role": "Pat, Park Keeper"
+    },
+    {
+      "file": "warden_fran.png",
+      "role": "Fran, Feeder Fran"
+    },
+    {
+      "file": "warden_fergus.png",
+      "role": "Fergus, Raptor Watcher"
+    },
+    {
+      "file": "warden_olu.png",
+      "role": "Olu, Owl-light"
+    },
+    {
+      "file": "warden_silhouette.png",
+      "role": "Unmet warden — ink silhouette"
+    }
+  ]
+}

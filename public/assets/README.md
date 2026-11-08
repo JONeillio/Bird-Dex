@@ -6,7 +6,7 @@ Everything here is a converted copy of a draft in `research/art-drafts/`. Show s
 | --- | --- | --- | --- | --- |
 | `birds/<id>/` | bird portraits (12 real, rest generated in code) | 64x64 | `src/art/portraits.ts`, `draft-portraits.json` | `research/art-drafts/bold-pixel/` |
 | `map/{markers,scenery,patterns}/` | pins, flag, trees, bushes, reeds, grass tile | native | `src/art/mapAssets.ts` | `.../bold-pixel/expansion-v1/` |
-| `wardens/`, `scenes/` | Reserve Warden portraits and marsh scenes | 96 and @2x 192 | `src/art/wardens.ts` | `.../game-art/screenshot-crops/` |
+| `wardens/`, `scenes/` | All 12 Reserve Warden portraits + unmet silhouette; two marsh scenes | 96 and @2x 192 | `src/art/wardens.ts` | `.../game-art/screenshot-crops/` (4 wardens, scenes) and `.../game-art/set-6-wardens/` (8 wardens, silhouette) |
 | `npcs/` | 12 story NPCs x 3 dialogue portraits (`<id>`, `<id>_talk`, `<id>_delight`) | 256 and @2x 512 | `src/art/npcs.ts` (`npcArt`) | `research/art-drafts/npc-pack-v1/` and `.../game-art/set-c-portrait-expressions/` |
 | `npcs/map/` | 12 NPC map sprite strips, 4 frames each | 192x64 (48x64 frames) | `src/art/npcs.ts` (`npcMapSprite`) | `.../game-art/set-b-npc-map-sprites/` |
 | `keepsakes/` | 12 keepsake icons | 32x32 | `src/art/keepsakes.ts` | `.../game-art/set-d-keepsake-icons/` |

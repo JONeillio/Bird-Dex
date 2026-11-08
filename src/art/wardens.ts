@@ -1,8 +1,9 @@
 // Reserve Warden personas and their portrait art, plus the habitat scenes that came with them.
 // Which personas have real art is listed in warden-art.json (R1 adds ids when a set arrives); everyone else
 // gets the silhouette fallback drawn in code. Portraits are 96x96 with a 192x192 "@2x" for large panels.
-// The art is AI-assisted drafts cut from Joseph's phone screenshots (8 Nov 2026); masters are in
-// research/art-drafts/game-art/screenshot-crops/.
+// The art is AI-assisted drafts: Maud, Reg, Agnes and Harold were cut from Joseph's phone screenshots (masters in
+// research/art-drafts/game-art/screenshot-crops/); the other eight and the unmet silhouette are game art Set 6
+// (research/art-drafts/game-art/set-6-wardens/, which has the review notes). All 12 personas now have art.
 import art from './warden-art.json'
 
 const base = import.meta.env.BASE_URL + 'assets/'
@@ -23,6 +24,9 @@ export interface WardenArt {
 export function wardenArt(id: string): WardenArt | null {
   return WARDEN_ART.has(id) ? { src: `${base}wardens/warden_${id}.png`, src2x: `${base}wardens/warden_${id}@2x.png` } : null
 }
+
+/** Ink silhouette shown before you have met a warden (same 96x96 framing as the portraits). */
+export const WARDEN_SILHOUETTE: WardenArt = { src: `${base}wardens/warden_silhouette.png`, src2x: `${base}wardens/warden_silhouette@2x.png` }
 
 export interface SceneArt {
   src: string

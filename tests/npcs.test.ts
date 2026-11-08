@@ -61,3 +61,25 @@ describe('NPC expressions and map sprites', () => {
     expect(npcMapSprite('nobody')).toBeNull()
   })
 })
+
+describe('Reserve Warden art (all twelve)', () => {
+  it('every persona has a 96 px portrait and a 192 px @2x, plus the silhouette', async () => {
+    const { PERSONAS, wardenArt, WARDEN_SILHOUETTE } = await import('../src/art/wardens')
+    const dims = (p: string): [number, number] => {
+      const b = readFileSync(p)
+      return [b.readUInt32BE(16), b.readUInt32BE(20)]
+    }
+    expect(PERSONAS.length).toBe(12)
+    for (const p of PERSONAS) {
+      const a = wardenArt(p.id)
+      expect(a, p.id).not.toBeNull()
+      for (const [src, size] of [[a!.src, 96], [a!.src2x, 192]] as const) {
+        const f = 'public/' + src.replace(/^.*?assets\//, 'assets/')
+        expect(existsSync(f), f).toBe(true)
+        expect(dims(f), f).toEqual([size, size])
+      }
+    }
+    expect(dims('public/' + WARDEN_SILHOUETTE.src.replace(/^.*?assets\//, 'assets/'))).toEqual([96, 96])
+    expect(wardenArt('nobody')).toBeNull()
+  })
+})
