@@ -85,16 +85,16 @@ Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SA
 Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal · Folk** (Folk holds NPCs, wardens and Call it). Art for NPCs, keepsakes, dialogue and the Field Report sheet arrived 8 Nov (game art Sets B–E), so U0 can be built as soon as Joseph says the UI phase can start.
 - [x] U0 Shared dialogue and sheet components from the dialogue kit (spec under Phase P, after P14)
 - [x] N5 Field Report flow: new checklists as parcels → report → what levelled up → outing card (canvas 2a–2d; engines N2, P4, P5)
-- [ ] U1 Bird News screen (canvas 1b; P8)
-- [ ] U2 Find a bird as a wanted poster with reliability strips (canvas 1c; P7)
+- [x] U1 Bird News screen (`#/news`, `src/features/news`, `useNews`; Explore chip with a coral dot; built 8 Nov)
+- [x] U2 Find a bird as a wanted poster with reliability strips (`#/find/<key>`, `src/features/find`; the old sheet now hands over to it; built 8 Nov)
 - [x] B4 + N6 BirdDex tabs: Dex | <year> | Life | Stats (built 8 Nov: `src/domain/dexLists.ts`, `StatsPanel.tsx`, rank pips and CSS frames, "Close to rank up" chip within 8 Bond points). Not done: Patch tab, "about now" filter, the "First of <year>" reveal beat (`isFirstOfYear` exists and is tested), nicknames on cards (canvas 4a)
-- [ ] C2 Ranks on cards and profile; rank-up reveal; profile "your year with it" (canvas 4b; P6)
-- [ ] C3 Nicknames
-- [ ] N7 Exploration on the map (explored / unexplored sites, region %, nearest unexplored) (canvas 1a)
-- [ ] F3 "Plan a day" sheet (canvas 1d)
-- [ ] D4 Badge case, warden page (trust, jobs, note), warden pennants (canvas 3b, 4c; P9, P10)
-- [ ] U3 Call it screen (canvas 3c; P11)
-- [ ] U4 Folk tab: people met, encounter screens, satchel (canvas 3a, 3d; P12)
+- [x] C2 Ranks on cards and profile (`BondPanel`), rank-up and first-of-year reveal (light overlay) built 8 Nov. Not done: "your year with it" on the profile, rank art (code-drawn pips until `public/assets/ranks/` exists)
+- [x] C3 Nicknames (Familiar and above, profile only; not yet on Dex cards)
+- [x] N7 Exploration on the map: "Explored N of M spots" in the status line, Somewhere new chip, Explored / Not visited yet on the site card, "N new checklists" banner. Not done: stamps drawn on the pins themselves, warden silhouettes on the map
+- [x] F3 Plan a day (`#/plan`; budget and stop-time chips, stops with arrive times, Google Maps hand-off; shows "arrives with the next data update" when `between` is missing, which the demo data is)
+- [x] D4 Badge case (`#/badges`) and warden page (`#/folk/warden/<id>`: trust, monthly jobs, weekly note, signature birds); pins drawn in code. Not done: warden pennants on the map
+- [x] U3 Call it (`#/folk/callit/<id>`: pick up to five, you vs the warden, result with a gold pin on a win; a win is also counted on the Folk screen)
+- [x] U4 (light, as Joseph asked) Folk tab with wardens, story folk, badge link and open calls; `#/folk/npc/<id>` shows who they are, their opening or return line and keepsake. Not done: NPC challenges and dialogue, satchel, NPC map markers, Folk tab dot
 - [ ] ~~E2 Squad screen · E3 Duel screen~~ **parked 8 Nov**: Call it replaces duels. Keep `src/domain/duel.ts` and its tests; don't build its screens unless Joseph asks.
 - [ ] E4 Gold badges, now earned by winning a Call it (see P11)
 - [ ] G1 Share codes (with the year race, P13) · [ ] G2 Rival Call it (optional) · [ ] G3 Patch race (optional)

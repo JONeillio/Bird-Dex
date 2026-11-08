@@ -625,3 +625,23 @@
 .plan-time { display: flex; flex-direction: column; align-items: center; padding-top: 12px; font-size: 13px; }
 .plan-time b { font-family: var(--font-display); }
 .parcel-banner { display: block; margin: 0 12px 6px; padding: 8px 12px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--discovery); color: var(--ink); font-weight: 800; text-decoration: none; text-align: center; }
+
+/* Folk, wardens, Call it, badges (D4, U3, U4) */
+.warden-img { image-rendering: pixelated; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--panel); }
+.warden-fallback { display: grid; place-items: center; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--sage); font-family: var(--font-display); font-size: 28px; }
+.folk-card { display: flex; gap: 12px; align-items: center; text-decoration: none; color: inherit; }
+.folk-card > div { min-width: 0; flex: 1; }
+.badge-pin { display: inline-grid; place-items: center; border-radius: 50%; border: 3px solid var(--ink); font-family: var(--font-display); color: var(--ink); flex: none; }
+.badge-pin.tier-none { background: transparent; border-style: dashed; opacity: 0.5; }
+.badge-pin.tier-bronze { background: #c98a4b; }
+.badge-pin.tier-silver { background: #c9d1d3; }
+.badge-pin.tier-gold { background: var(--discovery); box-shadow: 0 0 0 2px var(--ink); }
+.job-row { display: grid; gap: 4px; }
+.pick-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.pick-list button { width: 100%; text-align: left; display: flex; justify-content: space-between; gap: 8px; min-height: 44px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--panel); font: inherit; color: inherit; }
+.pick-list button[aria-pressed='true'] { background: var(--forest); color: var(--panel); }
+.versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; text-align: center; }
+.versus b { font-family: var(--font-display); font-size: 34px; }
+.versus .win { color: var(--forest); }
+.badge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.badge-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; font-size: 13px; }

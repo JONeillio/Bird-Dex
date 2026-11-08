@@ -19,6 +19,11 @@ import DevArt from './features/dev/DevArt'
 import DevEngine from './features/dev/DevEngine'
 import ReportFlow from './features/report/ReportFlow'
 import NewsScreen from './features/news/NewsScreen'
+import FolkScreen from './features/folk/FolkScreen'
+import WardenScreen from './features/folk/WardenScreen'
+import CallItScreen from './features/folk/CallItScreen'
+import BadgesScreen from './features/folk/BadgesScreen'
+import NpcScreen from './features/folk/NpcScreen'
 import PlanScreen from './features/plan/PlanScreen'
 import FindScreen from './features/find/FindScreen'
 import { DevDialogue } from './features/dev/DevDialogue'
@@ -26,17 +31,19 @@ import type { IconName } from './art/icons'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
 
-const TABS: { name: 'map' | 'dex' | 'journal'; label: string; icon: IconName }[] = [
+const TABS: { name: 'map' | 'dex' | 'journal' | 'folk'; label: string; icon: IconName }[] = [
   { name: 'map', label: 'Explore', icon: 'map' },
   { name: 'dex', label: 'Dex', icon: 'bird' },
   { name: 'journal', label: 'Journal', icon: 'book' },
+  { name: 'folk', label: 'Folk', icon: 'person' },
 ]
 
 function activeTab(route: Route): string | null {
   if (route.name === 'bird') return 'dex'
   if (route.name === 'news' || route.name === 'find' || route.name === 'plan') return 'map'
   if (route.name === 'report') return 'journal'
-  if (route.name === 'map' || route.name === 'dex' || route.name === 'journal') return route.name
+  if (route.name === 'warden' || route.name === 'callit' || route.name === 'badges' || route.name === 'npc') return 'folk'
+  if (route.name === 'map' || route.name === 'dex' || route.name === 'journal' || route.name === 'folk') return route.name
   return null
 }
 
@@ -60,6 +67,16 @@ function Screen({ route }: { route: Route }) {
       return <NewsScreen />
     case 'plan':
       return <PlanScreen />
+    case 'folk':
+      return <FolkScreen />
+    case 'warden':
+      return <WardenScreen id={route.id} />
+    case 'callit':
+      return <CallItScreen id={route.id} />
+    case 'badges':
+      return <BadgesScreen />
+    case 'npc':
+      return <NpcScreen id={route.id} />
     case 'find':
       return <FindScreen birdKey={route.key} />
     case 'settings':
