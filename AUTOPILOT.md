@@ -48,7 +48,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 
 **Phase N: engines (do these first, in this order)**
 - [x] C1 Bond engine (spec under Phase C)
-- [ ] N1 Outings and rarity values
+- [x] N1 Outings and rarity values
 - [ ] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
 - [ ] N3 Stats and exploration engines
 - [ ] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
@@ -153,6 +153,8 @@ Why (Joseph, 8 Nov): two reasons to open the app. **Exploring**: see what is aro
 - `rarityOf(table, binomial)`: not in the table → **unreported 8** ("not reported nearby lately"). No region data at all → every bird is `unknown 1` (scores still add up, just flat).
 - Rarity is recomputed from the current data, so it moves with the seasons; the UI will say "based on the last 14 days of reports".
 Tests: tiers at each boundary, notable vs unconfirmed, outside-Dex key, unreported, no region.
+
+**N1 notes (built 8 Nov).** `src/domain/outings.ts` (`groupOutings`, `outingsSince`, `outingKey`; re-exports `siteKey`) and `src/domain/rarity.ts` (`buildRarity`, `rarityOf`, `binomialOf`, `sciNameFor`, `RARITY_POINTS`, `RARITY_LABELS`). Outings on the same date are ordered most recently added first. `rarityOf(table, sciName)` takes a scientific name; use `sciNameFor(speciesId, encounter.sciName)` to get it for Dex and outside-Dex birds. A region with no sites that have reports counts as no data (every bird `unknown`, 1 point).
 
 **N2 Field Report engine** `src/domain/fieldReport.ts`.
 `allFieldReports(encounters, ctx: { rarity, region: RegionData | null }): FieldReport[]` in **one chronological pass** (12,000 encounters under 500 ms in vitest), and `fieldReportFor(outingKey, …)`.
