@@ -84,7 +84,7 @@ Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SA
 **UI phase (waits for Joseph's new visual design; build with his assets)**
 Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal · Folk** (Folk holds NPCs, wardens and Call it). Art for NPCs, keepsakes, dialogue and the Field Report sheet arrived 8 Nov (game art Sets B–E), so U0 can be built as soon as Joseph says the UI phase can start.
 - [x] U0 Shared dialogue and sheet components from the dialogue kit (spec under Phase P, after P14)
-- [ ] N5 Field Report flow: new checklists as parcels → report → what levelled up → outing card (canvas 2a–2d; engines N2, P4, P5)
+- [x] N5 Field Report flow: new checklists as parcels → report → what levelled up → outing card (canvas 2a–2d; engines N2, P4, P5)
 - [ ] U1 Bird News screen (canvas 1b; P8)
 - [ ] U2 Find a bird as a wanted poster with reliability strips (canvas 1c; P7)
 - [ ] B4 + N6 BirdDex tabs: Dex | <year> | Life | Patch, rank frames, "about now" and "close to rank up" filters (canvas 4a)
@@ -308,6 +308,8 @@ Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, P
 
 **U0 notes (built 8 Nov).** `src/ui/dialogue/`: `Dialogue` (lines of `{ text, expression? }`; portraits are stacked and cross-faded so swapping never flickers; the whole line is always in the page for screen readers), `Choices`, `SheetFrame`, `StripSprite` (`loop` plays only the first N frames; `frame` holds one), `useReducedMotion`, and the pure `typewriter.ts` (tested). Gallery at `#/dev/dialogue`. Nameplate text is ink on the cream area (cream on cream was unreadable). The next arrow sits inline after the last word. Phone check wanted: the typing speed (40 characters a second) and the 150 ms mouth swap.
 **Shell notes (built 8 Nov).** Tabs now read Explore · Dex · Journal; the Journal tab has a coral dot while `useParcels()` (`src/state/parcels.ts`) finds unopened outings from the last 30 days (`recentParcels` in `domain/parcels.ts`; older unopened outings are history, so importing a whole eBird history never makes hundreds of parcels). The Folk tab and its dot, the Dex rank-up dot and the News chip dot arrive with their screens; see `APP_MAP.md`.
+
+**N5 notes (built 8 Nov).** Route `#/report/<encoded outing key>` (`src/features/report/ReportFlow.tsx`): parcel (only if not yet opened) → Report → Levelled up → Card, with step buttons. Opening the parcel calls `markOpened`. `useReportData` builds the report from your sightings plus the region data (par shows once the region has loaded). `src/domain/levelUps.ts` (`levelBars`, tested in `tests/level-ups.test.ts`) turns Bond awards into before/after bars inside the current rank band (a rank-up bar starts at 0). The Journal now has a "new parcels" panel (last 30 days, unopened) and a "Past outings" list that opens any outing's report. The parcel (`ParcelArt`), outing card and Bond bars are drawn in code until the art in `game-art-brief-2.md` Set 11 arrives; swap them then (frames, nine-slice bars). Sample outings show "Sample history, nothing earned". The note box saves to the game store (`note:<outingKey>`). Still to do for this ticket's neighbours: a banner on Explore ("3 new checklists"), and tapping a bird in the report to open its profile.
 
 **Phase P phone review (add to Waiting):** Joseph opens `#/dev/engine` with the sample history and checks the news, jobs, notes and Call it results read sensibly; Lewis checks a few reliability numbers against what he knows.
 

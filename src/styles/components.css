@@ -534,3 +534,52 @@
 .dlg-choice:disabled { opacity: 0.55; cursor: default; }
 .sheet-frame { box-sizing: border-box; position: relative; color: var(--ink); }
 .sheet-frame-handle { display: block; margin: -4px auto 8px; image-rendering: pixelated; }
+
+/* Field Report flow (N5) */
+.mark-img { image-rendering: pixelated; flex: none; }
+.steps { display: flex; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.steps li { flex: 1; }
+.steps button { width: 100%; min-height: 44px; font: inherit; font-weight: 800; font-size: 14px; color: var(--ink); background: var(--panel); border: 2px solid var(--ink); border-radius: 10px; cursor: pointer; }
+.steps li.done button { background: var(--grass); }
+.steps li[aria-current='step'] button { background: var(--forest); color: var(--panel); }
+.parcel-step { align-items: center; text-align: center; padding-top: 8px; }
+.parcel-btn { background: none; border: 0; padding: 12px; cursor: pointer; }
+.parcel { display: block; image-rendering: pixelated; overflow: visible; }
+.parcel-closed .parcel-lid { transform: none; }
+.parcel-opening { animation: parcel-wobble 0.35s steps(4) 2; }
+.parcel-lid { transition: transform 0.35s steps(4); transform-origin: 12px 8px; }
+.parcel-opening .parcel-lid, .parcel-open .parcel-lid { transform: translate(0, -5px) rotate(-14deg); }
+.parcel-sparks { animation: parcel-spark 0.65s steps(3) 1; }
+@keyframes parcel-wobble { 0% { transform: rotate(0); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
+@keyframes parcel-spark { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .parcel-opening { animation: none; } .parcel-lid { transition: none; } .parcel-sparks { animation: none; } }
+.report-hero { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.report-total { display: flex; flex-direction: column; }
+.report-total-num { font-family: var(--font-display); font-size: 56px; line-height: 1; color: var(--forest); }
+.report-best { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 45%; }
+.report-nopic { display: inline-block; background: var(--grass); border: 2px solid var(--ink); border-radius: 8px; flex: none; }
+.report-stamps { display: flex; flex-wrap: wrap; gap: 8px 14px; list-style: none; padding: 0; margin: 0; }
+.report-stamps li { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 15px; }
+.report-points { width: 100%; border-collapse: collapse; }
+.report-points th { text-align: left; font-weight: 600; padding: 4px 0; }
+.report-points td { text-align: right; font-weight: 800; padding: 4px 0; }
+.report-points tr + tr { border-top: 1px dashed var(--sage); }
+.report-par { margin: 0; padding: 10px 12px; background: var(--grass); border-radius: 10px; }
+.report-birds { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.report-birds li { display: flex; align-items: center; gap: 10px; }
+.report-bird-name { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.report-pts { font-weight: 800; min-width: 36px; text-align: right; }
+.bond-list, .report-nearly, .outing-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.bond-row, .report-nearly li { display: flex; gap: 10px; align-items: center; }
+.bond-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.bond-bar { position: relative; height: 16px; border: 2px solid var(--ink); border-radius: 8px; background: var(--panel); overflow: hidden; }
+.bond-base { position: absolute; inset: 0 auto 0 0; background: var(--forest); }
+.bond-gain { position: absolute; top: 0; bottom: 0; background: var(--discovery); transition: width 0.8s steps(8); }
+@media (prefers-reduced-motion: reduce) { .bond-gain { transition: none; } }
+.outing-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; color: inherit; text-decoration: none; }
+.parcels-panel { border-color: var(--coral); }
+.outing-card { width: min(100%, 320px); margin: 0 auto; background: var(--panel); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 0 0 0 3px var(--discovery), 0 0 0 6px var(--ink); overflow: hidden; }
+.outing-card-top { display: flex; justify-content: space-between; padding: 6px 12px; background: var(--forest); color: var(--panel); font-family: var(--font-display); font-size: 18px; }
+.outing-card-window { display: flex; align-items: center; justify-content: center; min-height: 140px; background: linear-gradient(var(--water) 0 55%, var(--grass) 55% 100%); border-bottom: 3px solid var(--ink); }
+.outing-card-body { padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.note-box { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 8px; border: 2px solid var(--ink); border-radius: 10px; background: var(--panel); color: var(--ink); resize: vertical; }

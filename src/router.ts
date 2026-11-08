@@ -5,6 +5,7 @@ export type Route =
   | { name: 'dex' }
   | { name: 'journal' }
   | { name: 'bird'; id: string }
+  | { name: 'report'; key: string }
   | { name: 'settings' }
   | { name: 'dev'; page: string }
 
@@ -18,6 +19,8 @@ export function parseHash(hash: string): Route {
       return { name: 'journal' }
     case 'settings':
       return { name: 'settings' }
+    case 'report':
+      return parts[1] ? { name: 'report', key: decodeURIComponent(parts[1]) } : { name: 'journal' }
     case 'bird':
       return parts[1] ? { name: 'bird', id: decodeURIComponent(parts[1]) } : { name: 'dex' }
     case 'dev':
@@ -41,6 +44,8 @@ export function link(route: Route): string {
   switch (route.name) {
     case 'bird':
       return `#/bird/${encodeURIComponent(route.id)}`
+    case 'report':
+      return `#/report/${encodeURIComponent(route.key)}`
     case 'dev':
       return `#/dev/${route.page}`
     default:

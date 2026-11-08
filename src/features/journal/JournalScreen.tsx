@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { dexById } from '../../data/catalogue'
 import { MODE_LABELS } from '../../data/personal-schema'
 import { backupDue, formatDate, sortEncounters } from '../../domain/journal'
+import { groupOutings } from '../../domain/outings'
+import { useParcels } from '../../state/parcels'
 import { Banner, Panel, Pill, SampleStamp } from '../../ui/components'
 import { useRecords } from '../../state/records'
 import { useStore } from '../../state/store'
@@ -26,6 +28,9 @@ export default function JournalScreen() {
   const [shown, setShown] = useState(PAGE)
   const sorted = useMemo(() => sortEncounters(encounters), [encounters])
   const species = new Set(encounters.map((e) => e.speciesId)).size
+  const parcels = useParcels()
+  const outings = useMemo(() => groupOutings(encounters), [encounters])
+  const [outingsShown, setOutingsShown] = useState(8)
 
   return (
     <>
@@ -59,6 +64,49 @@ export default function JournalScreen() {
             <a className="btn small" href="#/settings">
               Go to backup
             </a>
+          </Panel>
+        )}
+        {parcels.length > 0 && (
+          <Panel className="stack tight parcels-panel">
+            <h3 className="h-display">{parcels.length === 1 ? '1 new parcel' : `${parcels.length} new parcels`}</h3>
+            <p className="muted small">Open one to see how your day went.</p>
+            <ul className="outing-list">
+              {parcels.slice(0, 5).map((o) => (
+                <li key={o.key}>
+                  <a className="outing-link" href={`#/report/${encodeURIComponent(o.key)}`}>
+                    <span>
+                      <strong>{o.place || 'Somewhere not named'}</strong>
+                      <span className="muted small"> · {formatDate(o.date)} · {o.species.length} {o.species.length === 1 ? 'species' : 'species'}</span>
+                    </span>
+                    <span className="btn small primary" aria-hidden="true">Open</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {parcels.length > 5 && <p className="muted small">And {parcels.length - 5} more below in Past outings.</p>}
+          </Panel>
+        )}
+        {outings.length > 0 && (
+          <Panel className="stack tight">
+            <h3 className="h-display">Past outings</h3>
+            <ul className="outing-list">
+              {outings.slice(0, outingsShown).map((o) => (
+                <li key={o.key}>
+                  <a className="outing-link" href={`#/report/${encodeURIComponent(o.key)}`}>
+                    <span>
+                      <strong>{o.place || 'Somewhere not named'}</strong>
+                      <span className="muted small"> · {formatDate(o.date)} · {o.species.length} {o.species.length === 1 ? 'species' : 'species'}</span>
+                    </span>
+                    <span className="small" aria-hidden="true">Report ›</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {outings.length > outingsShown && (
+              <button type="button" className="btn small" onClick={() => setOutingsShown(outingsShown + 10)}>
+                Show more
+              </button>
+            )}
           </Panel>
         )}
         <ImportsPanel />
