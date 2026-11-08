@@ -1,0 +1,101 @@
+{
+  "pack": "Bird-Dex Set C Portrait Expressions",
+  "assets": [
+    {
+      "file": "nell_talk.png",
+      "role": "Nell dialogue portrait — mid-speech"
+    },
+    {
+      "file": "nell_delight.png",
+      "role": "Nell dialogue portrait — delighted"
+    },
+    {
+      "file": "kit_talk.png",
+      "role": "Kit dialogue portrait — mid-speech"
+    },
+    {
+      "file": "kit_delight.png",
+      "role": "Kit dialogue portrait — delighted"
+    },
+    {
+      "file": "imani_talk.png",
+      "role": "Imani dialogue portrait — mid-speech"
+    },
+    {
+      "file": "imani_delight.png",
+      "role": "Imani dialogue portrait — delighted"
+    },
+    {
+      "file": "bea_talk.png",
+      "role": "Bea dialogue portrait — mid-speech"
+    },
+    {
+      "file": "bea_delight.png",
+      "role": "Bea dialogue portrait — delighted"
+    },
+    {
+      "file": "dev_talk.png",
+      "role": "Dev dialogue portrait — mid-speech"
+    },
+    {
+      "file": "dev_delight.png",
+      "role": "Dev dialogue portrait — delighted"
+    },
+    {
+      "file": "moss_talk.png",
+      "role": "Moss dialogue portrait — mid-speech"
+    },
+    {
+      "file": "moss_delight.png",
+      "role": "Moss dialogue portrait — delighted"
+    },
+    {
+      "file": "june_talk.png",
+      "role": "June dialogue portrait — mid-speech"
+    },
+    {
+      "file": "june_delight.png",
+      "role": "June dialogue portrait — delighted"
+    },
+    {
+      "file": "otis_talk.png",
+      "role": "Otis dialogue portrait — mid-speech"
+    },
+    {
+      "file": "otis_delight.png",
+      "role": "Otis dialogue portrait — delighted"
+    },
+    {
+      "file": "ruth_talk.png",
+      "role": "Ruth dialogue portrait — mid-speech"
+    },
+    {
+      "file": "ruth_delight.png",
+      "role": "Ruth dialogue portrait — delighted"
+    },
+    {
+      "file": "val_talk.png",
+      "role": "Val dialogue portrait — mid-speech"
+    },
+    {
+      "file": "val_delight.png",
+      "role": "Val dialogue portrait — delighted"
+    },
+    {
+      "file": "alfie_talk.png",
+      "role": "Alfie dialogue portrait — mid-speech"
+    },
+    {
+      "file": "alfie_delight.png",
+      "role": "Alfie dialogue portrait — delighted"
+    },
+    {
+      "file": "leanne_talk.png",
+      "role": "Leanne dialogue portrait — mid-speech"
+    },
+    {
+      "file": "leanne_delight.png",
+      "role": "Leanne dialogue portrait — delighted"
+    }
+  ]
+}

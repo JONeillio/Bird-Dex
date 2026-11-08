@@ -1,0 +1,37 @@
+{
+  "pack": "Bird-Dex Set E Dialogue and Sheet Kit",
+  "assets": [
+    {
+      "file": "dialogue_box.png",
+      "role": "Dialogue panel with tail. Nine-slice insets L34 T10 R10 B17 px. Text inset L12 T12 R12 B18."
+    },
+    {
+      "file": "nameplate.png",
+      "role": "Forest nameplate with cream lettering area. Insets L14 T6 R8 B6."
+    },
+    {
+      "file": "dialogue_next.png",
+      "role": "Blinking advance arrow. Two horizontal 16x16 frames."
+    },
+    {
+      "file": "choice_button.png",
+      "role": "Resting choice button. Nine-slice L8 T7 R8 B7."
+    },
+    {
+      "file": "choice_button_pressed.png",
+      "role": "Pressed choice button. Nine-slice L8 T7 R8 B7."
+    },
+    {
+      "file": "sheet_frame.png",
+      "role": "Field Report frame with four leaf sprigs. Nine-slice L21 T21 R21 B21."
+    },
+    {
+      "file": "sheet_handle.png",
+      "role": "Sheet grab handle."
+    },
+    {
+      "file": "speech_dots.png",
+      "role": "Thinking bubble. Two horizontal 24x8 frames; sheet 48x8."
+    }
+  ]
+}

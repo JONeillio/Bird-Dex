@@ -25,3 +25,39 @@ describe('NPC portraits', () => {
     }
   })
 })
+
+describe('NPC expressions and map sprites', () => {
+  const dims = (p: string): [number, number] => {
+    const b = readFileSync(p)
+    return [b.readUInt32BE(16), b.readUInt32BE(20)]
+  }
+  it('has talk and delight portraits (256 and @2x 512) with 1254 px masters for every NPC', async () => {
+    const { EXPRESSIONS, npcArt } = await import('../src/art/npcs')
+    expect(EXPRESSIONS).toEqual(['neutral', 'talk', 'delight'])
+    for (const n of NPCS) {
+      for (const e of EXPRESSIONS) {
+        const a = npcArt(n.id, e)!
+        for (const [src, size] of [[a.src, 256], [a.src2x, 512]] as const) {
+          const p = 'public/' + src.replace(/^.*?assets\//, 'assets/')
+          expect(existsSync(p), p).toBe(true)
+          expect(dims(p), p).toEqual([size, size])
+        }
+        if (e !== 'neutral') expect(dims(`research/art-drafts/game-art/set-c-portrait-expressions/${n.id}_${e}.png`)).toEqual([1254, 1254])
+      }
+    }
+    expect(npcArt('val', 'talk')?.src).toContain('val_talk.png')
+    expect(npcArt('val')?.src).toMatch(/val\.png$/)
+  })
+  it('has a 4-frame 48x64 map strip per NPC with the feet anchor on the bottom centre', async () => {
+    const { npcMapSprite } = await import('../src/art/npcs')
+    for (const n of NPCS) {
+      const s = npcMapSprite(n.id)!
+      const p = 'public/' + s.src.replace(/^.*?assets\//, 'assets/')
+      expect(dims(p), p).toEqual([s.frameW * s.frames, s.frameH])
+      expect(s.anchor).toEqual({ x: s.frameW / 2, y: s.frameH })
+      expect(s.action.length).toBeGreaterThan(3)
+      expect(existsSync(`research/art-drafts/game-art/set-b-npc-map-sprites/${n.id}_map.png`)).toBe(true)
+    }
+    expect(npcMapSprite('nobody')).toBeNull()
+  })
+})

@@ -7,7 +7,10 @@ Everything here is a converted copy of a draft in `research/art-drafts/`. Show s
 | `birds/<id>/` | bird portraits (12 real, rest generated in code) | 64x64 | `src/art/portraits.ts`, `draft-portraits.json` | `research/art-drafts/bold-pixel/` |
 | `map/{markers,scenery,patterns}/` | pins, flag, trees, bushes, reeds, grass tile | native | `src/art/mapAssets.ts` | `.../bold-pixel/expansion-v1/` |
 | `wardens/`, `scenes/` | Reserve Warden portraits and marsh scenes | 96 and @2x 192 | `src/art/wardens.ts` | `.../game-art/screenshot-crops/` |
-| `npcs/` | 12 story NPC portraits | 256 and @2x 512 | `src/art/npcs.ts` | `research/art-drafts/npc-pack-v1/` |
+| `npcs/` | 12 story NPCs x 3 dialogue portraits (`<id>`, `<id>_talk`, `<id>_delight`) | 256 and @2x 512 | `src/art/npcs.ts` (`npcArt`) | `research/art-drafts/npc-pack-v1/` and `.../game-art/set-c-portrait-expressions/` |
+| `npcs/map/` | 12 NPC map sprite strips, 4 frames each | 192x64 (48x64 frames) | `src/art/npcs.ts` (`npcMapSprite`) | `.../game-art/set-b-npc-map-sprites/` |
+| `keepsakes/` | 12 keepsake icons | 32x32 | `src/art/keepsakes.ts` | `.../game-art/set-d-keepsake-icons/` |
+| `ui/dialogue/` | Dialogue box, nameplate, buttons, sheet frame, handle, arrow, dots | various, nine-slice | `src/art/dialogueKit.ts` | `.../game-art/set-e-dialogue-kit/` |
 | `stamps/` | Lifer, first of year, explored, new best, rank up, unexplored | 32x32 | `src/art/marks.ts` | `.../game-art/set-a-stamps-tiers/` |
 | `tiers/` | Rarity tier marks 1-6 | 16x16 | `src/art/marks.ts` | `.../game-art/set-a-stamps-tiers/` |
 

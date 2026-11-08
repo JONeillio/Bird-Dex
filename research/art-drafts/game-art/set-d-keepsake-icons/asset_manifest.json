@@ -1,0 +1,53 @@
+{
+  "pack": "Bird-Dex Set D Keepsake Icons",
+  "assets": [
+    {
+      "file": "keepsake_recording.png",
+      "role": "Nell’s labelled field cassette"
+    },
+    {
+      "file": "keepsake_wren_sticker.png",
+      "role": "Kit’s wren sticker"
+    },
+    {
+      "file": "keepsake_nuthatch_study.png",
+      "role": "Imani’s illustrated nuthatch study"
+    },
+    {
+      "file": "keepsake_viewing_window.png",
+      "role": "Bea’s wooden viewing frame"
+    },
+    {
+      "file": "keepsake_order_slip.png",
+      "role": "Dev’s bakery order slip with the bird rhythm"
+    },
+    {
+      "file": "keepsake_photo_crop.png",
+      "role": "Moss’s print with pink crop marks"
+    },
+    {
+      "file": "keepsake_bridge_pin.png",
+      "role": "June’s enamel bridge pin"
+    },
+    {
+      "file": "keepsake_duty_card.png",
+      "role": "Val’s parakeet duty card"
+    },
+    {
+      "file": "keepsake_match_report.png",
+      "role": "Alfie’s match report"
+    },
+    {
+      "file": "keepsake_hand_map.png",
+      "role": "Otis’s folded map with the red star"
+    },
+    {
+      "file": "keepsake_enamel_cups.png",
+      "role": "Ruth’s two enamel cups"
+    },
+    {
+      "file": "keepsake_palette_swatch.png",
+      "role": "Leanne’s fan of colour swatches"
+    }
+  ]
+}

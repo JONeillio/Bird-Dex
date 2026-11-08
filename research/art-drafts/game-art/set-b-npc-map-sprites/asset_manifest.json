@@ -1,0 +1,53 @@
+{
+  "pack": "Bird-Dex Set B NPC Map Sprites",
+  "assets": [
+    {
+      "file": "nell_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, lifts a headphone cup. Ground anchor (24,64)."
+    },
+    {
+      "file": "kit_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, raises a finger to his lips. Ground anchor (24,64)."
+    },
+    {
+      "file": "imani_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, opens the nuthatch study. Ground anchor (24,64)."
+    },
+    {
+      "file": "bea_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, raises the viewing frame. Ground anchor (24,64)."
+    },
+    {
+      "file": "dev_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, raises the kitchen timer. Ground anchor (24,64)."
+    },
+    {
+      "file": "moss_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, raises the camera. Ground anchor (24,64)."
+    },
+    {
+      "file": "june_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, clicks the tally counter. Ground anchor (24,64)."
+    },
+    {
+      "file": "otis_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, unfolds the map. Ground anchor (24,64)."
+    },
+    {
+      "file": "ruth_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, angles her red-filter torch. Ground anchor (24,64)."
+    },
+    {
+      "file": "val_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, points with the duty card. Ground anchor (24,64)."
+    },
+    {
+      "file": "alfie_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, raises a goalkeeper glove. Ground anchor (24,64)."
+    },
+    {
+      "file": "leanne_map.png",
+      "role": "48x64 frames left to right: rest, breathe, rest, fans her swatches. Ground anchor (24,64)."
+    }
+  ]
+}

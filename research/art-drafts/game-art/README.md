@@ -5,7 +5,11 @@ Index of non-bird art sets. Briefs: `research/art-rendering/art/prompts/game-art
 | Folder | What | Arrived | Runtime location | Lookup |
 | --- | --- | --- | --- | --- |
 | `set-a-stamps-tiers/` | 6 stamps (32 px) + 6 rarity tier marks (16 px) | 8 Nov 2026 | `public/assets/stamps/`, `public/assets/tiers/` | `src/art/marks.ts` |
+| `set-b-npc-map-sprites/` | 12 NPC map sprite strips (4 frames of 48x64, feet anchor) | 8 Nov 2026 | `public/assets/npcs/map/` | `src/art/npcs.ts` (`npcMapSprite`) |
+| `set-c-portrait-expressions/` | `talk` and `delight` dialogue portraits for the 12 NPCs (1254 px masters) | 8 Nov 2026 | `public/assets/npcs/` (`<id>_talk`, `<id>_delight`, `@2x`) | `src/art/npcs.ts` (`npcArt(id, expression)`) |
+| `set-d-keepsake-icons/` | 12 keepsake icons (32 px), one per NPC | 8 Nov 2026 | `public/assets/keepsakes/` | `src/art/keepsakes.ts` |
+| `set-e-dialogue-kit/` | Dialogue box, nameplate, choice buttons, sheet frame, handle, next arrow, thinking dots (nine-slice) | 8 Nov 2026 | `public/assets/ui/dialogue/` | `src/art/dialogueKit.ts` |
 | `../npc-pack-v1/` | 12 story NPC portraits + stories (`encounters.json`) | 8 Nov 2026 | `public/assets/npcs/` | `src/art/npcs.ts` |
 | `screenshot-crops/` | Warden portraits (Maud, Reg, Agnes, Harold) and two marsh scenes cut from screenshots | 8 Nov 2026 | `public/assets/{wardens,scenes}/` | `src/art/wardens.ts` |
 
-Still to come (prompt from 8 Nov): NPC map sprites (48x64 frames, 4-frame strips), portrait expressions (talk, delight), keepsake icons (32 px), dialogue and sheet kit (nine-slice boxes, nameplate, buttons, handle). Also outstanding from the older brief: other 8 wardens, badges, rank frames and emblems, duel condition cards, water/woodland/reeds tiles.
+Still to come: other 8 wardens, badges (21 pins + 3 year pins), rank frames and emblems, duel condition cards and card back, water/woodland/reeds map tiles (from the older `game-art-brief.md`); any further NPC encounter art (props, scenes) is not yet briefed.
