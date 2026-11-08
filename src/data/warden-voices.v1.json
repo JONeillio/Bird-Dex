@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "version": "warden-voices-v1",
+  "voices": {
+    "maud": {
+      "rare": ["Well, I never. A {bird} has turned up near {site} lately, so keep your eyes peeled, love."],
+      "rareBand": ["That {bird} everyone is whispering about tends to show {band}. Get there early and be patient."],
+      "reliable": ["{bird} has been about on {days} of the last {window} days. A good bet if you come this way.", "You can lean on the {bird} this week: reported on {days} of the last {window} days."],
+      "seen": ["The {bird} has been reported lately. Worth a look along the water's edge."],
+      "quiet": ["It's a quiet week at {site}. Sometimes the marsh just wants you to sit still.", "Not much reported at {site} just now, but the reeds always have something up their sleeve."]
+    },
+    "reg": {
+      "rare": ["Somebody's spotted a {bird} near {site}. Not one you see every day, that."],
+      "rareBand": ["The {bird} keeps to a pattern: most reports come {band}. Plan your visit around that."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. Steady as a freshly cut reedbed.", "If you want a sure thing, try the {bird}: {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported lately. Walk the edge slowly and you may find it."],
+      "quiet": ["Quiet week out at {site}. The reeds are keeping their secrets.", "Hardly a thing reported at {site} this week. Come and find something first."]
+    },
+    "bev": {
+      "rare": ["Now that's a surprise: a {bird} reported near {site}. Keep an eye on the tideline."],
+      "rareBand": ["The {bird} is mostly reported {band}. Check the tide table and time it right."],
+      "reliable": ["{bird} has been about on {days} of the last {window} days. Dependable, like the tide.", "You'll do well to look for the {bird}: reported on {days} of the last {window} days."],
+      "seen": ["There's a {bird} on the reports lately. Have a scan of the mud."],
+      "quiet": ["Quiet on the shore at {site} this week. The tide gives and the tide takes away.", "Not much reported at {site} lately. Sometimes the mud keeps its visitors to itself."]
+    },
+    "tomasz": {
+      "rare": ["Worth noting: a {bird} has been reported near {site}. Rare enough that I would go and look."],
+      "rareBand": ["Reports of the {bird} come mostly {band}. Count carefully and take your time."],
+      "reliable": ["{bird} was reported on {days} of the last {window} days. That is as reliable as shore birds get.", "The most dependable bird this week is the {bird}: {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported recently. A good bird to put in your notebook."],
+      "quiet": ["A quiet week at {site}, by my count. Fewer birds to tally, more time to scan.", "Very little reported at {site} lately. Go and add to the tally."]
+    },
+    "rowan": {
+      "rare": ["Hush now: a {bird} has been reported near {site}. Walk softly if you go."],
+      "rareBand": ["The {bird} is usually reported {band}. Quiet feet and patience will serve you best."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. A good one to listen for.", "Try for the {bird} this week: {days} of the last {window} days."],
+      "seen": ["A {bird} has turned up on the reports lately. Listen first, look second."],
+      "quiet": ["A still week in the wood at {site}. Stillness is where the good birds hide.", "Not much reported at {site} lately. The woods will reward you if you wait."]
+    },
+    "agnes": {
+      "rare": ["Forty years I've watched these oaks, and a {bird} near {site} still makes my heart skip. Go and see."],
+      "rareBand": ["The {bird} is mostly reported {band}. Be there before it, and sit down."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. An old friend of the wood.", "Reliable as the old oak: the {bird}, reported on {days} of the last {window} days."],
+      "seen": ["There's a {bird} on the reports lately. The old trees are glad of it."],
+      "quiet": ["A quiet week at {site}, dear. The wood is resting.", "Little reported at {site} this week. Come and see what the trees are hiding."]
+    },
+    "harold": {
+      "rare": ["Not often you hear of a {bird} near {site}. Have a look along the hedge line."],
+      "rareBand": ["The {bird} is mostly reported {band}. Walk the fence line then."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. A good hedge keeps good company.", "Reliable as a well-laid hedge: the {bird}, reported on {days} of the last {window} days."],
+      "seen": ["A {bird} has been on the reports lately. Check the fence line."],
+      "quiet": ["Quiet week out at {site}. The hedges are keeping still.", "Not much reported at {site} lately. Plenty of hedge to check, mind."]
+    },
+    "sunita": {
+      "rare": ["Surveying the stubble this week, and look: a {bird} reported near {site}. Bring your binoculars."],
+      "rareBand": ["Most reports of the {bird} come {band}. Time your visit and scan the field edges."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. The stubble fields deliver.", "A dependable bird this week: the {bird}, on {days} of the last {window} days."],
+      "seen": ["A {bird} has turned up in the reports. Scan the field edges slowly."],
+      "quiet": ["A quiet week on the fields at {site}. Fewer flocks than usual.", "Not much reported at {site} lately. Come and make the survey a bit longer."]
+    },
+    "pat": {
+      "rare": ["Goodness: a {bird} has been reported near {site}. Not a bird you expect in a park."],
+      "rareBand": ["The {bird} is mostly reported {band}. Come early, before the dog walkers."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. A regular in the park.", "You can rely on the {bird} this week: {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported lately. Have a look round the paths."],
+      "quiet": ["A quiet week at {site}. Even a small patch has its slow days.", "Not much reported at {site} lately. Still worth a stroll, I say."]
+    },
+    "fran": {
+      "rare": ["Put the kettle on: a {bird} has been reported near {site}. Not one for the usual feeder crowd!"],
+      "rareBand": ["The {bird} is usually reported {band}. Settle in with a cuppa and wait."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. Reliable as the feeders.", "A regular this week: the {bird}, on {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported lately. Keep the feeders topped up."],
+      "quiet": ["A quiet week at {site}. The feeders are full, the visitors are shy.", "Not much reported at {site} lately. Pull up a seat anyway."]
+    },
+    "fergus": {
+      "rare": ["Look up: a {bird} has been reported near {site}. Rare enough to be worth the neck ache."],
+      "rareBand": ["The {bird} is mostly reported {band}. Be on the watchpoint then, and keep looking."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. Plenty of chances to catch it.", "Your best bet in the sky this week: the {bird}, on {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported lately. Scan the skyline and wait."],
+      "quiet": ["A quiet sky at {site} this week. They are up there somewhere.", "Not much reported at {site} lately. Patience, as ever."]
+    },
+    "olu": {
+      "rare": ["The night shift has a surprise: a {bird} reported near {site}. Mind the dark."],
+      "rareBand": ["The {bird} is mostly reported {band}. Be in place before the light goes."],
+      "reliable": ["{bird} has been reported on {days} of the last {window} days. Listen out for it.", "You can count on the {bird} this week: {days} of the last {window} days."],
+      "seen": ["A {bird} has been reported lately. Wait for the light to fade."],
+      "quiet": ["A quiet week for the night shift at {site}. Listen carefully.", "Not much reported at {site} lately. The dark keeps its own counsel."]
+    }
+  }
+}

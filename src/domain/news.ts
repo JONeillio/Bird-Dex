@@ -41,7 +41,7 @@ export interface NewsOptions {
   now: Date
 }
 
-const BAND_PHRASE: Record<TimeBand, string> = { dawn: 'at dawn', day: 'during the day', dusk: 'at dusk', night: 'at night' }
+export const BAND_PHRASE: Record<TimeBand, string> = { dawn: 'at dawn', day: 'during the day', dusk: 'at dusk', night: 'at night' }
 
 /** The report's own time as a sortable local-clock string; a missing time counts as the end of the day. */
 const stamp = (r: Report): string => `${r.obsDate}T${r.obsTime ?? '23:59'}`

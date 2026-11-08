@@ -8,6 +8,7 @@ import { SETS } from './schema'
 import wardensRaw from './wardens.v1.json'
 import { PERSONAS, type WardenHabitat } from './personas'
 import jobsRaw from './warden-jobs.v1.json'
+import voicesRaw from './warden-voices.v1.json'
 
 export const SIZES = ['tiny', 'small', 'medium', 'large', 'huge'] as const
 export const DIETS = ['seeds', 'insects', 'inverts', 'fish', 'plants', 'prey', 'omnivore'] as const
@@ -204,3 +205,42 @@ export const WARDEN_JOBS_VERSION = jobsParsed.version
 export function jobTemplatesFor(habitat: WardenHabitat): readonly JobTemplate[] {
   return jobsParsed.templates[habitat] ?? []
 }
+
+// Warden voices: a few lines per persona for the weekly note (AUTOPILOT P10). Slots are checked per branch, so a line
+// can never ask for a number the branch does not have.
+export const VOICE_BRANCHES = ['rare', 'rareBand', 'reliable', 'seen', 'quiet'] as const
+export type VoiceBranch = (typeof VOICE_BRANCHES)[number]
+/** The slots each branch may use, and must use (in `must`). */
+const VOICE_SLOTS: Record<VoiceBranch, { may: string[]; must: string[] }> = {
+  rare: { may: ['bird', 'site'], must: ['bird'] },
+  rareBand: { may: ['bird', 'band'], must: ['bird', 'band'] },
+  reliable: { may: ['bird', 'days', 'window'], must: ['bird', 'days', 'window'] },
+  seen: { may: ['bird'], must: ['bird'] },
+  quiet: { may: ['site'], must: ['site'] },
+}
+const lines = (min: number) => z.array(z.string().min(12).max(200)).min(min).max(3)
+const VoiceSchema = z.strictObject({ rare: lines(1), rareBand: lines(1), reliable: lines(2), seen: lines(1), quiet: lines(1) })
+export type WardenVoice = z.infer<typeof VoiceSchema>
+const VoicesFileSchema = z.object({ schema: z.literal(1), version: z.string(), voices: z.record(z.string(), VoiceSchema) })
+
+const voicesParsed = VoicesFileSchema.parse(voicesRaw)
+{
+  const personaIds = PERSONAS.map((p) => p.id)
+  for (const id of personaIds) if (!voicesParsed.voices[id]) throw new Error(`warden-voices.v1.json has no voice for ${id}.`)
+  for (const [id, voice] of Object.entries(voicesParsed.voices)) {
+    if (!personaIds.includes(id)) throw new Error(`warden-voices.v1.json: unknown persona ${id}.`)
+    for (const branch of VOICE_BRANCHES) {
+      for (const text of voice[branch]) {
+        const found = [...text.matchAll(/\{([a-zA-Z]+)\}/g)].map((m) => m[1])
+        const rule = VOICE_SLOTS[branch]
+        const where = `warden-voices.v1.json ${id}/${branch}`
+        for (const slot of found) if (!rule.may.includes(slot)) throw new Error(`${where}: {${slot}} is not allowed in this branch: "${text}"`)
+        for (const slot of rule.must) if (!found.includes(slot)) throw new Error(`${where}: missing {${slot}}: "${text}"`)
+        if (/[{}]/.test(text.replace(/\{[a-zA-Z]+\}/g, ''))) throw new Error(`${where}: stray brace: "${text}"`)
+      }
+    }
+  }
+}
+
+export const WARDEN_VOICES_VERSION = voicesParsed.version
+export const voiceFor = (persona: string): WardenVoice | undefined => voicesParsed.voices[persona]
