@@ -50,7 +50,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] C1 Bond engine (spec under Phase C)
 - [x] N1 Outings and rarity values
 - [x] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
-- [ ] N3 Stats and exploration engines
+- [x] N3 Stats and exploration engines
 - [ ] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
 - [ ] D1 Site character
 - [ ] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
@@ -178,6 +178,8 @@ Tests: a scripted 5-outing history covering every rule; par present and absent; 
 - `exploration(region, visited, startId)` → `{ explored: string[], total, share, nearestUnexplored: { siteId, minutes }[] /* up to 5, known drive times only, nearest first */ }`.
 - **Rule (decided):** reports are never hidden; seeing what is about is the main use of the app. What an unexplored site holds back: its warden (shown as a silhouette with "?" until your first outing there), your par history there, and an "Explored" stamp. A first visit gives the Field Report's explorer +15 and raises the region's explored %.
 Tests: visited from logs and imports, demo and sample site ids ignored, unknown drive times skipped, share maths.
+
+**N3 notes (built 8 Nov).** `src/domain/stats.ts` (`collectionStats(encounters, reports, bond, rarity, today)`, `streakOf`, `weekIndex`) and `src/domain/explore.ts` (`visitedSiteIds`, `exploration`). `today` is a `YYYY-MM-DD` string so the engine stays clock-free. `years` is newest first; its `species` counts distinct birds with a dated sighting that year, and `lifers`/`outings` come from the Field Reports. `visitedSiteIds` ignores `source: 'sample'` records as well as demo ids, so made-up sites can never explore a real place. `exploration.total` is every site in the region, and unknown or missing drive times are skipped, never 0.
 
 **N4 Engine readout** `#/dev/engine` (linked from Settings next to the art gallery). Plain lists using existing components, no new styling: totals; tier counts; top 5 most seen, top Bond, coolest; the 5 latest Field Reports as text ("2 Nov · Sample Reedbed Reserve · 18 species · 143 pts (rarity 61, lifers 40, firsts 15, bond 27) · best: Water Rail · par —"); exploration % for the current location and the 5 nearest unexplored sites. Header line says whether sample data is in use. Screens: `npm run screens -- "#/journal >> click:Import >> click:Try a sample history >> wait:400 >> click:Add sample >> wait:2500 >> click:Done" "#/dev/engine"`.
 
