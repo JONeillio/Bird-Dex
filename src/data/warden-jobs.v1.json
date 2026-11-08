@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "version": "warden-jobs-v1",
+  "templates": {
+    "wetland": [
+      { "id": "wet-count", "kind": "count", "min": 5, "text": "Count at least {min} {bird} here" },
+      { "id": "wet-heard", "kind": "heard", "text": "Hear a {bird} here (a call or song counts)" },
+      { "id": "wet-dusk", "kind": "band", "band": "dusk", "n": 3, "text": "Log {n} different birds here at dusk" },
+      { "id": "wet-signature", "kind": "signature", "n": 3, "text": "Log {n} of the reserve's signature birds this month" },
+      { "id": "wet-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "coast": [
+      { "id": "coast-count", "kind": "count", "min": 10, "text": "Count at least {min} {bird} on the shore" },
+      { "id": "coast-heard", "kind": "heard", "text": "Hear a {bird} here (a call counts)" },
+      { "id": "coast-dawn", "kind": "band", "band": "dawn", "n": 3, "text": "Log {n} different birds here at dawn" },
+      { "id": "coast-signature", "kind": "signature", "n": 3, "text": "Log {n} of the shore's signature birds this month" },
+      { "id": "coast-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "woodland": [
+      { "id": "wood-count", "kind": "count", "min": 2, "text": "Count at least {min} {bird} here" },
+      { "id": "wood-heard", "kind": "heard", "band": "dawn", "text": "Hear a {bird} here at dawn" },
+      { "id": "wood-dawn", "kind": "band", "band": "dawn", "n": 3, "text": "Log {n} different birds here at dawn" },
+      { "id": "wood-signature", "kind": "signature", "n": 2, "text": "Log {n} of the wood's signature birds this month" },
+      { "id": "wood-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "farmland-upland": [
+      { "id": "farm-count", "kind": "count", "min": 6, "text": "Count at least {min} {bird} here" },
+      { "id": "farm-heard", "kind": "heard", "text": "Hear a {bird} here (a call or song counts)" },
+      { "id": "farm-day", "kind": "band", "band": "day", "n": 4, "text": "Log {n} different birds here in the daytime" },
+      { "id": "farm-signature", "kind": "signature", "n": 3, "text": "Log {n} of the land's signature birds this month" },
+      { "id": "farm-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "garden": [
+      { "id": "garden-count", "kind": "count", "min": 3, "text": "Count at least {min} {bird} here" },
+      { "id": "garden-heard", "kind": "heard", "text": "Hear a {bird} here (a call or song counts)" },
+      { "id": "garden-dawn", "kind": "band", "band": "dawn", "n": 3, "text": "Log {n} different birds here at dawn" },
+      { "id": "garden-signature", "kind": "signature", "n": 3, "text": "Log {n} of the park's signature birds this month" },
+      { "id": "garden-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "raptors": [
+      { "id": "raptor-count", "kind": "count", "min": 2, "text": "Count at least {min} {bird} here" },
+      { "id": "raptor-heard", "kind": "heard", "text": "Hear a {bird} here (a call counts)" },
+      { "id": "raptor-day", "kind": "band", "band": "day", "n": 3, "text": "Log {n} different birds here in the daytime" },
+      { "id": "raptor-signature", "kind": "signature", "n": 2, "text": "Log {n} of the watchpoint's signature birds this month" },
+      { "id": "raptor-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ],
+    "night": [
+      { "id": "night-heard", "kind": "heard", "band": "dusk", "text": "Hear a {bird} here at dusk" },
+      { "id": "night-dusk", "kind": "band", "band": "dusk", "n": 2, "text": "Log {n} different birds here at dusk" },
+      { "id": "night-night", "kind": "band", "band": "night", "n": 2, "text": "Log {n} different birds here after dark" },
+      { "id": "night-signature", "kind": "signature", "n": 2, "text": "Log {n} of the night shift's signature birds this month" },
+      { "id": "night-season", "kind": "season", "text": "Visit in a season you have not been here before" }
+    ]
+  }
+}

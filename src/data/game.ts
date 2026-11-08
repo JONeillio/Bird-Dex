@@ -6,7 +6,8 @@ import traitsRaw from './catalogue/traits.v1.json'
 import { STARTER_DEX } from './catalogue'
 import { SETS } from './schema'
 import wardensRaw from './wardens.v1.json'
-import { PERSONAS } from './personas'
+import { PERSONAS, type WardenHabitat } from './personas'
+import jobsRaw from './warden-jobs.v1.json'
 
 export const SIZES = ['tiny', 'small', 'medium', 'large', 'huge'] as const
 export const DIETS = ['seeds', 'insects', 'inverts', 'fish', 'plants', 'prey', 'omnivore'] as const
@@ -153,3 +154,53 @@ export function allWardens(): readonly Warden[] {
   return Object.values(wardensParsed.locations).flat()
 }
 export const wardenById = (id: string): Warden | undefined => allWardens().find((w) => w.id === id)
+
+// Warden jobs: small monthly tasks at a warden's own site (AUTOPILOT P9). Templates per habitat; the engine fills them in.
+export const JOB_KINDS = ['count', 'heard', 'band', 'signature', 'season'] as const
+export type JobKind = (typeof JOB_KINDS)[number]
+
+const JobTemplateSchema = z.strictObject({
+  id: z.string().regex(/^[a-z]+(-[a-z]+)*$/),
+  kind: z.enum(JOB_KINDS),
+  /** Plain English with {bird}, {min} and {n} slots. */
+  text: z.string().min(8).max(120),
+  /** count: the least number counted in one sighting. */
+  min: z.number().int().min(2).max(100).optional(),
+  /** band and signature: how many different birds. */
+  n: z.number().int().min(1).max(6).optional(),
+  /** band: the part of the day. heard: optional. */
+  band: z.enum(['dawn', 'day', 'dusk', 'night']).optional(),
+})
+export type JobTemplate = z.infer<typeof JobTemplateSchema>
+
+const JobsFileSchema = z.object({
+  schema: z.literal(1),
+  version: z.string(),
+  templates: z.record(z.enum(HABITATS), z.array(JobTemplateSchema).min(3)),
+})
+
+const jobsParsed = JobsFileSchema.parse(jobsRaw)
+{
+  const seen = new Set<string>()
+  for (const h of HABITATS) {
+    const list = jobsParsed.templates[h]
+    if (!list) throw new Error(`warden-jobs.v1.json has no templates for ${h}.`)
+    if (new Set(list.map((t) => t.kind)).size < 3) throw new Error(`warden-jobs.v1.json ${h}: needs at least three different kinds.`)
+    for (const t of list) {
+      const where = `warden-jobs.v1.json ${h}/${t.id}`
+      if (seen.has(t.id)) throw new Error(`${where}: repeated template id.`)
+      seen.add(t.id)
+      const has = (slot: string) => t.text.includes(`{${slot}}`)
+      if ((t.kind === 'count' || t.kind === 'heard') !== has('bird')) throw new Error(`${where}: {bird} belongs in count and heard jobs only.`)
+      if (t.kind === 'count' && (t.min === undefined || !has('min'))) throw new Error(`${where}: a count job needs min and {min}.`)
+      if ((t.kind === 'band' || t.kind === 'signature') && (t.n === undefined || !has('n'))) throw new Error(`${where}: needs n and {n}.`)
+      if (t.kind === 'band' && !t.band) throw new Error(`${where}: a band job needs a band.`)
+      if (t.kind === 'season' && (t.min !== undefined || t.n !== undefined || t.band)) throw new Error(`${where}: a season job takes no numbers.`)
+    }
+  }
+}
+
+export const WARDEN_JOBS_VERSION = jobsParsed.version
+export function jobTemplatesFor(habitat: WardenHabitat): readonly JobTemplate[] {
+  return jobsParsed.templates[habitat] ?? []
+}
