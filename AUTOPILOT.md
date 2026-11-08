@@ -276,7 +276,6 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 ### Art from screenshots (done 8 Nov) and parked references
 
 - **Warden art, integrated.** Maud, Reg, Agnes and Harold portraits plus two marsh scenes (sunset, waterline beetle) were cut from phone screenshots (black background made transparent; masters in `research/art-drafts/game-art/screenshot-crops/`, runtime PNGs in `public/assets/{wardens,scenes}/`, 96 px and `@2x` 192 px). Code lookup: `src/art/wardens.ts` (`PERSONAS`, `wardenArt(id)` returns null when there is no art, so draw the silhouette; `SCENE_ART`), art list in `src/art/warden-art.json`. D4 and E3 must use these lookups; the habitat scene for a warden's site comes from `SCENE_ART` when one matches, otherwise `art/scenes.ts`. To add more screenshot art: crop, clear the black background, run `prepare_sprite.py` (see R1). Never commit full phone screenshots (public repo), only the cropped art.
-- **Field record / account screen** and other ideas below are reference only.
 - **Field record / account screen (reference only, do not build yet).** A page that sums up a birder's year: a quarterly "field report", habitat pins, and life / year / sites counts. Ideas to borrow later if it is wanted: a Year-in-review view built from encounters (year list, life list, sites visited, habitat mix), shared as an image or file rather than emailed (the app has no server, so no account emails). Revisit after B4 and Phase D when there is real data to show.
 
 ---
