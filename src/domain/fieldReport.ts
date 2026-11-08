@@ -4,7 +4,8 @@
 import { dexById } from '../data/catalogue'
 import type { Encounter } from '../data/personal-schema'
 import type { RegionData } from '../data/published-schema'
-import { bondRun, chronological, RANKS, type RankName } from './bond'
+import { bondRun, chronological, RANKS, RANK_THRESHOLDS, type RankName } from './bond'
+import { groupOutings } from './outings'
 import { binomialOf, rarityOf, sciNameFor, type RarityTable, type RarityTier } from './rarity'
 import { siteKey, UNKNOWN_SITE } from './siteKey'
 import { validSiteId } from '../data/personal-schema'
@@ -12,6 +13,9 @@ import { validSiteId } from '../data/personal-schema'
 export const LIFER_POINTS = 20
 export const FIRST_OF_YEAR_POINTS = 5
 export const EXPLORER_POINTS = 15
+/** A bird counts as "nearly levelled" when it ends the outing this close (or closer) to its next Bond rank. */
+export const NEARLY_POINTS = 10
+export const NEARLY_MAX = 3
 
 export interface ReportBird {
   /** Species id (Starter Dex id, or `x-...` for a bird outside the Dex). */
@@ -46,6 +50,18 @@ export interface FieldReport {
   /** `previous` = most species on any earlier outing at the same place; null on a first visit or unknown place. */
   siteBest: { previous: number | null; isNewBest: boolean }
   firstVisit: boolean
+  /** Names for `par.extra`, in the same order ([] without a par). */
+  extraNames: string[]
+  /** Birds logged on this outing that ended it within NEARLY_POINTS Bond points of their next rank, closest first, at most NEARLY_MAX. `rank` is the rank they ended at. */
+  nearlyLevelled: { key: string; name: string; rank: RankName; toNext: number }[]
+  /** The highest count of one bird on the outing (the biggest single checklist count), or null when no sighting had a count. */
+  mostCounted: { key: string; name: string; count: number } | null
+  /** Which of your real outings this year it was (see Outing.cardNo). 0 for sample outings. */
+  cardNo: number
+  /** Minutes (each checklist once), or null when unknown. */
+  durationMin: number | null
+  /** Earliest known time, HH:MM, or null. */
+  startTime: string | null
 }
 
 export interface ReportContext {
@@ -62,6 +78,10 @@ interface BirdAcc {
   bond: number
   rankFrom: number | null
   rankTo: number
+  /** Bond points after the last sighting of this bird on the outing. */
+  total: number
+  /** The biggest count on any one sighting of it on the outing. */
+  maxCount: number | null
 }
 
 interface OutingAcc {
@@ -85,6 +105,7 @@ function nameFor(e: Encounter): string {
 export function allFieldReports(encounters: readonly Encounter[], ctx: ReportContext): FieldReport[] {
   const { awards } = bondRun(encounters)
   const sorted = encounters.filter((e) => e.date !== null).sort(chronological)
+  const meta = new Map(groupOutings(encounters).map((o) => [o.key, o]))
 
   const seenEver = new Set<string>()
   const seenYear = new Set<string>()
@@ -123,11 +144,15 @@ export function allFieldReports(encounters: readonly Encounter[], ctx: ReportCon
         bond: 0,
         rankFrom: lastRank.get(e.speciesId) ?? null,
         rankTo: award.rankIndex,
+        total: award.total,
+        maxCount: null,
       }
       o.birds.set(e.speciesId, b)
     }
     b.bond += award.points
     b.rankTo = award.rankIndex
+    b.total = award.total
+    if (typeof e.count === 'number' && (b.maxCount === null || e.count > b.maxCount)) b.maxCount = e.count
     lastRank.set(e.speciesId, award.rankIndex)
   }
 
@@ -172,6 +197,22 @@ export function allFieldReports(encounters: readonly Encounter[], ctx: ReportCon
       par = { par: listed.size, found, extra }
     }
 
+    const nearlyLevelled = [...o.birds.values()]
+      .flatMap((b) => {
+        const rank = b.rankTo
+        if (rank >= RANKS.length - 1) return []
+        const toNext = RANK_THRESHOLDS[rank + 1] - b.total
+        return toNext > 0 && toNext <= NEARLY_POINTS ? [{ key: b.key, name: b.name, rank: RANKS[rank], toNext }] : []
+      })
+      .sort((x, y) => x.toNext - y.toNext || x.name.localeCompare(y.name))
+      .slice(0, NEARLY_MAX)
+    let mostCounted: FieldReport['mostCounted'] = null
+    for (const b of o.birds.values()) {
+      if (b.maxCount === null) continue
+      if (!mostCounted || b.maxCount > mostCounted.count || (b.maxCount === mostCounted.count && b.name.localeCompare(mostCounted.name) < 0)) mostCounted = { key: b.key, name: b.name, count: b.maxCount }
+    }
+    const m = meta.get(o.key)
+
     reports.push({
       outingKey: o.key,
       date: o.date,
@@ -185,6 +226,12 @@ export function allFieldReports(encounters: readonly Encounter[], ctx: ReportCon
       par,
       siteBest: { previous, isNewBest: previous !== null && speciesCount > previous },
       firstVisit,
+      extraNames: par ? par.extra.map((k) => o.birds.get(k)!.name) : [],
+      nearlyLevelled,
+      mostCounted,
+      cardNo: m?.cardNo ?? 0,
+      durationMin: m?.durationMin ?? null,
+      startTime: m?.startTime ?? null,
     })
     if (known) bestAtSite.set(o.siteKey, Math.max(previous ?? 0, speciesCount))
   }

@@ -69,7 +69,7 @@ Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SA
 - [x] P2 Encounter v3 fields (count, checklist, duration) and the importer keeping them
 - [x] P3 Game store (IndexedDB v3) and backup schema 2
 - [x] P4 Outings v2: checklists, start time, duration, card number, "opened" parcels
-- [ ] P5 Field Report v2 additions (nearly levelled, most counted, extras by name)
+- [x] P5 Field Report v2 additions (nearly levelled, most counted, extras by name)
 - [ ] P6 Bond record: months, time bands and field notes for the profile
 - [ ] P7 Reliability and Find a bird v2
 - [ ] P8 Bird News engine (with sunrise and sunset worked out on the phone)
@@ -254,6 +254,8 @@ Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, P
 **P4 notes (built 8 Nov).** `Outing` gained `checklistIds` (distinct, in the order of the day because sightings are chronological), `startTime` (earliest known time), `durationMin` (each checklist's duration counted once; sightings with a duration but no checklist id count once as a group; null when none known) and `cardNo` (real, non-sample outings numbered 1, 2, 3 within their calendar year by date, ties by when added; sample outings are 0). A card number can change if you import an older outing later, so show it as "No. 12 of 2026" computed live and never store it. `src/domain/parcels.ts`: `unopened(outings, opened, sinceCreatedAt)` (newest first; `sinceCreatedAt` null = every unopened outing), `markOpened(keys, opened)` (a new Set) and `unopenedFrom(encounters, ...)`. An outing whose parcel was opened stays closed even if a later import adds a sighting to it; reopening is for the UI to decide (the Journal can still open any outing's report). Tests in `tests/outings-v2.test.ts`.
 
 **P5 Field Report v2 additions.** Add to `FieldReport` (keep existing fields): `extraNames: string[]` (names for `par.extra`), `nearlyLevelled: { key, name, rank, toNext }[]` (species logged on this outing that are within 10 Bond points of their next rank afterwards, closest first, max 3), `mostCounted: { key, name, count } | null` (highest count on the outing, needs P2; null when no counts), `cardNo` (from P4), `durationMin`, `startTime`. Tests extend `field-report.test.ts`.
+
+**P5 notes (built 8 Nov).** `FieldReport` now also has `extraNames`, `nearlyLevelled` (`NEARLY_POINTS` = 10, `NEARLY_MAX` = 3; the rank is the one the bird ended the outing at and `toNext` is measured from its Bond total after its last sighting on that outing, not today's total; a bird already at Old Friend is never listed; ties by name), `mostCounted` (each bird's biggest single count on the outing, so two checklists are not added together; ties by name), `cardNo`, `durationMin` and `startTime` (all from `groupOutings`). Dex names are short ("Robin", "Wren"), so screens should show `name` as it comes. Tests are in `tests/field-report.test.ts` (new "P5" block); the points still sum exactly as before.
 
 **P6 Bond record for the profile.** `computeBond` also returns `monthsSeen: number[]` (1–12, sorted), `bandsSeen: TimeBand[]`, `sitesSeen: string[]` (site keys), `firstPlace: string | null`. New `fieldNotes(speciesId): string` in `src/domain/fieldNotes.ts` builds one plain sentence from `traits.v1.json` (size · diet · status · when active), for example "Small · eats insects · resident all year · sings at dawn"; returns '' for outside-Dex birds. `missingMonths(bond)` lists months never logged. Tests: sets match the rules, notes for three birds, outside-Dex empty.
 

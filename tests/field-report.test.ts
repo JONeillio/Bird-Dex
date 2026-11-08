@@ -202,3 +202,71 @@ describe('Field Report engine (N2)', () => {
     expect(rs.length).toBeGreaterThan(100)
   })
 })
+
+describe('Field Report v2 additions (P5)', () => {
+  const one = (encs: Encounter[], date = '2025-03-01', siteId: string | null = REED.siteId) => allFieldReports(encs, ctx).find((r) => r.date === date && r.siteId === siteId)!
+
+  it('names the extra birds in the same order as par.extra', () => {
+    const encs = [enc({ ...REED, speciesId: 'european-robin' }), enc({ ...REED, speciesId: 'common-kingfisher' }), enc({ ...REED, speciesId: 'eurasian-wren' })]
+    const r = allFieldReports(encs, { rarity: flat, region: region([site(REED.siteId, [rep('Erithacus rubecula')])]) })[0]
+    expect(r.par!.extra).toEqual(['common-kingfisher', 'eurasian-wren'])
+    expect(r.extraNames).toEqual(['Kingfisher', 'Wren'])
+    expect(one(encs).extraNames).toEqual([]) // no par without region data
+  })
+
+  it('lists birds that ended the outing within 10 Bond points of the next rank, closest first, at most three', () => {
+    const encs = [
+      enc({ ...REED, date: '2025-03-01', speciesId: 'european-robin' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'eurasian-wren' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'common-kingfisher' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'dunnock' }),
+      // the robin again on a later day at the same place and month: +1, so 11 points and 4 to go
+      enc({ ...REED, date: '2025-03-08', speciesId: 'european-robin' }),
+    ]
+    const first = one(encs, '2025-03-01')
+    expect(first.nearlyLevelled).toHaveLength(3) // four birds on 10 points, capped at three
+    expect(first.nearlyLevelled.every((b) => b.toNext === 5 && b.rank === 'Spotted')).toBe(true)
+    expect(first.nearlyLevelled.map((b) => b.name)).toEqual(['Dunnock', 'Kingfisher', 'Robin']) // ties by name
+    const second = one(encs, '2025-03-08')
+    expect(second.nearlyLevelled).toEqual([{ key: 'european-robin', name: 'Robin', rank: 'Spotted', toNext: 4 }])
+  })
+
+  it('does not list a bird that is far from its next rank, or one that has just levelled up', () => {
+    const encs = [enc({ ...REED, date: '2025-03-01', speciesId: 'european-robin' }), enc({ ...WOOD, date: '2025-03-05', speciesId: 'european-robin' })]
+    const r = one(encs, '2025-03-05', null) // a new place: +5 gives 15, Known, 25 from Familiar
+    expect(r.birds[0].rankUp).toEqual({ from: 'Spotted', to: 'Known' })
+    expect(r.nearlyLevelled).toEqual([])
+  })
+
+  it('finds the most counted bird, using the biggest count per bird and ignoring birds without one', () => {
+    const encs = [
+      enc({ ...REED, speciesId: 'european-robin', count: 3, checklistId: 'S1' }),
+      enc({ ...REED, speciesId: 'european-robin', count: 9, checklistId: 'S2' }),
+      enc({ ...REED, speciesId: 'eurasian-wren', count: 7 }),
+      enc({ ...REED, speciesId: 'dunnock', count: null }),
+      enc({ ...REED, speciesId: 'common-kingfisher' }),
+    ]
+    expect(one(encs).mostCounted).toEqual({ key: 'european-robin', name: 'Robin', count: 9 })
+    expect(one([enc({ ...REED }), enc({ ...REED, speciesId: 'dunnock', count: null })]).mostCounted).toBeNull()
+    expect(one([enc({ ...REED, speciesId: 'dunnock', count: 4 }), enc({ ...REED, speciesId: 'eurasian-wren', count: 4 })]).mostCounted?.name).toBe('Dunnock') // tie: by name
+  })
+
+  it('carries the card number, start time and duration of the outing', () => {
+    const encs = [
+      enc({ ...REED, date: '2025-02-01', speciesId: 'european-robin' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'european-robin', checklistId: 'S1', durationMin: 60, time: '08:00' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'dunnock', checklistId: 'S1', durationMin: 60, time: '08:00' }),
+      enc({ ...REED, date: '2025-03-01', speciesId: 'eurasian-wren', checklistId: 'S2', durationMin: 25, time: '07:15' }),
+    ]
+    const r = one(encs)
+    expect(r).toMatchObject({ cardNo: 2, durationMin: 85, startTime: '07:15' })
+    expect(one(encs, '2025-02-01')).toMatchObject({ cardNo: 1, durationMin: null, startTime: null })
+    expect(allFieldReports([enc({ ...REED, source: 'sample' })], ctx)[0].cardNo).toBe(0)
+  })
+
+  it('the points still add up exactly as before', () => {
+    for (const r of allFieldReports(history(), ctx)) {
+      expect(r.points.total).toBe(r.points.rarity + r.points.lifers + r.points.firstsOfYear + r.points.bond + r.points.explorer)
+    }
+  })
+})
