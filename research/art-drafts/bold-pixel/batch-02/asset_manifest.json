@@ -1,0 +1,55 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 02",
+  "assets": [
+    {
+      "id": "eurasian-coot",
+      "file": "bird_eurasian-coot_bold_pixel_v1.png",
+      "role": "Adult in sooty-black plumage with a white bill and forehead shield, red eye and grey-green lobed toes."
+    },
+    {
+      "id": "common-moorhen",
+      "file": "bird_common-moorhen_bold_pixel_v1.png",
+      "role": "Adult with slate plumage, a red shield, a yellow-tipped red bill and white flank and undertail markings."
+    },
+    {
+      "id": "canada-goose",
+      "file": "bird_canada-goose_bold_pixel_v1.png",
+      "role": "Adult with a black head and neck, white chin strap, brown-grey back, pale breast and black tail."
+    },
+    {
+      "id": "tufted-duck",
+      "file": "bird_tufted-duck_bold_pixel_v1.png",
+      "role": "Adult male with black upperparts, clean white flanks, a drooping tuft and a bright yellow eye."
+    },
+    {
+      "id": "great-cormorant",
+      "file": "bird_great-cormorant_bold_pixel_v1.png",
+      "role": "Adult with bronze-scaled wings held half open to dry, white cheek and throat, and a yellow bill base."
+    },
+    {
+      "id": "little-grebe",
+      "file": "bird_little-grebe_bold_pixel_v1.png",
+      "role": "Breeding adult with chestnut cheeks and neck, a dark body and a pale yellow-green gape patch."
+    },
+    {
+      "id": "great-crested-grebe",
+      "file": "bird_great-crested-grebe_bold_pixel_v1.png",
+      "role": "Breeding adult with a black double crest, chestnut-and-black cheek frills, white neck and pink dagger bill."
+    },
+    {
+      "id": "herring-gull",
+      "file": "bird_herring-gull_bold_pixel_v1.png",
+      "role": "Adult with a pale grey mantle, white-spotted black wingtips, yellow bill with a red spot and pink legs."
+    },
+    {
+      "id": "greylag-goose",
+      "file": "bird_greylag-goose_bold_pixel_v1.png",
+      "role": "Adult with grey-brown plumage, a thick orange bill, pink feet and pale flank barring."
+    },
+    {
+      "id": "gadwall",
+      "file": "bird_gadwall_bold_pixel_v1.png",
+      "role": "Adult male with patterned grey flanks, brownish head, black rear, white wing patch and dark bill."
+    }
+  ]
+}

@@ -51,6 +51,8 @@ Batch 01. Ten birds:
 
 ### Batch 02: lakes and rivers
 
+**Status: done and in the app 8 Nov 2026** (all 10 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-02/`).
+
 ```
 Batch 02. Ten birds:
 1. eurasian-coot (Coot): all sooty black, white bill and white forehead shield, red eye, grey-green lobed toes.
