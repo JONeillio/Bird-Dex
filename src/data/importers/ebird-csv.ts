@@ -225,9 +225,9 @@ export function planEbirdImport(parsed: EbirdParsed, existingKeys: ReadonlySet<s
 
 /**
  * Turn rows into saved sightings. eBird does not say whether a bird was seen or heard, so every row is "seen".
- * `newId` makes the record ids; `createdAt` is the time of the import.
+ * `newId` makes the record ids; `createdAt` is the time of the import. `source` is 'sample' only for the made-up history.
  */
-export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, createdAt: string, newId: () => string): Encounter[] {
+export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, createdAt: string, newId: () => string, source: 'ebird' | 'sample' = 'ebird'): Encounter[] {
   return rows.map((r) => ({
     id: newId(),
     speciesId: r.speciesId,
@@ -240,7 +240,7 @@ export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, cr
     siteId: r.siteId,
     time: r.time,
     ...(r.name ? { name: r.name, sciName: r.sciName } : {}),
-    source: 'ebird' as const,
+    source,
     importBatchId: batchId,
     importKey: r.importKey,
   }))

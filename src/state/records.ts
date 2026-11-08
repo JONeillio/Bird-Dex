@@ -18,6 +18,8 @@ interface RecordsState {
   replaceAll: (list: Encounter[]) => Promise<void>
   /** Add imported sightings in chunks (so a big file does not freeze the phone) and record the import. */
   addMany: (list: Encounter[], batch: ImportBatch, onProgress?: (fraction: number) => void) => Promise<void>
+  /** Undo one import: removes every sighting it added and its history entry. Sightings you logged yourself are never touched. Returns how many were removed. */
+  undoBatch: (batchId: string) => Promise<number>
 }
 
 let storage: RecordsStorage = memoryStorage()
@@ -74,6 +76,12 @@ export const useRecords = create<RecordsState>((set, get) => {
       }
       await save(() => storage.putBatch(batch))
       set({ encounters: [...get().encounters, ...list], batches: [...get().batches, batch] })
+    },
+    undoBatch: async (batchId) => {
+      const gone = get().encounters.filter((e) => e.importBatchId === batchId)
+      set({ encounters: get().encounters.filter((e) => e.importBatchId !== batchId), batches: get().batches.filter((b) => b.id !== batchId) })
+      await save(() => storage.removeMany(gone.map((e) => e.id), batchId))
+      return gone.length
     },
   }
 })

@@ -28,7 +28,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 
 ## 1. Waiting on Joseph (non-blocking; keep this list current)
 
-- [ ] Lewis's eBird export ("Download My Data" on ebird.org) to test B1 for real. Until then use synthetic fixtures.
+- [ ] Lewis's eBird export ("Download My Data" on ebird.org) to test B1 for real. Until then use the in-app sample history (Journal → Import → Try a sample history). Joseph agreed 8 Nov to prove the concept on made-up data first.
 - [ ] Which app Lewis mainly logs in (eBird, Merlin, BirdTrack).
 - [ ] Bird art batches 01–10 (`bird-batches.md`) and game art sets 1–5 (`game-art-brief.md`). Process with R1 whenever a ZIP is uploaded.
 - [ ] Lewis to sanity-check the Location 2 warden sites and signature birds after D2.
@@ -48,7 +48,8 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] B1 eBird CSV import (preview, idempotent, outside-Dex, needs-review)
 - [ ] B1b Accept eBird's ZIP directly (the email holds a ZIP; saves Lewis unzipping on his phone)
 - [ ] B2 Pasted list import
-- [ ] B3 Import history with undo
+- [x] B1c Sample eBird history (made up, one tap, labelled, removable) so concepts can be proved without Lewis's file
+- [x] B3 Import history with undo
 - [ ] B4 Year list and Life list views; first-of-the-year reveal
 
 **Phase C: Field Bond**
@@ -135,11 +136,13 @@ Screens: `npm run screens -- "#/journal >> click:Import"`.
 
 **B1 notes (built 8 Nov).** Parser `src/data/importers/ebird-csv.ts` (streams a File in 512 KB chunks; `parseEbirdCsv` for text and tests), `ImportFlow.tsx`, `records.addMany` (chunks of 500), IndexedDB v2 with an `importBatches` store. Choices made: sub-species rows (`Branta bernicla bernicla`) count as the species (two-word name) for outside-Dex ids, and a bracketed form such as "(Dark-bellied)" is dropped from the name; rows dated in the future need review; the `Count` column is not stored (no field for it). The Journal list shows 100 at a time and the profile 20, so a 12,000-sighting import does not freeze the phone. The screens script has `upload:<selector>|<path>`.
 
+**B1c Sample history (built 8 Nov).** `src/data/importers/sample-history.ts` writes a made-up export in eBird's own columns (seeded, so the same every time): about 240 checklists at 12 invented "Sample …" sites (`L99…`, submission ids `SMP…`, so nothing can match a real checklist), January 2024 to today, 84 of the 104 Dex birds plus 17 outside the Dex, 14 Dex birds deliberately never seen (bittern, dipper, goldeneye…) so there are always targets, and a few sp./slash/domestic rows for the needs-a-look list. It goes through `parseEbirdCsv` and `planEbirdImport` exactly like a real file; records and the batch carry `source: 'sample'`. Labelled "Sample history" in the Journal and "Includes sample history" on the BirdDex. **Rule for later phases:** sample data drives lists, Bond, duels and rivals so they can be seen working, but must never earn Reserve Warden badges or any other achievement (D3, E, G: ignore `source === 'sample'` when awarding). Seeded helpers are in `src/domain/random.ts` (`hash`, `mulberry32`, `rngFor`), reuse them for duel draws.
+
 **B1b ZIP support.** eBird emails a ZIP holding `MyEBirdData.csv`. In `ImportFlow`, accept `.zip` too: find the first entry ending `MyEBirdData.csv` (or any `.csv`) with a minimal central-directory reader and `DecompressionStream('deflate-raw')` (stored entries are copied as they are), reject anything over 200 MB uncompressed or with no CSV, then hand the text to the same parser (`parseEbirdCsv`; show the chunked progress line while reading). No new dependency unless the reader proves flaky; test with a ZIP built in the test (use `node:zlib` `deflateRawSync`). Update the pick-step instructions to "choose the ZIP or the CSV".
 
 **B2 Pasted list import.** In the same flow, a "Paste a list" tab: one bird per line, optional `, YYYY-MM-DD`. Match by Dex name (and eBird English name variants already in reports), case-insensitive; unmatched lines listed for review. No date → `date: null`. `source = 'list'`, key `list:<name>:<date|nodate>`.
 
-**B3 Import history.** Journal shows past imports (file, date, counts) with "Undo this import" (confirm; deletes encounters with that `importBatchId`). Backup includes `importBatches`, as an optional field.
+**B3 Import history (built 8 Nov).** `ImportsPanel.tsx` in the Journal lists each import with its live count and a two-step "Remove" (`records.undoBatch`, storage `removeMany`); it removes only sightings carrying that `importBatchId`, so your own logged sightings stay, and the same file can be imported again afterwards. Not done: the backup file does not carry `importBatches` yet, so after a restore the panel is empty (records keep their `importBatchId`). Original spec: Journal shows past imports (file, date, counts) with "Undo this import" (confirm; deletes encounters with that `importBatchId`). Backup includes `importBatches`, as an optional field.
 
 **B4 Year and Life lists; first of the year.** BirdDex screen gets a segmented control at the top: `Starter Dex | <this year> | Life list`.
 - Year: every species (Dex and outside) with an encounter dated this calendar year, newest first, count in the progress pill ("63 this year").
@@ -268,6 +271,11 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 
 - Bird batch: `python3 -I scripts/art/import_batch.py <zip> batch-NN` (add `--dry-run` first if unsure), then `npm run build && npm run screens -- "#/dev/art"`, open the screenshots and check each new bird at 64 px and as a silhouette. If a bird looks wrong for its species (wrong colours or missing a field mark listed in `bird-batches.md`), keep the old placeholder for that id and tell Joseph which ones to redo and why. Commit `AP R1: bird batch NN`.
 - Game art set: follow "Notes for Claude when a set arrives" at the end of `game-art-brief.md`; swap fallbacks for the art via the lookups named in the tickets above.
+
+### Parked references (from Joseph, 8 Nov; not tickets)
+
+- **Warden art.** Joseph liked the warden portraits and scene backdrops Astra sent as phone screenshots, and the field-record screen. He is short of phone storage, so no ZIP yet; "maybe build more later". The portraits match the briefs for Reg, Agnes, Harold and Maud, so when the ZIP arrives use R1 and the existing persona ids. Do not commit screenshots of his phone (public repo).
+- **Field record / account screen (reference only, do not build yet).** A page that sums up a birder's year: a quarterly "field report", habitat pins, and life / year / sites counts. Ideas to borrow later if it is wanted: a Year-in-review view built from encounters (year list, life list, sites visited, habitat mix), shared as an image or file rather than emailed (the app has no server, so no account emails). Revisit after B4 and Phase D when there is real data to show.
 
 ---
 

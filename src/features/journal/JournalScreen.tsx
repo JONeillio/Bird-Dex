@@ -2,13 +2,14 @@ import { useMemo, useState } from 'react'
 import { dexById } from '../../data/catalogue'
 import { MODE_LABELS } from '../../data/personal-schema'
 import { backupDue, formatDate, sortEncounters } from '../../domain/journal'
-import { Banner, Panel, Pill } from '../../ui/components'
+import { Banner, Panel, Pill, SampleStamp } from '../../ui/components'
 import { useRecords } from '../../state/records'
 import { useStore } from '../../state/store'
 import { useUi } from '../../state/ui'
 import { BirdPortrait } from '../birddex/BirdPortrait'
 import { SettingsButton } from '../shell/SettingsButton'
 import { ImportFlow } from './ImportFlow'
+import { ImportsPanel } from './ImportsPanel'
 
 const PAGE = 100
 
@@ -60,6 +61,7 @@ export default function JournalScreen() {
             </a>
           </Panel>
         )}
+        <ImportsPanel />
         {status === 'loading' && <p className="muted">Loading…</p>}
         {status === 'ready' && encounters.length === 0 && (
           <Panel className="coming stack">
@@ -93,6 +95,7 @@ export default function JournalScreen() {
                   <span className="row">
                     <Pill>{MODE_LABELS[e.mode]}</Pill>
                     {!s && <Pill>Outside the Starter Dex</Pill>}
+                    {e.source === 'sample' && <SampleStamp />}
                   </span>
                   {e.notes && <span className="small">{e.notes}</span>}
                   {e.photo && <img className="journal-photo" src={e.photo} alt={`Your photo of ${s?.name ?? 'the bird'}`} />}

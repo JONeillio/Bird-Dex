@@ -150,3 +150,34 @@ describe('writing an import', () => {
     expect(useRecords.getState().batches).toEqual([batch])
   })
 })
+
+describe('Undo an import (B3)', () => {
+  it('removes only that import, keeps your own logged sightings and lets the file be imported again', async () => {
+    const store = memoryStorage()
+    useRecords.setState({ encounters: [], batches: [] })
+    await useRecords.getState().load(store)
+    const p = ok(sample)
+    const first = planEbirdImport(p, new Set())
+    const batch: ImportBatch = { id: 'imp-undo', source: 'ebird', fileName: 'x.csv', rowCount: p.totalRows, importedCount: first.toAdd.length, date: '2026-11-08T10:00:00.000Z' }
+    await useRecords.getState().add({ id: 'mine0001', speciesId: 'european-robin', date: '2026-11-01', place: 'Garden', mode: 'seen', notes: '', photo: null, createdAt: '2026-11-01T08:00:00.000Z', source: 'log' })
+    await useRecords.getState().addMany(rowsToEncounters(first.toAdd, 'imp-undo', batch.date, newId), batch)
+    expect(useRecords.getState().encounters.length).toBe(first.toAdd.length + 1)
+
+    const removed = await useRecords.getState().undoBatch('imp-undo')
+    expect(removed).toBe(first.toAdd.length)
+    expect(useRecords.getState().encounters.map((e) => e.id)).toEqual(['mine0001'])
+    expect(useRecords.getState().batches).toEqual([])
+    expect(await store.loadAll()).toHaveLength(1)
+    expect(await store.loadBatches()).toEqual([])
+
+    // The same file adds everything again, since nothing is left to skip.
+    const again = planEbirdImport(p, new Set(useRecords.getState().encounters.flatMap((e) => (e.importKey ? [e.importKey] : []))))
+    expect(again.toAdd.length).toBe(first.toAdd.length)
+  })
+
+  it('removing an unknown import changes nothing', async () => {
+    useRecords.setState({ encounters: [], batches: [] })
+    await useRecords.getState().load(memoryStorage())
+    expect(await useRecords.getState().undoBatch('nope')).toBe(0)
+  })
+})

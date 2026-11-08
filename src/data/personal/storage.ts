@@ -14,6 +14,8 @@ export interface RecordsStorage {
   putMany(list: readonly Encounter[]): Promise<void>
   loadBatches(): Promise<ImportBatch[]>
   putBatch(b: ImportBatch): Promise<void>
+  /** Undo an import: delete these records and the import's history entry. */
+  removeMany(ids: readonly string[], batchId: string): Promise<void>
 }
 
 export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorage {
@@ -31,6 +33,10 @@ export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorag
     putMany: async (list) => void list.forEach((e) => m.set(e.id, e)),
     loadBatches: async () => [...batches.values()],
     putBatch: async (b) => void batches.set(b.id, b),
+    removeMany: async (ids, batchId) => {
+      ids.forEach((id) => m.delete(id))
+      batches.delete(batchId)
+    },
   }
 }
 
@@ -82,6 +88,11 @@ export async function idbStorage(): Promise<RecordsStorage> {
     },
     async putBatch(b) {
       await db.put(BATCHES, b)
+    },
+    async removeMany(ids, batchId) {
+      const tx = db.transaction([STORE, BATCHES], 'readwrite')
+      await Promise.all([...ids.map((id) => tx.objectStore(STORE).delete(id)), tx.objectStore(BATCHES).delete(batchId)])
+      await tx.done
     },
   }
 }

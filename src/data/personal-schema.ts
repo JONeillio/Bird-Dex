@@ -33,7 +33,7 @@ export const EncounterSchema = z.object({
   name: z.string().max(80).optional(),
   sciName: z.string().max(80).optional(),
   /** Where the record came from: logged by hand, an eBird export, or a pasted list. */
-  source: z.enum(['log', 'ebird', 'list']).optional(),
+  source: z.enum(['log', 'ebird', 'list', 'sample']).optional(),
   /** Which import added it, so one import can be undone. */
   importBatchId: z.string().max(64).optional(),
   /** Identifies the source row, so importing the same export twice adds nothing. */
@@ -44,7 +44,7 @@ export type Encounter = z.infer<typeof EncounterSchema>
 /** A record of one import, kept so it can be listed and (later) undone. */
 export const ImportBatchSchema = z.object({
   id: z.string().min(1).max(64),
-  source: z.enum(['ebird', 'list']),
+  source: z.enum(['ebird', 'list', 'sample']),
   fileName: z.string().max(120),
   /** Data rows read from the file. */
   rowCount: z.number().int().nonnegative(),

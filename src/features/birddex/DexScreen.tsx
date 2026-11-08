@@ -2,9 +2,10 @@ import { useMemo, useState } from 'react'
 import { DEX_SIZE, STARTER_DEX } from '../../data/catalogue'
 import { SETS, SET_LABELS, type SetId } from '../../data/schema'
 import { useStore } from '../../state/store'
+import { useRecords } from '../../state/records'
 import { useRecorded } from '../../state/useRecorded'
 import { useTilt } from '../../phone/tilt'
-import { Banner, Chip, DemoStamp, Pill } from '../../ui/components'
+import { Banner, Chip, DemoStamp, Pill, SampleStamp } from '../../ui/components'
 import { SettingsButton } from '../shell/SettingsButton'
 import { BirdPortrait } from './BirdPortrait'
 
@@ -16,6 +17,7 @@ export default function DexScreen() {
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
   const recorded = useRecorded()
+  const hasSample = useRecords((s) => s.encounters.some((e) => e.source === 'sample'))
   const tiltRef = useTilt<HTMLElement>(prefs.tiltOn)
 
   const shown = useMemo(() => {
@@ -45,6 +47,7 @@ export default function DexScreen() {
           <div style={{ width: `${pct}%` }} />
         </div>
         <div className="row">
+          {hasSample && !prefs.demoCollection && <SampleStamp>Includes sample history</SampleStamp>}
           {prefs.demoCollection ? (
             <>
               <DemoStamp />

@@ -73,6 +73,11 @@ export function DemoStamp() {
   return <Pill tone="demo">Demo data</Pill>
 }
 
+/** Marks the made-up eBird history so nobody mistakes it for real sightings. */
+export function SampleStamp({ children = 'Sample history' }: { children?: ReactNode }) {
+  return <Pill tone="demo">{children}</Pill>
+}
+
 export function BottomSheet({ open, onClose, title, children }: {
   open: boolean
   onClose: () => void
