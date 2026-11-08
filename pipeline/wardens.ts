@@ -54,7 +54,19 @@ function nearestDrive(region: RegionData, siteId: string): number | null {
   return best
 }
 
-export function draftWardens(region: RegionData): DraftWarden[] {
+export interface DraftOptions {
+  /** How many wardens (at most the 12 personas). Default 8. */
+  count?: number
+  /** Furthest drive from the nearest start point. Default 90. */
+  maxDriveMin?: number
+  /** Least distance between two wardens' sites. Default 2. */
+  spacingKm?: number
+}
+
+export function draftWardens(region: RegionData, opts: DraftOptions = {}): DraftWarden[] {
+  const count = Math.min(opts.count ?? WARDEN_COUNT, PERSONAS.length)
+  const maxDriveMin = opts.maxDriveMin ?? WARDEN_MAX_DRIVE_MIN
+  const spacingKm = opts.spacingKm ?? WARDEN_SPACING_KM
   // How many sites in the region report each Dex species (fewer = rarer).
   const sitesReporting = new Map<string, number>()
   for (const s of region.sites) for (const id of dexSpeciesAt(s)) sitesReporting.set(id, (sitesReporting.get(id) ?? 0) + 1)
@@ -62,18 +74,18 @@ export function draftWardens(region: RegionData): DraftWarden[] {
 
   const candidates = region.sites
     .map((site) => ({ site, species: dexSpeciesAt(site), driveMin: nearestDrive(region, site.id), character: siteCharacter(site) }))
-    .filter((c) => !RESTRICTED_NAME.test(c.site.name) && c.species.length >= WARDEN_MIN_SPECIES && c.driveMin !== null && c.driveMin <= WARDEN_MAX_DRIVE_MIN)
+    .filter((c) => !RESTRICTED_NAME.test(c.site.name) && c.species.length >= WARDEN_MIN_SPECIES && c.driveMin !== null && c.driveMin <= maxDriveMin)
   type Cand = (typeof candidates)[number]
   const bySpecies = (a: Cand, b: Cand) => b.species.length - a.species.length || a.site.id.localeCompare(b.site.id)
 
   const chosen: Cand[] = []
-  const free = (c: Cand) => !chosen.includes(c) && chosen.every((x) => distanceKm(x.site.point, c.site.point) >= WARDEN_SPACING_KM)
+  const free = (c: Cand) => !chosen.includes(c) && chosen.every((x) => distanceKm(x.site.point, c.site.point) >= spacingKm)
   for (const habitat of HABITAT_ORDER) {
     const best = candidates.filter((c) => c.character[0] === habitat && free(c)).sort(bySpecies)[0]
     if (best) chosen.push(best)
   }
   for (const c of [...candidates].sort(bySpecies)) {
-    if (chosen.length >= WARDEN_COUNT) break
+    if (chosen.length >= count) break
     if (free(c)) chosen.push(c)
   }
 

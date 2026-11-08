@@ -1,6 +1,7 @@
 // Pure transforms from provider responses to the published D1 shape. No network, no disk: tested with
 // synthetic fixtures in tests/pipeline.test.ts. Only whitelisted fields are copied; observer names never are.
 import type { Between, DriveEntry, LngLat, RegionData, Report, Site } from '../src/data/published-schema.ts'
+import { distanceKm } from '../src/domain/geo.ts'
 import { dexIdFor, isNotASpecies } from '../src/domain/taxon.ts'
 
 export interface RawHotspot {
@@ -64,10 +65,18 @@ export function cleanHotspot(h: RawHotspot): CleanHotspot | null {
 }
 
 /** Busiest sites first (most species ever recorded), then most recently active. */
-export function rankHotspots(hs: CleanHotspot[], max: number): CleanHotspot[] {
-  return [...hs]
-    .sort((a, b) => (b.speciesAllTime ?? 0) - (a.speciesAllTime ?? 0) || (b.latestObsDate ?? '').localeCompare(a.latestObsDate ?? ''))
-    .slice(0, max)
+/**
+ * Which hotspots to fetch reports for. Without a centre: the most species ever recorded, as before. With a centre, part of the
+ * quota (`localShare`, default half) goes to the best sites within `localKm` of it, so small local patches are not crowded out
+ * by famous reserves far away; the rest is the best of everything else.
+ */
+export function rankHotspots(hs: CleanHotspot[], max: number, local?: { centre: LngLat; km: number; share?: number }): CleanHotspot[] {
+  const byBest = (a: CleanHotspot, b: CleanHotspot) => (b.speciesAllTime ?? 0) - (a.speciesAllTime ?? 0) || (b.latestObsDate ?? '').localeCompare(a.latestObsDate ?? '') || (a.id < b.id ? -1 : 1)
+  const all = [...hs].sort(byBest)
+  if (!local) return all.slice(0, max)
+  const near = all.filter((h) => distanceKm(h.point, local.centre) <= local.km).slice(0, Math.floor(max * (local.share ?? 0.5)))
+  const taken = new Set(near.map((h) => h.id))
+  return [...near, ...all.filter((h) => !taken.has(h.id)).slice(0, max - near.length)].sort(byBest)
 }
 
 export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>, opts: { notable?: boolean } = {}): Report[] {
@@ -180,8 +189,8 @@ export function mergeNotable(sites: Site[], raw: RawObs[], dexBySci: ReadonlyMap
   return { sites: [...out, ...kept], added: kept.length, skippedPrivate }
 }
 
-/** How many sites go into the site-to-site matrix (40 x 40 = 1,600 routes, well under ORS's 3,500 per request). */
-export const BETWEEN_MAX = 40
+/** How many sites go into the site-to-site matrix (50 x 50 = 2,500 routes, well under ORS's 3,500 per request). */
+export const BETWEEN_MAX = 50
 
 /** The sites with the most distinct Starter Dex species reported (ties: id), at most `max`. */
 export function pickBetweenSites(sites: Site[], max = BETWEEN_MAX): Site[] {

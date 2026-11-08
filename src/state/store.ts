@@ -23,6 +23,8 @@ export interface Prefs {
   keepAwake: boolean
   /** When the last backup file was downloaded (ISO), for the gentle reminder. */
   lastBackupAt: string | null
+  /** Set once the default area has moved to South East London, so phones that saved an old area are moved over one time. */
+  areaV2: boolean
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -31,8 +33,9 @@ export const DEFAULT_PREFS: Prefs = {
   unrecordedOnly: true,
   targetsOnly: false,
   soundOn: false, // audio is opt-in
-  regionId: 'location-1',
-  startId: 'location-1',
+  regionId: 'se-london',
+  startId: 'erith',
+  areaV2: true,
   demoCollection: false,
   targets: [],
   hapticsOn: true,
@@ -50,7 +53,10 @@ export function loadPrefs(): Prefs {
     if (!raw) return { ...DEFAULT_PREFS }
     const parsed: unknown = JSON.parse(raw)
     if (typeof parsed !== 'object' || parsed === null) return { ...DEFAULT_PREFS }
-    return { ...DEFAULT_PREFS, ...(parsed as Partial<Prefs>) }
+    const merged = { ...DEFAULT_PREFS, ...(parsed as Partial<Prefs>) }
+    // One-time move to the new default area (Location 1 and 2 became South East London, Southampton and South Manchester).
+    if ((parsed as Partial<Prefs>).areaV2 !== true) return { ...merged, regionId: DEFAULT_PREFS.regionId, startId: DEFAULT_PREFS.startId, areaV2: true }
+    return merged
   } catch {
     return { ...DEFAULT_PREFS }
   }

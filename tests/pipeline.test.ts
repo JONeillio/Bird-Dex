@@ -24,6 +24,14 @@ describe('pipeline transforms', () => {
     ]
     expect(rankHotspots(hs, 2).map((h) => h.id)).toEqual(['b', 'c'])
   })
+  it('keeps half the quota for the best local sites so far-off famous reserves do not crowd them out', () => {
+    const at = (id: string, lng: number, n: number) => ({ id, name: id, point: [lng, 51.5] as [number, number], latestObsDate: '2026-11-01', speciesAllTime: n })
+    const hs = [at('far1', 1.5, 300), at('far2', 1.6, 290), at('far3', 1.7, 280), at('near1', 0.0, 100), at('near2', 0.01, 90), at('near3', 0.02, 80)]
+    const ids = rankHotspots(hs, 4, { centre: [0, 51.5], km: 10 }).map((h) => h.id)
+    expect(ids.filter((i) => i.startsWith('near'))).toEqual(['near1', 'near2'])
+    expect(ids).toHaveLength(4)
+    expect(rankHotspots(hs, 4).map((h) => h.id)).toEqual(['far1', 'far2', 'far3', 'near1'])
+  })
   it('joins by scientific name, falls back to the binomial, skips non-species and invalid records', () => {
     const r = toReports(
       [

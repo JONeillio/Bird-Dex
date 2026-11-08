@@ -15,6 +15,7 @@ import { BackButton } from '../shell/SettingsButton'
 import { BondPanel } from './BondPanel'
 import { BirdPortrait } from '../birddex/BirdPortrait'
 import { usePublished } from '../../data/published'
+import { pickStart } from '../../data/startPoint'
 import { limitFor, whereSeen } from '../../domain/findBird'
 import { daysAgo } from '../../domain/ranking'
 import { shortSiteName } from '../../domain/siteName'
@@ -155,7 +156,7 @@ function ReportedNearby({ speciesId, name }: { speciesId: string; name: string }
     )
   }
   const ref = data.index.regions.find((r) => r.id === data.regionId)!
-  const start = ref.startPoints[0]
+  const start = pickStart(ref, prefs.startId)
   const rows = whereSeen(data.region, start.id, speciesId)
   const go = (siteId: string, minutes: number | null) => {
     const fit = limitFor(minutes)

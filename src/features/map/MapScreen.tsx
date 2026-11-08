@@ -8,13 +8,15 @@ import { useRecorded } from '../../state/useRecorded'
 import { useShake } from '../../phone/shake'
 import { play } from '../../audio/sfx'
 import { buzz, BUZZ } from '../../phone/haptics'
-import { Banner, Chip, DemoStamp, Panel, Pill, Segmented } from '../../ui/components'
+import { Banner, Chip, DemoStamp, Panel, Pill } from '../../ui/components'
 import { SettingsButton } from '../shell/SettingsButton'
 import MapCanvas, { type MapSite } from './MapCanvas'
 import { birdSrc } from './birdArt'
 import { SiteCard } from './SiteCard'
 import { SiteSheet } from './SiteSheet'
 import { FindBirdSheet } from './FindBirdSheet'
+import { pickStart } from '../../data/startPoint'
+import { AreaSheet } from './AreaSheet'
 import { useNews } from '../../state/useNews'
 import { useParcels } from '../../state/parcels'
 import { useRecords } from '../../state/records'
@@ -36,6 +38,7 @@ export default function MapScreen() {
   const setFocus = useStore((s) => s.setFocusSpecies)
   const focusSiteId = useStore((s) => s.focusSiteId)
   const [findOpen, setFindOpen] = useState(false)
+  const [areaOpen, setAreaOpen] = useState(false)
   const { dot: newsDot } = useNews()
   const parcels = useParcels()
   const encounters = useRecords((st) => st.encounters)
@@ -49,7 +52,7 @@ export default function MapScreen() {
 
   const ready = data.status === 'ready' ? data : null
   const ref = ready ? ready.index.regions.find((r) => r.id === ready.regionId)! : null
-  const start = ref?.startPoints[0]
+  const start = ref ? pickStart(ref, prefs.startId) : undefined
 
   const filtered = useMemo(() => {
     if (!ready || !start) return null
@@ -105,19 +108,6 @@ export default function MapScreen() {
     <div className="map-screen">
       <Banner title="Map" right={<SettingsButton />} />
       <div className="map-controls">
-        {ready && ready.index.regions.length > 1 && (
-          <Segmented
-            label="Start from"
-            options={ready.index.regions.map((r) => ({ value: r.id, label: r.label }))}
-            value={ready.regionId}
-            onChange={(id) => {
-              setPicked(null)
-              setDetailsOpen(false)
-              setPref('regionId', id)
-              setPref('startId', id)
-            }}
-          />
-        )}
         <div className="chips">
           {focusName && (
             <Chip tone="coral" active onClick={() => setFocus(null)}>
@@ -146,7 +136,7 @@ export default function MapScreen() {
         {ready && filtered && start && (
           <div className="map-status small">
             <span>
-              Driving from {start.label} · {filtered.shown.length} sites
+              <button type="button" className="linkish" onClick={() => setAreaOpen(true)} aria-label={`Driving from ${start.label}. Change area`}>Driving from {start.label} ▾</button> · {filtered.shown.length} sites
               {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive time)` : ''}
               {focus && filtered.beyondLimit ? ` · ${filtered.beyondLimit} more beyond ${prefs.driveLimit} min` : ''}
               {explore && !ready.region.isDemo ? ` · Explored ${explore.explored.length} of ${explore.total} spots` : ''}
@@ -198,6 +188,21 @@ export default function MapScreen() {
             explored={ready.region.isDemo || !active ? undefined : visited.has(active.site.id)}
           />
         </div>
+      )}
+      {areaOpen && ready && (
+        <AreaSheet
+          index={ready.index}
+          regionId={ready.regionId}
+          startId={start?.id ?? ''}
+          onPick={(r, st) => {
+            setPicked(null)
+            setDetailsOpen(false)
+            setPref('regionId', r)
+            setPref('startId', st)
+            setAreaOpen(false)
+          }}
+          onClose={() => setAreaOpen(false)}
+        />
       )}
       {findOpen && ready && start && (
         <FindBirdSheet

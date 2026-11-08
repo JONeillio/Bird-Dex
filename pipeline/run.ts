@@ -22,7 +22,21 @@ interface Config {
   maxSites: number
   /** Extra hotspots allowed in just because they had a rarity. */
   maxRaritySites?: number
-  regions: PublishedIndex['regions'][number][]
+  regions: RegionConfig[]
+}
+
+/** A published region reference plus the settings only the pipeline needs. The extras never reach the published index. */
+type RegionConfig = PublishedIndex['regions'][number] & {
+  /** Search radius for hotspots and rarities (eBird allows up to 50). Default: the top-level value. */
+  radiusKm?: number
+  /** Sites to fetch reports for. Default: the top-level value. */
+  maxSites?: number
+  /** Within this distance of the centre, half the sites are the best local ones (see rankHotspots). */
+  localKm?: number
+  /** Used by the warden draft only. */
+  wardenCount?: number
+  wardenMaxDriveMin?: number
+  wardenSpacingKm?: number
 }
 
 const task = process.argv.find((a) => a.startsWith('--task='))?.split('=')[1] ?? 'deploy'
@@ -51,11 +65,13 @@ async function eb(path: string): Promise<unknown> {
   return null
 }
 
-async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBySci: Map<string, string>): Promise<RegionData> {
+async function fetchRegion(cfg: Config, region: RegionConfig, dexBySci: Map<string, string>): Promise<RegionData> {
   const [lng, lat] = region.centre
-  const raw = await eb(`/ref/hotspot/geo?lat=${lat}&lng=${lng}&dist=${cfg.hotspotRadiusKm}&back=${cfg.windowDays}&fmt=json`)
+  const radiusKm = region.radiusKm ?? cfg.hotspotRadiusKm
+  const maxSites = region.maxSites ?? cfg.maxSites
+  const raw = await eb(`/ref/hotspot/geo?lat=${lat}&lng=${lng}&dist=${radiusKm}&back=${cfg.windowDays}&fmt=json`)
   const active = (Array.isArray(raw) ? (raw as RawHotspot[]) : []).map(cleanHotspot).filter((h): h is CleanHotspot => !!h)
-  const chosen = rankHotspots(active, cfg.maxSites)
+  const chosen = rankHotspots(active, maxSites, region.localKm ? { centre: region.centre, km: region.localKm } : undefined)
 
   let sites: Site[] = []
   for (const h of chosen) {
@@ -64,7 +80,7 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
   }
 
   // Rarities: one call for the whole area. Added before routing so new hotspots get drive times too.
-  const rawNotable = await eb(`/data/obs/geo/recent/notable?lat=${lat}&lng=${lng}&dist=${cfg.hotspotRadiusKm}&back=${cfg.windowDays}&detail=simple&sppLocale=en_GB`)
+  const rawNotable = await eb(`/data/obs/geo/recent/notable?lat=${lat}&lng=${lng}&dist=${radiusKm}&back=${cfg.windowDays}&detail=simple&sppLocale=en_GB`)
   const notable = Array.isArray(rawNotable) ? (rawNotable as RawObs[]) : []
   const merged = mergeNotable(sites, notable, dexBySci, cfg.maxRaritySites ?? 30)
   sites = merged.sites
@@ -122,7 +138,7 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
       hotspotsActive: active.length,
       reportsFetchedFor: sites.length,
       truncated: active.length > sites.length,
-      note: `Showing the ${sites.length} busiest birding sites within ${cfg.hotspotRadiusKm} km that had reports in the last ${cfg.windowDays} days.`,
+      note: `Showing the ${sites.length} best birding sites within ${radiusKm} km that had reports in the last ${cfg.windowDays} days.`,
     },
     sites,
     drive: { computedAt, byStart },

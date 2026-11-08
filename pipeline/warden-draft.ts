@@ -6,13 +6,16 @@ import { join } from 'node:path'
 import { IndexSchema, RegionSchema } from '../src/data/published-schema.ts'
 import { draftWardens } from './wardens.ts'
 
+const config = JSON.parse(readFileSync('pipeline/config/regions.json', 'utf8')) as { regions: { id: string; wardenCount?: number; wardenMaxDriveMin?: number; wardenSpacingKm?: number }[] }
+
 const dir = process.argv.find((a) => a.startsWith('--dir='))?.split('=')[1] ?? '.cache/bq-data'
 const index = IndexSchema.parse(JSON.parse(readFileSync(join(dir, 'index.json'), 'utf8')))
 const locations: Record<string, ReturnType<typeof draftWardens>> = {}
 const lines = [`# Warden draft (data from ${index.generatedAt}${index.isDemo ? ', DEMO data' : ''})`, '']
 for (const ref of index.regions) {
   const region = RegionSchema.parse(JSON.parse(readFileSync(join(dir, ref.file), 'utf8')))
-  const wardens = draftWardens(region)
+  const c = config.regions.find((r) => r.id === ref.id)
+  const wardens = draftWardens(region, { count: c?.wardenCount, maxDriveMin: c?.wardenMaxDriveMin, spacingKm: c?.wardenSpacingKm })
   locations[ref.id] = wardens
   lines.push(`## ${ref.label} (${ref.id}): ${wardens.length} wardens`)
   for (const w of wardens) lines.push(`- ${w.id} at ${w.siteName} [${w.siteId}], ${w.habitat}, ${w.notes.dexSpecies} Dex species, ${w.notes.driveMin} min; boss ${w.boss} (${w.notes.bossSites} sites)`)

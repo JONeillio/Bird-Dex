@@ -4,8 +4,28 @@
  "isDemo": true,
  "regions": [
   {
+   "id": "se-london",
+   "label": "South East London",
+   "centre": [
+    0.176,
+    51.476
+   ],
+   "zoom": 10,
+   "startPoints": [
+    {
+     "id": "erith",
+     "label": "Erith",
+     "point": [
+      0.176,
+      51.476
+     ]
+    }
+   ],
+   "file": "region/se-london.json"
+  },
+  {
    "id": "location-1",
-   "label": "Location 1",
+   "label": "South Manchester",
    "centre": [
     -2.2836,
     53.4413
@@ -14,7 +34,7 @@
    "startPoints": [
     {
      "id": "location-1",
-     "label": "Location 1",
+     "label": "South Manchester",
      "point": [
       -2.2836,
       53.4413
@@ -22,26 +42,6 @@
     }
    ],
    "file": "region/location-1.json"
-  },
-  {
-   "id": "location-2",
-   "label": "Location 2",
-   "centre": [
-    0.176,
-    51.476
-   ],
-   "zoom": 11,
-   "startPoints": [
-    {
-     "id": "location-2",
-     "label": "Location 2",
-     "point": [
-      0.176,
-      51.476
-     ]
-    }
-   ],
-   "file": "region/location-2.json"
   }
  ]
 }
