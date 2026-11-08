@@ -62,16 +62,39 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] B1b Accept eBird's ZIP directly
 - [x] B2 Pasted list import
 
+**Phase P: engines for the design canvas (agreed with Joseph 8 Nov 15:31; do these next, in this order)**
+Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SAi6yZ2Wb6S3KTfSHKSw; summary in the Claude project doc `claude/birdquest-design-concepts.md`). Row 5 (alternative visual styles) was not chosen: don't build themes. Specs are under "Phase P" in section 4. P1 goes first because its history only starts filling from the day it ships.
+- [ ] P1 Pipeline: report history (days reported, time of day) kept in the Actions cache, 0 extra API calls
+- [ ] P2 Encounter v3 fields (count, checklist, duration) and the importer keeping them
+- [ ] P3 Game store (IndexedDB v3) and backup schema 2
+- [ ] P4 Outings v2: checklists, start time, duration, card number, "opened" parcels
+- [ ] P5 Field Report v2 additions (nearly levelled, most counted, extras by name)
+- [ ] P6 Bond record: months, time bands and field notes for the profile
+- [ ] P7 Reliability and Find a bird v2
+- [ ] P8 Bird News engine (with sunrise and sunset worked out on the phone)
+- [ ] P9 Warden jobs and trust
+- [ ] P10 Warden notes (a weekly line in each warden's voice)
+- [ ] P11 Call it engine (replaces duels as the warden contest)
+- [ ] P12 Folk: NPC data, meetings, challenges and keepsakes
+- [ ] P13 Year race in share codes; storage persistence check
+- [ ] P14 Engine readout additions on `#/dev/engine`
+
 **UI phase (waits for Joseph's new visual design; build with his assets)**
-- [ ] N5 Field Report screen (the "how did I do" moment after an import or log)
-- [ ] B4 + N6 BirdDex tabs: Starter Dex | <year> | Life list | Stats
-- [ ] C2 Ranks on cards and profile; rank-up reveal
+Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal · Folk** (Folk holds NPCs, wardens and Call it).
+- [ ] N5 Field Report flow: new checklists as parcels → report → what levelled up → outing card (canvas 2a–2d; engines N2, P4, P5)
+- [ ] U1 Bird News screen (canvas 1b; P8)
+- [ ] U2 Find a bird as a wanted poster with reliability strips (canvas 1c; P7)
+- [ ] B4 + N6 BirdDex tabs: Dex | <year> | Life | Patch, rank frames, "about now" and "close to rank up" filters (canvas 4a)
+- [ ] C2 Ranks on cards and profile; rank-up reveal; profile "your year with it" (canvas 4b; P6)
 - [ ] C3 Nicknames
-- [ ] N7 Exploration on the map (explored / unexplored sites, region %, nearest unexplored)
-- [ ] F3 "Plan a day" sheet
-- [ ] D4 Badge case, warden panel, warden pennants
-- [ ] E2 Squad screen · [ ] E3 Duel screen · [ ] E4 Gold badges
-- [ ] G1 Share codes · [ ] G2 Rival duel · [ ] G3 Patch race (optional)
+- [ ] N7 Exploration on the map (explored / unexplored sites, region %, nearest unexplored) (canvas 1a)
+- [ ] F3 "Plan a day" sheet (canvas 1d)
+- [ ] D4 Badge case, warden page (trust, jobs, note), warden pennants (canvas 3b, 4c; P9, P10)
+- [ ] U3 Call it screen (canvas 3c; P11)
+- [ ] U4 Folk tab: people met, encounter screens, satchel (canvas 3a, 3d; P12)
+- [ ] ~~E2 Squad screen · E3 Duel screen~~ **parked 8 Nov**: Call it replaces duels. Keep `src/domain/duel.ts` and its tests; don't build its screens unless Joseph asks.
+- [ ] E4 Gold badges, now earned by winning a Call it (see P11)
+- [ ] G1 Share codes (with the year race, P13) · [ ] G2 Rival Call it (optional) · [ ] G3 Patch race (optional)
 - [ ] H1 List view · [ ] H2 Adventure skin
 - [ ] I1 First run · [ ] I2 Credits · [ ] I3 Accessibility · [ ] I4 Hand-over note
 
@@ -193,6 +216,62 @@ Tests: visited from logs and imports, demo and sample site ids ignored, unknown 
 **N6 Stats tab (UI phase, with B4).** Fourth BirdDex tab showing N3: totals, most seen, top Bond, coolest birds, years, best outings, streak.
 
 **N7 Exploration on the map (UI phase).** Explored sites get a stamp on their pin; unexplored keep the normal pin with a small "?"; the status line shows "Explored 7 of 80 spots"; a "Somewhere new" chip lists the nearest unexplored spots. Warden silhouettes until visited (with D4).
+
+### Phase P: engines for the design canvas (8 Nov)
+
+Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, Plan a day), the Field Report flow, Folk (NPCs, warden jobs, Call it) and the Collection. Most of it already has an engine (N1–N3, C1, D1–D3, F1–F2). These tickets fill the gaps so the UI phase is only screens. Same rules as phase N: pure functions in `src/domain/`, vitest tests on synthetic data, no styled UI, sample data shows but never earns anything (`source === 'sample'`), public reports never award progress.
+
+**Rule for every new stored thing:** keep only what cannot be worked out again from encounters plus published data (choices you made, notes, opened flags). Trust, job progress, badges, keepsakes earned and Call it results are always recomputed, the way the collection is.
+
+**P1 Pipeline: report history (0 extra API calls).** The recent-observations endpoint gives only the latest report per species per site, so "reported on 9 of the last 14 days" needs memory between runs.
+- Keep `.cache/bq-data/history.json` (the cache only, never git, never published raw): `{ schema: 1, since: "YYYY-MM-DD", sites: { [locId]: { [speciesCode]: { d: string[] /* distinct obs dates, newest first, max 30 */, t: string[] /* obs times HH:MM, newest first, max 20 */ } } } }`. Each refresh merges every report it fetched (latest per species per site, plus notable records at listed sites), then drops dates older than 30 days and sites no longer listed. `since` = first day the history existed.
+- Publish two optional fields on `ReportSchema`: `days` (integer bitmask over the region window: bit 0 = the region's `generatedAt` date, bit 1 = the day before … bit 13; never larger than 2^14−1) and `bands` (`{ dawn, day, dusk, night }` counts from `t` using `timeBand`). Add optional `historySince` (date) to `RegionSchema` so the app can say "since 9 Nov" while it fills up. Older data without these fields must still validate.
+- Honest limits, written in a code comment and in CLAUDE.md "Facts learned": two refreshes a day catch most report days, but a checklist submitted late, after a newer one for the same species and site, is missed, so the UI says "about N of 14 days". Times are only known for reports eBird gives with a time.
+- Make sure the workflow saves the cache after a refresh with history (key per run, as now) and that a code-only deploy keeps the old history untouched.
+- Tests (synthetic): merge adds a new date once, keeps 30 max, drops old dates; bitmask maths across a month boundary; bands from times; a site leaving the list drops its history; schema accepts old and new region files.
+- Then dispatch a refresh, read the summary, and record in CLAUDE.md: history file size, the number of species-site pairs, and that eBird calls did not change.
+
+**P2 Encounter v3 fields.** Add to `EncounterSchema`, all optional (old records and backups still parse): `count` (int ≥ 1, or null when eBird says "X"), `checklistId` (eBird Submission ID such as `S123…`, ≤ 32 chars), `durationMin` (int 0–1440, the checklist's duration). The eBird importer keeps `Count`, `Submission ID` and `Duration (Min)` when present (sample history too: make the seeded generator produce believable counts and durations). Logging by hand: add an optional count field to the log sheet in the UI phase, nothing now. `Count` is still never invented. Tests: CSV with and without these columns, "X" count → null, re-import adds nothing.
+
+**P3 Game store and backup v2.**
+- IndexedDB version 3 adds a `game` store (keyPath `id`), with typed documents validated by zod in `src/data/personal/game-schema.ts`: `opened` (`{ id: 'opened', keys: string[] }`: outing keys whose Field Report was opened), `outingNote` (`{ id: 'note:<outingKey>', text ≤ 500 }`), `call` (P11 records, `id: 'call:<id>'`), `npc` (`{ id: 'npc:<npcId>', choices: Record<string, string> }`: answers you gave in encounters, nothing derivable), `prefsExtra` (`{ id: 'prefs', nicknames: Record<speciesId, string>, lastNewsSeenAt: string | null, lastReportSeenAt: string | null, playerName: string }`). Memory fallback like `memoryStorage`. A damaged document is skipped, never fatal.
+- `BackupSchema` gains `schema: 2` with optional `importBatches` and `game` (array of game documents). `parseBackup` accepts 1 and 2; `buildBackup` writes 2. Restore merges game documents by id (backup wins only when the phone has none; `opened` keys are unioned).
+- `src/state/game.ts`: a small hook like `useRecords` (load once, update optimistically, save).
+- Tests: upgrade from v2 keeps encounters and batches; schema 1 backup still restores; round trip keeps game documents; union of opened keys.
+
+**P4 Outings v2 and parcels.** In `outings.ts`, extend `Outing` (no breaking changes): `checklistIds: string[]`, `startTime: string | null` (earliest `time`), `durationMin: number | null` (sum over distinct checklists; null when none had one), `cardNo: number` (1-based count of real, non-sample outings in that calendar year in date order; sample outings get 0). New `src/domain/parcels.ts`: `unopened(outings, openedKeys, sinceCreatedAt)` lists outings with sightings added after `sinceCreatedAt` and not yet opened, newest first; `markOpened(keys, opened)` returns the new set. A grouping rule stays as now (one outing = one date at one place), so two checklists at one site on one day are one parcel. Tests: card numbers by year, sample excluded from numbering, duration sums per checklist not per sighting, unopened after a re-import.
+
+**P5 Field Report v2 additions.** Add to `FieldReport` (keep existing fields): `extraNames: string[]` (names for `par.extra`), `nearlyLevelled: { key, name, rank, toNext }[]` (species logged on this outing that are within 10 Bond points of their next rank afterwards, closest first, max 3), `mostCounted: { key, name, count } | null` (highest count on the outing, needs P2; null when no counts), `cardNo` (from P4), `durationMin`, `startTime`. Tests extend `field-report.test.ts`.
+
+**P6 Bond record for the profile.** `computeBond` also returns `monthsSeen: number[]` (1–12, sorted), `bandsSeen: TimeBand[]`, `sitesSeen: string[]` (site keys), `firstPlace: string | null`. New `fieldNotes(speciesId): string` in `src/domain/fieldNotes.ts` builds one plain sentence from `traits.v1.json` (size · diet · status · when active), for example "Small · eats insects · resident all year · sings at dawn"; returns '' for outside-Dex birds. `missingMonths(bond)` lists months never logged. Tests: sets match the rules, notes for three birds, outside-Dex empty.
+
+**P7 Reliability and Find a bird v2.** `src/domain/reliability.ts`: `daysReported(days: number | undefined): number | null` (popcount, null when no history), `reliabilityLabel(n, windowDays)` ("most days" ≥ 9, "often" 5–8, "now and then" 2–4, "once" 1), `bestBand(bands)` (the band with most reports when it has ≥ 50% of them and ≥ 3 reports, else null), `strip(days, windowDays): boolean[]` (oldest first, for the 14-cell bar). `findBird.whereSeen` gains `days` and `bestBand` per sighting and sorts by days reported (desc), then newest report, then drive time; with no history it keeps today's order. Tests.
+
+**P8 Bird News engine.** `src/domain/news.ts`: `birdNews({ region, startId, limitMin, recorded, targets, rarity, lastSeenAt, now })` → `{ newToYou: number /* unrecorded Dex species reported within the limit */, rareScarce: Sighting[] /* tier rare or scarce within the limit, newest first, max 5, unconfirmed flagged */, targetsReported: Sighting[] /* each target's best site by reliability then drive */, sinceLastLook: number /* reports newer than lastSeenAt */, generatedAt }`. Unknown drive times are excluded from "within the limit" but counted in a separate `unknownDrive` number. `src/domain/sun.ts`: `sunTimes(lngLat, date)` → local sunrise and sunset as HH:MM using the standard NOAA solar formula (no API, no network), tested against three known dates for Manchester and London to within 2 minutes (put the reference values from a published almanac in the test with their source in a comment). One-line tip: when a target's `bestBand` exists, "Most <bird> reports here come at <band>".
+
+**P9 Warden jobs and trust.** `src/data/warden-jobs.v1.json` (zod in `game.ts`): job templates per habitat. Kinds: `count` (log species X at the warden's site with a count), `heard` (log X as heard or seen and heard there; optional band), `band` (log any bird there in a band, e.g. dusk), `signature` (log N signature birds there this month), `season` (an outing there in a season you have not visited it in). `src/domain/wardenJobs.ts`: `jobsFor(warden, month /* YYYY-MM */, site)` picks 2 jobs with the seeded random (`rngFor(wardenId + month)`), choosing species that are in the site's current reports or signature list so every job is doable; `jobStatus(job, encounters)` counts only real (non-sample) encounters with `siteId === warden.siteId` dated in that month. `trust(warden, encounters, now)` = number of completed jobs over every month since your first real outing there (recompute each month's jobs from the seed), mapped to levels Newcomer 0, Visitor 1, Regular 3, Local 6, Friend of the reserve 10. Seeds must not depend on today's region data for past months: for past months use the signature list only. Tests: deterministic jobs, completion, sample ignored, other sites ignored, trust levels.
+
+**P10 Warden notes.** `src/data/warden-voices.v1.json`: per persona, 4–6 sentence templates with slots (`{bird}`, `{band}`, `{days}`, `{site}`), in their voice (friendly, British, no jokes at anyone's expense). `wardenNote(warden, site, region, weekKey)` chooses a fact in this order: a rare or scarce bird reported at the site (with its best band from P7 when known), else the most reliable bird on the signature list, else a quiet-week line; picks the template with `rngFor(wardenId + weekKey)`. Never invent numbers: only use counts and days that are in the data. Returns `{ text, basis: string /* e.g. "eBird reports, last 14 days" */ }`. Tests: each branch, no slot left unfilled, deterministic per week.
+
+**P11 Call it engine** `src/domain/callIt.ts` (replaces duels as the warden contest; `duel.ts` stays as it is).
+- `wardenCalls(warden, site, region)`: 5 species from the site's current reports with the most days reported (P7; fallback newest), boss included only if reported on ≥ 3 days.
+- `callPoints(tier)`: common/fairly-common 1, uncommon 2, scarce 3, rare/unreported 4 (from the region's rarity table at the time of calling; stored with the call so later data can't change it).
+- Record (stored in the P3 game store): `{ id, wardenId, siteId, madeAt /* ISO */, expiresOn /* madeAt date + 7 days */, player: { key, name, pts }[] /* 1–5 */, warden: { key, name, pts }[] }`. Player choices may be any species reported in the region or on your life list.
+- `settle(call, encounters)`: the first real outing at `siteId` dated on or after the call's date and on or before `expiresOn`, whose sightings were added after `madeAt` (so importing an old checklist can't settle it). Your score = points of your calls you logged on that outing; the warden's score = points of her calls you logged on it (she is betting on what you'll find). Result `win | draw | loss | pending | expired`. Tie → draw.
+- Badge rule change: gold = silver plus a Call it win against that warden (replace `duelWins` in `badges.ts` with a `callWins` map derived from settled calls; keep the old option name working for tests until E4).
+- Tests: points frozen at calling, settling outing selection, import of an older checklist doesn't settle, expiry, sample ignored, gold rule.
+
+**P12 Folk: NPCs.** Data: convert `research/art-drafts/npc-pack-v1/encounters.json` into `src/data/npcs.v1.json` (zod in `game.ts`): `id, name, role, habitats: SetId[], band: TimeBand | null, skill: 'ear' | 'count' | 'behaviour' | 'colour' | 'patience' | 'spot', opening, returnLine, keepsake, connections, challenge`. Keep the Erith settings only as flavour text for Location 2 (`placeNote`); NPCs must work in any region.
+- `challenge` kinds and pure checkers in `src/domain/folk.ts`: `pick-phrase` (choose the matching phrase among 3; until licensed recordings exist, phrases are drawn sonograms plus synthesised tones from `src/audio`), `count-flock` (seeded number of birds crossing, answer ±0), `pick-by-pose` (choose a species from 3 silhouettes), `match-swatch` (choose a colour among 4), `spot` (tap a target area index), `choice` (no wrong answer; stored as a choice). `checkAnswer(challenge, seed, answer)`.
+- Meetings (how you meet them: by going outside): `npcMeetings(outings, siteCharacterById, met)` walks real outings oldest first; an NPC is met at the first outing whose site character includes one of its habitats and, when it has a band, has a sighting in that band. At most one new NPC per outing; tie broken by `rngFor(outingKey)`. Returns `{ npcId, outingKey, date, place }[]`. The Field Report shows "You met Nell" for that outing.
+- Progress: `stage(npcId, meetings, choices)`: `met` → `done` (challenge answered) → `returned` (a later real outing at a site with a matching habitat after `done`) ; keepsakes = NPCs at `done` or later. Connections (Dev ↔ Nell) unlock a second line when both are done.
+- Tests: meeting rules, one per outing, sample never meets anyone, each checker, stages, keepsakes derived.
+
+**P13 Year race and storage.** Add `y: { year, count }` (species this calendar year) to the G1 share-code payload spec and a pure `yearRace(mine, theirs)`. Add `src/phone/persist.ts`: on first real import or log, call `navigator.storage.persist()` once (guarded; some browsers lack it) and expose `persisted()` for Settings to show "Stored safely on this phone" or "Your browser may clear this: add to home screen and back up". Tests for the share payload with a mocked year.
+
+**P14 Engine readout.** Extend `#/dev/engine` (plain lists, existing components) with: Bird News numbers, the 5 most reliable site-bird pairs, this month's jobs and trust for the current location's wardens, each warden's note, a Call it sandbox (make a call for a warden, settle it against the sample history), NPC meetings and stages, unopened parcels. Screens: `npm run screens -- "#/journal >> click:Import >> click:Try a sample history >> wait:400 >> click:Add sample >> wait:2500 >> click:Done" "#/dev/engine"`.
+
+**Phase P phone review (add to Waiting):** Joseph opens `#/dev/engine` with the sample history and checks the news, jobs, notes and Call it results read sensibly; Lewis checks a few reliability numbers against what he knows.
 
 ### Phase C: Field Bond
 

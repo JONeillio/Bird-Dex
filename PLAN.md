@@ -76,6 +76,19 @@ Hosted test on his phone, real data check, backup explained, credits visible. No
 - Routing origin privacy: keep the public-start-point rule until the provider position is resolved.
 - AI-generated sprites need grid cleanup and species checks, not just resizing.
 
+## Hosting check (8 Nov 2026): GitHub Pages is still right
+
+Checked against GitHub's published limits on 8 Nov: a Pages site may be up to 1 GB, has a soft 100 GB a month bandwidth limit, and the 10-builds-an-hour limit does not apply to sites built by an Actions workflow (ours is). The repo is about 33 MB of history (mostly `research/` art masters) and the site about 5 MB, so there is lots of room. eBird and Pages both require non-commercial use.
+
+Revisit hosting when any of these becomes true (none needs action now):
+1. **Records need to follow people between phones, or rivals need live scores.** Records live only in each phone's browser storage; share codes and backup files cover this for now. Next step would be a small free-tier backend with sign-in (for example Supabase, or Cloudflare Workers with D1), which brings privacy duties because people's sightings would leave the phone.
+2. **Anyone wants a place that isn't a preset location.** Only the Action holds the eBird key, so new places mean editing `regions.json`. Live lookups for any place would need a small proxy that keeps the key secret (for example a Cloudflare Worker).
+3. **Money of any kind** (charging, ads, selling access). Pages is not for commercial sites and eBird data needs written permission for commercial use, so both would have to change first.
+4. **eBird call volume.** About 164 calls per refresh, twice a day, for two locations; each new location adds about 80 per refresh. eBird publishes no quota, so add locations slowly and watch for 429s in the refresh summary.
+5. **Repo size.** Keep art masters out of `public/` and consider moving `research/art-drafts/` masters to a release or separate repo if the repo nears 1 GB.
+
+Known weak spot today: browsers can clear site storage, especially on iPhone when the app isn't added to the home screen. AUTOPILOT P13 asks the browser for persistent storage, and the backup reminder stays.
+
 ## Files and where they live
 
 All supplied material is now in the repo. Research sits under `research/` (per its README) rather than `docs/`, which stays free as a possible Pages root.

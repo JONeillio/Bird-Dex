@@ -4,6 +4,15 @@
 
 Written 8 Nov 2026 with Joseph, after Lewis asked for "gym badges" and Joseph asked how battles could fit. Our influences are Pokémon (collect, badges) and Top Trumps (compare cards), but the mechanics here come from things birders already do: patch lists, bird races, year lists and knowing which bird turns up where. Avoid borrowed terms: no gyms, trainers, HP, types or attacks.
 
+## Update, 8 Nov afternoon: what changed after the design canvas
+
+Joseph approved the design canvas (https://claude.ai/artifact/H8SAi6yZ2Wb6S3KTfSHKSw) rows 1–4. Engines are AUTOPILOT phase P. What changes here:
+- **Call it replaces Field Duels as the warden contest.** Before a visit you and the warden each call up to 5 birds; your next logged outing at that site within 7 days settles it, and rarer calls score more. It rewards knowing which bird turns up where, it can only be won by going outside, and it needs no combat. Section 4 below is parked (the engine stays in `duel.ts`); a win now earns the gold warden badge.
+- **Warden trust and monthly jobs.** Wardens give two small survey-style jobs a month (count a species, hear one at dusk, log signature birds), modelled on real counts such as WeBS and BirdTrack. Completed jobs build trust: Newcomer, Visitor, Regular, Local, Friend of the reserve. Each warden also gives a weekly note in their own voice, written only from the latest reports.
+- **Folk.** Twelve story NPCs (the NPC pack) each teach a real birding skill: by ear, counting, behaviour, colour, patience, spotting. You meet them by logging an outing at the right kind of place (and time of day), never from the sofa; their challenge then plays at home and earns a keepsake. A later visit moves their story on.
+- **Field Report as parcels.** New checklists from an import arrive as parcels to open, then the report, what levelled up and an outing card to keep.
+- Bottom tabs become Explore · Dex · Journal · Folk.
+
 ## Principles
 
 1. **Going outside is the only way to get stronger.** Everything grows from your own logged or imported sightings. Public eBird reports never award progress (hard rule), demo data never counts.
