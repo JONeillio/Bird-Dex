@@ -1,0 +1,399 @@
+{
+  "schema_version": "1.0",
+  "pack_name": "Bird-Dex NPC Asset Pack v1",
+  "created": "2026-11-08",
+  "starting_area": {
+    "locality": "Erith, London Borough of Bexley",
+    "proposed_first_chapter": "Bursted Woods",
+    "proposed_later_chapter": "Erith Pier and Thames riverside"
+  },
+  "placement_policy": "Suggested narrative settings. Exact coordinates and live map markers remain unset. Fictional features are identified per character.",
+  "character_order": [
+    "nell",
+    "kit",
+    "imani",
+    "bea",
+    "dev",
+    "moss",
+    "june",
+    "otis",
+    "ruth",
+    "val",
+    "alfie",
+    "leanne"
+  ],
+  "characters": [
+    {
+      "id": "nell",
+      "name": "Nell",
+      "role": "The dawn-chorus recordist",
+      "appearance": "Young Black British field recordist with curls, ochre headphones, teal rain shell and handheld recorder.",
+      "location": "A path just inside Bursted Woods",
+      "location_status": "proposed_localisation",
+      "location_note": "Suggested home for the original woodland encounter. The exact path and seating are fictional.",
+      "availability": "Early morning",
+      "opening_line": "There. Hear that little phrase? Wait for him to sing it again.",
+      "story": "Nell spends her mornings collecting the sounds most people walk straight past. She is delighted when a familiar call emerges from the noise, and wants you to hear it for yourself. Dev later recognises a phrase in one of her recordings.",
+      "scene": "Move in from the path to Nell beside the trees. She lifts one headphone cup, pauses her recorder and looks towards the canopy. Road noise fades enough to make the bird phrase clear.",
+      "encounter": "Listen to a short call, wait for its repetition, then select the matching phrase. Later visits add another recording or a conversation with Dev.",
+      "keepsake": "A labelled recording for the field journal",
+      "reward_effect": "Replay the encounter audio from the journal.",
+      "return_line": "I kept the bit where we both heard it. You can hear you smiling.",
+      "connections": [
+        "dev"
+      ],
+      "original_or_new": "Original portrait and opening line. Keepsake and return visit developed for this pack.",
+      "portrait": {
+        "file": "nell.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "99f92d35ddcc93e8c02830cec1c8cb659b5635c0de6d380eaba7004bea0b74b2"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "kit",
+      "name": "Kit",
+      "role": "The self-appointed wren expert",
+      "appearance": "Freckled red-haired child in a blue hat and mustard coat, with oversized binoculars and a wren on his hat.",
+      "location": "The scrubby edge of Bursted Woods",
+      "location_status": "proposed_localisation",
+      "location_note": "Suggested setting for his existing wren encounter. The precise clearing is fictional.",
+      "availability": "Daytime",
+      "opening_line": "If you see it, just point. Last time someone shouted, it flew off.",
+      "story": "Kit has been standing still for twenty minutes and is certain that patience will make him the best wren spotter in the wood. He has yet to notice that the bird is sitting on his hat.",
+      "scene": "Move from the woodland edge into a close view of Kit holding a finger to his lips. A tiny movement above his hat gives the player the answer before Kit sees it.",
+      "encounter": "Tap the wren quietly. Kit follows your gaze, looks up too late and has to accept your account of where it was.",
+      "keepsake": "A hand-drawn wren sticker",
+      "reward_effect": "A cosmetic sticker for a journal page.",
+      "return_line": "It came back. Different hat today. I'm testing a theory.",
+      "connections": [],
+      "original_or_new": "Original portrait and opening line. Keepsake and return visit developed for this pack.",
+      "portrait": {
+        "file": "kit.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "60356168b71b0d1ef225b49ad3ed87296aa9cfdd848a850b1d5208b41cc8938f"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "imani",
+      "name": "Imani",
+      "role": "The hide artist",
+      "appearance": "Artist in her early forties with a silver streak in dark hair, red shawl, indigo overalls and an open bird sketchbook.",
+      "location": "A fictional hide or sheltered sketching bench in the Bursted Woods chapter",
+      "location_status": "proposed_localisation",
+      "location_note": "A game scene. No real hide at Bursted Woods has been established. Local RSPB information lists no facilities.",
+      "availability": "Daytime",
+      "opening_line": "Same bird in both drawings. Reckon you can name it from the way it climbs?",
+      "story": "Imani sketches behaviour before she worries about perfect feathers. Her two nuthatch drawings show how posture can reveal a bird, even when you only catch a glimpse. She lets the player cover one drawing and work from the other.",
+      "scene": "Move into a sheltered seat beside her. Imani tilts her battered sketchbook towards the player, then covers one page with her hand.",
+      "encounter": "Identify the nuthatch from its headfirst climbing pose. Imani reveals both drawings and talks through the movement she noticed.",
+      "keepsake": "A copy of her nuthatch study",
+      "reward_effect": "An illustrated behaviour note in the field journal.",
+      "return_line": "That one's yours to finish. I've left you the interesting bit.",
+      "connections": [
+        "bea"
+      ],
+      "original_or_new": "Original portrait and opening line. Keepsake and return visit developed for this pack.",
+      "portrait": {
+        "file": "imani.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "edc11884565b65376fa535b9361500e636655f6221ceaffffdca34fcca3d3134"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "bea",
+      "name": "Bea",
+      "role": "The hide keeper",
+      "appearance": "Stocky, cheerful middle-aged woman with dark bob, pencil in her hair, paint-marked blue jacket and a wonky wooden viewing frame.",
+      "location": "A fictional bird hide in the Bursted Woods chapter",
+      "location_status": "proposed_localisation",
+      "location_note": "The hide, brook, reused timber and viewing windows belong to the game fiction. Their presence at the real wood is unverified.",
+      "availability": "Daytime while working on the hide",
+      "opening_line": "Built that window specially for kingfishers. So far it's been excellent for looking at a crisp packet.",
+      "story": "Bea used to paint fairground signs. A little gold carousel lettering survives on timber she reused for the hide. She gives you her wonky viewing frame and asks where the next viewing slot ought to go. She claims the two buns on Dev's bakery order are both for volunteers.",
+      "scene": "Lean into the hide window beside Bea. She passes the wooden frame into the foreground, letting the player explore different views through it.",
+      "encounter": "Slide the frame along the wall to choose a clear view of the fictional brook. On a later visit, the window has been built in the position the player chose.",
+      "keepsake": "The viewing window you chose",
+      "reward_effect": "A persistent scene change, with a sighting pencilled on its sill.",
+      "return_line": "Typical. I was getting the drill.",
+      "connections": [
+        "dev",
+        "imani",
+        "moss",
+        "ruth"
+      ],
+      "original_or_new": "Existing story retained. Bursted Woods chapter placement proposed for this pack.",
+      "portrait": {
+        "file": "bea.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "ee53d62a134681d4480bb2cb83ea9311264b3d4d05a245ab1858c8ddf4060aaa"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "dev",
+      "name": "Dev",
+      "role": "The baker at the gate",
+      "appearance": "Lanky British South Asian baker with wavy hair, moustache, plum jumper, honey rain cape and green mechanical kitchen timer.",
+      "location": "A fictional bakery yard at the edge of the starting neighbourhood",
+      "location_status": "proposed_localisation",
+      "location_note": "A fictional shop near the Bursted Woods chapter. No specific real bakery or business is represented.",
+      "availability": "Dawn after the first bake",
+      "opening_line": "First week at the bakery I thought that blackbird was someone's alarm going off. Felt a right idiot when I asked whose phone it was.",
+      "story": "Dev sits on the low wall behind the bakery with flour on his sleeve and a timer on his knee. When the oven fan cuts out he can hear the same blackbird phrase each morning. He writes the rhythm on the back of an order slip. The order on the front is Bea's: two buns, one iced, both apparently for the volunteers.",
+      "scene": "Move into the yard beside Dev. The oven fan stops and the soundscape opens up for a few seconds.",
+      "encounter": "Pick the phrase that repeats, then visit Nell to find out whether she has recorded it too.",
+      "keepsake": "A bakery order slip with the bird rhythm on the back",
+      "reward_effect": "A two-sided journal item linking Dev and Bea.",
+      "return_line": "You heard it that time. Same one, just before the fan came back on.",
+      "connections": [
+        "nell",
+        "bea"
+      ],
+      "original_or_new": "Existing story retained. Fictional neighbourhood placement proposed for this pack.",
+      "portrait": {
+        "file": "dev.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "f8e7d991dc455d72f323e5953364d69ff15b3a38650c090a793acc32990b872e"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "moss",
+      "name": "Moss",
+      "role": "The photographer who missed it",
+      "appearance": "Young androgynous photographer with raspberry hair, silver hoops, mended denim, sage hood and a secondhand camera on a floral strap.",
+      "location": "A fallen tree in Bursted Woods",
+      "location_status": "proposed_localisation",
+      "location_note": "Suggested woodland setting. The particular tree and photograph are fictional.",
+      "availability": "Daytime",
+      "opening_line": "Best view I've ever had of a jay. Absolutely filled the frame. This is the branch about half a second later.",
+      "story": "Moss used the last frame on the roll and was about to bin the result. In the apparently empty photograph, a second jay is tucked into the far edge with an acorn in its bill. Moss had been watching the first bird too intently to notice.",
+      "scene": "Move beside Moss on a fallen tree. A strip of prints lies across their knees. Tapping one brings the photograph close enough to inspect.",
+      "encounter": "Move a magnifier over the photograph to find the second jay. Moss marks a crop in pink pencil.",
+      "keepsake": "A photograph with the crop marked in pink",
+      "reward_effect": "A journal print. Later the full photograph appears in Bea's hide with your initials beside Moss's.",
+      "return_line": "Put the whole thing up in the hide. Your initials are on it. You found the bird.",
+      "connections": [
+        "bea"
+      ],
+      "original_or_new": "Existing story retained. Bursted Woods placement proposed for this pack.",
+      "portrait": {
+        "file": "moss.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "f3e3fe882b1f353af58dcfd15c4f5b14c15049e25414f2bab6dfd7ff89738ec9"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "june",
+      "name": "June",
+      "role": "The bridge champion",
+      "appearance": "Older British Chinese wheelchair user with swept-back grey hair, saffron jumper, teal dungarees and a blue tally counter.",
+      "location": "A fictional accessible bridge viewpoint in the starting chapter",
+      "location_status": "fictional_scene_unplaced",
+      "location_note": "The bridge and approach need a suitable location or a fictional game setting. Real access and facilities have not been assessed.",
+      "availability": "Saturday daytime",
+      "opening_line": "Seven long-tailed tits went across. If you're about to say eight, you'd better have seen something I didn't.",
+      "story": "June used to race in a rowing eight. She still comes to the same viewpoint each Saturday, and she still likes winning. She hands you the tally counter while a flock moves between trees. Seven birds cross, June looks smug, and then the last bird appears.",
+      "scene": "Settle beside June at the bridge rail, keeping her seated position and the view across the gap comfortable in frame.",
+      "encounter": "Count the crossing birds and catch the delayed eighth bird. June challenges you again on later visits.",
+      "keepsake": "A tiny enamel bridge pin",
+      "reward_effect": "A seasonal champion pin with a friendly recurring challenge.",
+      "return_line": "Season champion. Give it here if I win next week.",
+      "connections": [],
+      "original_or_new": "Existing story retained. Precise local placement remains open.",
+      "portrait": {
+        "file": "june.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "7c5e07ef4ee5547920ea9e27338274f4af63a3b5782fe07a292ea75dfedd4abe"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "otis",
+      "name": "Otis",
+      "role": "The keeper of his sister's map",
+      "appearance": "Black British teenager with twists under an orange cap, plum striped rugby shirt and a repaired hand-drawn map.",
+      "location": "A fictional brook and footbridge in the starting chapter",
+      "location_status": "fictional_scene_unplaced",
+      "location_note": "The brook, footbridge and Waggy Bridge name are invented. They need a later mapping decision.",
+      "availability": "Sunday daytime",
+      "opening_line": "She's put the star in the wrong place. Well. She's seven. Let's go to the wrong place, then.",
+      "story": "Otis and his little sister draw a map after every Sunday walk. Hers has a huge red star beside an ordinary bend in the brook. At her eye level, a grey wagtail becomes visible beneath the bridge. Otis has walked straight past it for weeks.",
+      "scene": "Let his paper map unfold over the game map. Following its star moves the view low over the fictional brook, at a child's eye level.",
+      "encounter": "Follow the handmade map and find the overlooked bird beneath the bridge.",
+      "keepsake": "His sister's hand-drawn map",
+      "reward_effect": "An optional map overlay preserving her place names, including Waggy Bridge.",
+      "return_line": "She's asking if you've been back to Waggy Bridge. Apparently it needs checking every Sunday.",
+      "connections": [],
+      "original_or_new": "Existing story retained. Precise local placement remains open.",
+      "portrait": {
+        "file": "otis.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "dce933c9018a73cf5351d5bff1d5dc2310db9fbe5e7692ec823b79c6d80b4f22"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "ruth",
+      "name": "Ruth",
+      "role": "The last one in the wood",
+      "appearance": "Night-shift birder in her early forties with dark curls, indigo cape, coral knitwear and a brass torch with red filter.",
+      "location": "A fictional evening bench in the Bursted Woods chapter",
+      "location_status": "proposed_localisation",
+      "location_note": "The bench, repeated owl encounter and shared cups are narrative concepts. Local owl occurrence was not verified for this pack.",
+      "availability": "Dusk and evening in the game",
+      "opening_line": "You can sit there. That end dries first.",
+      "story": "Ruth stops at the same bench after a late shift. The first encounter is simply time spent sitting together. On a later visit there are two enamel cups. Halfway through pouring, she pauses for an owl call and waits for the reply before speaking.",
+      "scene": "Settle beside Ruth. Rain ticks off her hood and a distant bus changes gear. On the return visit she pours tea, then both characters listen.",
+      "encounter": "Choose whether to stay another minute or head home. Both choices lead to recognition on a later visit. A subsequent visit introduces the owl conversation.",
+      "keepsake": "Your enamel cup beside hers",
+      "reward_effect": "Your cup later hangs beside Ruth's in the fictional hide.",
+      "return_line": "There you are. Wondered when you two would meet.",
+      "connections": [
+        "bea"
+      ],
+      "original_or_new": "Existing story retained. Bursted Woods chapter placement proposed for this pack.",
+      "portrait": {
+        "file": "ruth.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "02ec3de72c924fb27046fc649d72bf70057b41f38569a029add177f97765c8ad"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "val",
+      "name": "Val",
+      "role": "The driver who knows the parakeets' timetable",
+      "appearance": "British Caribbean bus driver in her late fifties, salt-and-pepper locs, amber glasses, navy uniform and a duty card with a green bird sketch.",
+      "location": "A bus stop on Erith Road beside Bursted Woods",
+      "location_status": "previously_proposed_real_area",
+      "location_note": "The bus-served wood and parakeets are grounded in local information. The particular stop scene and predictable flight are fictional.",
+      "availability": "Late afternoon or early evening",
+      "opening_line": "Used to drive the 89 through here. Everyone upstairs looking down at their phones. Best seats in the house, absolutely wasted.",
+      "story": "Val knows where to look when a parakeet flock crosses the road. People ask what time the birds come through. She always says after work and lets them decide whose. Her dry humour makes her a possible first contact for the player.",
+      "scene": "Settle beside Val at the kerb. She points at a gap between treetops. A bus pulls away, then the sound and green streaks of the flock fill that gap.",
+      "encounter": "Follow Val's gaze and spot the passing flock. On a return visit, recognise the flight line yourself.",
+      "keepsake": "An old duty card with the flight line drawn on its back",
+      "reward_effect": "A journal item that prompts Nell to play a related recording.",
+      "return_line": "After work. Theirs, usually. Mine's all over the place.",
+      "connections": [
+        "nell"
+      ],
+      "original_or_new": "Existing regional character and placement retained. Return line developed for this pack.",
+      "portrait": {
+        "file": "val.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "155dc21600b5ae1b4284fc7035990e5d927f1cff0bf0c247d9e1ee297fa028ca"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "alfie",
+      "name": "Alfie",
+      "role": "The keeper who wants a witness",
+      "appearance": "Lanky mixed-race teenage goalkeeper with sandy curls, teal shirt, coral elbow patch and muddy cream gloves.",
+      "location": "The open grass beside Bursted Woods",
+      "location_status": "previously_proposed_real_area",
+      "location_note": "Open grass and green woodpeckers are supported by local information. The match, jacket goalposts and exact bird position are fictional.",
+      "availability": "Sunday after a kickabout",
+      "opening_line": "Please tell my brother you saw it. Green bird, red head, practically on the penalty spot. He reckons I'm making excuses for the third goal.",
+      "story": "Alfie insists a green woodpecker distracted him during a goal. After the game he asks you to watch the grass by his water bottle, hoping for a witness his brother will believe.",
+      "scene": "Drop to Alfie's eye line behind a goal marked with jackets. A movement in the grass reveals a red crown and green back.",
+      "encounter": "Spot the woodpecker and agree to sign his match report as a witness.",
+      "keepsake": "The signed match report",
+      "reward_effect": "A journal page updated on the next visit by his brother's reply.",
+      "return_line": "Bird confirmed. Still should've saved it.",
+      "return_line_speaker": "Alfie's brother, written on the report",
+      "connections": [],
+      "original_or_new": "Existing regional character and placement retained.",
+      "portrait": {
+        "file": "alfie.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "466aa4138e1dec2c38e0996c3e0173836ec7de82525c5d185a6260b00a7a1f37"
+      },
+      "status": "concept"
+    },
+    {
+      "id": "leanne",
+      "name": "Leanne",
+      "role": "The colourist on Erith Pier",
+      "appearance": "Young nail colourist with auburn bob, plum jacket, cherry lipstick and a ring of gull-inspired nail swatches.",
+      "location": "Erith Pier",
+      "location_status": "previously_proposed_real_place",
+      "location_note": "A real local gull-watching destination, suggested as a later river chapter beyond the initial wood.",
+      "availability": "Lunch break",
+      "opening_line": "Got asked for 'seagull grey' at work. I said, which bit? She's looking at me like I've asked which seagull. Well. That as well.",
+      "story": "Leanne works in her aunt's nail salon. She spends lunch breaks matching swatches to gull plumage at the pier. Each time a bird turns in the light she finds she needs another shade.",
+      "scene": "Join Leanne at the pier rail. A gull turns its folded wing towards the light while she lifts her fan of swatches alongside it.",
+      "encounter": "Slide a swatch beneath the wing to match the grey. Complete a small set, then name the last colour.",
+      "keepsake": "Your Erith Pier palette",
+      "reward_effect": "A colour option for the field journal. A later conversation mentions a salon customer requesting the player's colour by name.",
+      "return_line": "Someone asked for your colour yesterday. By name. Had to get the card out to check it.",
+      "connections": [],
+      "original_or_new": "Existing regional character and placement retained. Return line developed for this pack.",
+      "portrait": {
+        "file": "leanne.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "PNG",
+        "transparent_background": true,
+        "sha256": "14328cc5e9b9380d071736fccaac715638e53fa3279a8e33a65a524c9080ee0e"
+      },
+      "status": "concept"
+    }
+  ],
+  "sources": [
+    {
+      "title": "RSPB Bexley Local Group — Bursted Woods and adjoining open space",
+      "url": "https://group.rspb.org.uk/bexley/local-wild-places/bursted-woods-and-adjoining-open-space/",
+      "supports": "Woodland and open grass, Barnehurst station, buses including the 89, resident birds including green woodpecker and ring-necked parakeet. The page lists no facilities."
+    },
+    {
+      "title": "Bexley Council — Parks to visit around the borough",
+      "url": "https://www.bexley.gov.uk/services/parks-leisure-and-libraries/parks-and-open-spaces/parks-visit-around-borough",
+      "supports": "Local park names and addresses."
+    },
+    {
+      "title": "BirdGuides — Watching gulls in East London",
+      "url": "https://www.birdguides.com/articles/patch-birding/watching-gulls-in-east-london/",
+      "supports": "Erith Pier as a Thames gull-watching location. Historical article, used for setting inspiration."
+    }
+  ]
+}
