@@ -1,0 +1,53 @@
+{
+  "pack": "Bird-Dex Set A - Stamps and Tiers",
+  "assets": [
+    {
+      "file": "stamp_lifer.png",
+      "role": "Lifer stamp with star"
+    },
+    {
+      "file": "stamp_first_of_year.png",
+      "role": "First-of-year stamp with calendar and leaf"
+    },
+    {
+      "file": "stamp_explored.png",
+      "role": "Explored stamp with flag on hill"
+    },
+    {
+      "file": "stamp_new_best.png",
+      "role": "New-best stamp with laurel and +1"
+    },
+    {
+      "file": "stamp_rank_up.png",
+      "role": "Rank-up stamp with arrow and sparkle"
+    },
+    {
+      "file": "stamp_unexplored.png",
+      "role": "Unexplored stamp with question mark and dashed circle"
+    },
+    {
+      "file": "tier_1_common.png",
+      "role": "Tier 1 Common — circle"
+    },
+    {
+      "file": "tier_2_fairly_common.png",
+      "role": "Tier 2 Fairly common — diamond"
+    },
+    {
+      "file": "tier_3_uncommon.png",
+      "role": "Tier 3 Uncommon — triangle"
+    },
+    {
+      "file": "tier_4_scarce.png",
+      "role": "Tier 4 Scarce — square"
+    },
+    {
+      "file": "tier_5_rare.png",
+      "role": "Tier 5 Rare — star"
+    },
+    {
+      "file": "tier_6_special.png",
+      "role": "Tier 6 Special — heart-like plum gem"
+    }
+  ]
+}
