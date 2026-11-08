@@ -1,8 +1,8 @@
 // Where your records are kept. IndexedDB on the phone; an in-memory copy when the browser won't allow it
 // (private mode, storage full), so the app keeps working and says so.
 import { openDB, type IDBPDatabase } from 'idb'
-import type { Encounter } from '../personal-schema'
-import { EncounterSchema } from '../personal-schema'
+import type { Encounter, ImportBatch } from '../personal-schema'
+import { EncounterSchema, ImportBatchSchema } from '../personal-schema'
 
 export interface RecordsStorage {
   readonly persistent: boolean
@@ -10,10 +10,15 @@ export interface RecordsStorage {
   put(e: Encounter): Promise<void>
   remove(id: string): Promise<void>
   replaceAll(list: readonly Encounter[]): Promise<void>
+  /** Write many records in one go (imports write in chunks of 500). */
+  putMany(list: readonly Encounter[]): Promise<void>
+  loadBatches(): Promise<ImportBatch[]>
+  putBatch(b: ImportBatch): Promise<void>
 }
 
 export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorage {
   const m = new Map(initial.map((e) => [e.id, e]))
+  const batches = new Map<string, ImportBatch>()
   return {
     persistent: false,
     loadAll: async () => [...m.values()],
@@ -23,16 +28,22 @@ export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorag
       m.clear()
       list.forEach((e) => m.set(e.id, e))
     },
+    putMany: async (list) => void list.forEach((e) => m.set(e.id, e)),
+    loadBatches: async () => [...batches.values()],
+    putBatch: async (b) => void batches.set(b.id, b),
   }
 }
 
 const DB_NAME = 'birdquest'
 const STORE = 'encounters'
+const BATCHES = 'importBatches'
 
 export async function idbStorage(): Promise<RecordsStorage> {
-  const db: IDBPDatabase = await openDB(DB_NAME, 1, {
+  const db: IDBPDatabase = await openDB(DB_NAME, 2, {
     upgrade(d) {
-      d.createObjectStore(STORE, { keyPath: 'id' })
+      // Version 1 had only the encounters store; version 2 adds the import history. Existing records are untouched.
+      if (!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE, { keyPath: 'id' })
+      if (!d.objectStoreNames.contains(BATCHES)) d.createObjectStore(BATCHES, { keyPath: 'id' })
     },
   })
   return {
@@ -56,6 +67,21 @@ export async function idbStorage(): Promise<RecordsStorage> {
       await tx.store.clear()
       await Promise.all(list.map((e) => tx.store.put(e)))
       await tx.done
+    },
+    async putMany(list) {
+      const tx = db.transaction(STORE, 'readwrite')
+      await Promise.all(list.map((e) => tx.store.put(e)))
+      await tx.done
+    },
+    async loadBatches() {
+      const rows: unknown[] = await db.getAll(BATCHES)
+      return rows.flatMap((r) => {
+        const p = ImportBatchSchema.safeParse(r)
+        return p.success ? [p.data] : []
+      })
+    },
+    async putBatch(b) {
+      await db.put(BATCHES, b)
     },
   }
 }

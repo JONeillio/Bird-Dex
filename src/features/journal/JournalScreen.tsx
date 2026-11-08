@@ -8,6 +8,9 @@ import { useStore } from '../../state/store'
 import { useUi } from '../../state/ui'
 import { BirdPortrait } from '../birddex/BirdPortrait'
 import { SettingsButton } from '../shell/SettingsButton'
+import { ImportFlow } from './ImportFlow'
+
+const PAGE = 100
 
 export default function JournalScreen() {
   const encounters = useRecords((s) => s.encounters)
@@ -18,6 +21,8 @@ export default function JournalScreen() {
   const say = useUi((s) => s.say)
   const last = useStore((s) => s.prefs.lastBackupAt)
   const [confirmId, setConfirmId] = useState<string | null>(null)
+  const [importing, setImporting] = useState(false)
+  const [shown, setShown] = useState(PAGE)
   const sorted = useMemo(() => sortEncounters(encounters), [encounters])
   const species = new Set(encounters.map((e) => e.speciesId)).size
 
@@ -32,13 +37,18 @@ export default function JournalScreen() {
         )}
         <div className="row spread">
           <h2 className="h-display">Your sightings</h2>
-          <button type="button" className="btn primary small" onClick={() => openLog()}>
-            + Log
-          </button>
+          <span className="row gap">
+            <button type="button" className="btn small" onClick={() => setImporting(true)}>
+              Import
+            </button>
+            <button type="button" className="btn primary small" onClick={() => openLog()}>
+              + Log
+            </button>
+          </span>
         </div>
         {encounters.length > 0 && (
           <p className="muted">
-            {encounters.length} {encounters.length === 1 ? 'sighting' : 'sightings'} · {species} {species === 1 ? 'species' : 'species'}
+            {encounters.length.toLocaleString('en-GB')} {encounters.length === 1 ? 'sighting' : 'sightings'} · {species.toLocaleString('en-GB')} {species === 1 ? 'species' : 'species'}
           </p>
         )}
         {backupDue(encounters.length, last) && (
@@ -61,7 +71,7 @@ export default function JournalScreen() {
           </Panel>
         )}
         <ul className="journal-list">
-          {sorted.map((e) => {
+          {sorted.slice(0, shown).map((e) => {
             const s = dexById(e.speciesId)
             const label = s?.name ?? e.name ?? e.speciesId
             return (
@@ -109,6 +119,12 @@ export default function JournalScreen() {
             )
           })}
         </ul>
+        {sorted.length > shown && (
+          <button type="button" className="btn block" onClick={() => setShown(shown + PAGE)}>
+            Show {Math.min(PAGE, sorted.length - shown)} more ({(sorted.length - shown).toLocaleString('en-GB')} left)
+          </button>
+        )}
+        {importing && <ImportFlow onClose={() => setImporting(false)} />}
       </main>
     </>
   )

@@ -4,6 +4,7 @@
 // Steps after a route, separated by " >> ":
 //   click:<text>              click the first button/link/chip whose text contains <text>
 //   type:<css selector>|<text> type into an input
+//   upload:<css selector>|<path> attach a file to a file input (path relative to the repo root)
 //   scroll:<text>             scroll the first heading containing <text> into view
 //   wait:<ms>                 wait
 // WIDTH=360 npm run screens -- ... checks the narrowest phones.
@@ -60,6 +61,11 @@ try {
       } else if (kind === 'type') {
         const bar = arg.lastIndexOf('|')
         await page.type(arg.slice(0, bar), arg.slice(bar + 1)).catch(() => console.log(`  step failed: ${step}`))
+      } else if (kind === 'upload') {
+        const bar = arg.lastIndexOf('|')
+        const input = await page.$(arg.slice(0, bar))
+        if (input) await input.uploadFile(arg.slice(bar + 1))
+        else console.log(`  step failed: ${step}`)
       } else if (kind === 'scroll') {
         await page.evaluate((t) => [...document.querySelectorAll('h1,h2,h3')].find((e) => e.textContent?.includes(t))?.scrollIntoView(), arg)
       } else if (kind === 'wait') {

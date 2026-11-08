@@ -45,7 +45,8 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] A4 Art intake script and data-driven portrait list
 
 **Phase B: Lewis's history and lists**
-- [ ] B1 eBird CSV import (preview, idempotent, outside-Dex, needs-review)
+- [x] B1 eBird CSV import (preview, idempotent, outside-Dex, needs-review)
+- [ ] B1b Accept eBird's ZIP directly (the email holds a ZIP; saves Lewis unzipping on his phone)
 - [ ] B2 Pasted list import
 - [ ] B3 Import history with undo
 - [ ] B4 Year list and Life list views; first-of-the-year reveal
@@ -131,6 +132,10 @@ Screens: `npm run screens -- "#/map >> click:View spot >> click:I saw it" "#/jou
 - The catch reveal does **not** run for imports. Instead, one summary screen: "Imported 12,431 sightings: 98 Starter Dex birds, 143 others." Bond (phase C) will rank them.
 - Tests on synthetic CSV only (`tests/fixtures/ebird-sample.csv`, invented ids `S900000001…`, `L900001…`): header variants, AM/PM times, date-less row, sp./slash/hybrid rows, outside-Dex row, idempotency (import twice → second adds 0), 20,000-row synthetic parse completes under 3 s in vitest.
 Screens: `npm run screens -- "#/journal >> click:Import"`.
+
+**B1 notes (built 8 Nov).** Parser `src/data/importers/ebird-csv.ts` (streams a File in 512 KB chunks; `parseEbirdCsv` for text and tests), `ImportFlow.tsx`, `records.addMany` (chunks of 500), IndexedDB v2 with an `importBatches` store. Choices made: sub-species rows (`Branta bernicla bernicla`) count as the species (two-word name) for outside-Dex ids, and a bracketed form such as "(Dark-bellied)" is dropped from the name; rows dated in the future need review; the `Count` column is not stored (no field for it). The Journal list shows 100 at a time and the profile 20, so a 12,000-sighting import does not freeze the phone. The screens script has `upload:<selector>|<path>`.
+
+**B1b ZIP support.** eBird emails a ZIP holding `MyEBirdData.csv`. In `ImportFlow`, accept `.zip` too: find the first entry ending `MyEBirdData.csv` (or any `.csv`) with a minimal central-directory reader and `DecompressionStream('deflate-raw')` (stored entries are copied as they are), reject anything over 200 MB uncompressed or with no CSV, then hand the text to the same parser (`parseEbirdCsv`; show the chunked progress line while reading). No new dependency unless the reader proves flaky; test with a ZIP built in the test (use `node:zlib` `deflateRawSync`). Update the pick-step instructions to "choose the ZIP or the CSV".
 
 **B2 Pasted list import.** In the same flow, a "Paste a list" tab: one bird per line, optional `, YYYY-MM-DD`. Match by Dex name (and eBird English name variants already in reports), case-insensitive; unmatched lines listed for review. No date → `date: null`. `source = 'list'`, key `list:<name>:<date|nodate>`.
 

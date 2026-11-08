@@ -1,11 +1,13 @@
 import { create } from 'zustand'
-import type { Encounter } from '../data/personal-schema'
+import type { Encounter, ImportBatch } from '../data/personal-schema'
 import { idbStorage, memoryStorage, type RecordsStorage } from '../data/personal/storage'
 
 type Status = 'loading' | 'ready'
 
 interface RecordsState {
   encounters: Encounter[]
+  /** Past imports, newest last. */
+  batches: ImportBatch[]
   status: Status
   /** Set when records can only be kept in memory this session. */
   warning: string | null
@@ -14,6 +16,8 @@ interface RecordsState {
   update: (e: Encounter) => Promise<void>
   remove: (id: string) => Promise<void>
   replaceAll: (list: Encounter[]) => Promise<void>
+  /** Add imported sightings in chunks (so a big file does not freeze the phone) and record the import. */
+  addMany: (list: Encounter[], batch: ImportBatch, onProgress?: (fraction: number) => void) => Promise<void>
 }
 
 let storage: RecordsStorage = memoryStorage()
@@ -31,15 +35,16 @@ export const useRecords = create<RecordsState>((set, get) => {
   }
   return {
     encounters: [],
+    batches: [],
     status: 'loading',
     warning: null,
     load: async (s) => {
       try {
         storage = s ?? (await idbStorage())
-        set({ encounters: await storage.loadAll(), status: 'ready', warning: null })
+        set({ encounters: await storage.loadAll(), batches: await storage.loadBatches(), status: 'ready', warning: null })
       } catch {
         storage = memoryStorage()
-        set({ encounters: [], status: 'ready', warning: WARNING })
+        set({ encounters: [], batches: [], status: 'ready', warning: WARNING })
       }
     },
     add: async (e) => {
@@ -57,6 +62,18 @@ export const useRecords = create<RecordsState>((set, get) => {
     replaceAll: async (list) => {
       set({ encounters: list })
       await save(() => storage.replaceAll(list))
+    },
+    addMany: async (list, batch, onProgress) => {
+      const CHUNK = 500
+      for (let i = 0; i < list.length; i += CHUNK) {
+        const chunk = list.slice(i, i + CHUNK)
+        await save(() => storage.putMany(chunk))
+        onProgress?.(Math.min(1, (i + chunk.length) / list.length))
+        // Let the screen repaint between chunks.
+        await new Promise((r) => setTimeout(r, 0))
+      }
+      await save(() => storage.putBatch(batch))
+      set({ encounters: [...get().encounters, ...list], batches: [...get().batches, batch] })
     },
   }
 })

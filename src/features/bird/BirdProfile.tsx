@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { dexById } from '../../data/catalogue'
 import { SET_LABELS } from '../../data/schema'
 import { sceneDataUrl } from '../../art/scenes'
@@ -27,6 +28,7 @@ export default function BirdProfile({ id }: { id: string }) {
   const openLog = useUi((s) => s.openLog)
   const tiltRef = useTilt<HTMLDivElement>(prefs.tiltOn)
   const species = dexById(id)
+  const [shownMine, setShownMine] = useState(20)
 
   if (!species) {
     return (
@@ -103,7 +105,7 @@ export default function BirdProfile({ id }: { id: string }) {
                 {rec?.firstDate ? ` · first ${formatDate(rec.firstDate)}` : ''}
               </p>
               <ul className="journal-list compact">
-                {mine.map((e) => (
+                {mine.slice(0, shownMine).map((e) => (
                   <li key={e.id} className="journal-item">
                     <div className="journal-main">
                       <strong>
@@ -120,6 +122,11 @@ export default function BirdProfile({ id }: { id: string }) {
                   </li>
                 ))}
               </ul>
+              {mine.length > shownMine && (
+                <button type="button" className="btn small" onClick={() => setShownMine(shownMine + 40)}>
+                  Show more ({mine.length - shownMine} left)
+                </button>
+              )}
             </>
           )}
         </Panel>

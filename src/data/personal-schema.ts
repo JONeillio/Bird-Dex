@@ -41,6 +41,19 @@ export const EncounterSchema = z.object({
 })
 export type Encounter = z.infer<typeof EncounterSchema>
 
+/** A record of one import, kept so it can be listed and (later) undone. */
+export const ImportBatchSchema = z.object({
+  id: z.string().min(1).max(64),
+  source: z.enum(['ebird', 'list']),
+  fileName: z.string().max(120),
+  /** Data rows read from the file. */
+  rowCount: z.number().int().nonnegative(),
+  /** Sightings actually added. */
+  importedCount: z.number().int().nonnegative(),
+  date: z.string(),
+})
+export type ImportBatch = z.infer<typeof ImportBatchSchema>
+
 export const BackupSchema = z.object({
   app: z.literal('birdquest'),
   schema: z.literal(1),
