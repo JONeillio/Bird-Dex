@@ -15,6 +15,7 @@ import { birdSrc } from './birdArt'
 import { SiteCard } from './SiteCard'
 import { SiteSheet } from './SiteSheet'
 import { FindBirdSheet } from './FindBirdSheet'
+import { useNews } from '../../state/useNews'
 import { nameForKey } from '../../domain/findBird'
 
 const LIMITS: DriveLimit[] = [30, 60, 90]
@@ -32,6 +33,7 @@ export default function MapScreen() {
   const setFocus = useStore((s) => s.setFocusSpecies)
   const focusSiteId = useStore((s) => s.focusSiteId)
   const [findOpen, setFindOpen] = useState(false)
+  const { dot: newsDot } = useNews()
   const data = usePublished(prefs.regionId)
   const recorded = useRecorded()
   const [picked, setPicked] = useState<string | null>(focusSiteId)
@@ -118,6 +120,10 @@ export default function MapScreen() {
               {l} min
             </Chip>
           ))}
+          <Chip active={false} onClick={() => (window.location.hash = '#/news')}>
+            Bird News{newsDot && <span className="chip-dot" role="img" aria-label="Something new" />}
+          </Chip>
+          <Chip active={false} onClick={() => (window.location.hash = '#/plan')}>Plan a day</Chip>
           <Chip active={false} onClick={() => setFindOpen(true)}>Find a bird</Chip>
           <Chip active={prefs.unrecordedOnly} onClick={() => setPref('unrecordedOnly', !prefs.unrecordedOnly)}>
             New to me
@@ -180,14 +186,7 @@ export default function MapScreen() {
           recorded={recorded}
           onPick={(key) => {
             setFindOpen(false)
-            setPicked(null)
-            setFocus(key)
-            // Open the drive limit wide enough for the nearest report of this bird.
-            const near = filterSites(ready.region, { startId: start.id, limitMin: 1e9, recorded, targets: prefs.targets, newOnly: false, focusSpeciesId: key })
-            const mins = near.shown.map((v) => v.minutes ?? 1e9)
-            const nearest = mins.length ? Math.min(...mins) : null
-            const fit = nearest === null ? null : LIMITS.find((l) => nearest <= l)
-            if (fit && fit > prefs.driveLimit) setPref('driveLimit', fit)
+            window.location.hash = `#/find/${encodeURIComponent(key)}`
           }}
           onClose={() => setFindOpen(false)}
         />

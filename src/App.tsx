@@ -18,6 +18,8 @@ import BirdProfile from './features/bird/BirdProfile'
 import DevArt from './features/dev/DevArt'
 import DevEngine from './features/dev/DevEngine'
 import ReportFlow from './features/report/ReportFlow'
+import NewsScreen from './features/news/NewsScreen'
+import FindScreen from './features/find/FindScreen'
 import { DevDialogue } from './features/dev/DevDialogue'
 import type { IconName } from './art/icons'
 
@@ -31,6 +33,7 @@ const TABS: { name: 'map' | 'dex' | 'journal'; label: string; icon: IconName }[]
 
 function activeTab(route: Route): string | null {
   if (route.name === 'bird') return 'dex'
+  if (route.name === 'news' || route.name === 'find' || route.name === 'plan') return 'map'
   if (route.name === 'report') return 'journal'
   if (route.name === 'map' || route.name === 'dex' || route.name === 'journal') return route.name
   return null
@@ -52,6 +55,10 @@ function Screen({ route }: { route: Route }) {
       return <BirdProfile id={route.id} />
     case 'report':
       return <ReportFlow key={route.key} outingKey={route.key} />
+    case 'news':
+      return <NewsScreen />
+    case 'find':
+      return <FindScreen birdKey={route.key} />
     case 'settings':
       return <SettingsScreen />
     case 'dev':
