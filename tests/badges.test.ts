@@ -16,7 +16,7 @@ const warden: WardenLike = {
   signature: ['mute-swan', 'gadwall', 'eurasian-teal', 'common-snipe', 'water-rail', 'eurasian-bittern', 'little-grebe', 'eurasian-coot'].filter((id) => STARTER_DEX.some((s) => s.id === id)),
   boss: 'eurasian-bittern',
 }
-const at = (ids: string[], over: Partial<Encounter> = {}) => ids.map((speciesId) => enc({ speciesId, ...over }))
+const at = (ids: readonly string[], over: Partial<Encounter> = {}) => ids.map((speciesId) => enc({ speciesId, ...over }))
 
 describe('warden badges (D3)', () => {
   it('the test warden is built from real Dex ids', () => {
