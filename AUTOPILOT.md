@@ -53,7 +53,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] N3 Stats and exploration engines
 - [x] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
 - [x] D1 Site character
-- [ ] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
+- [x] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
 - [ ] E1 Duel engine
 - [ ] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
 - [ ] F2 Route planner engine
@@ -251,6 +251,8 @@ Screens: `npm run screens -- "#/map >> click:Plan a day"` (add a tiny `between` 
 - Year badges: 50 / 100 / 150 species recorded this calendar year (Dex and outside).
 - Demo collection never earns anything (it has no encounters; also guard explicitly).
 Tests for each rule, including logs at a different site not counting.
+
+**D3 notes (built 8 Nov).** `src/domain/badges.ts`: `earnedBadges({ encounters, wardens, duelWins, year, demoCollection })`, `wardenBadge`, `badgeKeys`, `newBadges` (the keys for the "Badge earned!" overlay, e.g. `warden:maud:silver`, `set:wetland`, `year:2026:50`). It takes a minimal `WardenLike` (`id`, `siteId`, `signature`, `boss`), so D2 only has to supply `wardens.v1.json`. Sample-history sightings and the demo collection are filtered out inside the engine, and public reports are not an input. Bronze needs min(5, signature length) birds including the boss, all logged at the warden's site id; silver is the whole signature list; gold is silver plus `duelWins[wardenId]`. A tier key set includes the lower tiers.
 
 **D4 Badge UI.**
 - `#/badges` "Badge case" screen, linked from the BirdDex banner and Journal: three sections (Reserve Wardens for the current location, Sets, This year). Warden pins show the boss bird in the centre; locked pins are silhouettes with "3 / 5 birds". Pin art file names use `farmland` for the `farmland-upland` habitat. Fallback pin art: `pixelSprite` shapes per habitat (shield, roundel, leaf, hexagon, flower, feather, moon) in bronze/silver/gold; real art from `public/assets/badges/` when present (file names in `game-art-brief.md`).
