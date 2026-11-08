@@ -92,6 +92,9 @@ Presentation: pixel arena showing the site's backdrop (the existing habitat scen
 
 ## Order of work
 
+**Superseded 8 Nov 14:05:** AUTOPILOT.md section 2 is now the order (engines first, UI after Joseph's redesign). Two additions agreed then: the **Field Report** (after logging or importing an outing: points from rarity, lifers, firsts of the year and Bond, compared with the site's par from recent eBird reports and with your own best there) and **Exploring** (sites you have not visited hold back their warden and an Explored stamp; reports are never hidden). Specs: AUTOPILOT Phase N.
+
+
 1. **G1 Field Bond + ranks**, alongside the import (T9.3), so imported history shows up as ranks straight away.
 2. **G2 Reserve Wardens + Badge case** (T9.4): signature-list badges, no duels yet.
 3. **G3 Field Duels** against wardens (T9.6).

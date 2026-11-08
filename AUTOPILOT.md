@@ -32,65 +32,50 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [ ] Which app Lewis mainly logs in (eBird, Merlin, BirdTrack).
 - [ ] Bird art batches 01–10 (`bird-batches.md`) and game art sets 1–5 (`game-art-brief.md`). Process with R1 whenever a ZIP is uploaded. Astra's ZIP export failed (phone storage), so on 8 Nov four wardens (Maud, Reg, Agnes, Harold) and two marsh scenes were cut from Joseph's screenshots instead; the other 8 wardens, badges, ranks, duel cards and terrain tiles are still to come, in any form (ZIP, or more screenshots).
 - [ ] Lewis to sanity-check the Location 2 warden sites and signature birds after D2.
+- [ ] Joseph's redesigned visual assets (from another app). The UI phase waits for them.
+- [ ] After N4: Joseph opens `#/dev/engine` with the sample history loaded and says whether the scores feel right.
 - [ ] Phone reviews (added at the end of each phase).
 
 ---
 
 ## 2. Checklist (tick as you go)
 
-**Phase A: foundations**
-- [x] A1 Encounter fields: site, time, outside-Dex birds, source
-- [x] A2 Log sheet fills site and time; edit an existing sighting
-- [x] A3 Game data loaders (traits, duel cards) with zod
-- [x] A4 Art intake script and data-driven portrait list
+**Order decided with Joseph, 8 Nov 14:05: engines first, UI later.** Joseph is redesigning the visuals in another app and will bring the assets over, so do not spend effort on styled UI until then. Build every game rule as pure, tested logic now; the only new screen is a plain dev readout (N4) so the numbers can be checked on a phone. **Model:** every ticket below is written for Sonnet. Use Opus only to change a design decision or when a check fails 3 times.
 
-**Phase B: Lewis's history and lists**
-- [x] B1 eBird CSV import (preview, idempotent, outside-Dex, needs-review)
-- [ ] B1b Accept eBird's ZIP directly (the email holds a ZIP; saves Lewis unzipping on his phone)
+**Done**
+- [x] A1 Encounter fields · [x] A2 Log sheet site/time, editing · [x] A3 Game data loaders · [x] A4 Art intake script
+- [x] B1 eBird CSV import · [x] B1c Sample history · [x] B3 Import history with undo
+
+**Phase N: engines (do these first, in this order)**
+- [ ] C1 Bond engine (spec under Phase C)
+- [ ] N1 Outings and rarity values
+- [ ] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
+- [ ] N3 Stats and exploration engines
+- [ ] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
+- [ ] D1 Site character
+- [ ] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
+- [ ] E1 Duel engine
+- [ ] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
+- [ ] F2 Route planner engine
+- [ ] D2 Warden draft task and wardens.v1.json
+- [ ] B1b Accept eBird's ZIP directly
 - [ ] B2 Pasted list import
-- [x] B1c Sample eBird history (made up, one tap, labelled, removable) so concepts can be proved without Lewis's file
-- [x] B3 Import history with undo
-- [ ] B4 Year list and Life list views; first-of-the-year reveal
 
-**Phase C: Field Bond**
-- [ ] C1 Bond engine
+**UI phase (waits for Joseph's new visual design; build with his assets)**
+- [ ] N5 Field Report screen (the "how did I do" moment after an import or log)
+- [ ] B4 + N6 BirdDex tabs: Starter Dex | <year> | Life list | Stats
 - [ ] C2 Ranks on cards and profile; rank-up reveal
 - [ ] C3 Nicknames
-
-**Phase F: day route planner** (Lewis's "that would be huge"; done before the wardens on purpose)
-- [ ] F1 Pipeline: site-to-site drive matrix
-- [ ] F2 Route planner engine
+- [ ] N7 Exploration on the map (explored / unexplored sites, region %, nearest unexplored)
 - [ ] F3 "Plan a day" sheet
-
-**Phase D: Reserve Wardens and badges**
-- [ ] D1 Site character
-- [ ] D2 Warden draft task and wardens.v1.json
-- [ ] D3 Badge engine
-- [ ] D4 Badge case screen, warden panel in the site sheet, warden pennants on the map
-
-**Phase E: Field Duels**
-- [ ] E1 Duel engine
-- [ ] E2 Squad screen
-- [ ] E3 Duel screen
-- [ ] E4 Gold badges from duel wins
-
-**Phase G: Rivals**
-- [ ] G1 Squad share codes and rival link
-- [ ] G2 Rival duel and result sharing
-- [ ] G3 Patch race (optional; do last)
-
-**Phase H: map polish**
-- [ ] H1 List view of sites
-- [ ] H2 Adventure skin (BUILD_PLAN T4.1–T4.3)
-
-**Phase I: polish and hand-over**
-- [ ] I1 First run
-- [ ] I2 Credits screen
-- [ ] I3 Accessibility pass
-- [ ] I4 Hand-over note for Lewis
+- [ ] D4 Badge case, warden panel, warden pennants
+- [ ] E2 Squad screen · [ ] E3 Duel screen · [ ] E4 Gold badges
+- [ ] G1 Share codes · [ ] G2 Rival duel · [ ] G3 Patch race (optional)
+- [ ] H1 List view · [ ] H2 Adventure skin
+- [ ] I1 First run · [ ] I2 Credits · [ ] I3 Accessibility · [ ] I4 Hand-over note
 
 **Recurring**
-- R1 Art intake (whenever a ZIP arrives; not ticked, repeat as needed)
+- R1 Art intake (whenever art arrives; not ticked, repeat as needed)
 
 ---
 
@@ -152,6 +137,51 @@ Tests: year filter at year boundaries, null dates excluded from year, outside-De
 Screens: `npm run screens -- "#/dex" "#/dex >> click:Life list"`.
 
 **Phase B phone review (add to Waiting):** import a real eBird export on Lewis's phone; compare totals with eBird's life list; check year list.
+
+### Phase N: engines (the core loop and exploring)
+
+Why (Joseph, 8 Nov): two reasons to open the app. **Exploring**: see what is around you, with places you have not been yet holding something back. **The Field Report**: get home, log or import the day, and see how you did, against your own past visits and against the site's par (what other birders reported there recently). Logging the same bird again levels it up (Bond, C1). All engines are pure functions in `src/domain/` with vitest tests; no styled UI.
+
+**N1 Outings and rarity values.**
+`src/domain/outings.ts`:
+- `siteKey(e)` as in section 3. `Outing = { key: "<date>|<siteKey>", date, siteKey, siteId: string | null, place, species: string[] /* distinct keys in first-seen order; key = speciesId */, encounters: Encounter[], sample: boolean /* true if every encounter has source 'sample' */, lastCreatedAt }`.
+- `groupOutings(encounters): Outing[]`: dated encounters only, grouped by date and site key, newest date first.
+- `outingsSince(encounters, sinceCreatedAt: string | null): Outing[]`: outings holding at least one encounter with `createdAt` after `sinceCreatedAt` (null = all). This is how "what's new since I last looked" works for both logging and re-importing.
+`src/domain/rarity.ts` (species-level, per region; a bird's value depends on the area you are in, not the site):
+- Key = binomial (first two words of the scientific name): Dex birds use the catalogue `sciName`, outside-Dex birds use the encounter's `sciName`, so both work.
+- `buildRarity(region: RegionData): RarityTable`. Counted sites = sites with at least one report. `share` = sites reporting the species / counted sites. Tier and points: any report of it with `notable` and not `unconfirmed` → **rare 25**; share < 3% → **scarce 10**; < 10% → **uncommon 5**; < 25% → **fairly common 2**; otherwise **common 1**.
+- `rarityOf(table, binomial)`: not in the table → **unreported 8** ("not reported nearby lately"). No region data at all → every bird is `unknown 1` (scores still add up, just flat).
+- Rarity is recomputed from the current data, so it moves with the seasons; the UI will say "based on the last 14 days of reports".
+Tests: tiers at each boundary, notable vs unconfirmed, outside-Dex key, unreported, no region.
+
+**N2 Field Report engine** `src/domain/fieldReport.ts`.
+`allFieldReports(encounters, ctx: { rarity, region: RegionData | null }): FieldReport[]` in **one chronological pass** (12,000 encounters under 500 ms in vitest), and `fieldReportFor(outingKey, …)`.
+`FieldReport = { outingKey, date, place, siteId, sample, speciesCount, birds: { key, name, tier, points, lifer, firstOfYear, rankUp: { from, to } | null }[] /* sorted by points, then name */, points: { rarity, lifers, firstsOfYear, bond, explorer, total }, bestBird: key | null, par: { par, found, extra: string[] } | null, siteBest: { previous: number | null, isNewBest: boolean }, firstVisit: boolean }`.
+Rules:
+- **Lifer**: no encounter of that species on an earlier date (same date at another site: the earlier `time`, then `createdAt`, gets it). **First of year**: not a lifer and no earlier encounter that calendar year.
+- **Points**: rarity = sum of rarity points over the outing's distinct species; lifers +20 each; firsts of year +5 each; bond = Bond points earned by this outing's encounters (C1 rules, so repeat visits still score but less); explorer +15 when `firstVisit`. Total = sum.
+- **Rank-ups**: species whose Bond rank rose because of this outing (C1 `rankUps`).
+- **Par** (the "NPC" benchmark; the warden voices it later): only when the region data has a site with `id === outing.siteId`. `par` = distinct species reported there in the window; `found` = how many of those you logged on this outing; `extra` = species you logged that are not in the reports (your finds the crowd missed). Null for other sites.
+- **Site best**: the most species on any earlier outing at the same site key; `isNewBest` when this beats it (false on a first visit).
+- **First visit**: no earlier outing at this site key; the key `unknown` never counts.
+- `sample` passes through: sample outings get reports (so the loop can be seen working) but D3/E/G never award anything from them.
+Tests: a scripted 5-outing history covering every rule; par present and absent; same-day two-site lifer goes to the earlier one; speed test.
+
+**N3 Stats and exploration engines.**
+`src/domain/stats.ts`: `collectionStats(encounters, reports: FieldReport[], bond, rarity, today)` → `{ totals: { sightings, species, dexSpecies, outings, sites }, mostSeen /* top 10 by sightings */, topBond /* top 10 by Bond points */, coolest /* top 10 recorded birds by rarity points, ties by fewest sightings */, years: { year, species, lifers, outings }[], bestOutings /* top 5 reports by total */, streak: { currentWeeks, bestWeeks } /* ISO weeks with at least one outing, current counts back from this week or last */ }`. Sample records count here (they are only stats), with a `sample` flag on the result if any were used.
+`src/domain/explore.ts` (works from eBird imports too: the export carries each checklist's Location ID, so every place Lewis has birded counts):
+- `visitedSiteIds(encounters)`: distinct `siteId`s that pass `validSiteId`.
+- `exploration(region, visited, startId)` → `{ explored: string[], total, share, nearestUnexplored: { siteId, minutes }[] /* up to 5, known drive times only, nearest first */ }`.
+- **Rule (decided):** reports are never hidden; seeing what is about is the main use of the app. What an unexplored site holds back: its warden (shown as a silhouette with "?" until your first outing there), your par history there, and an "Explored" stamp. A first visit gives the Field Report's explorer +15 and raises the region's explored %.
+Tests: visited from logs and imports, demo and sample site ids ignored, unknown drive times skipped, share maths.
+
+**N4 Engine readout** `#/dev/engine` (linked from Settings next to the art gallery). Plain lists using existing components, no new styling: totals; tier counts; top 5 most seen, top Bond, coolest; the 5 latest Field Reports as text ("2 Nov · Sample Reedbed Reserve · 18 species · 143 pts (rarity 61, lifers 40, firsts 15, bond 27) · best: Water Rail · par —"); exploration % for the current location and the 5 nearest unexplored sites. Header line says whether sample data is in use. Screens: `npm run screens -- "#/journal >> click:Import >> click:Try a sample history >> wait:400 >> click:Add sample >> wait:2500 >> click:Done" "#/dev/engine"`.
+
+**N5 Field Report screen (UI phase).** After an import or a log, a "Your Field Report" sheet for outings since `prefs.lastReportSeenAt` (newest first, swipe between them): headline, best bird, lifers and firsts, rank-ups, points breakdown, par line ("Reported here lately: 31. You found 23, plus 2 nobody else logged."), site best. Then set `lastReportSeenAt`. Journal gets a "Reports" view of past outings. Visual design from Joseph's assets.
+
+**N6 Stats tab (UI phase, with B4).** Fourth BirdDex tab showing N3: totals, most seen, top Bond, coolest birds, years, best outings, streak.
+
+**N7 Exploration on the map (UI phase).** Explored sites get a stamp on their pin; unexplored keep the normal pin with a small "?"; the status line shows "Explored 7 of 80 spots"; a "Somewhere new" chip lists the nearest unexplored spots. Warden silhouettes until visited (with D4).
 
 ### Phase C: Field Bond
 
