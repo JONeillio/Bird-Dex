@@ -49,7 +49,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 **Phase N: engines (do these first, in this order)**
 - [x] C1 Bond engine (spec under Phase C)
 - [x] N1 Outings and rarity values
-- [ ] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
+- [x] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
 - [ ] N3 Stats and exploration engines
 - [ ] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
 - [ ] D1 Site character
@@ -168,6 +168,8 @@ Rules:
 - **First visit**: no earlier outing at this site key; the key `unknown` never counts.
 - `sample` passes through: sample outings get reports (so the loop can be seen working) but D3/E/G never award anything from them.
 Tests: a scripted 5-outing history covering every rule; par present and absent; same-day two-site lifer goes to the earlier one; speed test.
+
+**N2 notes (built 8 Nov).** `src/domain/fieldReport.ts` (`allFieldReports`, `fieldReportFor`, `FieldReport`, `ReportBird`). Reports come back newest outing first (same order as `groupOutings`). Each bird's `points` = rarity + lifer + first of year + the Bond it earned on that outing, so the report total always equals the sum of the birds' points plus the explorer bonus (tested). `par.extra` and `bestBird` are species ids (look names up through `birds`). A rank-up spans from the bird's rank before its first sighting on the outing to its rank after the last, and is never set for a lifer. An unknown place has no first visit, no explorer bonus and no site best. Sample outings carry `sample: true`; D3/E/G must ignore those when awarding.
 
 **N3 Stats and exploration engines.**
 `src/domain/stats.ts`: `collectionStats(encounters, reports: FieldReport[], bond, rarity, today)` → `{ totals: { sightings, species, dexSpecies, outings, sites }, mostSeen /* top 10 by sightings */, topBond /* top 10 by Bond points */, coolest /* top 10 recorded birds by rarity points, ties by fewest sightings */, years: { year, species, lifers, outings }[], bestOutings /* top 5 reports by total */, streak: { currentWeeks, bestWeeks } /* ISO weeks with at least one outing, current counts back from this week or last */ }`. Sample records count here (they are only stats), with a `sample` flag on the result if any were used.
