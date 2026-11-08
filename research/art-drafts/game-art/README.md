@@ -13,3 +13,5 @@ Index of non-bird art sets. Briefs: `research/art-rendering/art/prompts/game-art
 | `screenshot-crops/` | Warden portraits (Maud, Reg, Agnes, Harold) and two marsh scenes cut from screenshots | 8 Nov 2026 | `public/assets/{wardens,scenes}/` | `src/art/wardens.ts` |
 
 Still to come: other 8 wardens, badges (21 pins + 3 year pins), rank frames and emblems, duel condition cards and card back, water/woodland/reeds map tiles (from the older `game-art-brief.md`); any further NPC encounter art (props, scenes) is not yet briefed.
+
+**Brief 2 (8 Nov 2026):** everything still missing, plus new UI parts and NPC backdrops, is in `research/art-rendering/art/prompts/game-art-brief-2.md` (Sets 6-13). It supersedes the old Sets 2-5 list; duel condition cards are dropped.
