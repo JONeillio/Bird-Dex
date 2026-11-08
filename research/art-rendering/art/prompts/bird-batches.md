@@ -86,6 +86,8 @@ Batch 03. Nine birds:
 
 ### Batch 04: winter visitors and winter ducks
 
+**Status: done and in the app 8 Nov 2026** (all 9 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-04/`).
+
 ```
 Batch 04. Nine birds:
 1. redwing (Redwing): small thrush, bold cream stripe over the eye, rusty red patch on the flank under the wing, streaked breast, brown back.
@@ -100,6 +102,8 @@ Batch 04. Nine birds:
 ```
 
 ### Batch 05: estuary and marsh (Lewis's Thames marshes)
+
+**Status: done and in the app 8 Nov 2026** (all 9 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-05/`).
 
 ```
 Batch 05. Nine birds:

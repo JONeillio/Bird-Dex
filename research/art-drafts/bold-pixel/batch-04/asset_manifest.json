@@ -1,0 +1,50 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 04",
+  "assets": [
+    {
+      "id": "redwing",
+      "file": "bird_redwing_bold_pixel_v1.png",
+      "role": "Adult with a cream eyebrow, streaked breast and rusty-red flank patch beneath the folded wing."
+    },
+    {
+      "id": "fieldfare",
+      "file": "bird_fieldfare_bold_pixel_v1.png",
+      "role": "Adult with a grey head and rump, chestnut mantle and dark chevrons on its orange-buff breast."
+    },
+    {
+      "id": "eurasian-teal",
+      "file": "bird_eurasian-teal_bold_pixel_v1.png",
+      "role": "Adult drake with a cream-edged green eye patch, white side stripe and yellow undertail triangle."
+    },
+    {
+      "id": "eurasian-wigeon",
+      "file": "bird_eurasian-wigeon_bold_pixel_v1.png",
+      "role": "Adult drake with a cream-yellow forehead stripe, pink breast, grey body and black stern."
+    },
+    {
+      "id": "northern-shoveler",
+      "file": "bird_northern-shoveler_bold_pixel_v1.png",
+      "role": "Adult drake with a broad spoon-shaped bill, green head, white breast and chestnut flanks."
+    },
+    {
+      "id": "common-pochard",
+      "file": "bird_common-pochard_bold_pixel_v1.png",
+      "role": "Adult drake with a chestnut-red head, red iris, black breast and grey-banded bill."
+    },
+    {
+      "id": "common-goldeneye",
+      "file": "bird_common-goldeneye_bold_pixel_v1.png",
+      "role": "Adult drake with a peaked green-black head, round white cheek spot and golden eye."
+    },
+    {
+      "id": "goosander",
+      "file": "bird_goosander_bold_pixel_v1.png",
+      "role": "Adult drake with a green-black head, slim hooked red bill, black back and salmon-tinted white body."
+    },
+    {
+      "id": "mew-gull",
+      "file": "bird_mew-gull_bold_pixel_v1.png",
+      "role": "Adult with a rounded head, dark eye, plain yellow-green bill and legs, and white-spotted black wingtips."
+    }
+  ]
+}
