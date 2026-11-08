@@ -51,7 +51,7 @@ describe('sample eBird history', () => {
   it('uses only invented sites, real dates and never a future date', () => {
     const p = parse(make())
     expect(p.rows.every((r) => r.siteId?.startsWith('L99') && r.place.startsWith('Sample'))).toBe(true)
-    expect(p.rows.every((r) => r.date >= '2024-01-01' && r.date <= today)).toBe(true)
+    expect(p.rows.every((r) => r.date! >= '2024-01-01' && r.date! <= today)).toBe(true)
     expect(p.rows.every((r) => r.time === null || /^\d\d:\d\d$/.test(r.time))).toBe(true)
   })
 
@@ -75,7 +75,7 @@ describe('sample eBird history', () => {
   it('is a mix of seasons: summer visitors only appear in summer months', () => {
     const p = parse(make())
     const swallow = p.rows.filter((r) => r.speciesId === 'barn-swallow')
-    if (swallow.length) expect(swallow.every((r) => Number(r.date.slice(5, 7)) >= 4 && Number(r.date.slice(5, 7)) <= 9)).toBe(true)
+    if (swallow.length) expect(swallow.every((r) => Number(r.date!.slice(5, 7)) >= 4 && Number(r.date!.slice(5, 7)) <= 9)).toBe(true)
   })
 
   it('saves as source "sample", passes the record schema and fills the Dex like an import would', () => {

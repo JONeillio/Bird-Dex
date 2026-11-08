@@ -32,6 +32,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [ ] Which app Lewis mainly logs in (eBird, Merlin, BirdTrack).
 - [ ] Bird art batches 01–10 (`bird-batches.md`) and game art sets 1–5 (`game-art-brief.md`). Process with R1 whenever a ZIP is uploaded. Astra's ZIP export failed (phone storage), so on 8 Nov four wardens (Maud, Reg, Agnes, Harold) and two marsh scenes were cut from Joseph's screenshots instead; the other 8 wardens, badges, ranks, duel cards and terrain tiles are still to come, in any form (ZIP, or more screenshots).
 - [ ] Lewis to sanity-check the Location 2 warden sites and signature birds (`src/data/wardens.v1.json`, drafted 8 Nov). Things to ask: do the sites make sense as local landmarks, are the signature birds the ones he would look for there, and is Rainham Marshes as "wetland" right. The draft puts several Location 2 sites under "garden" (Walthamstow Wetlands, Richmond Park, Beddington Farmlands) because they report a lot of woodland and garden birds, so some may deserve a different habitat.
+- [ ] Phone check of B1b/B2: Journal → Import → choose `samples/MyEBirdData-sample.zip` (download it from the repo) and try Paste a list with a few bird names.
 - [ ] Joseph's redesigned visual assets (from another app). The UI phase waits for them.
 - [ ] After N4: Joseph opens `#/dev/engine` with the sample history loaded and says whether the scores feel right.
 - [ ] Phone reviews (added at the end of each phase).
@@ -58,8 +59,8 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
 - [x] F2 Route planner engine
 - [x] D2 Warden draft task and wardens.v1.json
-- [ ] B1b Accept eBird's ZIP directly
-- [ ] B2 Pasted list import
+- [x] B1b Accept eBird's ZIP directly
+- [x] B2 Pasted list import
 
 **UI phase (waits for Joseph's new visual design; build with his assets)**
 - [ ] N5 Field Report screen (the "how did I do" moment after an import or log)
@@ -126,6 +127,8 @@ Screens: `npm run screens -- "#/journal >> click:Import"`.
 **B1b ZIP support.** eBird emails a ZIP holding `MyEBirdData.csv`. In `ImportFlow`, accept `.zip` too: find the first entry ending `MyEBirdData.csv` (or any `.csv`) with a minimal central-directory reader and `DecompressionStream('deflate-raw')` (stored entries are copied as they are), reject anything over 200 MB uncompressed or with no CSV, then hand the text to the same parser (`parseEbirdCsv`; show the chunked progress line while reading). No new dependency unless the reader proves flaky; test with a ZIP built in the test (use `node:zlib` `deflateRawSync`). Update the pick-step instructions to "choose the ZIP or the CSV".
 
 **B2 Pasted list import.** In the same flow, a "Paste a list" tab: one bird per line, optional `, YYYY-MM-DD`. Match by Dex name (and eBird English name variants already in reports), case-insensitive; unmatched lines listed for review. No date → `date: null`. `source = 'list'`, key `list:<name>:<date|nodate>`.
+
+**B1b and B2 notes (built 8 Nov).** `src/data/importers/zip.ts`: `prepareImportFile(file)` returns a CSV as it is, or, when the first bytes are a ZIP header (the name does not matter), the CSV taken out of it (`extractCsvFromZip`, `chooseCsvEntry`: MyEBirdData.csv first, else the first .csv, folders and `__MACOSX` ignored). It reads only the end of the ZIP, the central directory and the one entry, so a large ZIP does not load into memory; inflating stops at 200 MB even if the ZIP lies about its size. Plain-English errors for no CSV, password protected, ZIP64, too big and damaged ZIPs. The result is a File, so the normal chunked parser and progress bar are used. `ImportFlow` now says "Import your birds", takes `.zip` or `.csv`, and has a "Paste a list" step. `src/data/importers/pasted-list.ts`: `parsePastedList(text, {species, today})` gives the same `EbirdParsed` shape, so the preview, plan, "already imported" skipping and undo all work unchanged. Names match the Dex `name` or `ebirdName` ignoring case, hyphens and apostrophes; bullets and numbering are stripped; a date is optional (YYYY-MM-DD or DD/MM/YYYY), no date is stored as `date: null`; unmatched names, bad or future dates are listed with their line numbers and not imported; first 2,000 lines only. Key `list:<dexId>:<date|nodate>`, `source: 'list'`. Only Starter Dex birds can be pasted for now (an outside-the-Dex bird would need a scientific name). `ImportRow.date` is now `string | null`. **Needs a phone check:** choosing the sample ZIP with the file picker on Joseph's Android phone (`samples/MyEBirdData-sample.zip`); the sandbox tests the reader on hand-built ZIPs and the committed sample, but not the real picker.
 
 **B3 Import history (built 8 Nov).** `ImportsPanel.tsx` in the Journal lists each import with its live count and a two-step "Remove" (`records.undoBatch`, storage `removeMany`); it removes only sightings carrying that `importBatchId`, so your own logged sightings stay, and the same file can be imported again afterwards. Not done: the backup file does not carry `importBatches` yet, so after a restore the panel is empty (records keep their `importBatchId`). Original spec: Journal shows past imports (file, date, counts) with "Undo this import" (confirm; deletes encounters with that `importBatchId`). Backup includes `importBatches`, as an optional field.
 

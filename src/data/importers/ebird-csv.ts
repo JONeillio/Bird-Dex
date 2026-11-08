@@ -12,8 +12,8 @@ export interface ImportRow {
   /** Names for birds outside the Starter Dex only (Dex birds use the catalogue name). */
   name?: string
   sciName?: string
-  /** YYYY-MM-DD. Rows without a valid date are never imported. */
-  date: string
+  /** YYYY-MM-DD. eBird rows without a valid date are never imported; pasted lists may have none (null, never invented). */
+  date: string | null
   /** HH:MM, or null. */
   time: string | null
   siteId: string | null
@@ -225,9 +225,9 @@ export function planEbirdImport(parsed: EbirdParsed, existingKeys: ReadonlySet<s
 
 /**
  * Turn rows into saved sightings. eBird does not say whether a bird was seen or heard, so every row is "seen".
- * `newId` makes the record ids; `createdAt` is the time of the import. `source` is 'sample' only for the made-up history.
+ * `newId` makes the record ids; `createdAt` is the time of the import. `source` is 'sample' only for the made-up history and 'list' for a pasted list.
  */
-export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, createdAt: string, newId: () => string, source: 'ebird' | 'sample' = 'ebird'): Encounter[] {
+export function rowsToEncounters(rows: readonly ImportRow[], batchId: string, createdAt: string, newId: () => string, source: 'ebird' | 'sample' | 'list' = 'ebird'): Encounter[] {
   return rows.map((r) => ({
     id: newId(),
     speciesId: r.speciesId,
