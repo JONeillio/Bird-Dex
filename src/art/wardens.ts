@@ -7,29 +7,9 @@ import art from './warden-art.json'
 
 const base = import.meta.env.BASE_URL + 'assets/'
 
-export type WardenHabitat = 'wetland' | 'coast' | 'woodland' | 'farmland-upland' | 'garden' | 'raptors' | 'night'
-
-export interface Persona {
-  id: string
-  name: string
-  habitat: WardenHabitat
-}
-
-/** All twelve personas (AUTOPILOT D2). The id matches the art file name `warden_<id>.png`. */
-export const PERSONAS: readonly Persona[] = [
-  { id: 'maud', name: 'Maud the Marsh Warden', habitat: 'wetland' },
-  { id: 'reg', name: 'Reg the Reedcutter', habitat: 'wetland' },
-  { id: 'bev', name: 'Bev the Bait-digger', habitat: 'coast' },
-  { id: 'tomasz', name: 'Tomasz the Tideline Counter', habitat: 'coast' },
-  { id: 'rowan', name: 'Rowan the Woodland Ranger', habitat: 'woodland' },
-  { id: 'agnes', name: 'Agnes "Old Acorn"', habitat: 'woodland' },
-  { id: 'harold', name: 'Harold the Hedgelayer', habitat: 'farmland-upland' },
-  { id: 'sunita', name: 'Sunita the Stubble-field Surveyor', habitat: 'farmland-upland' },
-  { id: 'pat', name: 'Pat the Park Keeper', habitat: 'garden' },
-  { id: 'fran', name: 'Feeder Fran', habitat: 'garden' },
-  { id: 'fergus', name: 'Fergus the Raptor Watcher', habitat: 'raptors' },
-  { id: 'olu', name: 'Olu "Owl-light"', habitat: 'night' },
-]
+export { PERSONAS, personaById } from '../data/personas'
+export type { Persona, WardenHabitat } from '../data/personas'
+import type { WardenHabitat } from '../data/personas'
 
 export const WARDEN_ART: ReadonlySet<string> = new Set(art as string[])
 
@@ -43,8 +23,6 @@ export interface WardenArt {
 export function wardenArt(id: string): WardenArt | null {
   return WARDEN_ART.has(id) ? { src: `${base}wardens/warden_${id}.png`, src2x: `${base}wardens/warden_${id}@2x.png` } : null
 }
-
-export const personaById = (id: string): Persona | undefined => PERSONAS.find((p) => p.id === id)
 
 export interface SceneArt {
   src: string

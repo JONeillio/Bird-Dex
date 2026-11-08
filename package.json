@@ -14,6 +14,7 @@
     "probe": "tsx pipeline/probe.ts",
     "map-audit": "tsx pipeline/map-audit.ts",
     "taxonomy-check": "tsx pipeline/taxonomy-check.ts",
+    "warden-draft": "tsx pipeline/warden-draft.ts",
     "screens": "node scripts/dev/screens.mjs"
   },
   "dependencies": {

@@ -7,6 +7,7 @@ name: Deploy BirdQuest
 #   probe     check what eBird and openrouteservice really return (no deploy)
 #   map-audit check the OpenFreeMap style and tiles (no deploy)
 #   taxonomy-check  check every Starter Dex scientific name against eBird (no deploy)
+#   warden-draft  print a draft of the Reserve Wardens from the cached data (no API calls, no deploy)
 # Times in any cron are UTC. Scheduled runs do a refresh.
 
 on:
@@ -18,7 +19,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, refresh, probe, map-audit, taxonomy-check]
+        options: [deploy, refresh, probe, map-audit, taxonomy-check, warden-draft]
   # Fresh sightings twice a day (times are UTC; GitHub may start a few minutes late).
   schedule:
     - cron: "40 5 * * *"
@@ -66,6 +67,16 @@ jobs:
         env:
           EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
         run: npm run taxonomy-check
+      - name: Restore last data (warden draft)
+        if: env.TASK == 'warden-draft'
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/bq-data
+          key: bq-data-${{ github.run_id }}
+          restore-keys: bq-data-
+      - name: Draft the Reserve Wardens
+        if: env.TASK == 'warden-draft'
+        run: npm run warden-draft
       - name: Keep the report
         if: always() && (env.TASK == 'probe' || env.TASK == 'map-audit' || env.TASK == 'taxonomy-check')
         uses: actions/upload-artifact@v4
