@@ -1,13 +1,15 @@
 import { useMemo, useState } from 'react'
 import { STARTER_DEX, dexById } from '../../data/catalogue'
-import { EncounterSchema, MODES, MODE_LABELS, type Mode } from '../../data/personal-schema'
+import { EncounterSchema, MODES, MODE_LABELS, validSiteId, type Encounter, type Mode } from '../../data/personal-schema'
 import { todayIso } from '../../domain/collection'
+import { outsideId } from '../../domain/taxon'
+import { nowHHMM } from '../../domain/time'
 import { play } from '../../audio/sfx'
 import { buzz, BUZZ } from '../../phone/haptics'
 import { shrinkPhoto } from '../../phone/photo'
 import { newEncounterId, useRecords } from '../../state/records'
 import { useStore } from '../../state/store'
-import { useUi } from '../../state/ui'
+import { useUi, type LogRequest } from '../../state/ui'
 import { BottomSheet, Segmented } from '../../ui/components'
 
 const SORTED = [...STARTER_DEX].sort((a, b) => a.name.localeCompare(b.name))
@@ -16,29 +18,45 @@ const SORTED = [...STARTER_DEX].sort((a, b) => a.name.localeCompare(b.name))
 export function LogSheet() {
   const req = useUi((s) => s.logRequest)
   if (!req) return null
-  return <LogForm key={`${req.speciesId ?? ''}|${req.place ?? ''}`} speciesId={req.speciesId} place={req.place} />
+  return <LogForm key={`${req.edit?.id ?? ''}|${req.speciesId ?? ''}|${req.outside?.sciName ?? ''}|${req.siteId ?? ''}|${req.place ?? ''}`} req={req} />
 }
 
-function LogForm({ speciesId, place: placeIn }: { speciesId?: string; place?: string }) {
+function LogForm({ req }: { req: LogRequest }) {
+  const edit = req.edit
+  const outside = edit && edit.speciesId.startsWith('x-') ? { name: edit.name ?? edit.speciesId, sciName: edit.sciName ?? '' } : req.outside
+  const speciesId = edit?.speciesId ?? req.speciesId
+  const placeIn = edit ? edit.place : req.place
+  // Only real eBird site ids are kept; demo sites never become a saved site.
+  const siteIn = validSiteId(edit ? edit.siteId : req.siteId)
   const close = useUi((s) => s.closeLog)
   const showReveal = useUi((s) => s.showReveal)
   const say = useUi((s) => s.say)
   const encounters = useRecords((s) => s.encounters)
   const add = useRecords((s) => s.add)
+  const update = useRecords((s) => s.update)
   const prefs = useStore((s) => s.prefs)
   const setPref = useStore((s) => s.setPref)
 
   const [species, setSpecies] = useState(speciesId ?? '')
-  const [date, setDate] = useState(todayIso())
+  const [date, setDate] = useState(edit ? edit.date ?? '' : todayIso())
+  // A new sighting made today starts with the time now (editable). An edit keeps whatever was saved.
+  const [time, setTime] = useState(edit ? edit.time ?? '' : nowHHMM())
+  const [timeTouched, setTimeTouched] = useState(false)
   const [place, setPlace] = useState(placeIn ?? '')
-  const [mode, setMode] = useState<Mode>('seen')
-  const [notes, setNotes] = useState('')
-  const [photo, setPhoto] = useState<string | null>(null)
+  const [mode, setMode] = useState<Mode>(edit?.mode ?? 'seen')
+  const [notes, setNotes] = useState(edit?.notes ?? '')
+  const [photo, setPhoto] = useState<string | null>(edit?.photo ?? null)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
   const places = useMemo(() => [...new Set(encounters.map((e) => e.place).filter(Boolean))].slice(-12), [encounters])
   const today = todayIso()
+
+  const onDate = (d: string) => {
+    setDate(d)
+    // The automatic time only makes sense for today; a time you typed yourself stays.
+    if (!edit && !timeTouched) setTime(d === today ? nowHHMM() : '')
+  }
 
   const onPhoto = async (file: File | undefined) => {
     if (!file) return
@@ -55,7 +73,7 @@ function LogForm({ speciesId, place: placeIn }: { speciesId?: string; place?: st
 
   const save = async () => {
     setError(null)
-    if (!species || !dexById(species)) {
+    if (!outside && (!species || !dexById(species))) {
       setError('Choose which bird you saw.')
       return
     }
@@ -63,27 +81,57 @@ function LogForm({ speciesId, place: placeIn }: { speciesId?: string; place?: st
       setError('That date is in the future.')
       return
     }
-    const parsed = EncounterSchema.safeParse({
+    const placeTrim = place.trim()
+    // If the place text was changed, the eBird site it was prefilled from no longer applies.
+    const siteId = placeTrim === (placeIn ?? '').trim() ? siteIn : null
+    const speciesKey = outside ? (edit ? edit.speciesId : outsideId(outside.sciName)) : species
+    const base: Encounter = edit ?? {
       id: newEncounterId(),
-      speciesId: species,
+      speciesId: speciesKey,
+      date: null,
+      place: '',
+      mode: 'seen',
+      notes: '',
+      photo: null,
+      createdAt: new Date().toISOString(),
+      source: 'log',
+      ...(outside ? { name: outside.name, sciName: outside.sciName } : {}),
+    }
+    const parsed = EncounterSchema.safeParse({
+      ...base,
+      speciesId: speciesKey,
       date: date || null,
-      place: place.trim(),
+      time: time || null,
+      siteId,
+      place: placeTrim,
       mode,
       notes: notes.trim(),
       photo,
-      createdAt: new Date().toISOString(),
     })
     if (!parsed.success) {
       setError('Something in that entry is too long or not valid. Shorten the notes or place and try again.')
       play('oops', prefs.soundOn)
       return
     }
-    const firstTime = !encounters.some((e) => e.speciesId === species)
+    if (edit) {
+      await update(parsed.data)
+      close()
+      play('tick', prefs.soundOn)
+      say('Sighting updated.')
+      return
+    }
+    const firstTime = !encounters.some((e) => e.speciesId === speciesKey)
     await add(parsed.data)
     // Demo mode hides real records, so switch it off to let the new sighting show up.
     const wasDemo = prefs.demoCollection
     if (wasDemo) setPref('demoCollection', false)
     close()
+    if (outside) {
+      play('tick', prefs.soundOn)
+      buzz(BUZZ.select, prefs.hapticsOn)
+      say(`Logged ${outside.name}. It is not in the Starter Dex, so it will show in your life list.${wasDemo ? ' Demo collection switched off.' : ''}`)
+      return
+    }
     if (firstTime) showReveal({ speciesId: species, firstTime: true })
     else {
       play('tick', prefs.soundOn)
@@ -94,24 +142,43 @@ function LogForm({ speciesId, place: placeIn }: { speciesId?: string; place?: st
   }
 
   return (
-    <BottomSheet open onClose={close} title="Log a sighting">
-      <h2 className="h-display site-name">Log a sighting</h2>
+    <BottomSheet open onClose={close} title={edit ? 'Edit sighting' : 'Log a sighting'}>
+      <h2 className="h-display site-name">{edit ? 'Edit sighting' : 'Log a sighting'}</h2>
       <p className="muted small">Saved on this phone only. Your own sightings are what fill your BirdDex.</p>
       <div className="form stack">
-        <label className="field">
-          <span>Which bird?</span>
-          <select value={species} onChange={(e) => setSpecies(e.target.value)} aria-label="Which bird">
-            <option value="">Choose a bird…</option>
-            {SORTED.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-        </label>
+        {outside ? (
+          <div className="field">
+            <span>Which bird?</span>
+            <strong>{outside.name}</strong>
+            <span className="muted small">Not in the Starter Dex, so it counts in your life list rather than filling a card.</span>
+          </div>
+        ) : (
+          <label className="field">
+            <span>Which bird?</span>
+            <select value={species} onChange={(e) => setSpecies(e.target.value)} aria-label="Which bird">
+              <option value="">Choose a bird…</option>
+              {SORTED.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <label className="field">
           <span>Date</span>
-          <input type="date" value={date} max={today} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" value={date} max={today} onChange={(e) => onDate(e.target.value)} />
+        </label>
+        <label className="field">
+          <span>Time (optional)</span>
+          <input
+            type="time"
+            value={time}
+            onChange={(e) => {
+              setTimeTouched(true)
+              setTime(e.target.value)
+            }}
+          />
         </label>
         <label className="field">
           <span>Where? (optional)</span>
@@ -150,7 +217,7 @@ function LogForm({ speciesId, place: placeIn }: { speciesId?: string; place?: st
           </p>
         )}
         <button type="button" className="btn primary block" onClick={() => void save()} disabled={busy}>
-          Save sighting
+          {edit ? 'Save changes' : 'Save sighting'}
         </button>
       </div>
     </BottomSheet>

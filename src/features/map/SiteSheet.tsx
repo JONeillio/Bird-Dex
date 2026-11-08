@@ -85,7 +85,7 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
                 </span>
               </a>
               <span className="report-actions">
-                <button type="button" className="btn small" onClick={() => openLog({ speciesId: r.speciesId!, place: shortSiteName(site.name) })}>
+                <button type="button" className="btn small" onClick={() => openLog({ speciesId: r.speciesId!, place: shortSiteName(site.name), siteId: site.id })}>
                   I saw it
                 </button>
                 {r.checklistUrl && (
@@ -111,11 +111,16 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
                     <span className="muted small">Last reported {daysAgo(r.obsDate)}</span>
                   </span>
                 </span>
-                {r.checklistUrl && (
-                  <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener">
-                    eBird ↗
-                  </a>
-                )}
+                <span className="report-actions">
+                  <button type="button" className="btn small" onClick={() => openLog({ outside: { name: r.name, sciName: r.sciName }, place: shortSiteName(site.name), siteId: site.id })}>
+                    I saw it
+                  </button>
+                  {r.checklistUrl && (
+                    <a className="report-link small" href={r.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist for ${r.name}`}>
+                      eBird ↗
+                    </a>
+                  )}
+                </span>
               </li>
             ))}
           </ul>

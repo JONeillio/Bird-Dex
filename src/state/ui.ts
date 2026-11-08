@@ -1,8 +1,15 @@
 import { create } from 'zustand'
+import type { Encounter } from '../data/personal-schema'
 
 export interface LogRequest {
   speciesId?: string
   place?: string
+  /** The eBird site the sighting is at, when the caller knows it. */
+  siteId?: string
+  /** A bird outside the Starter Dex (from a public report), logged by name. */
+  outside?: { name: string; sciName: string }
+  /** Edit this existing sighting instead of adding a new one. */
+  edit?: Encounter
 }
 export interface RevealRequest {
   speciesId: string

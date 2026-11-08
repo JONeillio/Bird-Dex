@@ -6,6 +6,12 @@ export const MODES = ['seen', 'heard', 'both'] as const
 export type Mode = (typeof MODES)[number]
 export const MODE_LABELS: Record<Mode, string> = { seen: 'Seen', heard: 'Heard', both: 'Seen and heard' }
 
+/** A real eBird hotspot id such as L123456. Demo sites (LDEMO01) are deliberately not valid. */
+export const SITE_ID_PATTERN = /^L\d+$/
+export function validSiteId(id: string | null | undefined): string | null {
+  return id && SITE_ID_PATTERN.test(id) ? id : null
+}
+
 export const EncounterSchema = z.object({
   id: z.string().min(8).max(64),
   speciesId: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
@@ -20,7 +26,7 @@ export const EncounterSchema = z.object({
   createdAt: z.string(),
   // Added later; all optional so older records and backups still load.
   /** The eBird hotspot id, when the sighting was logged at (or imported from) a known site. */
-  siteId: z.string().regex(/^L\d+$/).nullable().optional(),
+  siteId: z.string().regex(SITE_ID_PATTERN).nullable().optional(),
   /** HH:MM in 24 hours, or null when unknown (never invented). */
   time: z.string().regex(/^\d{2}:\d{2}$/).nullable().optional(),
   /** Birds outside the Starter Dex (speciesId starts `x-`) keep their own names here. */

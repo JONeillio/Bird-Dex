@@ -106,7 +106,10 @@ export default function BirdProfile({ id }: { id: string }) {
                 {mine.map((e) => (
                   <li key={e.id} className="journal-item">
                     <div className="journal-main">
-                      <strong>{formatDate(e.date)}</strong>
+                      <strong>
+                        {formatDate(e.date)}
+                        {e.time ? ` · ${e.time}` : ''}
+                      </strong>
                       <span className="muted small">
                         {MODE_LABELS[e.mode]}
                         {e.place ? ` · ${e.place}` : ''}
@@ -132,6 +135,7 @@ function ReportedNearby({ speciesId, name }: { speciesId: string; name: string }
   const prefs = useStore((s) => s.prefs)
   const setPref = useStore((s) => s.setPref)
   const setFocus = useStore((s) => s.setFocusSpecies)
+  const openLog = useUi((s) => s.openLog)
   const data = usePublished(prefs.regionId)
   if (data.status !== 'ready') {
     return (
@@ -177,11 +181,16 @@ function ReportedNearby({ speciesId, name }: { speciesId: string; name: string }
                     </span>
                   </span>
                 </a>
-                {report.checklistUrl && (
-                  <a className="report-link small" href={report.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist at ${shortSiteName(site.name)}`}>
-                    eBird ↗
-                  </a>
-                )}
+                <span className="report-actions">
+                  <button type="button" className="btn small" onClick={() => openLog({ speciesId, place: shortSiteName(site.name), siteId: site.id })}>
+                    I saw it
+                  </button>
+                  {report.checklistUrl && (
+                    <a className="report-link small" href={report.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist at ${shortSiteName(site.name)}`}>
+                      eBird ↗
+                    </a>
+                  )}
+                </span>
               </li>
             ))}
           </ul>

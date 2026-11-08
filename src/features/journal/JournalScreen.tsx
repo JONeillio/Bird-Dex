@@ -63,23 +63,34 @@ export default function JournalScreen() {
         <ul className="journal-list">
           {sorted.map((e) => {
             const s = dexById(e.speciesId)
+            const label = s?.name ?? e.name ?? e.speciesId
             return (
               <li key={e.id} className="journal-item">
-                <a href={`#/bird/${e.speciesId}`} className="journal-bird" aria-label={s?.name ?? e.speciesId}>
-                  {s ? <BirdPortrait species={s} size={56} /> : null}
-                </a>
+                {s ? (
+                  <a href={`#/bird/${e.speciesId}`} className="journal-bird" aria-label={label}>
+                    <BirdPortrait species={s} size={56} />
+                  </a>
+                ) : (
+                  <span className="journal-bird" aria-hidden="true" />
+                )}
                 <div className="journal-main">
-                  <strong>{s?.name ?? e.speciesId}</strong>
+                  <strong>{label}</strong>
                   <span className="muted small">
                     {formatDate(e.date)}
+                    {e.time ? ` · ${e.time}` : ''}
                     {e.place ? ` · ${e.place}` : ''}
                   </span>
                   <span className="row">
                     <Pill>{MODE_LABELS[e.mode]}</Pill>
+                    {!s && <Pill>Outside the Starter Dex</Pill>}
                   </span>
                   {e.notes && <span className="small">{e.notes}</span>}
                   {e.photo && <img className="journal-photo" src={e.photo} alt={`Your photo of ${s?.name ?? 'the bird'}`} />}
                 </div>
+                <span className="report-actions">
+                <button type="button" className="btn small" onClick={() => openLog({ edit: e })} aria-label={`Edit ${label} sighting`}>
+                  Edit
+                </button>
                 <button
                   type="button"
                   className="btn small ghost"
@@ -93,6 +104,7 @@ export default function JournalScreen() {
                 >
                   {confirmId === e.id ? 'Tap to delete' : 'Delete'}
                 </button>
+                </span>
               </li>
             )
           })}
