@@ -52,6 +52,20 @@ describe('draftWardens', () => {
     expect(out.map((w) => w.siteId).sort()).toEqual(['f1', 'g1', 'w1', 'w2'])
   })
 
+  it('skips vague "use a more precise hotspot" entries', () => {
+    expect(RESTRICTED_NAME.test('Big Marsh (Please use more precise hotspot if possible)')).toBe(true)
+    expect(RESTRICTED_NAME.test('Precise Lane Wood')).toBe(false)
+  })
+
+  it('keeps some wardens close to home when asked, even if bigger sites are further out', () => {
+    const near = [0, 1, 2].map((i) => site(`n${i}`, wet.slice(0, 12), [-2.3 + i * 0.1, 53.4]))
+    const far = [0, 1, 2].map((i) => site(`f${i}`, wet.slice(0, 20), [-1.0 + i * 0.1, 53.4]))
+    const minutes = Object.fromEntries([...near.map((x) => [x.id, 15]), ...far.map((x) => [x.id, 50])])
+    const out = draftWardens(region([...near, ...far], minutes), { count: 4, localCount: 2, localDriveMin: 25, maxDriveMin: 60 })
+    expect(out.filter((w) => w.siteId.startsWith('n'))).toHaveLength(2)
+    expect(out.filter((w) => w.siteId.startsWith('f'))).toHaveLength(2)
+  })
+
   it('skips a site within 2 km of one already chosen', () => {
     const a = site('a', wet.slice(0, 14), [-2.3, 53.4])
     const b = site('b', wet.slice(0, 13), [-2.3, 53.405]) // about 0.5 km away

@@ -53,7 +53,9 @@
       "localKm": 22,
       "wardenCount": 12,
       "wardenMaxDriveMin": 65,
-      "wardenSpacingKm": 3
+      "wardenSpacingKm": 3,
+      "wardenLocalCount": 7,
+      "wardenLocalDriveMin": 25
     },
     {
       "id": "southampton",
@@ -79,7 +81,9 @@
       "localKm": 15,
       "wardenCount": 5,
       "wardenMaxDriveMin": 50,
-      "wardenSpacingKm": 3
+      "wardenSpacingKm": 3,
+      "wardenLocalCount": 2,
+      "wardenLocalDriveMin": 25
     },
     {
       "id": "location-1",

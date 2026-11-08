@@ -15,7 +15,7 @@ export const WARDEN_SPACING_KM = 2
 export const SIGNATURE_SIZE = 8
 
 /** Names that say you can't just turn up (eBird often puts this in the hotspot name). Such sites never get a warden. */
-export const RESTRICTED_NAME = /\b(permit|permits|private|members? only|no public access|no access|closed)\b/i
+export const RESTRICTED_NAME = /\b(permit|permits|private|members? only|no public access|no access|closed)\b|please use (a |the )?(more )?(precise|specific)/i
 
 const OWL_GENERA = new Set(['Tyto', 'Strix', 'Athene', 'Asio'])
 const HABITAT_ORDER: SetId[] = ['wetland', 'coast', 'woodland', 'farmland-upland', 'garden']
@@ -61,6 +61,10 @@ export interface DraftOptions {
   maxDriveMin?: number
   /** Least distance between two wardens' sites. Default 2. */
   spacingKm?: number
+  /** How many wardens should be close to home (within `localDriveMin`); the rest are bigger destinations further out. Default 0 (no split). */
+  localCount?: number
+  /** What counts as close to home, in minutes from the nearest start point. Default 25. */
+  localDriveMin?: number
 }
 
 export function draftWardens(region: RegionData, opts: DraftOptions = {}): DraftWarden[] {
@@ -78,21 +82,40 @@ export function draftWardens(region: RegionData, opts: DraftOptions = {}): Draft
   type Cand = (typeof candidates)[number]
   const bySpecies = (a: Cand, b: Cand) => b.species.length - a.species.length || a.site.id.localeCompare(b.site.id)
 
+  /** The habitat a site was chosen to represent (it can differ from its first character when it was picked to fill a habitat). */
+  const role = new Map<Cand, SetId>()
   const chosen: Cand[] = []
   const free = (c: Cand) => !chosen.includes(c) && chosen.every((x) => distanceKm(x.site.point, c.site.point) >= spacingKm)
-  for (const habitat of HABITAT_ORDER) {
-    const best = candidates.filter((c) => c.character[0] === habitat && free(c)).sort(bySpecies)[0]
-    if (best) chosen.push(best)
-  }
-  for (const c of [...candidates].sort(bySpecies)) {
-    if (chosen.length >= count) break
-    if (free(c)) chosen.push(c)
+  const localCount = Math.min(opts.localCount ?? 0, count)
+  const localDriveMin = opts.localDriveMin ?? 25
+  const tiers = localCount > 0
+    ? [
+        { pool: candidates.filter((c) => c.driveMin! <= localDriveMin), take: localCount },
+        { pool: candidates.filter((c) => c.driveMin! > localDriveMin), take: count - localCount },
+      ]
+    : [{ pool: candidates, take: count }]
+  for (const { pool, take } of tiers) {
+    const start = chosen.length
+    const room = () => chosen.length - start < take
+    // One of each habitat first (a site counts for a habitat if it is one of its two main characters), then the busiest.
+    for (const habitat of HABITAT_ORDER) {
+      if (!room()) break
+      const best = pool.filter((c) => c.character.includes(habitat) && free(c)).sort(bySpecies)[0]
+      if (best) {
+        chosen.push(best)
+        role.set(best, habitat)
+      }
+    }
+    for (const c of [...pool].sort(bySpecies)) {
+      if (!room()) break
+      if (free(c)) chosen.push(c)
+    }
   }
 
   const used = new Set<string>()
   const out: DraftWarden[] = []
   for (const c of chosen) {
-    const primary = c.character[0]
+    const primary = role.get(c) ?? c.character[0]
     const inCharacter = c.species.filter((id) => dexById(id)!.sets.includes(primary)).sort(rarer)
     const others = c.species.filter((id) => !inCharacter.includes(id)).sort(rarer)
     const signature = [...inCharacter, ...others].slice(0, SIGNATURE_SIZE)
