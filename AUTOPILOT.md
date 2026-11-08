@@ -47,7 +47,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] B1 eBird CSV import · [x] B1c Sample history · [x] B3 Import history with undo
 
 **Phase N: engines (do these first, in this order)**
-- [ ] C1 Bond engine (spec under Phase C)
+- [x] C1 Bond engine (spec under Phase C)
 - [ ] N1 Outings and rarity values
 - [ ] N2 Field Report engine (points, lifers, rank-ups, par, explorer bonus)
 - [ ] N3 Stats and exploration engines
@@ -194,6 +194,8 @@ Process encounters sorted by date (null last), then time (null last), then `crea
 Ranks by points: Spotted 0+, Known 15+, Familiar 40+, Seasoned 80+, Old Friend 150+. `rankIndex` 0–4.
 `rankUps(before, after)`: species whose rank rose (for the reveal).
 Tests: each rule; daily cap per site; two sites same day both count; import of 1,000 synthetic sightings is fast (< 200 ms); deleting encounters lowers points (pure recompute).
+
+**C1 notes (built 8 Nov).** `src/domain/bond.ts` (`computeBond`, `bondRun`, `rankUps`, `chronological`) and `src/domain/siteKey.ts` (`siteKey`, shared with outings). `bondRun` also returns `awards`, keyed by encounter id: `{ speciesId, points, total, rankIndex }` for each sighting, which N2 uses for the Field Report's Bond points and rank-ups. Choices made: an unknown place (no site id, no label) cannot earn the new-place bonus and is not counted in `sites`; a species' first-ever sighting also uses up the heard-only bonus if it was heard; a sighting that earns 0 (same bird, place and day) does not update the new-month, band or year sets; a bird new in `after` is not a rank-up (the catch reveal covers it). Sample records count like any others.
 
 **C2 Ranks in the UI.**
 - Dex card: rank emblem bottom-left (fallback: 1–5 small pips drawn with CSS) and a frame class per rank (`frame-spotted` … `frame-oldfriend`; fallback CSS borders: plain, double, dashed "stitched" brown, brown with corner squares, gold with a slow shimmer that respects reduced motion). When `public/assets/ranks/` art exists, use it via `border-image`.
