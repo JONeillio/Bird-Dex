@@ -61,6 +61,8 @@ Map hierarchy (8 Nov pass, from Joseph's feedback that big pins, floating sprite
 
 Rarities (T9.2, 8 Nov): `/data/obs/geo/recent/notable?lat&lng&dist=50&back=14&detail=simple` is one call per location; records include `locationPrivate` (private ones are never published) and records awaiting review are kept as "unconfirmed". First live refresh (run 42473249675, 8 Nov): Location 1 gave 165 notable records (105 awaiting review, 25 private left out, 10 extra hotspots); Location 2 gave 141 (14 awaiting review, 3 private, 11 extra hotspots). `obsValid` is present with `detail=simple`. Whole refresh: 164 eBird calls + 2 ORS, 83 s.
 
+Site-to-site matrix (F1, 8 Nov, refresh run 42490902428): one ORS matrix request per region with the 40 sites that have the most Starter Dex species reported, as both sources and destinations (omitting `sources` and `destinations` means all-to-all), `metrics: ['duration']`. 1,560 of 1,560 off-diagonal drive times came back known in both locations, no nulls; the request counted as one against the daily 500 (497 left after the whole refresh of 164 eBird calls and 4 ORS calls, 89 s). Published as optional `between: { ids, s }` (seconds, null = unknown, diagonal 0) and validated against the region's sites.
+
 Still unverified: eBird hotspot cap on `geo` (900 may or may not be a limit), whether eBird returns more than 14 days for `back`, and eBird quota in practice.
 
 ## Working rules
