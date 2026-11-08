@@ -56,7 +56,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
 - [x] E1 Duel engine
 - [x] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
-- [ ] F2 Route planner engine
+- [x] F2 Route planner engine
 - [ ] D2 Warden draft task and wardens.v1.json
 - [ ] B1b Accept eBird's ZIP directly
 - [ ] B2 Pasted list import
@@ -227,6 +227,8 @@ Screens: use the demo collection is not enough (no encounters). Add a dev-only r
 `planDay(region, { startId, recorded, wanted: 'new' | string[] /* bird keys */, budgetMin, stopMin = 40, maxStops = 4 }) → { stops: { site, arriveMin, birds: string[] }[], totalMin, returnMin, uncovered: string[] }`.
 Wanted birds: the given keys, or every unrecorded Dex species reported in the region when `'new'`. Greedy: from the start point, repeatedly choose the unvisited site (in `between.ids`) with the highest `(newly covered wanted birds) / (travel + stopMin)` such that elapsed + travel + stopMin + drive back to start ≤ budget. Travel from the start uses `drive.byStart`; between sites uses `between`; drive back uses the site's `byStart` time (approximation, label it so). Unknown travel → site not eligible. Stop when nothing adds a bird or `maxStops` is reached.
 Tests: budget respected; unknown travel skipped; targets prioritised; picks a two-site plan that covers more than the best single site; empty result when nothing is reachable.
+
+**F2 notes (built 8 Nov).** `src/domain/routePlan.ts` exports `planDay` and `wantedBirds`. Stops are chosen greedily by newly covered wanted birds per minute (travel + stop time); ties go to more birds, then shorter travel, then site id, so the same input always gives the same plan. `arriveMin` is minutes after leaving the start point; `stops[i].birds` are only the birds newly covered at that stop; `returnMin` is the last stop's drive time from the start point (an approximation: label it "about" in the UI); `totalMin` is the whole day including the drive home. Unknown drive times (start leg, between-sites leg or return) make a site ineligible, never 0. An empty plan (no stops, `uncovered` lists every wanted bird) comes back when `between` is missing, the start point is unknown, nothing is wanted or nothing fits the budget. `wanted: 'new'` means unrecorded Starter Dex birds only; explicit keys can also be `ebird:<code>` for birds outside the Dex. F3 needs the "Route planning arrives with the next data update" message when `between` is undefined (an empty plan with `between` missing).
 
 **F3 "Plan a day" sheet.** Map controls get a "Plan a day" chip (next to Find a bird). Sheet: what to look for (chips: "Most new birds", or each of your targets reported in the region; multi-select), time (2 h / 4 h / 6 h), result as an ordered list (site, arrive after N min, birds to look for with portraits), totals, and **Open in Google Maps**:
 `https://www.google.com/maps/dir/?api=1&origin=<lat>,<lng>&destination=<lat>,<lng>&waypoints=<lat>,<lng>%7C<lat>,<lng>&travelmode=driving` with origin and destination = the start point and waypoints = the stops in order (note lat,lng order here). Copy under it: "A plan from recent reports, not a guarantee. Birds move; check access before you go." Credit: openrouteservice/OSM. If `between` is missing (old data), say "Route planning arrives with the next data update."
