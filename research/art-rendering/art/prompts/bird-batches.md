@@ -69,6 +69,8 @@ Batch 02. Ten birds:
 
 ### Batch 03: more garden and town birds
 
+**Status: done and in the app 8 Nov 2026** (all 9 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-03/`).
+
 ```
 Batch 03. Nine birds:
 1. eurasian-collared-dove (Collared Dove): pale sandy pinkish-grey, thin black half-collar on the back of the neck edged white, dark red eye, darker wingtips.
