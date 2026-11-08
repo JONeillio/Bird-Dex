@@ -20,9 +20,14 @@ interface RecordsState {
   addMany: (list: Encounter[], batch: ImportBatch, onProgress?: (fraction: number) => void) => Promise<void>
   /** Undo one import: removes every sighting it added and its history entry. Sightings you logged yourself are never touched. Returns how many were removed. */
   undoBatch: (batchId: string) => Promise<number>
+  /** Add import-history entries from a restored backup (ones already here are left alone). */
+  restoreBatches: (list: ImportBatch[]) => Promise<void>
 }
 
 let storage: RecordsStorage = memoryStorage()
+
+/** The storage in use, so other stores (the game documents) share the one database connection. */
+export const currentStorage = (): RecordsStorage => storage
 
 const WARNING = 'This browser would not let BirdQuest save records on the phone (private mode or full storage). Sightings will be lost when you close it, so download a backup.'
 
@@ -82,6 +87,13 @@ export const useRecords = create<RecordsState>((set, get) => {
       set({ encounters: get().encounters.filter((e) => e.importBatchId !== batchId), batches: get().batches.filter((b) => b.id !== batchId) })
       await save(() => storage.removeMany(gone.map((e) => e.id), batchId))
       return gone.length
+    },
+    restoreBatches: async (list) => {
+      const have = new Set(get().batches.map((b) => b.id))
+      const fresh = list.filter((b) => !have.has(b.id))
+      if (fresh.length === 0) return
+      set({ batches: [...get().batches, ...fresh] })
+      for (const b of fresh) await save(() => storage.putBatch(b))
     },
   }
 })

@@ -5,6 +5,7 @@ import { needsMotionPermission, requestMotionPermission, tiltSupported } from '.
 import { useInstall } from '../../phone/install'
 import { play, unlockAudio } from '../../audio/sfx'
 import { buzz, BUZZ } from '../../phone/haptics'
+import { useGame } from '../../state/game'
 import { useRecords } from '../../state/records'
 import { useStore, type Prefs } from '../../state/store'
 import { useUi } from '../../state/ui'
@@ -32,6 +33,10 @@ export default function SettingsScreen() {
   const targets = prefs.targets
   const encounters = useRecords((s) => s.encounters)
   const replaceAll = useRecords((s) => s.replaceAll)
+  const batches = useRecords((s) => s.batches)
+  const restoreBatches = useRecords((s) => s.restoreBatches)
+  const gameDocs = useGame((s) => s.docs)
+  const restoreGame = useGame((s) => s.restore)
   const say = useUi((s) => s.say)
   const install = useInstall()
   const fileRef = useRef<HTMLInputElement>(null)
@@ -39,7 +44,7 @@ export default function SettingsScreen() {
   const [restoreError, setRestoreError] = useState<string | null>(null)
 
   const download = () => {
-    const backup = buildBackup(encounters, targets)
+    const backup = buildBackup(encounters, targets, new Date(), { importBatches: batches, game: Object.values(gameDocs) })
     const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -66,12 +71,14 @@ export default function SettingsScreen() {
       setRestoreError(r.error)
       return
     }
-    setPlan({ plan: planRestore(encounters, targets, r.backup, KNOWN), targets: r.backup.targets })
+    setPlan({ plan: planRestore(encounters, targets, r.backup, KNOWN, { importBatches: batches, game: Object.values(gameDocs) }), targets: r.backup.targets })
   }
 
   const confirmRestore = async () => {
     if (!plan) return
     await replaceAll(plan.plan.merged)
+    await restoreBatches(plan.plan.addedBatches)
+    await restoreGame(plan.plan.mergedGame)
     for (const t of plan.plan.addedTargets) useStore.getState().toggleTarget(t)
     say(`Restored ${plan.plan.added} sighting${plan.plan.added === 1 ? '' : 's'}.`)
     setPlan(null)

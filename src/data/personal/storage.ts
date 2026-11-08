@@ -3,6 +3,7 @@
 import { openDB, type IDBPDatabase } from 'idb'
 import type { Encounter, ImportBatch } from '../personal-schema'
 import { EncounterSchema, ImportBatchSchema } from '../personal-schema'
+import { GameDocSchema, type GameDoc } from './game-schema'
 
 export interface RecordsStorage {
   readonly persistent: boolean
@@ -16,11 +17,17 @@ export interface RecordsStorage {
   putBatch(b: ImportBatch): Promise<void>
   /** Undo an import: delete these records and the import's history entry. */
   removeMany(ids: readonly string[], batchId: string): Promise<void>
+  /** Game documents (opened parcels, notes, calls, NPC answers, preferences). Damaged ones are skipped. */
+  loadGame(): Promise<GameDoc[]>
+  putGame(doc: GameDoc): Promise<void>
+  putGameMany(docs: readonly GameDoc[]): Promise<void>
+  removeGame(id: string): Promise<void>
 }
 
 export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorage {
   const m = new Map(initial.map((e) => [e.id, e]))
   const batches = new Map<string, ImportBatch>()
+  const game = new Map<string, GameDoc>()
   return {
     persistent: false,
     loadAll: async () => [...m.values()],
@@ -37,19 +44,25 @@ export function memoryStorage(initial: readonly Encounter[] = []): RecordsStorag
       ids.forEach((id) => m.delete(id))
       batches.delete(batchId)
     },
+    loadGame: async () => [...game.values()],
+    putGame: async (d) => void game.set(d.id, d),
+    putGameMany: async (docs) => void docs.forEach((d) => game.set(d.id, d)),
+    removeGame: async (id) => void game.delete(id),
   }
 }
 
 const DB_NAME = 'birdquest'
 const STORE = 'encounters'
 const BATCHES = 'importBatches'
+const GAME = 'game'
 
 export async function idbStorage(): Promise<RecordsStorage> {
-  const db: IDBPDatabase = await openDB(DB_NAME, 2, {
+  const db: IDBPDatabase = await openDB(DB_NAME, 3, {
     upgrade(d) {
-      // Version 1 had only the encounters store; version 2 adds the import history. Existing records are untouched.
+      // Version 1 had only the encounters store; version 2 adds the import history; version 3 adds the game documents. Existing records are untouched.
       if (!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE, { keyPath: 'id' })
       if (!d.objectStoreNames.contains(BATCHES)) d.createObjectStore(BATCHES, { keyPath: 'id' })
+      if (!d.objectStoreNames.contains(GAME)) d.createObjectStore(GAME, { keyPath: 'id' })
     },
   })
   return {
@@ -93,6 +106,24 @@ export async function idbStorage(): Promise<RecordsStorage> {
       const tx = db.transaction([STORE, BATCHES], 'readwrite')
       await Promise.all([...ids.map((id) => tx.objectStore(STORE).delete(id)), tx.objectStore(BATCHES).delete(batchId)])
       await tx.done
+    },
+    async loadGame() {
+      const rows: unknown[] = await db.getAll(GAME)
+      return rows.flatMap((r) => {
+        const p = GameDocSchema.safeParse(r)
+        return p.success ? [p.data] : []
+      })
+    },
+    async putGame(d) {
+      await db.put(GAME, d)
+    },
+    async putGameMany(docs) {
+      const tx = db.transaction(GAME, 'readwrite')
+      await Promise.all(docs.map((d) => tx.store.put(d)))
+      await tx.done
+    },
+    async removeGame(id) {
+      await db.delete(GAME, id)
     },
   }
 }

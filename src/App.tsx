@@ -7,6 +7,7 @@ import SettingsScreen from './features/settings/SettingsScreen'
 import { LogSheet } from './features/log/LogSheet'
 import { Reveal } from './features/log/Reveal'
 import { Toast } from './features/log/Toast'
+import { useGame } from './state/game'
 import { useRecords } from './state/records'
 import { useStore } from './state/store'
 import { play, unlockAudio } from './audio/sfx'
@@ -64,7 +65,7 @@ export default function App() {
     soundRef.current = soundOn
   })
 
-  useEffect(() => void load(), [load])
+  useEffect(() => void load().then(() => useGame.getState().load()), [load])
   useWakeLock(keepAwake)
 
   // Browsers keep audio locked until a tap, so the opening jingle plays on the first touch.

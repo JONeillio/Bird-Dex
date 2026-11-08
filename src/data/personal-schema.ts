@@ -1,6 +1,7 @@
 // Your own records. They live on this phone (IndexedDB) and in backup files you download; they are never
 // sent anywhere. Public eBird reports never create one of these: only logging (or, later, an import) does.
 import { z } from 'zod'
+import { validGameDocs } from './personal/game-schema'
 
 export const MODES = ['seen', 'heard', 'both'] as const
 export type Mode = (typeof MODES)[number]
@@ -62,9 +63,13 @@ export type ImportBatch = z.infer<typeof ImportBatchSchema>
 
 export const BackupSchema = z.object({
   app: z.literal('birdquest'),
-  schema: z.literal(1),
+  /** 1 = sightings and targets only. 2 adds the import history and the game documents. */
+  schema: z.union([z.literal(1), z.literal(2)]),
   exportedAt: z.string(),
   encounters: z.array(EncounterSchema),
   targets: z.array(z.string()),
+  importBatches: z.array(ImportBatchSchema).optional(),
+  /** Game documents; any that are damaged are dropped when the file is read. */
+  game: z.array(z.unknown()).optional().transform((a) => (a ? validGameDocs(a) : undefined)),
 })
 export type Backup = z.infer<typeof BackupSchema>

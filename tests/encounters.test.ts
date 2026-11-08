@@ -32,9 +32,9 @@ describe('encounter fields (A1)', () => {
   it('outside-Dex birds do not count toward Starter Dex progress', () => {
     expect([...recordedIds({ demoCollection: false }, [base, outside])]).toEqual(['european-robin'])
   })
-  it('a backup round-trip keeps the new fields and stays schema 1', () => {
+  it('a backup round-trip keeps the new fields and is written as schema 2', () => {
     const b = buildBackup([base, outside], [], new Date('2026-11-08T12:00:00Z'))
-    expect(b.schema).toBe(1)
+    expect(b.schema).toBe(2)
     expect(BackupSchema.safeParse(b).success).toBe(true)
     const r = parseBackup(JSON.stringify(b))
     expect(r.ok && r.backup.encounters).toEqual([base, outside])
