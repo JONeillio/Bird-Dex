@@ -39,3 +39,28 @@ describe('curated game data', () => {
     for (let m = 1; m <= 12; m++) expect(cards.cards.filter((c) => !c.months || c.months.includes(m)).length).toBeGreaterThanOrEqual(5)
   })
 })
+
+// The typed loaders (src/data/game.ts) parse the same files and fail loudly if they are invalid.
+import { CARDS_VERSION, DUEL_CARDS, TRAIT_KEYS, TRAITS_VERSION, cardForId, ruleKey, traitsById } from '../src/data/game'
+import { STARTER_DEX } from '../src/data/catalogue'
+
+describe('game data loaders (A3)', () => {
+  it('loads traits for every Starter Dex bird and nothing else', () => {
+    for (const s of STARTER_DEX) expect(traitsById(s.id), s.id).toBeDefined()
+    expect(traitsById('x-regulus-ignicapilla')).toBeUndefined()
+    expect(traitsById('european-robin')).toMatchObject({ size: 'small', diet: 'insects', songster: true })
+    expect(TRAITS_VERSION).toBe('traits-v1')
+  })
+  it('loads the 12 duel cards in file order', () => {
+    expect(DUEL_CARDS).toHaveLength(12)
+    expect(CARDS_VERSION).toBe('duel-cards-v1')
+    expect(cardForId('dawn-chorus')?.band).toBe('dawn')
+    expect(cardForId('nope')).toBeUndefined()
+  })
+  it('every card rule key is a trait key', () => {
+    for (const c of DUEL_CARDS) for (const r of c.rules) expect(TRAIT_KEYS, `${c.id}: ${ruleKey(r)}`).toContain(ruleKey(r))
+  })
+  it('the fog card counts heard birds as home ground; no other card does', () => {
+    expect(DUEL_CARDS.filter((c) => c.affinity === 'heard').map((c) => c.id)).toEqual(['fog'])
+  })
+})
