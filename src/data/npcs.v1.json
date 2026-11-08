@@ -1,0 +1,298 @@
+{
+  "schema": 1,
+  "version": "npcs-v1",
+  "npcs": [
+    {
+      "id": "nell",
+      "name": "Nell",
+      "role": "The dawn-chorus recordist",
+      "habitats": [
+        "woodland",
+        "garden"
+      ],
+      "band": "dawn",
+      "skill": "ear",
+      "opening": "There. Hear that little phrase? Wait for him to sing it again.",
+      "returnLine": "I kept the bit where we both heard it. You can hear you smiling.",
+      "keepsake": "A labelled recording for the field journal",
+      "connections": [
+        "dev"
+      ],
+      "challenge": {
+        "kind": "pick-phrase",
+        "bird": "eurasian-wren",
+        "decoys": [
+          "european-robin",
+          "dunnock"
+        ]
+      },
+      "placeNote": "A path just inside Bursted Woods"
+    },
+    {
+      "id": "kit",
+      "name": "Kit",
+      "role": "The self-appointed wren expert",
+      "habitats": [
+        "woodland",
+        "garden"
+      ],
+      "band": null,
+      "skill": "spot",
+      "opening": "If you see it, just point. Last time someone shouted, it flew off.",
+      "returnLine": "It came back. Different hat today. I'm testing a theory.",
+      "keepsake": "A hand-drawn wren sticker",
+      "connections": [],
+      "challenge": {
+        "kind": "spot",
+        "cells": 9
+      },
+      "placeNote": "The scrubby edge of Bursted Woods"
+    },
+    {
+      "id": "imani",
+      "name": "Imani",
+      "role": "The hide artist",
+      "habitats": [
+        "woodland"
+      ],
+      "band": null,
+      "skill": "behaviour",
+      "opening": "Same bird in both drawings. Reckon you can name it from the way it climbs?",
+      "returnLine": "That one's yours to finish. I've left you the interesting bit.",
+      "keepsake": "A copy of her nuthatch study",
+      "connections": [
+        "bea"
+      ],
+      "challenge": {
+        "kind": "pick-by-pose",
+        "bird": "eurasian-nuthatch",
+        "decoys": [
+          "eurasian-treecreeper",
+          "great-spotted-woodpecker"
+        ]
+      }
+    },
+    {
+      "id": "bea",
+      "name": "Bea",
+      "role": "The hide keeper",
+      "habitats": [
+        "wetland",
+        "woodland"
+      ],
+      "band": null,
+      "skill": "patience",
+      "opening": "Built that window specially for kingfishers. So far it's been excellent for looking at a crisp packet.",
+      "returnLine": "Typical. I was getting the drill.",
+      "keepsake": "The viewing window you chose",
+      "connections": [
+        "dev",
+        "imani",
+        "moss",
+        "ruth"
+      ],
+      "challenge": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "low",
+            "label": "A low window, close to the water"
+          },
+          {
+            "id": "middle",
+            "label": "A window at eye level, halfway along"
+          },
+          {
+            "id": "high",
+            "label": "A high window, looking over the reeds"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dev",
+      "name": "Dev",
+      "role": "The baker at the gate",
+      "habitats": [
+        "garden"
+      ],
+      "band": "dawn",
+      "skill": "ear",
+      "opening": "First week at the bakery I thought that blackbird was someone's alarm going off. Felt a right idiot when I asked whose phone it was.",
+      "returnLine": "You heard it that time. Same one, just before the fan came back on.",
+      "keepsake": "A bakery order slip with the bird rhythm on the back",
+      "connections": [
+        "nell",
+        "bea"
+      ],
+      "challenge": {
+        "kind": "pick-phrase",
+        "bird": "eurasian-blackbird",
+        "decoys": [
+          "song-thrush",
+          "mistle-thrush"
+        ]
+      }
+    },
+    {
+      "id": "moss",
+      "name": "Moss",
+      "role": "The photographer who missed it",
+      "habitats": [
+        "woodland"
+      ],
+      "band": null,
+      "skill": "spot",
+      "opening": "Best view I've ever had of a jay. Absolutely filled the frame. This is the branch about half a second later.",
+      "returnLine": "Put the whole thing up in the hide. Your initials are on it. You found the bird.",
+      "keepsake": "A photograph with the crop marked in pink",
+      "connections": [
+        "bea"
+      ],
+      "challenge": {
+        "kind": "spot",
+        "cells": 12
+      },
+      "placeNote": "A fallen tree in Bursted Woods"
+    },
+    {
+      "id": "june",
+      "name": "June",
+      "role": "The bridge champion",
+      "habitats": [
+        "garden",
+        "woodland"
+      ],
+      "band": null,
+      "skill": "count",
+      "opening": "Seven long-tailed tits went across. If you're about to say eight, you'd better have seen something I didn't.",
+      "returnLine": "Season champion. Give it here if I win next week.",
+      "keepsake": "A tiny enamel bridge pin",
+      "connections": [],
+      "challenge": {
+        "kind": "count-flock",
+        "bird": "long-tailed-tit",
+        "min": 5,
+        "max": 12
+      }
+    },
+    {
+      "id": "otis",
+      "name": "Otis",
+      "role": "The keeper of his sister's map",
+      "habitats": [
+        "wetland"
+      ],
+      "band": null,
+      "skill": "spot",
+      "opening": "She's put the star in the wrong place. Well. She's seven. Let's go to the wrong place, then.",
+      "returnLine": "She's asking if you've been back to Waggy Bridge. Apparently it needs checking every Sunday.",
+      "keepsake": "His sister's hand-drawn map",
+      "connections": [],
+      "challenge": {
+        "kind": "spot",
+        "cells": 12
+      }
+    },
+    {
+      "id": "ruth",
+      "name": "Ruth",
+      "role": "The last one in the wood",
+      "habitats": [
+        "woodland",
+        "garden"
+      ],
+      "band": "dusk",
+      "skill": "patience",
+      "opening": "You can sit there. That end dries first.",
+      "returnLine": "There you are. Wondered when you two would meet.",
+      "keepsake": "Your enamel cup beside hers",
+      "connections": [
+        "bea"
+      ],
+      "challenge": {
+        "kind": "choice",
+        "options": [
+          {
+            "id": "stay",
+            "label": "Stay another minute"
+          },
+          {
+            "id": "home",
+            "label": "Head home"
+          }
+        ]
+      }
+    },
+    {
+      "id": "val",
+      "name": "Val",
+      "role": "The driver who knows the parakeets' timetable",
+      "habitats": [
+        "garden",
+        "farmland-upland"
+      ],
+      "band": "dusk",
+      "skill": "behaviour",
+      "opening": "Used to drive the 89 through here. Everyone upstairs looking down at their phones. Best seats in the house, absolutely wasted.",
+      "returnLine": "After work. Theirs, usually. Mine's all over the place.",
+      "keepsake": "An old duty card with the flight line drawn on its back",
+      "connections": [
+        "nell"
+      ],
+      "challenge": {
+        "kind": "spot",
+        "cells": 16
+      },
+      "placeNote": "A bus stop on Erith Road beside Bursted Woods"
+    },
+    {
+      "id": "alfie",
+      "name": "Alfie",
+      "role": "The keeper who wants a witness",
+      "habitats": [
+        "garden",
+        "farmland-upland"
+      ],
+      "band": null,
+      "skill": "spot",
+      "opening": "Please tell my brother you saw it. Green bird, red head, practically on the penalty spot. He reckons I'm making excuses for the third goal.",
+      "returnLine": "Bird confirmed. Still should've saved it.",
+      "keepsake": "The signed match report",
+      "connections": [],
+      "challenge": {
+        "kind": "pick-by-pose",
+        "bird": "eurasian-green-woodpecker",
+        "decoys": [
+          "european-greenfinch",
+          "eurasian-jay"
+        ]
+      },
+      "placeNote": "The open grass beside Bursted Woods"
+    },
+    {
+      "id": "leanne",
+      "name": "Leanne",
+      "role": "The colourist on Erith Pier",
+      "habitats": [
+        "coast"
+      ],
+      "band": null,
+      "skill": "colour",
+      "opening": "Got asked for 'seagull grey' at work. I said, which bit? She's looking at me like I've asked which seagull. Well. That as well.",
+      "returnLine": "Someone asked for your colour yesterday. By name. Had to get the card out to check it.",
+      "keepsake": "Your Erith Pier palette",
+      "connections": [],
+      "challenge": {
+        "kind": "match-swatch",
+        "correct": "#9aa3ab",
+        "decoys": [
+          "#8a8f94",
+          "#a9b0b8",
+          "#7d8794"
+        ]
+      },
+      "placeNote": "Erith Pier"
+    }
+  ]
+}

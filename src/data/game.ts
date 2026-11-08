@@ -9,6 +9,7 @@ import wardensRaw from './wardens.v1.json'
 import { PERSONAS, type WardenHabitat } from './personas'
 import jobsRaw from './warden-jobs.v1.json'
 import voicesRaw from './warden-voices.v1.json'
+import npcsRaw from './npcs.v1.json'
 
 export const SIZES = ['tiny', 'small', 'medium', 'large', 'huge'] as const
 export const DIETS = ['seeds', 'insects', 'inverts', 'fish', 'plants', 'prey', 'omnivore'] as const
@@ -244,3 +245,78 @@ const voicesParsed = VoicesFileSchema.parse(voicesRaw)
 
 export const WARDEN_VOICES_VERSION = voicesParsed.version
 export const voiceFor = (persona: string): WardenVoice | undefined => voicesParsed.voices[persona]
+
+// Folk: the twelve story NPCs (AUTOPILOT P12). Converted from research/art-drafts/npc-pack-v1/encounters.json.
+// They work in any region: each lives at one site per region (assigned in src/domain/folk.ts) and is met by a real outing there.
+// The dialogue scripts with expressions are ticket P12b, so `script` is optional until then.
+export const NPC_SKILLS = ['ear', 'count', 'behaviour', 'colour', 'patience', 'spot'] as const
+export type NpcSkill = (typeof NPC_SKILLS)[number]
+const Hex = z.string().regex(/^#[0-9a-f]{6}$/)
+const BirdId = z.string().regex(/^[a-z]+(-[a-z]+)*$/)
+
+const ChallengeSchema = z.discriminatedUnion('kind', [
+  /** Hear a phrase (a drawn sonogram plus a synthesised tone) and pick the matching bird among three. */
+  z.strictObject({ kind: z.literal('pick-phrase'), bird: BirdId, decoys: z.array(BirdId).length(2) }),
+  /** A seeded number of birds cross; you give the number. */
+  z.strictObject({ kind: z.literal('count-flock'), bird: BirdId, min: z.number().int().min(2), max: z.number().int().max(30) }),
+  /** Pick the species from three silhouettes. */
+  z.strictObject({ kind: z.literal('pick-by-pose'), bird: BirdId, decoys: z.array(BirdId).length(2) }),
+  /** Pick the matching colour among four swatches. */
+  z.strictObject({ kind: z.literal('match-swatch'), correct: Hex, decoys: z.array(Hex).length(3) }),
+  /** Tap the cell (0 to cells - 1) the bird is in. */
+  z.strictObject({ kind: z.literal('spot'), cells: z.number().int().min(4).max(36) }),
+  /** No wrong answer; the choice is stored. */
+  z.strictObject({ kind: z.literal('choice'), options: z.array(z.strictObject({ id: z.string().regex(/^[a-z]+$/), label: z.string().min(3).max(80) })).min(2).max(4) }),
+])
+export type Challenge = z.infer<typeof ChallengeSchema>
+
+const ScriptLine = z.strictObject({ text: z.string().min(1).max(240), expression: z.enum(['neutral', 'talk', 'delight']) })
+const ScriptSchema = z.strictObject({ intro: ScriptLine, prompt: ScriptLine, right: ScriptLine, wrong: ScriptLine, return: ScriptLine, connection: ScriptLine })
+export type NpcScript = z.infer<typeof ScriptSchema>
+
+const NpcSchema = z.strictObject({
+  id: z.string().regex(/^[a-z]+$/),
+  name: z.string().min(2).max(20),
+  role: z.string().min(5).max(60),
+  /** Which kinds of site they live at (the site character, D1). */
+  habitats: z.array(z.enum(SETS)).min(1).max(2),
+  /** The part of the day your outing must include a sighting in to meet them, or null for any time. */
+  band: z.enum(['dawn', 'day', 'dusk', 'night']).nullable(),
+  skill: z.enum(NPC_SKILLS),
+  opening: z.string().min(5).max(200),
+  returnLine: z.string().min(5).max(200),
+  /** What they give you, in words (the icon is src/art/keepsakes.ts). */
+  keepsake: z.string().min(5).max(80),
+  connections: z.array(z.string()),
+  challenge: ChallengeSchema,
+  /** Where the original story set them (flavour only, for Location 2). */
+  placeNote: z.string().max(80).optional(),
+  script: ScriptSchema.optional(),
+})
+export type Npc = z.infer<typeof NpcSchema>
+const NpcsFileSchema = z.object({ schema: z.literal(1), version: z.string(), npcs: z.array(NpcSchema).min(1) })
+
+const npcsParsed = NpcsFileSchema.parse(npcsRaw)
+{
+  const ids = new Set<string>()
+  const dexIds = new Set(STARTER_DEX.map((s) => s.id))
+  for (const n of npcsParsed.npcs) {
+    if (ids.has(n.id)) throw new Error(`npcs.v1.json: repeated id ${n.id}.`)
+    ids.add(n.id)
+  }
+  for (const n of npcsParsed.npcs) {
+    const where = `npcs.v1.json ${n.id}`
+    for (const c of n.connections) if (!ids.has(c) || c === n.id) throw new Error(`${where}: bad connection ${c}.`)
+    const c = n.challenge
+    const birds = c.kind === 'pick-phrase' || c.kind === 'pick-by-pose' ? [c.bird, ...c.decoys] : c.kind === 'count-flock' ? [c.bird] : []
+    for (const b of birds) if (!dexIds.has(b)) throw new Error(`${where}: ${b} is not in the Starter Dex.`)
+    if (c.kind === 'pick-phrase' || c.kind === 'pick-by-pose') if (new Set([c.bird, ...c.decoys]).size !== 3) throw new Error(`${where}: the three birds must differ.`)
+    if (c.kind === 'count-flock' && c.min >= c.max) throw new Error(`${where}: min must be below max.`)
+    if (c.kind === 'match-swatch' && new Set([c.correct, ...c.decoys]).size !== 4) throw new Error(`${where}: the four swatches must differ.`)
+    if (c.kind === 'choice' && new Set(c.options.map((o) => o.id)).size !== c.options.length) throw new Error(`${where}: repeated option id.`)
+  }
+}
+
+export const NPCS_VERSION = npcsParsed.version
+export const NPC_DATA: readonly Npc[] = npcsParsed.npcs
+export const npcDataById = (id: string): Npc | undefined => NPC_DATA.find((n) => n.id === id)

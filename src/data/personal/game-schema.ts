@@ -45,6 +45,8 @@ export const isOpenedDoc = (d: GameDoc | undefined): d is OpenedDoc => !!d && d.
 export const isPrefsDoc = (d: GameDoc | undefined): d is PrefsExtraDoc => !!d && d.id === 'prefs' && 'nicknames' in d
 export const isNpcDoc = (d: GameDoc | undefined): d is z.infer<typeof NpcDocSchema> => !!d && d.id.startsWith('npc:') && 'choices' in d
 
+export const isNpcHomesDoc = (d: GameDoc | undefined): d is z.infer<typeof NpcHomesDocSchema> => !!d && d.id.startsWith('npcHomes:') && 'homes' in d
+
 export const DEFAULT_PREFS_EXTRA: PrefsExtraDoc = { id: 'prefs', nicknames: {}, lastNewsSeenAt: null, lastReportSeenAt: null, playerName: '' }
 
 /** Keep the documents that are valid and drop the rest (one per id, the last wins). */
