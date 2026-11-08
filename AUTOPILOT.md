@@ -87,7 +87,7 @@ Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal
 - [x] N5 Field Report flow: new checklists as parcels → report → what levelled up → outing card (canvas 2a–2d; engines N2, P4, P5)
 - [ ] U1 Bird News screen (canvas 1b; P8)
 - [ ] U2 Find a bird as a wanted poster with reliability strips (canvas 1c; P7)
-- [ ] B4 + N6 BirdDex tabs: Dex | <year> | Life | Patch, rank frames, "about now" and "close to rank up" filters (canvas 4a)
+- [x] B4 + N6 BirdDex tabs: Dex | <year> | Life | Stats (built 8 Nov: `src/domain/dexLists.ts`, `StatsPanel.tsx`, rank pips and CSS frames, "Close to rank up" chip within 8 Bond points). Not done: Patch tab, "about now" filter, the "First of <year>" reveal beat (`isFirstOfYear` exists and is tested), nicknames on cards (canvas 4a)
 - [ ] C2 Ranks on cards and profile; rank-up reveal; profile "your year with it" (canvas 4b; P6)
 - [ ] C3 Nicknames
 - [ ] N7 Exploration on the map (explored / unexplored sites, region %, nearest unexplored) (canvas 1a)

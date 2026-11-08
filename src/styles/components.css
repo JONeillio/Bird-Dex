@@ -583,3 +583,24 @@
 .outing-card-window { display: flex; align-items: center; justify-content: center; min-height: 140px; background: linear-gradient(var(--water) 0 55%, var(--grass) 55% 100%); border-bottom: 3px solid var(--ink); }
 .outing-card-body { padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 6px; }
 .note-box { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 8px; border: 2px solid var(--ink); border-radius: 10px; background: var(--panel); color: var(--ink); resize: vertical; }
+
+/* BirdDex ranks and stats (B4, C2, N6) */
+.rank-pips { display: flex; gap: 3px; justify-content: center; height: 8px; }
+.rank-pips i { width: 8px; height: 8px; background: var(--sage); border: 1px solid var(--ink); opacity: 0.45; }
+.rank-pips i.on { background: var(--forest); opacity: 1; }
+.rank-pips i.on.gold { background: var(--discovery); }
+.card.frame-known { border-width: 3px; }
+.card.frame-familiar { border-style: double; border-width: 5px; }
+.card.frame-seasoned { border-style: dashed; border-width: 3px; border-color: #7a5a3a; box-shadow: inset 0 0 0 2px var(--panel), inset 0 0 0 4px #7a5a3a; }
+.card.frame-oldfriend { border-width: 3px; border-color: var(--discovery); box-shadow: 0 0 0 2px var(--ink), inset 0 0 0 2px var(--discovery); animation: oldfriend-glint 4s steps(8) infinite; }
+@keyframes oldfriend-glint { 0%, 90%, 100% { filter: none; } 95% { filter: brightness(1.15); } }
+@media (prefers-reduced-motion: reduce) { .card.frame-oldfriend { animation: none; } }
+.stat-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat-tile { display: flex; flex-direction: column; align-items: center; padding: 8px 2px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--panel); }
+.stat-tile b { font-family: var(--font-display); font-size: 22px; line-height: 1.1; }
+.stat-tile span { font-size: 12px; color: var(--muted); }
+.rank-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.rank-list li { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.rank-list b { font-weight: 800; text-align: right; }
+.tier-tag { display: inline-flex; align-items: center; gap: 4px; }
+.screen > .segmented button { flex: 1; }
