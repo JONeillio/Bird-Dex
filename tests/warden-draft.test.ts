@@ -1,7 +1,7 @@
 // Synthetic fixtures only. Checks the warden drafting rules from AUTOPILOT D2.
 import { describe, expect, it } from 'vitest'
 import { STARTER_DEX } from '../src/data/catalogue'
-import { draftWardens, SIGNATURE_SIZE } from '../pipeline/wardens'
+import { draftWardens, RESTRICTED_NAME, SIGNATURE_SIZE } from '../pipeline/wardens'
 import type { RegionData, Report, Site } from '../src/data/published-schema'
 import { siteCharacter } from '../src/domain/siteCharacter'
 
@@ -28,6 +28,15 @@ describe('draftWardens', () => {
   it('needs 12 Dex species and a known drive of 90 minutes or less', () => {
     const r = region([site('few', wet.slice(0, 11)), site('far', wet.slice(0, 14), [-2.0, 53.4]), site('unk', wet.slice(0, 14), [-1.8, 53.4]), site('ok', wet.slice(0, 12), [-1.6, 53.4])], { far: 91, unk: null })
     expect(draftWardens(r).map((w) => w.siteId)).toEqual(['ok'])
+  })
+
+  it('never gives a warden to a site whose name says permit only or private', () => {
+    expect(RESTRICTED_NAME.test('King George V Reservoir (permit only)')).toBe(true)
+    expect(RESTRICTED_NAME.test('Private lake')).toBe(true)
+    expect(RESTRICTED_NAME.test('Permitted Path Wood')).toBe(false)
+    const open = site('open', wet.slice(0, 12), [-2.0, 53.4])
+    const permit = { ...site('permit', wet.slice(0, 14), [-1.5, 53.4]), name: 'The Reservoir (permit only)' }
+    expect(draftWardens(region([permit, open])).map((w) => w.siteId)).toEqual(['open'])
   })
 
   it('picks the richest site for each habitat, one persona each, ids tied to the region', () => {

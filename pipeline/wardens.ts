@@ -14,6 +14,9 @@ export const WARDEN_COUNT = 8
 export const WARDEN_SPACING_KM = 2
 export const SIGNATURE_SIZE = 8
 
+/** Names that say you can't just turn up (eBird often puts this in the hotspot name). Such sites never get a warden. */
+export const RESTRICTED_NAME = /\b(permit|permits|private|members? only|no public access|no access|closed)\b/i
+
 const OWL_GENERA = new Set(['Tyto', 'Strix', 'Athene', 'Asio'])
 const HABITAT_ORDER: SetId[] = ['wetland', 'coast', 'woodland', 'farmland-upland', 'garden']
 /** If a habitat has run out of personas, the closest habitat to borrow from. */
@@ -59,7 +62,7 @@ export function draftWardens(region: RegionData): DraftWarden[] {
 
   const candidates = region.sites
     .map((site) => ({ site, species: dexSpeciesAt(site), driveMin: nearestDrive(region, site.id), character: siteCharacter(site) }))
-    .filter((c) => c.species.length >= WARDEN_MIN_SPECIES && c.driveMin !== null && c.driveMin <= WARDEN_MAX_DRIVE_MIN)
+    .filter((c) => !RESTRICTED_NAME.test(c.site.name) && c.species.length >= WARDEN_MIN_SPECIES && c.driveMin !== null && c.driveMin <= WARDEN_MAX_DRIVE_MIN)
   type Cand = (typeof candidates)[number]
   const bySpecies = (a: Cand, b: Cand) => b.species.length - a.species.length || a.site.id.localeCompare(b.site.id)
 
