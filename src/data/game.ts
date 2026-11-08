@@ -5,6 +5,8 @@ import cardsRaw from './catalogue/duel-cards.v1.json'
 import traitsRaw from './catalogue/traits.v1.json'
 import { STARTER_DEX } from './catalogue'
 import { SETS } from './schema'
+import wardensRaw from './wardens.v1.json'
+import { PERSONAS } from './personas'
 
 export const SIZES = ['tiny', 'small', 'medium', 'large', 'huge'] as const
 export const DIETS = ['seeds', 'insects', 'inverts', 'fish', 'plants', 'prey', 'omnivore'] as const
@@ -93,3 +95,61 @@ export function cardForId(id: string): DuelCard | undefined {
 export function ruleKey(rule: Rule): keyof Traits {
   return Object.keys(rule)[0] as keyof Traits
 }
+
+// Reserve Wardens: real sites with a signature list of Dex birds each (AUTOPILOT D2). Drafted by pipeline/warden-draft.ts
+// from live data, then checked by a person. Site ids are eBird hotspot ids and are matched against encounters' siteId.
+const HABITATS = ['wetland', 'coast', 'woodland', 'farmland-upland', 'garden', 'raptors', 'night'] as const
+
+const WardenSchema = z.strictObject({
+  /** `<persona>-<regionId>`. Used in badge keys, duel routes and saved duel wins. */
+  id: z.string().regex(/^[a-z]+-[a-z0-9]+(-[a-z0-9]+)*$/),
+  persona: z.string(),
+  siteId: z.string().min(1),
+  siteName: z.string().min(1),
+  habitat: z.enum(HABITATS),
+  signature: z.array(z.string()).min(3).max(8),
+  boss: z.string(),
+})
+export type Warden = z.infer<typeof WardenSchema>
+
+const WardensFileSchema = z.object({
+  schema: z.literal(1),
+  version: z.string(),
+  locations: z.record(z.string(), z.array(WardenSchema).min(1)),
+})
+
+const wardensParsed = WardensFileSchema.parse(wardensRaw)
+{
+  const personaIds = new Set(PERSONAS.map((p) => p.id))
+  const dexIds = new Set(STARTER_DEX.map((s) => s.id))
+  const seen = new Set<string>()
+  for (const [region, list] of Object.entries(wardensParsed.locations)) {
+    const personas = new Set<string>()
+    const sites = new Set<string>()
+    for (const w of list) {
+      const where = `wardens.v1.json ${region}/${w.id}`
+      if (w.id !== `${w.persona}-${region}`) throw new Error(`${where}: id must be persona-region.`)
+      if (seen.has(w.id)) throw new Error(`${where}: repeated warden id.`)
+      seen.add(w.id)
+      if (!personaIds.has(w.persona)) throw new Error(`${where}: unknown persona ${w.persona}.`)
+      if (personas.has(w.persona)) throw new Error(`${where}: persona used twice in one location.`)
+      personas.add(w.persona)
+      if (sites.has(w.siteId)) throw new Error(`${where}: two wardens at one site.`)
+      sites.add(w.siteId)
+      for (const id of w.signature) if (!dexIds.has(id)) throw new Error(`${where}: ${id} is not in the Starter Dex.`)
+      if (new Set(w.signature).size !== w.signature.length) throw new Error(`${where}: repeated signature bird.`)
+      if (!w.signature.includes(w.boss)) throw new Error(`${where}: the boss must be in the signature list.`)
+    }
+  }
+}
+
+export const WARDENS_VERSION = wardensParsed.version
+
+/** The wardens for a region (empty for a region with none, e.g. the demo). */
+export function wardensFor(regionId: string): readonly Warden[] {
+  return wardensParsed.locations[regionId] ?? []
+}
+export function allWardens(): readonly Warden[] {
+  return Object.values(wardensParsed.locations).flat()
+}
+export const wardenById = (id: string): Warden | undefined => allWardens().find((w) => w.id === id)

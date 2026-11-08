@@ -64,3 +64,40 @@ describe('game data loaders (A3)', () => {
     expect(DUEL_CARDS.filter((c) => c.affinity === 'heard').map((c) => c.id)).toEqual(['fog'])
   })
 })
+
+import { WARDENS_VERSION, allWardens, wardenById, wardensFor } from '../src/data/game'
+import { PERSONAS } from '../src/data/personas'
+import { shortSiteName } from '../src/domain/siteName'
+
+describe('Reserve Wardens data (D2)', () => {
+  it('has eight wardens in each of the two locations', () => {
+    expect(WARDENS_VERSION).toBe('wardens-v1')
+    expect(wardensFor('location-1')).toHaveLength(8)
+    expect(wardensFor('location-2')).toHaveLength(8)
+    expect(wardensFor('demo-nowhere')).toEqual([])
+  })
+  it('uses each persona once per location and finds a warden by its id', () => {
+    for (const r of ['location-1', 'location-2']) {
+      const ps = wardensFor(r).map((w) => w.persona)
+      expect(new Set(ps).size).toBe(ps.length)
+    }
+    expect(wardenById('maud-location-1')?.persona).toBe('maud')
+    expect(wardenById('maud-location-2')?.siteId).not.toBe(wardenById('maud-location-1')?.siteId)
+    expect(wardenById('nobody')).toBeUndefined()
+  })
+  it('every persona has a name and a greeting in plain British English', () => {
+    expect(PERSONAS).toHaveLength(12)
+    for (const p of PERSONAS) {
+      expect(p.greeting.length, p.id).toBeGreaterThan(20)
+      expect(p.greeting.length, p.id).toBeLessThan(100)
+    }
+  })
+  it('names are tidy: short, no brackets, no cut-off ellipsis, no postcodes', () => {
+    for (const w of allWardens()) {
+      expect(w.siteName, w.id).not.toMatch(/[()…]/)
+      expect(w.siteName.length, w.id).toBeLessThanOrEqual(40)
+      expect(w.siteName, w.id).not.toMatch(/\b[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}\b/)
+      expect(shortSiteName(w.siteName, 40), w.id).toBe(w.siteName)
+    }
+  })
+})
