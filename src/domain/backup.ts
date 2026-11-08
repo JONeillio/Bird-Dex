@@ -1,5 +1,6 @@
 // Backup and restore of your own records. Pure functions; the Settings screen does the file handling.
 import { BackupSchema, type Backup, type Encounter } from '../data/personal-schema'
+import { isOutsideId } from './taxon'
 
 export function buildBackup(encounters: readonly Encounter[], targets: readonly string[], now: Date = new Date()): Backup {
   return { app: 'birdquest', schema: 1, exportedAt: now.toISOString(), encounters: [...encounters], targets: [...targets] }
@@ -39,7 +40,8 @@ export function planRestore(existing: readonly Encounter[], existingTargets: rea
   let unknown = 0
   for (const e of backup.encounters) {
     if (have.has(e.id)) duplicates++
-    else if (!knownSpecies.has(e.speciesId)) unknown++
+    // Birds outside the Starter Dex are kept when they carry their own name; anything else unknown is left out.
+    else if (!knownSpecies.has(e.speciesId) && !(isOutsideId(e.speciesId) && e.name)) unknown++
     else {
       merged.push(e)
       have.add(e.id)

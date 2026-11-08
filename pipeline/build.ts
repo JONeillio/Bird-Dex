@@ -1,6 +1,7 @@
 // Pure transforms from provider responses to the published D1 shape. No network, no disk: tested with
 // synthetic fixtures in tests/pipeline.test.ts. Only whitelisted fields are copied; observer names never are.
 import type { DriveEntry, LngLat, RegionData, Report, Site } from '../src/data/published-schema.ts'
+import { dexIdFor, isNotASpecies } from '../src/domain/taxon.ts'
 
 export interface RawHotspot {
   locId?: unknown
@@ -67,19 +68,6 @@ export function rankHotspots(hs: CleanHotspot[], max: number): CleanHotspot[] {
   return [...hs]
     .sort((a, b) => (b.speciesAllTime ?? 0) - (a.speciesAllTime ?? 0) || (b.latestObsDate ?? '').localeCompare(a.latestObsDate ?? ''))
     .slice(0, max)
-}
-
-/** Not a single species: "gull sp.", "Carrion/Hooded Crow", hybrids, domestic types. */
-export function isNotASpecies(sciName: string, comName: string): boolean {
-  return / sp\.$/.test(sciName) || sciName.includes('/') || / x /.test(sciName) || /domestic/i.test(comName)
-}
-
-/** Join to the Starter Dex by scientific name; subspecies forms fall back to the two-word binomial. */
-export function dexIdFor(sciName: string, dexBySci: ReadonlyMap<string, string>): string | null {
-  const exact = dexBySci.get(sciName)
-  if (exact) return exact
-  const binomial = sciName.split(' ').slice(0, 2).join(' ')
-  return dexBySci.get(binomial) ?? null
 }
 
 export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>, opts: { notable?: boolean } = {}): Report[] {

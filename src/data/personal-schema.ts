@@ -18,6 +18,20 @@ export const EncounterSchema = z.object({
   /** A small JPEG data URL (kept on this phone), or null. */
   photo: z.string().startsWith('data:image/').max(400_000).nullable(),
   createdAt: z.string(),
+  // Added later; all optional so older records and backups still load.
+  /** The eBird hotspot id, when the sighting was logged at (or imported from) a known site. */
+  siteId: z.string().regex(/^L\d+$/).nullable().optional(),
+  /** HH:MM in 24 hours, or null when unknown (never invented). */
+  time: z.string().regex(/^\d{2}:\d{2}$/).nullable().optional(),
+  /** Birds outside the Starter Dex (speciesId starts `x-`) keep their own names here. */
+  name: z.string().max(80).optional(),
+  sciName: z.string().max(80).optional(),
+  /** Where the record came from: logged by hand, an eBird export, or a pasted list. */
+  source: z.enum(['log', 'ebird', 'list']).optional(),
+  /** Which import added it, so one import can be undone. */
+  importBatchId: z.string().max(64).optional(),
+  /** Identifies the source row, so importing the same export twice adds nothing. */
+  importKey: z.string().max(200).optional(),
 })
 export type Encounter = z.infer<typeof EncounterSchema>
 

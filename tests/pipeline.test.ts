@@ -1,6 +1,7 @@
 // Synthetic fixtures only: invented ids (LTEST…, STEST…), never real eBird data.
 import { describe, expect, it } from 'vitest'
-import { cleanHotspot, dexIdFor, rankHotspots, splitObsDt, toDrive, toReports, toSite, unmatched } from '../pipeline/build'
+import { dexIdFor } from '../src/domain/taxon'
+import { cleanHotspot, rankHotspots, splitObsDt, toDrive, toReports, toSite, unmatched } from '../pipeline/build'
 import { SiteSchema } from '../src/data/published-schema'
 
 const dex = new Map([['Erithacus rubecula', 'european-robin'], ['Motacilla alba', 'pied-wagtail']])

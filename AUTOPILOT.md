@@ -39,7 +39,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 ## 2. Checklist (tick as you go)
 
 **Phase A: foundations**
-- [ ] A1 Encounter fields: site, time, outside-Dex birds, source
+- [x] A1 Encounter fields: site, time, outside-Dex birds, source
 - [ ] A2 Log sheet fills site and time; edit an existing sighting
 - [ ] A3 Game data loaders (traits, duel cards) with zod
 - [ ] A4 Art intake script and data-driven portrait list

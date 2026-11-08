@@ -3,6 +3,7 @@ import type { Encounter } from '../data/personal-schema'
 import type { DexSpecies, SetId } from '../data/schema'
 import { SETS } from '../data/schema'
 import type { Prefs } from '../state/store'
+import { isOutsideId } from './taxon'
 
 export interface SpeciesRecord {
   /** How many sightings are logged for this species. */
@@ -32,7 +33,8 @@ export function deriveRecords(encounters: readonly Pick<Encounter, 'speciesId' |
  * species you have logged. Public reports never add to it.
  */
 export function recordedIds(prefs: Pick<Prefs, 'demoCollection'>, encounters: readonly Pick<Encounter, 'speciesId'>[] = []): ReadonlySet<string> {
-  return prefs.demoCollection ? new Set(DEMO_RECORDED_IDS) : new Set(encounters.map((e) => e.speciesId))
+  // Birds outside the Starter Dex (`x-` ids) never count toward Starter Dex progress.
+  return prefs.demoCollection ? new Set(DEMO_RECORDED_IDS) : new Set(encounters.map((e) => e.speciesId).filter((id) => !isOutsideId(id)))
 }
 
 export interface SetProgress {
