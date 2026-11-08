@@ -1,8 +1,8 @@
 // Synthetic fixtures only: invented ids (LTEST…, STEST…), never real eBird data.
 import { describe, expect, it } from 'vitest'
 import { dexIdFor } from '../src/domain/taxon'
-import { cleanHotspot, rankHotspots, splitObsDt, toDrive, toReports, toSite, unmatched } from '../pipeline/build'
-import { SiteSchema } from '../src/data/published-schema'
+import { cleanHotspot, pickBetweenSites, rankHotspots, splitObsDt, toBetween, toDrive, toReports, toSite, unmatched } from '../pipeline/build'
+import { RegionSchema, SiteSchema } from '../src/data/published-schema'
 
 const dex = new Map([['Erithacus rubecula', 'european-robin'], ['Motacilla alba', 'pied-wagtail']])
 
@@ -65,5 +65,60 @@ describe('pipeline config', () => {
       expect(ref.file).toMatch(/^region\/[a-z0-9-]+\.json$/)
       expect(ref.centre[1]).toBeGreaterThan(49)
     }
+  })
+})
+
+describe('site-to-site matrix (F1)', () => {
+  const rep = (speciesId: string | null, code: string) => ({
+    speciesId, ebirdCode: code, name: code, sciName: 'Fakeus fakeus', obsDate: '2026-11-06', obsTime: null, count: null, checklistUrl: null, reviewed: false,
+  })
+  const site = (id: string, species: (string | null)[]) => ({
+    id, name: id, point: [-2.3, 53.4] as [number, number], url: null, latestObsDate: null, speciesAllTime: null, access: 'unknown' as const,
+    reports: species.map((s, i) => rep(s, `${id}-${i}`)),
+  })
+  const region = (sites: ReturnType<typeof site>[], between?: unknown) => ({
+    schema: 1 as const, regionId: 'r', generatedAt: '2026-11-07T06:00:00Z', isDemo: false, windowDays: 14,
+    coverage: { hotspotsListed: 0, hotspotsActive: 0, reportsFetchedFor: 0, truncated: false, note: '' },
+    sites, drive: { computedAt: null, byStart: {} }, unmatchedSpecies: [], ...(between === undefined ? {} : { between }),
+  })
+
+  it('picks the sites with the most distinct Starter Dex species, ties by id, at most max', () => {
+    const sites = [site('L3', ['a', 'b']), site('L1', ['a', 'b']), site('L2', ['a', 'b', 'c']), site('L4', [null, null, null, 'a']), site('L5', ['a', 'a'])]
+    expect(pickBetweenSites(sites, 3).map((s) => s.id)).toEqual(['L2', 'L1', 'L3'])
+    expect(pickBetweenSites(sites).map((s) => s.id)).toEqual(['L2', 'L1', 'L3', 'L4', 'L5'])
+    // outside-Dex reports (null) are not counted
+    expect(pickBetweenSites([site('L9', [null, null, null]), site('L8', ['a'])], 1).map((s) => s.id)).toEqual(['L8'])
+  })
+
+  it('rounds seconds, keeps the diagonal at 0, and turns null, missing or odd values into unknown', () => {
+    const b = toBetween(['L1', 'L2', 'L3'], [
+      [0, 600.4, null],
+      [610.6, 0],
+      [Number.NaN, -5, 0],
+    ])
+    expect(b).toEqual({
+      ids: ['L1', 'L2', 'L3'],
+      s: [[0, 600, null], [611, 0, null], [null, null, 0]],
+    })
+    // no matrix at all: everything unknown except the diagonal
+    expect(toBetween(['L1', 'L2'], undefined).s).toEqual([[0, null], [null, 0]])
+  })
+
+  it('a region with a valid between parses; one without still parses', () => {
+    const sites = [site('L1', ['a']), site('L2', ['a']), site('L3', ['a'])]
+    expect(RegionSchema.safeParse(region(sites)).success).toBe(true)
+    expect(RegionSchema.safeParse(region(sites, toBetween(['L1', 'L2'], [[0, 300], [320, 0]]))).success).toBe(true)
+  })
+
+  it('rejects a matrix that is not square, has unknown or repeated ids, or holds fractions or negatives', () => {
+    const sites = [site('L1', ['a']), site('L2', ['a'])]
+    const bad = (between: unknown) => RegionSchema.safeParse(region(sites, between)).success
+    expect(bad({ ids: ['L1', 'L2'], s: [[0, 1]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'L2'], s: [[0, 1], [1]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'LX'], s: [[0, 1], [1, 0]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'L1'], s: [[0, 1], [1, 0]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'L2'], s: [[0, 1.5], [1, 0]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'L2'], s: [[0, -1], [1, 0]] })).toBe(false)
+    expect(bad({ ids: ['L1', 'L2'], s: [[0, 1], [1, 0]] })).toBe(true)
   })
 })

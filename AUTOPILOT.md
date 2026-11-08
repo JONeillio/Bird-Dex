@@ -55,7 +55,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] D1 Site character
 - [x] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
 - [x] E1 Duel engine
-- [ ] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
+- [x] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
 - [ ] F2 Route planner engine
 - [ ] D2 Warden draft task and wardens.v1.json
 - [ ] B1b Accept eBird's ZIP directly
@@ -220,6 +220,8 @@ Screens: use the demo collection is not enough (no encounters). Add a dev-only r
 ### Phase F: day route planner
 
 **F1 Site-to-site matrix.** In `pipeline/run.ts`, after the start-point matrices: take the 40 sites with the most Dex species reported (per region), one ORS matrix request with all 40 as both sources and destinations, `metrics: ["duration"]`. Publish as optional `between: { ids: string[], s: (number | null)[][] }` on `RegionSchema` (seconds, rounded; null = unknown, never 0). Validate square and ids ⊂ sites. Budget: +1 ORS request per region per refresh (still far under 500/day). Dispatch a refresh, check the summary, record the facts.
+
+**F1 notes (built 8 Nov).** `pipeline/build.ts` gained `pickBetweenSites` (top 40 sites by distinct Starter Dex species, ties by id) and `toBetween`; `pipeline/run.ts` makes one ORS matrix request per region (all 40 as sources and destinations, `metrics: ['duration']`) after the start-point matrices. `RegionSchema` has an optional `between: { ids, s }` and a `superRefine` that rejects non-square matrices and ids that are not sites in the region. Seconds are rounded; null, missing or negative values are unknown (null); the diagonal is 0 (the same place). If the request fails, `between` is left out and the run says so; the planner (F3) shows "Route planning arrives with the next data update" when it is missing.
 
 **F2 Planner engine** `src/domain/routePlan.ts`:
 `planDay(region, { startId, recorded, wanted: 'new' | string[] /* bird keys */, budgetMin, stopMin = 40, maxStops = 4 }) → { stops: { site, arriveMin, birds: string[] }[], totalMin, returnMin, uncovered: string[] }`.

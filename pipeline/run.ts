@@ -6,7 +6,7 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, appendFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { timedFetch, redact } from './lib/http.ts'
-import { cleanHotspot, mergeNotable, rankHotspots, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
+import { cleanHotspot, mergeNotable, pickBetweenSites, rankHotspots, toBetween, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
 import { IndexSchema, RegionRefSchema, RegionSchema, type PublishedIndex, type RegionData, type Site } from '../src/data/published-schema.ts'
 import { StarterDexSchema } from '../src/data/schema.ts'
 
@@ -92,6 +92,23 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
     if (res.headers['x-ratelimit-remaining']) say(`- openrouteservice requests left today: ${res.headers['x-ratelimit-remaining']}`)
   }
 
+  // Site-to-site drive times for the day planner: one more matrix request per region (the busiest sites, both ways).
+  let between: RegionData['between']
+  if (orsKey && sites.length >= 2) {
+    const picked = pickBetweenSites(sites)
+    orsCalls++
+    const res = await timedFetch(`${ORS}/matrix/driving-car`, {
+      method: 'POST',
+      headers: { Authorization: orsKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ locations: picked.map((s) => s.point), metrics: ['duration'] }), // [lng, lat]; all sources and destinations
+    })
+    if (res.ok) {
+      between = toBetween(picked.map((s) => s.id), (res.json as { durations?: (number | null)[][] } | null)?.durations)
+      const known = between.s.flat().filter((v) => v !== null).length - picked.length // not counting the diagonal
+      say(`- ${region.label} site-to-site: ${picked.length} sites, ${known} of ${picked.length * (picked.length - 1)} drive times known`)
+    } else say(`- Site-to-site times for ${region.label}: openrouteservice returned ${res.status}; left out (the planner says it is not ready)`)
+  }
+
   const now = new Date().toISOString()
   return RegionSchema.parse({
     schema: 1,
@@ -109,6 +126,7 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
     sites,
     drive: { computedAt, byStart },
     unmatchedSpecies: unmatched(sites),
+    ...(between ? { between } : {}),
   } satisfies RegionData)
 }
 

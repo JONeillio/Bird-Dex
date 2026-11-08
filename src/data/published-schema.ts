@@ -64,6 +64,13 @@ export const DriveEntrySchema = z.union([
 ])
 export type DriveEntry = z.infer<typeof DriveEntrySchema>
 
+/** Seconds between the busiest sites (one matrix request per region), for the day planner. null = unknown, never 0. */
+export const BetweenSchema = z.object({
+  ids: z.array(z.string()),
+  s: z.array(z.array(z.number().int().nonnegative().nullable())),
+})
+export type Between = z.infer<typeof BetweenSchema>
+
 export const RegionSchema = z.object({
   schema: z.literal(1),
   regionId: z.string(),
@@ -83,5 +90,15 @@ export const RegionSchema = z.object({
     byStart: z.record(z.string(), z.record(z.string(), DriveEntrySchema)),
   }),
   unmatchedSpecies: z.array(z.object({ sciName: z.string(), name: z.string(), sites: z.number().int() })),
+  /** Optional: older published data does not have it, and the planner then says route planning is coming. */
+  between: BetweenSchema.optional(),
+}).superRefine((r, ctx) => {
+  const b = r.between
+  if (!b) return
+  const known = new Set(r.sites.map((s) => s.id))
+  const n = b.ids.length
+  if (new Set(b.ids).size !== n) ctx.addIssue({ code: 'custom', path: ['between', 'ids'], message: 'between ids must be unique' })
+  if (b.ids.some((id) => !known.has(id))) ctx.addIssue({ code: 'custom', path: ['between', 'ids'], message: 'between ids must all be sites in the region' })
+  if (b.s.length !== n || b.s.some((row) => row.length !== n)) ctx.addIssue({ code: 'custom', path: ['between', 's'], message: 'between matrix must be square and match ids' })
 })
 export type RegionData = z.infer<typeof RegionSchema>

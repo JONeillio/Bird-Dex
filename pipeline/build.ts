@@ -1,6 +1,6 @@
 // Pure transforms from provider responses to the published D1 shape. No network, no disk: tested with
 // synthetic fixtures in tests/pipeline.test.ts. Only whitelisted fields are copied; observer names never are.
-import type { DriveEntry, LngLat, RegionData, Report, Site } from '../src/data/published-schema.ts'
+import type { Between, DriveEntry, LngLat, RegionData, Report, Site } from '../src/data/published-schema.ts'
 import { dexIdFor, isNotASpecies } from '../src/domain/taxon.ts'
 
 export interface RawHotspot {
@@ -178,4 +178,30 @@ export function mergeNotable(sites: Site[], raw: RawObs[], dexBySci: ReadonlyMap
   extra.sort((a, b) => (b.latestObsDate ?? '').localeCompare(a.latestObsDate ?? ''))
   const kept = extra.slice(0, maxExtra)
   return { sites: [...out, ...kept], added: kept.length, skippedPrivate }
+}
+
+/** How many sites go into the site-to-site matrix (40 x 40 = 1,600 routes, well under ORS's 3,500 per request). */
+export const BETWEEN_MAX = 40
+
+/** The sites with the most distinct Starter Dex species reported (ties: id), at most `max`. */
+export function pickBetweenSites(sites: Site[], max = BETWEEN_MAX): Site[] {
+  const dexCount = (s: Site) => new Set(s.reports.map((r) => r.speciesId).filter((id): id is string => !!id)).size
+  return [...sites].sort((a, b) => dexCount(b) - dexCount(a) || (a.id < b.id ? -1 : 1)).slice(0, max)
+}
+
+/**
+ * ORS duration matrix -> published `between`. Seconds, rounded. A null, missing or non-finite entry is unknown (null),
+ * never 0. The diagonal (a site to itself) is 0 because it is genuinely the same place.
+ */
+export function toBetween(ids: string[], durations: (number | null)[][] | undefined): Between {
+  return {
+    ids,
+    s: ids.map((_, i) =>
+      ids.map((_, j) => {
+        if (i === j) return 0
+        const v = durations?.[i]?.[j]
+        return typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.round(v) : null
+      }),
+    ),
+  }
 }
