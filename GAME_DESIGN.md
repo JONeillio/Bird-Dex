@@ -1,5 +1,7 @@
 # BirdQuest game design: Field Bond, Reserve Wardens and Field Duels
 
+> Build order, exact numbers and file contracts are in `AUTOPILOT.md` (phases C, D, E, G), which wins where the two differ. Curated data: `src/data/catalogue/traits.v1.json` and `duel-cards.v1.json`.
+
 Written 8 Nov 2026 with Joseph, after Lewis asked for "gym badges" and Joseph asked how battles could fit. Our influences are Pokémon (collect, badges) and Top Trumps (compare cards), but the mechanics here come from things birders already do: patch lists, bird races, year lists and knowing which bird turns up where. Avoid borrowed terms: no gyms, trainers, HP, types or attacks.
 
 ## Principles
@@ -53,7 +55,7 @@ Each preset location has about 8 **Reserve Wardens**: NPCs who look after real, 
 - a **boss bird**: the hardest of those to find;
 - a **live team**: the birds reported at the site in the last 14 days, so the challenge changes week to week.
 
-**Earning the badge** (version 1, no duel needed): log at least 5 of the signature birds, including the boss, at that site, across any number of visits. Badges are pixel enamel pins in a Badge case screen. Each has three tiers (bronze, silver, gold) for doing it again in another season, or as a year-list challenge.
+**Earning the badge**: bronze = log at least 5 of the signature birds, including the boss, at that site (any number of visits); silver = log every signature bird there; gold = silver plus a Field Duel win against that warden. Badges are pixel enamel pins in a Badge case screen. (Exact rules: AUTOPILOT.md D3.)
 
 **Territory overlay** (an option on the Adventure skin, M4): warden sites show banners; beaten ones show your pin; rivals' patches show their colour.
 

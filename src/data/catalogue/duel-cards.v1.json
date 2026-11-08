@@ -1,0 +1,331 @@
+{
+ "schema": 1,
+ "version": "duel-cards-v1",
+ "note": "Field Duel condition cards (AUTOPILOT.md E1). Fit = +1 if the bird's sets include any of `sets` (cards with empty sets give this point to every bird), +1 per rule matched (each rule tests one trait from traits.v1.json). Max 3. months null = all year; band null = any time.",
+ "cards": [
+  {
+   "id": "dawn-chorus",
+   "name": "Dawn chorus",
+   "flavour": "First light, and every singer is going for it.",
+   "sets": [
+    "woodland",
+    "garden"
+   ],
+   "months": [
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "band": "dawn",
+   "rules": [
+    {
+     "songster": true
+    },
+    {
+     "diet": [
+      "insects"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "low-tide",
+   "name": "Low tide",
+   "flavour": "The mud is open and the waders move in.",
+   "sets": [
+    "coast",
+    "wetland"
+   ],
+   "months": null,
+   "band": null,
+   "rules": [
+    {
+     "diet": [
+      "inverts"
+     ]
+    },
+    {
+     "size": [
+      "medium",
+      "large"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "cold-snap",
+   "name": "Cold snap",
+   "flavour": "Frost on everything. Hardy and hungry birds only.",
+   "sets": [
+    "garden",
+    "farmland-upland",
+    "wetland"
+   ],
+   "months": [
+    11,
+    12,
+    1,
+    2
+   ],
+   "band": null,
+   "rules": [
+    {
+     "status": [
+      "winter"
+     ]
+    },
+    {
+     "diet": [
+      "seeds",
+      "plants"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "feeder-rush",
+   "name": "Feeder rush",
+   "flavour": "Someone's topped up the feeders.",
+   "sets": [
+    "garden"
+   ],
+   "months": null,
+   "band": null,
+   "rules": [
+    {
+     "size": [
+      "tiny",
+      "small"
+     ]
+    },
+    {
+     "diet": [
+      "seeds"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "reedbed-dusk",
+   "name": "Reedbed at dusk",
+   "flavour": "The reeds go quiet, then the secretive ones start moving.",
+   "sets": [
+    "wetland"
+   ],
+   "months": null,
+   "band": "dusk",
+   "rules": [
+    {
+     "active": [
+      "crepuscular",
+      "nocturnal"
+     ]
+    },
+    {
+     "diet": [
+      "fish",
+      "inverts"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "thermals",
+   "name": "Thermals",
+   "flavour": "Warm air rising off the fields. Time to soar.",
+   "sets": [
+    "raptors"
+   ],
+   "months": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "band": "day",
+   "rules": [
+    {
+     "size": [
+      "large",
+      "huge"
+     ]
+    },
+    {
+     "diet": [
+      "prey"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "fog",
+   "name": "Fog",
+   "flavour": "You can't see a thing. Listen.",
+   "sets": [],
+   "months": null,
+   "band": null,
+   "rules": [
+    {
+     "songster": true
+    },
+    {
+     "active": [
+      "crepuscular",
+      "nocturnal"
+     ]
+    }
+   ],
+   "affinity": "heard"
+  },
+  {
+   "id": "open-water",
+   "name": "Open water",
+   "flavour": "Wind on the lake and nowhere to hide.",
+   "sets": [
+    "wetland"
+   ],
+   "months": null,
+   "band": null,
+   "rules": [
+    {
+     "diet": [
+      "fish",
+      "plants"
+     ]
+    },
+    {
+     "size": [
+      "large",
+      "huge"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "hedgerow-harvest",
+   "name": "Hedgerow harvest",
+   "flavour": "Berries and seed heads everywhere.",
+   "sets": [
+    "farmland-upland",
+    "garden"
+   ],
+   "months": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "band": null,
+   "rules": [
+    {
+     "diet": [
+      "seeds",
+      "omnivore",
+      "plants"
+     ]
+    },
+    {
+     "status": [
+      "resident",
+      "winter"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "night-watch",
+   "name": "Night watch",
+   "flavour": "Torch off. Something's out there.",
+   "sets": [
+    "woodland",
+    "farmland-upland",
+    "raptors"
+   ],
+   "months": null,
+   "band": "night",
+   "rules": [
+    {
+     "active": [
+      "nocturnal",
+      "crepuscular"
+     ]
+    },
+    {
+     "diet": [
+      "prey"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "summer-skies",
+   "name": "Summer skies",
+   "flavour": "Long evenings and air full of insects.",
+   "sets": [
+    "farmland-upland",
+    "garden",
+    "wetland"
+   ],
+   "months": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "band": null,
+   "rules": [
+    {
+     "status": [
+      "summer"
+     ]
+    },
+    {
+     "diet": [
+      "insects"
+     ]
+    }
+   ],
+   "affinity": "context"
+  },
+  {
+   "id": "sheltered-wood",
+   "name": "Sheltered wood",
+   "flavour": "Out of the wind, among the trunks.",
+   "sets": [
+    "woodland"
+   ],
+   "months": null,
+   "band": null,
+   "rules": [
+    {
+     "size": [
+      "tiny",
+      "small",
+      "medium"
+     ]
+    },
+    {
+     "diet": [
+      "insects",
+      "seeds"
+     ]
+    }
+   ],
+   "affinity": "context"
+  }
+ ]
+}

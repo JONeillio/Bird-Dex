@@ -1,0 +1,735 @@
+{
+ "schema": 1,
+ "version": "traits-v1",
+ "note": "Curated 8 Nov 2026 for Field Duels (GAME_DESIGN.md). size by body length incl. tail: tiny <12.5 cm, small 12.5-20, medium 20-40, large 40-70, huge 70+. diet = main food. status = how most UK birders meet it (winter = mainly a winter visitor). Change only with a reason in the commit message.",
+ "traits": {
+  "pink-footed-goose": {
+   "size": "large",
+   "diet": "plants",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "greylag-goose": {
+   "size": "huge",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "canada-goose": {
+   "size": "huge",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "mute-swan": {
+   "size": "huge",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "whooper-swan": {
+   "size": "huge",
+   "diet": "plants",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-shelduck": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-wigeon": {
+   "size": "large",
+   "diet": "plants",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "gadwall": {
+   "size": "large",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-teal": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "mallard": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "northern-shoveler": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-pochard": {
+   "size": "large",
+   "diet": "plants",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "tufted-duck": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-goldeneye": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "goosander": {
+   "size": "large",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "red-legged-partridge": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "grey-partridge": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-pheasant": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "little-grebe": {
+   "size": "medium",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "great-crested-grebe": {
+   "size": "large",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "great-cormorant": {
+   "size": "huge",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "grey-heron": {
+   "size": "huge",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "little-egret": {
+   "size": "large",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-bittern": {
+   "size": "large",
+   "diet": "fish",
+   "status": "resident",
+   "active": "crepuscular",
+   "songster": false
+  },
+  "eurasian-sparrowhawk": {
+   "size": "medium",
+   "diet": "prey",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-buzzard": {
+   "size": "large",
+   "diet": "prey",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "red-kite": {
+   "size": "large",
+   "diet": "prey",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-kestrel": {
+   "size": "medium",
+   "diet": "prey",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "peregrine-falcon": {
+   "size": "large",
+   "diet": "prey",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "western-barn-owl": {
+   "size": "medium",
+   "diet": "prey",
+   "status": "resident",
+   "active": "crepuscular",
+   "songster": false
+  },
+  "tawny-owl": {
+   "size": "medium",
+   "diet": "prey",
+   "status": "resident",
+   "active": "nocturnal",
+   "songster": false
+  },
+  "little-owl": {
+   "size": "medium",
+   "diet": "prey",
+   "status": "resident",
+   "active": "crepuscular",
+   "songster": false
+  },
+  "water-rail": {
+   "size": "medium",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "crepuscular",
+   "songster": false
+  },
+  "common-moorhen": {
+   "size": "medium",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-coot": {
+   "size": "medium",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-oystercatcher": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "northern-lapwing": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-snipe": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "crepuscular",
+   "songster": false
+  },
+  "eurasian-curlew": {
+   "size": "large",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-redshank": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-sandpiper": {
+   "size": "small",
+   "diet": "inverts",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "black-headed-gull": {
+   "size": "medium",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "mew-gull": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "herring-gull": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "lesser-black-backed-gull": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-tern": {
+   "size": "medium",
+   "diet": "fish",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "stock-dove": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-wood-pigeon": {
+   "size": "large",
+   "diet": "plants",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-collared-dove": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "rock-dove-feral-pigeon": {
+   "size": "medium",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-swift": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-kingfisher": {
+   "size": "small",
+   "diet": "fish",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-green-woodpecker": {
+   "size": "medium",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "great-spotted-woodpecker": {
+   "size": "medium",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-jay": {
+   "size": "medium",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-magpie": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "western-jackdaw": {
+   "size": "medium",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "rook": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "carrion-crow": {
+   "size": "large",
+   "diet": "omnivore",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "coal-tit": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "eurasian-blue-tit": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "great-tit": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "long-tailed-tit": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-nuthatch": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-treecreeper": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "skylark": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "barn-swallow": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "western-house-martin": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-chiffchaff": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "willow-warbler": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "eurasian-blackcap": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "common-whitethroat": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "sedge-warbler": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "goldcrest": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "eurasian-wren": {
+   "size": "tiny",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "dunnock": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "european-robin": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "common-redstart": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": true
+  },
+  "european-pied-flycatcher": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "european-stonechat": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "northern-wheatear": {
+   "size": "small",
+   "diet": "insects",
+   "status": "summer",
+   "active": "diurnal",
+   "songster": false
+  },
+  "white-throated-dipper": {
+   "size": "small",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-blackbird": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "song-thrush": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "redwing": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "fieldfare": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "mistle-thrush": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "common-starling": {
+   "size": "medium",
+   "diet": "inverts",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "bohemian-waxwing": {
+   "size": "small",
+   "diet": "plants",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "house-sparrow": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-tree-sparrow": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-chaffinch": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "brambling": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "winter",
+   "active": "diurnal",
+   "songster": false
+  },
+  "european-greenfinch": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "european-goldfinch": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "eurasian-siskin": {
+   "size": "tiny",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "common-linnet": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "lesser-redpoll": {
+   "size": "tiny",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "eurasian-bullfinch": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "yellowhammer": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": true
+  },
+  "reed-bunting": {
+   "size": "small",
+   "diet": "seeds",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "meadow-pipit": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "white-wagtail-pied-wagtail": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  },
+  "grey-wagtail": {
+   "size": "small",
+   "diet": "insects",
+   "status": "resident",
+   "active": "diurnal",
+   "songster": false
+  }
+ }
+}

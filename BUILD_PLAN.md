@@ -463,4 +463,5 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 | M6 Import | not started | |
 | M7 Real art | started | Style locked: Bold Pixel (7 Nov). 12 bird portraits converted to 64×64 and in the app (3 anchors + 9 from `expansion-v1/`), plus converted markers, scenery and a grass tile in `public/assets/map/` (`src/art/mapAssets.ts`). All still drafts: individual approval pending. Missing from the batch: water and woodland textures. 92 birds still use generated placeholders. |
 | M8 Polish + hand-over | not started | |
+| Autopilot | planned 8 Nov 2026 | Everything left is in `AUTOPILOT.md` (phases A–I), with curated traits and duel cards in `src/data/catalogue/`. Work from there. |
 | M9 Lewis's feedback | started 8 Nov 2026 | T9.1 Find a bird and T9.2 rarities built. Game design agreed with Joseph (`GAME_DESIGN.md`). Next: T9.3 import + year list with Field Bond, T9.4 wardens and badges, T9.5 route planner, T9.6 duels, T9.7 rivals. |

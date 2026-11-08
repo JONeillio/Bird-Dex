@@ -13,7 +13,8 @@
     "pipeline": "tsx pipeline/run.ts",
     "probe": "tsx pipeline/probe.ts",
     "map-audit": "tsx pipeline/map-audit.ts",
-    "taxonomy-check": "tsx pipeline/taxonomy-check.ts"
+    "taxonomy-check": "tsx pipeline/taxonomy-check.ts",
+    "screens": "node scripts/dev/screens.mjs"
   },
   "dependencies": {
     "@fontsource/nunito": "^5.3.0",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.90.0",
+    "puppeteer-core": "^25.16.0",
     "tsx": "^4.23.15",
     "typescript": "~7.0.2",
     "vite": "^8.3.6",
