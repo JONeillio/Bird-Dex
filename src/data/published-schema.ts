@@ -43,6 +43,14 @@ export const ReportSchema = z.object({
   notable: z.boolean().optional(),
   /** A notable record eBird's reviewers have not yet accepted. Shown as "unconfirmed", never hidden. */
   unconfirmed: z.boolean().optional(),
+  /**
+   * Which recent days this bird was reported here, as a bitmask over the region window: bit 0 is the day the data
+   * was generated, bit 1 the day before, up to bit 13. Counted from the pipeline's own history (P1), so it fills up
+   * over the first two weeks; read it as "about N of 14 days". Missing in older data.
+   */
+  days: z.number().int().min(0).max(16383).optional(),
+  /** How many of the remembered report times fell in each part of the day. Only reports with a time count. */
+  bands: z.object({ dawn: z.number().int().min(0), day: z.number().int().min(0), dusk: z.number().int().min(0), night: z.number().int().min(0) }).optional(),
 })
 export type Report = z.infer<typeof ReportSchema>
 
@@ -92,6 +100,8 @@ export const RegionSchema = z.object({
   unmatchedSpecies: z.array(z.object({ sciName: z.string(), name: z.string(), sites: z.number().int() })),
   /** Optional: older published data does not have it, and the planner then says route planning is coming. */
   between: BetweenSchema.optional(),
+  /** First day the pipeline began remembering reports (P1). The app says "since 9 Nov" while `days` fills up. */
+  historySince: isoDate.optional(),
 }).superRefine((r, ctx) => {
   const b = r.between
   if (!b) return

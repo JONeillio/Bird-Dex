@@ -65,7 +65,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 
 **Phase P: engines for the design canvas (agreed with Joseph 8 Nov 15:31; do these next, in this order)**
 Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SAi6yZ2Wb6S3KTfSHKSw; summary in the Claude project doc `claude/birdquest-design-concepts.md`). Row 5 (alternative visual styles) was not chosen: don't build themes. Specs are under "Phase P" in section 4. P1 goes first because its history only starts filling from the day it ships.
-- [ ] P1 Pipeline: report history (days reported, time of day) kept in the Actions cache, 0 extra API calls
+- [x] P1 Pipeline: report history (days reported, time of day) kept in the Actions cache, 0 extra API calls
 - [ ] P2 Encounter v3 fields (count, checklist, duration) and the importer keeping them
 - [ ] P3 Game store (IndexedDB v3) and backup schema 2
 - [ ] P4 Outings v2: checklists, start time, duration, card number, "opened" parcels
@@ -234,6 +234,8 @@ Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, P
 - Make sure the workflow saves the cache after a refresh with history (key per run, as now) and that a code-only deploy keeps the old history untouched.
 - Tests (synthetic): merge adds a new date once, keeps 30 max, drops old dates; bitmask maths across a month boundary; bands from times; a site leaving the list drops its history; schema accepts old and new region files.
 - Then dispatch a refresh, read the summary, and record in CLAUDE.md: history file size, the number of species-site pairs, and that eBird calls did not change.
+
+**P1 notes (built 8 Nov).** `pipeline/history.ts` (pure, tested in `tests/history.test.ts`): `mergeHistory`, `withHistory`, `daysMask`, `countDays`, `bandCounts`, `isPublishable`. The file is `.cache/bq-data/history.json` and sits in the same cache as the published JSON, so `reuse()` in `run.ts` copies the cache into `pipeline/out` with `filter: isPublishable` (the history is never published) and `refresh()` writes it back after rebuilding the cache. It is only written when a refresh succeeds, so a failed refresh or a code-only deploy leaves it untouched. Unconfirmed (awaiting review) records are not remembered. `days` is published on each report with history (bit 0 = the day the data was generated; one day ahead counts as today because eBird dates are local and the generated date is UTC) and `bands` only when a time is known. Use `countDays(report.days)` for "N of 14 days" and say "since <historySince>" until 14 days have passed. UI must say "about N of 14 days".
 
 **P2 Encounter v3 fields.** Add to `EncounterSchema`, all optional (old records and backups still parse): `count` (int ≥ 1, or null when eBird says "X"), `checklistId` (eBird Submission ID such as `S123…`, ≤ 32 chars), `durationMin` (int 0–1440, the checklist's duration). The eBird importer keeps `Count`, `Submission ID` and `Duration (Min)` when present (sample history too: make the seeded generator produce believable counts and durations). Logging by hand: add an optional count field to the log sheet in the UI phase, nothing now. `Count` is still never invented. Tests: CSV with and without these columns, "X" count → null, re-import adds nothing.
 

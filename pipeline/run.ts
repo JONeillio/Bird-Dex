@@ -9,6 +9,7 @@ import { timedFetch, redact } from './lib/http.ts'
 import { cleanHotspot, mergeNotable, pickBetweenSites, rankHotspots, toBetween, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
 import { IndexSchema, RegionRefSchema, RegionSchema, type PublishedIndex, type RegionData, type Site } from '../src/data/published-schema.ts'
 import { StarterDexSchema } from '../src/data/schema.ts'
+import { HISTORY_FILE, historyStats, isPublishable, mergeHistory, parseHistory, withHistory } from './history.ts'
 
 const OUT = 'pipeline/out'
 const CACHE = '.cache/bq-data'
@@ -141,14 +142,33 @@ async function refresh(): Promise<void> {
   const tmp = `${OUT}.tmp`
   rmSync(tmp, { recursive: true, force: true })
   mkdirSync(join(tmp, 'region'), { recursive: true })
-  for (const region of cfg.regions) {
-    const data = await fetchRegion(cfg, region, dexBySci)
+  const fetched: RegionData[] = []
+  for (const region of cfg.regions) fetched.push(await fetchRegion(cfg, region, dexBySci))
+
+  // Report history (P1): remember each report's date and time for up to 30 days, so the app can show how often a bird
+  // turns up. Lives in the cache folder only; it is written after the published copy below and never published.
+  const today = new Date().toISOString().slice(0, 10)
+  const historyPath = join(CACHE, HISTORY_FILE)
+  const prevText = existsSync(historyPath) ? readFileSync(historyPath, 'utf8') : null
+  const prevHistory = prevText ? parseHistory(prevText) : null
+  if (prevText && !prevHistory) say('- The saved report history could not be read, so it starts again from today.')
+  const history = mergeHistory(prevHistory, fetched.flatMap((d) => d.sites), today)
+
+  for (const [i, region] of cfg.regions.entries()) {
+    const data = RegionSchema.parse({
+      ...fetched[i],
+      sites: withHistory(fetched[i].sites, history, fetched[i].generatedAt.slice(0, 10), fetched[i].windowDays),
+      historySince: history.since,
+    } satisfies RegionData)
     writeFileSync(join(tmp, region.file), JSON.stringify(data))
     const reports = data.sites.reduce((n, s) => n + s.reports.length, 0)
     const dexSpecies = new Set(data.sites.flatMap((s) => s.reports.map((r) => r.speciesId).filter(Boolean))).size
     const unknown = Object.values(data.drive.byStart).flatMap((m) => Object.values(m)).filter((d) => d.status === 'unknown').length
     say(`- ${region.label}: ${data.sites.length} sites (of ${data.coverage.hotspotsActive} active), ${reports} reports, ${dexSpecies} Starter Dex species, ${data.unmatchedSpecies.length} other species, ${unknown} unknown drive times`)
   }
+  const stats = historyStats(history)
+  const historyText = JSON.stringify(history)
+  say(`- Report history: since ${history.since}, ${stats.sites} sites, ${stats.pairs} species-site pairs, ${Math.round(historyText.length / 1024)} KB (kept in the cache, not published).`)
   const index = IndexSchema.parse({ schema: 1, generatedAt: new Date().toISOString(), isDemo: false, regions: cfg.regions } satisfies PublishedIndex)
   writeFileSync(join(tmp, 'index.json'), JSON.stringify(index))
 
@@ -159,13 +179,14 @@ async function refresh(): Promise<void> {
   rmSync(CACHE, { recursive: true, force: true })
   mkdirSync('.cache', { recursive: true })
   cpSync(OUT, CACHE, { recursive: true })
+  writeFileSync(join(CACHE, HISTORY_FILE), historyText)
   say(`- Requests: eBird ${ebirdCalls}, openrouteservice ${orsCalls}. Took ${Math.round((Date.now() - t0) / 1000)} s.`)
 }
 
 function reuse(): boolean {
   if (!existsSync(join(CACHE, 'index.json'))) return false
   rmSync(OUT, { recursive: true, force: true })
-  cpSync(CACHE, OUT, { recursive: true })
+  cpSync(CACHE, OUT, { recursive: true, filter: isPublishable }) // the history file stays in the cache
   const idx = IndexSchema.parse(JSON.parse(readFileSync(join(OUT, 'index.json'), 'utf8')))
   say(`- Reused cached data from ${idx.generatedAt} (0 requests).`)
   return true
