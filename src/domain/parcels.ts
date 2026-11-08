@@ -17,3 +17,20 @@ export function markOpened(keys: Iterable<string>, opened: ReadonlySet<string>):
 
 /** The same thing straight from sightings, for screens that have not grouped them yet. */
 export const unopenedFrom = (encounters: readonly Encounter[], opened: ReadonlySet<string>, sinceCreatedAt: string | null): Outing[] => unopened(groupOutings(encounters), opened, sinceCreatedAt)
+
+/** Outings older than this many days are history, not parcels: importing a whole eBird history must not give hundreds of them. */
+export const PARCEL_DAYS = 30
+
+const dayNumber = (iso: string): number => Math.round(Date.parse(`${iso}T00:00:00Z`) / 86_400_000)
+
+/**
+ * The parcels to show: unopened outings from the last 30 days (dates up to a day ahead are allowed, for time zones),
+ * newest first. `today` is YYYY-MM-DD in the phone's own time zone. Older unopened outings stay reachable in the Journal.
+ */
+export function recentParcels(outings: readonly Outing[], opened: ReadonlySet<string>, today: string): Outing[] {
+  const t = dayNumber(today)
+  return unopened(outings, opened, null).filter((o) => {
+    const age = t - dayNumber(o.date)
+    return age >= -1 && age <= PARCEL_DAYS
+  })
+}

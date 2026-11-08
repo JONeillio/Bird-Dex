@@ -1,8 +1,8 @@
 // P4: checklists, start time, duration and card numbers on outings, and parcels.
 import { describe, expect, it } from 'vitest'
 import type { Encounter } from '../src/data/personal-schema'
-import { groupOutings } from '../src/domain/outings'
-import { markOpened, unopened } from '../src/domain/parcels'
+import { groupOutings, type Outing } from '../src/domain/outings'
+import { markOpened, recentParcels, unopened } from '../src/domain/parcels'
 
 let n = 0
 const enc = (over: Partial<Encounter> = {}): Encounter => {
@@ -92,5 +92,17 @@ describe('parcels', () => {
     // If B's report had not been opened, the new sighting would bring it back.
     const none = new Set(['2026-10-01|a'])
     expect(unopened(outings, none, '2026-11-08T23:00:00.000Z').map((o) => o.key)).toEqual(['2026-11-01|c', '2026-10-05|b'])
+  })
+})
+
+describe('recentParcels', () => {
+  const o = (date: string): Outing => ({ key: `${date}|a`, date, siteKey: 'a', siteId: null, place: '', species: [], encounters: [], sample: false, lastCreatedAt: `${date}T10:00:00Z`, checklistIds: [], startTime: null, durationMin: null, cardNo: 1 })
+  it('keeps unopened outings from the last 30 days and drops older history', () => {
+    const outings = [o('2026-11-08'), o('2026-10-09'), o('2026-10-08'), o('2025-01-01')]
+    expect(recentParcels(outings, new Set(), '2026-11-08').map((x) => x.date)).toEqual(['2026-11-08', '2026-10-09']) // 30 days back is in, 31 is out
+  })
+  it('leaves out opened outings, and allows a date one day ahead (time zones) but not further', () => {
+    const outings = [o('2026-11-09'), o('2026-11-10'), o('2026-11-07')]
+    expect(recentParcels(outings, new Set(['2026-11-07|a']), '2026-11-08').map((x) => x.date)).toEqual(['2026-11-09'])
   })
 })

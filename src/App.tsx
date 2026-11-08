@@ -8,6 +8,7 @@ import { LogSheet } from './features/log/LogSheet'
 import { Reveal } from './features/log/Reveal'
 import { Toast } from './features/log/Toast'
 import { useGame } from './state/game'
+import { useParcels } from './state/parcels'
 import { useRecords } from './state/records'
 import { useStore } from './state/store'
 import { play, unlockAudio } from './audio/sfx'
@@ -16,13 +17,14 @@ import DexScreen from './features/birddex/DexScreen'
 import BirdProfile from './features/bird/BirdProfile'
 import DevArt from './features/dev/DevArt'
 import DevEngine from './features/dev/DevEngine'
+import { DevDialogue } from './features/dev/DevDialogue'
 import type { IconName } from './art/icons'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
 
 const TABS: { name: 'map' | 'dex' | 'journal'; label: string; icon: IconName }[] = [
-  { name: 'map', label: 'Map', icon: 'map' },
-  { name: 'dex', label: 'BirdDex', icon: 'bird' },
+  { name: 'map', label: 'Explore', icon: 'map' },
+  { name: 'dex', label: 'Dex', icon: 'bird' },
   { name: 'journal', label: 'Journal', icon: 'book' },
 ]
 
@@ -49,7 +51,7 @@ function Screen({ route }: { route: Route }) {
     case 'settings':
       return <SettingsScreen />
     case 'dev':
-      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : <DevUi />
+      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : route.page === 'dialogue' ? <DevDialogue /> : <DevUi />
   }
 }
 
@@ -59,6 +61,7 @@ export default function App() {
   const soundOn = useStore((s) => s.prefs.soundOn)
   const keepAwake = useStore((s) => s.prefs.keepAwake)
   const load = useRecords((s) => s.load)
+  const parcels = useParcels().length
   const first = useRef(true)
   const soundRef = useRef(soundOn)
   useEffect(() => {
@@ -107,7 +110,10 @@ export default function App() {
             href={`#/${t.name}`}
             aria-current={current === t.name ? 'page' : undefined}
           >
-            <PixelIcon name={t.icon} size={28} colour={current === t.name ? '#fffbef' : '#213b32'} />
+            <span className="tab-icon">
+              <PixelIcon name={t.icon} size={28} colour={current === t.name ? '#fffbef' : '#213b32'} />
+              {t.name === 'journal' && parcels > 0 && <span className="tab-dot" role="img" aria-label="New checklists to open" />}
+            </span>
             {t.label}
           </a>
         ))}

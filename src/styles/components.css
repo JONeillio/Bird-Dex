@@ -261,6 +261,19 @@
   font-weight: 800;
   text-decoration: none;
 }
+.tab-icon { position: relative; display: inline-flex; }
+.tab-dot {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--coral);
+  border: 2px solid var(--panel);
+  outline: 2px solid var(--ink);
+  border-radius: 50%;
+}
+.tab[aria-current='page'] .tab-dot { border-color: var(--forest); }
 .tab[aria-current='page'] {
   background: var(--forest);
   color: var(--panel);
@@ -504,3 +517,20 @@
 .imports-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
 .warden-img { image-rendering: pixelated; display: block; max-width: 100%; height: auto; }
 .warden-missing { width: 96px; height: 96px; border: 2px dashed var(--muted); border-radius: 8px; }
+
+/* Dialogue and sheet kit (U0). Pieces are nine-sliced at whole-number scales by src/art/dialogueKit.ts. */
+.strip-sprite { display: inline-block; flex: none; background-repeat: no-repeat; image-rendering: pixelated; }
+.dlg { position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+.dlg-portrait { position: relative; width: 128px; height: 128px; margin-left: 8px; flex: none; }
+.dlg-portrait img { position: absolute; inset: 0; width: 128px; height: 128px; opacity: 0; }
+.dlg-portrait img.on { opacity: 1; }
+.dlg-plate { position: relative; z-index: 1; box-sizing: border-box; min-width: 128px; margin: -12px 0 -8px 12px; padding: 0 12px; display: flex; align-items: center; min-height: 48px; font-family: var(--font-display, inherit); font-size: 18px; font-weight: 700; color: var(--ink); }
+.dlg-box { box-sizing: border-box; width: 100%; min-height: 128px; position: relative; text-align: left; font: inherit; font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--ink); background-color: transparent; cursor: pointer; }
+.dlg-text { display: block; }
+.dlg-next { display: inline-block; margin-left: 6px; vertical-align: -6px; }
+.dlg-choices { display: grid; gap: 8px; width: 100%; margin-top: 12px; }
+.dlg-choice { box-sizing: border-box; min-height: 48px; width: 100%; font: inherit; font-size: 16px; font-weight: 800; color: var(--ink); background-color: transparent; cursor: pointer; }
+.dlg-choice:active:not(:disabled) { border-image-source: var(--choice-pressed); }
+.dlg-choice:disabled { opacity: 0.55; cursor: default; }
+.sheet-frame { box-sizing: border-box; position: relative; color: var(--ink); }
+.sheet-frame-handle { display: block; margin: -4px auto 8px; image-rendering: pixelated; }
