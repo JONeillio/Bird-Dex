@@ -15,6 +15,10 @@ export interface RevealRequest {
   speciesId: string
   /** First ever sighting of this species (the big reveal) rather than another sighting of a known one. */
   firstTime: boolean
+  /** A known bird whose Bond rank just rose. */
+  rankUp?: { from: string; to: string }
+  /** First sighting this calendar year of a bird recorded in an earlier year. */
+  firstOfYear?: number
 }
 
 interface UiState {

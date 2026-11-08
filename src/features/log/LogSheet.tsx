@@ -7,6 +7,8 @@ import { nowHHMM } from '../../domain/time'
 import { play } from '../../audio/sfx'
 import { buzz, BUZZ } from '../../phone/haptics'
 import { shrinkPhoto } from '../../phone/photo'
+import { computeBond, rankUps } from '../../domain/bond'
+import { isFirstOfYear } from '../../domain/dexLists'
 import { newEncounterId, useRecords } from '../../state/records'
 import { useStore } from '../../state/store'
 import { useUi, type LogRequest } from '../../state/ui'
@@ -132,8 +134,12 @@ function LogForm({ req }: { req: LogRequest }) {
       say(`Logged ${outside.name}. It is not in the Starter Dex, so it will show in your life list.${wasDemo ? ' Demo collection switched off.' : ''}`)
       return
     }
+    const ups = rankUps(computeBond(encounters), computeBond([...encounters, parsed.data])).find((u) => u.speciesId === speciesKey)
+    const foy = parsed.data.date && isFirstOfYear(encounters, speciesKey, parsed.data.date) ? Number(parsed.data.date.slice(0, 4)) : undefined
     if (firstTime) showReveal({ speciesId: species, firstTime: true })
-    else {
+    else if (ups || foy) {
+      showReveal({ speciesId: species, firstTime: false, rankUp: ups ? { from: ups.from, to: ups.to } : undefined, firstOfYear: foy })
+    } else {
       play('tick', prefs.soundOn)
       buzz(BUZZ.select, prefs.hapticsOn)
       say(`Added another ${dexById(species)?.name ?? 'bird'} sighting.${wasDemo ? ' Demo collection switched off.' : ''}`)

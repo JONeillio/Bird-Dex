@@ -12,6 +12,7 @@ import { deriveRecords } from '../../domain/collection'
 import { formatDate, sortEncounters } from '../../domain/journal'
 import { Banner, Chip, DemoStamp, Panel, Pill } from '../../ui/components'
 import { BackButton } from '../shell/SettingsButton'
+import { BondPanel } from './BondPanel'
 import { BirdPortrait } from '../birddex/BirdPortrait'
 import { usePublished } from '../../data/published'
 import { limitFor, whereSeen } from '../../domain/findBird'
@@ -93,6 +94,7 @@ export default function BirdProfile({ id }: { id: string }) {
           </div>
         </div>
 
+        <BondPanel speciesId={species.id} name={species.name} />
         <ReportedNearby speciesId={species.id} name={species.name} />
         <Panel className="stack tight">
           <h3 className="h-display small-h">Your sightings</h3>

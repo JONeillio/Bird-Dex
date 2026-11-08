@@ -604,3 +604,7 @@
 .rank-list b { font-weight: 800; text-align: right; }
 .tier-tag { display: inline-flex; align-items: center; gap: 4px; }
 .screen > .segmented button { flex: 1; }
+.tight-row { gap: 6px; align-items: center; }
+.nick { margin: 0; font-family: var(--font-display); font-size: 18px; }
+.how-bond summary { cursor: pointer; font-weight: 800; padding: 6px 0; }
+.how-bond ul { margin: 4px 0; padding-left: 18px; }
