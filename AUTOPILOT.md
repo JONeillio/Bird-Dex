@@ -70,7 +70,7 @@ Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SA
 - [x] P3 Game store (IndexedDB v3) and backup schema 2
 - [x] P4 Outings v2: checklists, start time, duration, card number, "opened" parcels
 - [x] P5 Field Report v2 additions (nearly levelled, most counted, extras by name)
-- [ ] P6 Bond record: months, time bands and field notes for the profile
+- [x] P6 Bond record: months, time bands and field notes for the profile
 - [ ] P7 Reliability and Find a bird v2
 - [ ] P8 Bird News engine (with sunrise and sunset worked out on the phone)
 - [ ] P9 Warden jobs and trust
@@ -258,6 +258,8 @@ Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, P
 **P5 notes (built 8 Nov).** `FieldReport` now also has `extraNames`, `nearlyLevelled` (`NEARLY_POINTS` = 10, `NEARLY_MAX` = 3; the rank is the one the bird ended the outing at and `toNext` is measured from its Bond total after its last sighting on that outing, not today's total; a bird already at Old Friend is never listed; ties by name), `mostCounted` (each bird's biggest single count on the outing, so two checklists are not added together; ties by name), `cardNo`, `durationMin` and `startTime` (all from `groupOutings`). Dex names are short ("Robin", "Wren"), so screens should show `name` as it comes. Tests are in `tests/field-report.test.ts` (new "P5" block); the points still sum exactly as before.
 
 **P6 Bond record for the profile.** `computeBond` also returns `monthsSeen: number[]` (1–12, sorted), `bandsSeen: TimeBand[]`, `sitesSeen: string[]` (site keys), `firstPlace: string | null`. New `fieldNotes(speciesId): string` in `src/domain/fieldNotes.ts` builds one plain sentence from `traits.v1.json` (size · diet · status · when active), for example "Small · eats insects · resident all year · sings at dawn"; returns '' for outside-Dex birds. `missingMonths(bond)` lists months never logged. Tests: sets match the rules, notes for three birds, outside-Dex empty.
+
+**P6 notes (built 8 Nov).** `Bond` also has `monthsSeen`, `bandsSeen` (always dawn, day, dusk, night order), `sitesSeen` (site keys in the order you first met the bird there; an unknown place is never listed) and `firstPlace` (the place label of the earliest dated sighting, null when blank). They come from the same sightings the Bond rules counted, so `months`, `bands` and `sites` equal their lengths. `src/domain/fieldNotes.ts`: `fieldNotes(speciesId)` builds "Small · eats insects · resident all year · sings at dawn" from the traits (diet wording: inverts = "eats small invertebrates", prey = "hunts other animals"; songsters "sing at dawn" if diurnal), '' outside the Dex; `missingMonths(bond)`. Tests: `tests/bond-record.test.ts`. **Phase P so far:** P1 to P6 are done; P7 to P12b are next and are still engines and data, no screens.
 
 **P7 Reliability and Find a bird v2.** `src/domain/reliability.ts`: `daysReported(days: number | undefined): number | null` (popcount, null when no history), `reliabilityLabel(n, windowDays)` ("most days" ≥ 9, "often" 5–8, "now and then" 2–4, "once" 1), `bestBand(bands)` (the band with most reports when it has ≥ 50% of them and ≥ 3 reports, else null), `strip(days, windowDays): boolean[]` (oldest first, for the 14-cell bar). `findBird.whereSeen` gains `days` and `bestBand` per sighting and sorts by days reported (desc), then newest report, then drive time; with no history it keeps today's order. Tests.
 

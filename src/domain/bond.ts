@@ -9,6 +9,8 @@ export type RankName = (typeof RANKS)[number]
 /** Bond points needed for each rank, in the same order as RANKS. */
 export const RANK_THRESHOLDS = [0, 15, 40, 80, 150] as const
 
+const BAND_ORDER: readonly TimeBand[] = ['dawn', 'day', 'dusk', 'night']
+
 export const BOND_POINTS = {
   first: 10,
   newSite: 5,
@@ -36,6 +38,14 @@ export interface Bond {
   bands: number
   /** True once the bird has been heard (heard-only or seen and heard). */
   heard: boolean
+  /** Months 1-12 it has been recorded in, sorted. */
+  monthsSeen: number[]
+  /** Time bands it has been recorded in, in the order dawn, day, dusk, night. */
+  bandsSeen: TimeBand[]
+  /** Site keys (see siteKey) of the known places, in the order you first met it there. */
+  sitesSeen: string[]
+  /** The place label of the earliest dated sighting, or null when it had none. */
+  firstPlace: string | null
 }
 
 /** What one sighting earned, and where the bird stood just after it. */
@@ -81,6 +91,7 @@ interface Acc {
   points: number
   sightings: number
   firstDate: string | null
+  firstPlace: string | null
   sites: Set<string>
   months: Set<number>
   bands: Set<TimeBand>
@@ -96,6 +107,7 @@ function newAcc(): Acc {
     points: 0,
     sightings: 0,
     firstDate: null,
+    firstPlace: null,
     sites: new Set(),
     months: new Set(),
     bands: new Set(),
@@ -158,7 +170,10 @@ export function bondRun(encounters: readonly Encounter[]): BondRun {
       if (mode === 'heard') acc.heardOnly = true
     }
     if (mode === 'heard' || mode === 'both') acc.heardAny = true
-    if (e.date && (acc.firstDate === null || e.date < acc.firstDate)) acc.firstDate = e.date
+    if (e.date && (acc.firstDate === null || e.date < acc.firstDate)) {
+      acc.firstDate = e.date
+      acc.firstPlace = e.place.trim() || null
+    }
 
     acc.points += earned
     awards.set(e.id, { speciesId: e.speciesId, points: earned, total: acc.points, rankIndex: rankIndexFor(acc.points) })
@@ -178,6 +193,10 @@ export function bondRun(encounters: readonly Encounter[]): BondRun {
       months: acc.months.size,
       bands: acc.bands.size,
       heard: acc.heardAny,
+      monthsSeen: [...acc.months].sort((a, b) => a - b),
+      bandsSeen: BAND_ORDER.filter((b) => acc.bands.has(b)),
+      sitesSeen: [...acc.sites],
+      firstPlace: acc.firstPlace,
     })
   }
   return { bonds, awards }
