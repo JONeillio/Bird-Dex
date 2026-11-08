@@ -270,7 +270,9 @@
      "obsTime": null,
      "count": 1,
      "checklistUrl": null,
-     "reviewed": false
+     "reviewed": false,
+     "notable": true,
+     "unconfirmed": false
     },
     {
      "speciesId": "eurasian-bullfinch",
@@ -383,7 +385,9 @@
      "obsTime": null,
      "count": 1,
      "checklistUrl": null,
-     "reviewed": false
+     "reviewed": false,
+     "notable": true,
+     "unconfirmed": true
     },
     {
      "speciesId": "eurasian-siskin",

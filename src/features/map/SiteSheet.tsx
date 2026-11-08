@@ -76,7 +76,7 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
               <a href={`#/bird/${r.speciesId}`} className="report-main">
                 {src && <img src={src} width={40} height={40} alt="" />}
                 <span>
-                  <strong>{s?.name ?? r.name}</strong> {isNew && <Pill tone="warn">New to you</Pill>} {targets.includes(r.speciesId!) && <Pill>☆ Target</Pill>}
+                  <strong>{s?.name ?? r.name}</strong> {r.notable && <Pill tone="warn">{r.unconfirmed ? 'Rare · unconfirmed' : 'Rare'}</Pill>} {isNew && <Pill tone="warn">New to you</Pill>} {targets.includes(r.speciesId!) && <Pill>☆ Target</Pill>}
                   <br />
                   <span className="muted small">
                     Last reported {daysAgo(r.obsDate)}
@@ -99,14 +99,14 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
         })}
       </ul>
       {other.length > 0 && (
-        <details className="other-birds">
+        <details className="other-birds" open={other.some((r) => r.notable)}>
           <summary>Other birds ({other.length})</summary>
           <ul className="report-list">
             {other.map((r) => (
               <li key={r.ebirdCode} className="report">
                 <span className="report-main">
                   <span>
-                    {r.name}
+                    {r.name} {r.notable && <Pill tone="warn">{r.unconfirmed ? 'Rare · unconfirmed' : 'Rare'}</Pill>}
                     <br />
                     <span className="muted small">Last reported {daysAgo(r.obsDate)}</span>
                   </span>

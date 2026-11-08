@@ -6,7 +6,7 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, appendFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { timedFetch, redact } from './lib/http.ts'
-import { cleanHotspot, rankHotspots, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
+import { cleanHotspot, mergeNotable, rankHotspots, toDrive, toReports, toSite, unmatched, type CleanHotspot, type RawHotspot, type RawObs } from './build.ts'
 import { IndexSchema, RegionRefSchema, RegionSchema, type PublishedIndex, type RegionData, type Site } from '../src/data/published-schema.ts'
 import { StarterDexSchema } from '../src/data/schema.ts'
 
@@ -19,6 +19,8 @@ interface Config {
   windowDays: number
   hotspotRadiusKm: number
   maxSites: number
+  /** Extra hotspots allowed in just because they had a rarity. */
+  maxRaritySites?: number
   regions: PublishedIndex['regions'][number][]
 }
 
@@ -54,11 +56,19 @@ async function fetchRegion(cfg: Config, region: Config['regions'][number], dexBy
   const active = (Array.isArray(raw) ? (raw as RawHotspot[]) : []).map(cleanHotspot).filter((h): h is CleanHotspot => !!h)
   const chosen = rankHotspots(active, cfg.maxSites)
 
-  const sites: Site[] = []
+  let sites: Site[] = []
   for (const h of chosen) {
     const obs = await eb(`/data/obs/${encodeURIComponent(h.id)}/recent?back=${cfg.windowDays}&sppLocale=en_GB`)
     sites.push(toSite(h, toReports(Array.isArray(obs) ? (obs as RawObs[]) : [], dexBySci)))
   }
+
+  // Rarities: one call for the whole area. Added before routing so new hotspots get drive times too.
+  const rawNotable = await eb(`/data/obs/geo/recent/notable?lat=${lat}&lng=${lng}&dist=${cfg.hotspotRadiusKm}&back=${cfg.windowDays}&detail=simple&sppLocale=en_GB`)
+  const notable = Array.isArray(rawNotable) ? (rawNotable as RawObs[]) : []
+  const merged = mergeNotable(sites, notable, dexBySci, cfg.maxRaritySites ?? 30)
+  sites = merged.sites
+  const unconfirmed = notable.filter((o) => o.obsValid !== true).length
+  say(`- ${region.label} rarities: ${notable.length} records (${unconfirmed} not yet confirmed), ${merged.skippedPrivate} at private locations left out, ${merged.added} extra hotspots added`)
 
   const byStart: RegionData['drive']['byStart'] = {}
   let computedAt: string | null = null

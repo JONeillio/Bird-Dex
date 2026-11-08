@@ -424,6 +424,8 @@
 .report-main { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; min-height: 44px; }
 .report-main .pill { font-size: 11px; padding: 0 6px; border-width: 1.5px; }
 .report-link { flex: none; font-weight: 800; }
+.report-main.as-button { background: none; border: 0; padding: 0; font: inherit; text-align: left; cursor: pointer; flex: 1; }
+.bird-blank { width: 40px; height: 40px; flex: none; border: 2px dashed var(--silhouette); border-radius: 8px; }
 .other-birds { margin-top: 10px; }
 .other-birds summary { font-weight: 800; min-height: 40px; display: flex; align-items: center; cursor: pointer; }
 .credit { margin-top: 14px; }

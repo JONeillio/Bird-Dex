@@ -20,6 +20,11 @@ export interface RawObs {
   obsValid?: unknown
   obsReviewed?: unknown
   subId?: unknown
+  locId?: unknown
+  locName?: unknown
+  lat?: unknown
+  lng?: unknown
+  locationPrivate?: unknown
 }
 
 export interface CleanHotspot {
@@ -77,7 +82,7 @@ export function dexIdFor(sciName: string, dexBySci: ReadonlyMap<string, string>)
   return dexBySci.get(binomial) ?? null
 }
 
-export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>): Report[] {
+export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>, opts: { notable?: boolean } = {}): Report[] {
   const out = new Map<string, Report>()
   for (const r of raw) {
     const code = str(r.speciesCode)
@@ -85,7 +90,8 @@ export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>):
     const name = str(r.comName)
     const when = splitObsDt(r.obsDt)
     if (!code || !sci || !name || !when) continue
-    if (r.obsValid === false) continue
+    // Ordinary reports: only valid ones. Rarities: keep records still awaiting review, labelled unconfirmed.
+    if (r.obsValid === false && !opts.notable) continue
     if (isNotASpecies(sci, name)) continue
     const howMany = num(r.howMany)
     const sub = str(r.subId)
@@ -99,6 +105,7 @@ export function toReports(raw: RawObs[], dexBySci: ReadonlyMap<string, string>):
       count: howMany !== null && Number.isInteger(howMany) ? howMany : null, // "X" (present, not counted) -> null
       checklistUrl: sub && /^S\d+$/.test(sub) ? `https://ebird.org/checklist/${sub}` : null,
       reviewed: r.obsReviewed === true,
+      ...(opts.notable ? { notable: true, unconfirmed: r.obsValid !== true } : {}),
     }
     const prev = out.get(code)
     if (!prev || prev.obsDate < report.obsDate) out.set(code, report) // keep the newest per species
@@ -140,4 +147,47 @@ export function unmatched(sites: Site[]): RegionData['unmatchedSpecies'] {
       byCode.set(r.ebirdCode, e)
     }
   return [...byCode.values()].sort((a, b) => b.sites - a.sites)
+}
+
+/**
+ * Merge eBird's notable (rare for the area) records into the sites. A rarity at a site we already list marks
+ * that bird as notable (keeping the newer record). A rarity at a public hotspot we don't list adds that hotspot,
+ * newest first, up to `maxExtra`. Private locations (often gardens) are never published.
+ */
+export function mergeNotable(sites: Site[], raw: RawObs[], dexBySci: ReadonlyMap<string, string>, maxExtra: number): { sites: Site[]; added: number; skippedPrivate: number } {
+  const byLoc = new Map<string, RawObs[]>()
+  let skippedPrivate = 0
+  for (const o of raw) {
+    const loc = str(o.locId)
+    if (!loc || o.locationPrivate !== false) {
+      skippedPrivate++
+      continue
+    }
+    byLoc.set(loc, [...(byLoc.get(loc) ?? []), o])
+  }
+  const out = sites.map((s) => ({ ...s, reports: [...s.reports] }))
+  const index = new Map(out.map((s, i) => [s.id, i]))
+  const extra: Site[] = []
+  for (const [loc, obs] of byLoc) {
+    const rare = toReports(obs, dexBySci, { notable: true })
+    if (rare.length === 0) continue
+    const i = index.get(loc)
+    if (i !== undefined) {
+      const site = out[i]
+      for (const r of rare) {
+        const j = site.reports.findIndex((x) => x.ebirdCode === r.ebirdCode)
+        if (j < 0) site.reports.push(r)
+        // The ordinary feed only holds accepted records, so a same-day or newer one there is confirmed.
+        else if (site.reports[j].obsDate >= r.obsDate) site.reports[j] = { ...site.reports[j], notable: true, unconfirmed: false }
+        else site.reports[j] = r
+      }
+      site.reports.sort((a, b) => b.obsDate.localeCompare(a.obsDate) || a.name.localeCompare(b.name))
+      continue
+    }
+    const h = cleanHotspot({ locId: loc, locName: obs[0].locName, lat: obs[0].lat, lng: obs[0].lng, latestObsDt: rare[0].obsDate })
+    if (h) extra.push(toSite(h, rare))
+  }
+  extra.sort((a, b) => (b.latestObsDate ?? '').localeCompare(a.latestObsDate ?? ''))
+  const kept = extra.slice(0, maxExtra)
+  return { sites: [...out, ...kept], added: kept.length, skippedPrivate }
 }

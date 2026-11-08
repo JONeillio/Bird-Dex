@@ -388,6 +388,27 @@ Joseph's part: generate the 3 anchors (robin, kingfisher, grey heron) with an im
 - **T8.5 [S] Quest trail (stretch, it's on the board):** for the top 5 sites per start point, fetch one ORS directions geometry per refresh, simplify it, publish it, and draw it as a dotted cream line from the start point when a site is selected. Label it "approximate route".
 - **T8.6 [C] Hand-over note** for the brother: link, Add to home screen, how to import, back up monthly.
 
+### M9. Lewis's feedback (8 Nov 2026)
+
+Lewis is the most experienced birder testing the app and is based in **Location 2**. Treat his needs as the bar: someone who goes out often, already uses eBird/Merlin, and knows the local sites. What he said, and what it means:
+
+- "Filter for birds and drive time and get route planners. That would be huge." Drive filter is live; the gap is a **day route** through several sites.
+- "Sometimes I have a bird I want to look for but can't be bothered filtering eBird for recent sightings." **Species-first search** is his main pain.
+- "Could you build an API that extracts data from eBird?" (about getting his Merlin data in). The eBird API has **no endpoint for a user's life or year list**; Merlin's life list includes his eBird checklists. So his history comes in by **eBird "Download My Data" CSV import** (M6), re-imported now and then. Scraping eBird as him is off the table (terms).
+- "I really like the layout." Keep it.
+- "Integrate some achievements, kinda like gym badges in Pokémon."
+- Implied: a 104-bird Starter Dex will be nearly full on his first import, so he needs a list that never runs out.
+
+**T9.1 [S] Find a bird — done 8 Nov.** `src/domain/findBird.ts` (bird keys: Dex id or `ebird:<code>`, so any reported bird is searchable; `birdIndex`, `searchBirds` word-start matching, `whereSeen`, `rarities`, `limitFor`). Map: "Find a bird" chip opens `FindBirdSheet` (type any bird → sites, latest report, nearest drive; empty box lists rarities). Choosing a bird focuses the map, widens the drive limit to fit its nearest report, ranks sites by that bird's newest report then drive, and says how many more sites are beyond the limit. Profile: "Reported nearby" lists the newest six sites with date, count and drive; tapping one opens the map on that site. Tests: `tests/findbird.test.ts`.
+
+**T9.2 [S] Rarities — done 8 Nov, needs a refresh to show.** Pipeline makes one extra call per location: `/data/obs/geo/recent/notable?dist=50&back=14&detail=simple`. `mergeNotable` (in `pipeline/build.ts`) marks rarities at listed sites, adds up to `maxRaritySites` (30) extra public hotspots that had one (before routing, so they get drive times), and **never publishes private locations**. Records awaiting review are kept and labelled "Rare · unconfirmed". Report schema gained optional `notable` and `unconfirmed`. Record what the endpoint really returns in CLAUDE.md after the first refresh.
+
+**T9.3 [S] His history and a list that never runs out.** Pull M6 forward (eBird CSV import, idempotent, preview). Add **Year list** mode (resets 1 Jan; "first of the year" reveal) and a **full UK list** beyond the Starter Dex, using eBird taxonomy for birds outside it. Check with his first real export whether Merlin-only saves are in it. Ask Lewis for: his eBird export, and whether he logs in eBird, Merlin or BirdTrack.
+
+**T9.4 [S] Gym badges.** Client-side only, derived from encounters (never from public reports, demo never counts). Each location gets about 8 "gyms": well-known sites, each with a short list of signature birds and a boss bird; log enough of them at that site → badge. Plus set badges (complete Wetland, Raptors…) and year-list milestones (50/100/150). A Badges case screen in the style of the board.
+
+**T9.5 [S] Route planner.** Pick targets (or "most new birds") and a time budget; the Action precomputes an ORS site-to-site matrix for each location's top sites (one request; check the 3,500-route limit); the phone picks an order greedily and opens Google Maps with waypoints (no key). Label it as a plan from recent reports, not a guarantee.
+
 ### Backlog (good ideas, not v1)
 
 Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown Nov–Mar); eBird "notable" reports as a gold-star flag; badges for sites visited; a shareable "new bird" card image; real calls once licences are checked; more regions on request; cross-device sync only if he asks.
@@ -438,3 +459,4 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 | M6 Import | not started | |
 | M7 Real art | started | Style locked: Bold Pixel (7 Nov). 12 bird portraits converted to 64×64 and in the app (3 anchors + 9 from `expansion-v1/`), plus converted markers, scenery and a grass tile in `public/assets/map/` (`src/art/mapAssets.ts`). All still drafts: individual approval pending. Missing from the batch: water and woodland textures. 92 birds still use generated placeholders. |
 | M8 Polish + hand-over | not started | |
+| M9 Lewis's feedback | started 8 Nov 2026 | T9.1 Find a bird and T9.2 rarities built. Next: T9.3 import + year list, T9.4 gym badges, T9.5 route planner. |

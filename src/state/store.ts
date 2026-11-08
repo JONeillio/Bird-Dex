@@ -68,9 +68,11 @@ interface Store {
   prefs: Prefs
   setPref: <K extends keyof Prefs>(key: K, value: Prefs[K]) => void
   toggleTarget: (speciesId: string) => void
-  /** Species the map should focus on (set by Find nearby). Not persisted. */
+  /** Bird the map should focus on (set by Find nearby / Find a bird): a Dex id or "ebird:<code>". Not persisted. */
   focusSpeciesId: string | null
-  setFocusSpecies: (id: string | null) => void
+  /** Site to select when the map opens with a focus (a row tapped in "Reported nearby"). Not persisted. */
+  focusSiteId: string | null
+  setFocusSpecies: (id: string | null, siteId?: string | null) => void
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -88,5 +90,6 @@ export const useStore = create<Store>((set, get) => ({
     set({ prefs })
   },
   focusSpeciesId: null,
-  setFocusSpecies: (id) => set({ focusSpeciesId: id }),
+  focusSiteId: null,
+  setFocusSpecies: (id, siteId = null) => set({ focusSpeciesId: id, focusSiteId: siteId }),
 }))

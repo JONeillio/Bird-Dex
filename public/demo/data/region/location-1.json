@@ -179,7 +179,9 @@
      "obsTime": null,
      "count": 1,
      "checklistUrl": null,
-     "reviewed": false
+     "reviewed": false,
+     "notable": true,
+     "unconfirmed": false
     },
     {
      "speciesId": "bohemian-waxwing",
@@ -620,7 +622,9 @@
      "obsTime": null,
      "count": 1,
      "checklistUrl": null,
-     "reviewed": false
+     "reviewed": false,
+     "notable": true,
+     "unconfirmed": true
     },
     {
      "speciesId": "common-wood-pigeon",

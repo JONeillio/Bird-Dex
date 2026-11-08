@@ -1,6 +1,9 @@
 // Map logic, pure and tested: drive filter, site ranking (Today's Quest) and lure choice.
 import type { DriveEntry, RegionData, Report, Site } from '../data/published-schema'
 
+/** Same as birdKey in findBird.ts (kept here to avoid a cycle): Dex id, or "ebird:<code>" for other birds. */
+const keyOf = (r: Report): string => r.speciesId ?? `ebird:${r.ebirdCode}`
+
 /** Whole minutes, rounded up. null means "Drive time unknown" (never 0). */
 export function driveMinutes(e: DriveEntry | undefined): number | null {
   return e && e.status === 'ok' ? Math.max(1, Math.ceil(e.s / 60)) : null
@@ -22,6 +25,7 @@ export interface FilterOpts {
   recorded: ReadonlySet<string>
   targets: readonly string[]
   newOnly: boolean
+  /** A bird key (Dex id or "ebird:<code>") from Find a bird / Find nearby: only sites reporting it are shown. */
   focusSpeciesId: string | null
 }
 
@@ -37,7 +41,7 @@ export function scarcity(region: RegionData): Map<string, number> {
 export function chooseLure(site: Site, recorded: ReadonlySet<string>, targets: readonly string[], scarce: Map<string, number>, focus: string | null = null): Report | null {
   const dex = site.reports.filter((r) => r.speciesId)
   if (focus) {
-    const f = dex.find((r) => r.speciesId === focus)
+    const f = site.reports.find((r) => keyOf(r) === focus)
     if (f) return f
   }
   const t = dex.filter((r) => targets.includes(r.speciesId!))
@@ -54,27 +58,37 @@ export interface Filtered {
   shown: SiteView[]
   /** Sites hidden only because their drive time is unknown (counted, never treated as 0). */
   unknownDrive: number
+  /** Sites hidden only because they are beyond the drive limit (counted when a bird is focused). */
+  beyondLimit: number
 }
 
 export function filterSites(region: RegionData, o: FilterOpts): Filtered {
   const drive = region.drive.byStart[o.startId] ?? {}
   const scarce = scarcity(region)
   let unknownDrive = 0
+  let beyondLimit = 0
   const shown: SiteView[] = []
   for (const site of region.sites) {
     const minutes = driveMinutes(drive[site.id])
-    if (o.focusSpeciesId && !site.reports.some((r) => r.speciesId === o.focusSpeciesId)) continue
+    if (o.focusSpeciesId && !site.reports.some((r) => keyOf(r) === o.focusSpeciesId)) continue
     const newIds = [...new Set(site.reports.map((r) => r.speciesId).filter((x): x is string => !!x && !o.recorded.has(x)))]
     if (o.newOnly && !o.focusSpeciesId && newIds.length === 0) continue
     if (minutes === null) {
       unknownDrive++
       continue
     }
-    if (minutes > o.limitMin) continue
+    if (minutes > o.limitMin) {
+      beyondLimit++
+      continue
+    }
     const newest = site.reports.reduce<string | null>((m, r) => (!m || r.obsDate > m ? r.obsDate : m), null)
     shown.push({ site, minutes, newIds, newest, lure: chooseLure(site, o.recorded, o.targets, scarce, o.focusSpeciesId) })
   }
-  return { shown: rankSites(shown, o.targets), unknownDrive }
+  // Looking for one bird: where it was reported most recently, then the shortest drive.
+  const ranked = o.focusSpeciesId
+    ? [...shown].sort((a, b) => (b.lure?.obsDate ?? '').localeCompare(a.lure?.obsDate ?? '') || (a.minutes ?? 1e9) - (b.minutes ?? 1e9))
+    : rankSites(shown, o.targets)
+  return { shown: ranked, unknownDrive, beyondLimit }
 }
 
 /** Quest order: targets reported, then most new birds, then newest report, then shortest drive. */

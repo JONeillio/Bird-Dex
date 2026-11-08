@@ -3,6 +3,7 @@
   "windowDays": 14,
   "hotspotRadiusKm": 50,
   "maxSites": 80,
+  "maxRaritySites": 30,
   "regions": [
     {
       "id": "location-1",

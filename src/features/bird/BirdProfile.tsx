@@ -12,6 +12,11 @@ import { formatDate, sortEncounters } from '../../domain/journal'
 import { Banner, Chip, DemoStamp, Panel, Pill } from '../../ui/components'
 import { BackButton } from '../shell/SettingsButton'
 import { BirdPortrait } from '../birddex/BirdPortrait'
+import { usePublished } from '../../data/published'
+import { limitFor, whereSeen } from '../../domain/findBird'
+import { daysAgo } from '../../domain/ranking'
+import { shortSiteName } from '../../domain/siteName'
+import type { DriveLimit } from '../../state/store'
 
 export default function BirdProfile({ id }: { id: string }) {
   const prefs = useStore((s) => s.prefs)
@@ -86,10 +91,7 @@ export default function BirdProfile({ id }: { id: string }) {
           </div>
         </div>
 
-        <Panel className="stack tight">
-          <h3 className="h-display small-h">Reported nearby</h3>
-          <p className="muted">Nearby reports appear here once the map and live data are connected.</p>
-        </Panel>
+        <ReportedNearby speciesId={species.id} name={species.name} />
         <Panel className="stack tight">
           <h3 className="h-display small-h">Your sightings</h3>
           {mine.length === 0 ? (
@@ -120,5 +122,79 @@ export default function BirdProfile({ id }: { id: string }) {
         </Panel>
       </main>
     </>
+  )
+}
+
+const SHOW = 6
+
+/** Where this bird was reported recently around the chosen location: newest first, then nearest. */
+function ReportedNearby({ speciesId, name }: { speciesId: string; name: string }) {
+  const prefs = useStore((s) => s.prefs)
+  const setPref = useStore((s) => s.setPref)
+  const setFocus = useStore((s) => s.setFocusSpecies)
+  const data = usePublished(prefs.regionId)
+  if (data.status !== 'ready') {
+    return (
+      <Panel className="stack tight">
+        <h3 className="h-display small-h">Reported nearby</h3>
+        <p className="muted">{data.status === 'loading' ? 'Loading recent reports…' : 'Recent reports could not be loaded right now.'}</p>
+      </Panel>
+    )
+  }
+  const ref = data.index.regions.find((r) => r.id === data.regionId)!
+  const start = ref.startPoints[0]
+  const rows = whereSeen(data.region, start.id, speciesId)
+  const go = (siteId: string, minutes: number | null) => {
+    const fit = limitFor(minutes)
+    if (fit && fit > prefs.driveLimit) setPref('driveLimit', fit as DriveLimit)
+    setFocus(speciesId, siteId)
+  }
+  return (
+    <Panel className="stack tight">
+      <div className="row spread">
+        <h3 className="h-display small-h">Reported nearby</h3>
+        {data.region.isDemo && <DemoStamp />}
+      </div>
+      {rows.length === 0 ? (
+        <p className="muted">
+          No reports of {name} around {start.label} in the last {data.region.windowDays} days.
+        </p>
+      ) : (
+        <>
+          <p className="muted small">
+            {rows.length} {rows.length === 1 ? 'site' : 'sites'} in the last {data.region.windowDays} days · driving from {start.label}
+          </p>
+          <ul className="report-list">
+            {rows.slice(0, SHOW).map(({ site, report, minutes }) => (
+              <li key={site.id} className="report">
+                <a className="report-main" href="#/map" onClick={() => go(site.id, minutes)}>
+                  <span>
+                    <strong>{shortSiteName(site.name)}</strong> {report.notable && <Pill tone="warn">{report.unconfirmed ? 'Rare · unconfirmed' : 'Rare'}</Pill>}
+                    <br />
+                    <span className="muted small">
+                      {daysAgo(report.obsDate)}
+                      {report.count ? ` · ${report.count} seen` : ''} · {minutes !== null ? `${minutes} min` : 'drive time unknown'}
+                    </span>
+                  </span>
+                </a>
+                {report.checklistUrl && (
+                  <a className="report-link small" href={report.checklistUrl} target="_blank" rel="noopener" aria-label={`eBird checklist at ${shortSiteName(site.name)}`}>
+                    eBird ↗
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+          {rows.length > SHOW && (
+            <a className="btn small" href="#/map" onClick={() => setFocus(speciesId)}>
+              See all {rows.length} on the map
+            </a>
+          )}
+        </>
+      )}
+      <p className="muted small credit">
+        {data.region.isDemo ? 'Demo data, invented for trying the app.' : <>Sightings: <a href="https://ebird.org" target="_blank" rel="noopener">eBird (ebird.org)</a>. Recent reports, not live positions.</>}
+      </p>
+    </Panel>
   )
 }

@@ -39,6 +39,10 @@ export const ReportSchema = z.object({
   count: z.number().int().nullable(),
   checklistUrl: z.string().url().nullable(),
   reviewed: z.boolean(),
+  /** eBird flagged it as rare for the area and date (from the notable-observations feed). */
+  notable: z.boolean().optional(),
+  /** A notable record eBird's reviewers have not yet accepted. Shown as "unconfirmed", never hidden. */
+  unconfirmed: z.boolean().optional(),
 })
 export type Report = z.infer<typeof ReportSchema>
 
