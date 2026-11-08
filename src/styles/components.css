@@ -502,3 +502,5 @@
 .rule { border: 0; border-top: 2px dashed var(--muted); margin: 4px 0; width: 100%; }
 .import-note { margin: 0; padding: 8px 10px; border: 2px dashed var(--muted); border-radius: 6px; font-size: 16px; }
 .imports-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.warden-img { image-rendering: pixelated; display: block; max-width: 100%; height: auto; }
+.warden-missing { width: 96px; height: 96px; border: 2px dashed var(--muted); border-radius: 8px; }

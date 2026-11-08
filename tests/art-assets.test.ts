@@ -34,3 +34,25 @@ describe('portrait art files', () => {
     }
   })
 })
+
+describe('warden portraits and scenes', () => {
+  it('every listed warden is a persona with a 96x96 portrait and a 192x192 @2x', async () => {
+    const { PERSONAS, WARDEN_ART } = await import('../src/art/wardens')
+    const ids = new Set(PERSONAS.map((p) => p.id))
+    expect(ids.size).toBe(12)
+    expect(WARDEN_ART.size).toBeGreaterThanOrEqual(4)
+    for (const id of WARDEN_ART) {
+      expect(ids.has(id), `${id} is not a persona`).toBe(true)
+      expect(pngSize(`public/assets/wardens/warden_${id}.png`)).toEqual([96, 96])
+      expect(pngSize(`public/assets/wardens/warden_${id}@2x.png`)).toEqual([192, 192])
+    }
+  })
+  it('scenes exist at their registered sizes', async () => {
+    const { SCENE_ART } = await import('../src/art/wardens')
+    for (const s of Object.values(SCENE_ART)) {
+      const file = (p: string) => 'public/' + p.replace(import.meta.env.BASE_URL, '')
+      expect(pngSize(file(s.src))).toEqual([s.size, s.size])
+      expect(pngSize(file(s.src2x))).toEqual([s.size * 2, s.size * 2])
+    }
+  })
+})

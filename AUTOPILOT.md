@@ -30,7 +30,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 
 - [ ] Lewis's eBird export ("Download My Data" on ebird.org) to test B1 for real. Until then use the in-app sample history (Journal → Import → Try a sample history). Joseph agreed 8 Nov to prove the concept on made-up data first.
 - [ ] Which app Lewis mainly logs in (eBird, Merlin, BirdTrack).
-- [ ] Bird art batches 01–10 (`bird-batches.md`) and game art sets 1–5 (`game-art-brief.md`). Process with R1 whenever a ZIP is uploaded.
+- [ ] Bird art batches 01–10 (`bird-batches.md`) and game art sets 1–5 (`game-art-brief.md`). Process with R1 whenever a ZIP is uploaded. Astra's ZIP export failed (phone storage), so on 8 Nov four wardens (Maud, Reg, Agnes, Harold) and two marsh scenes were cut from Joseph's screenshots instead; the other 8 wardens, badges, ranks, duel cards and terrain tiles are still to come, in any form (ZIP, or more screenshots).
 - [ ] Lewis to sanity-check the Location 2 warden sites and signature birds after D2.
 - [ ] Phone reviews (added at the end of each phase).
 
@@ -270,11 +270,13 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 ### R1 Art intake (whenever Joseph uploads a ZIP)
 
 - Bird batch: `python3 -I scripts/art/import_batch.py <zip> batch-NN` (add `--dry-run` first if unsure), then `npm run build && npm run screens -- "#/dev/art"`, open the screenshots and check each new bird at 64 px and as a silhouette. If a bird looks wrong for its species (wrong colours or missing a field mark listed in `bird-batches.md`), keep the old placeholder for that id and tell Joseph which ones to redo and why. Commit `AP R1: bird batch NN`.
+- Art that arrives as phone screenshots instead of a ZIP: crop each piece (check no status bar or button overlay is left in it), make the black background transparent (flood from the edges and clear enclosed near-black gaps), save the master in `research/art-drafts/game-art/screenshot-crops/`, then convert as below. Add the id to `src/art/warden-art.json` for wardens.
 - Game art set: follow "Notes for Claude when a set arrives" at the end of `game-art-brief.md`; swap fallbacks for the art via the lookups named in the tickets above.
 
-### Parked references (from Joseph, 8 Nov; not tickets)
+### Art from screenshots (done 8 Nov) and parked references
 
-- **Warden art.** Joseph liked the warden portraits and scene backdrops Astra sent as phone screenshots, and the field-record screen. He is short of phone storage, so no ZIP yet; "maybe build more later". The portraits match the briefs for Reg, Agnes, Harold and Maud, so when the ZIP arrives use R1 and the existing persona ids. Do not commit screenshots of his phone (public repo).
+- **Warden art, integrated.** Maud, Reg, Agnes and Harold portraits plus two marsh scenes (sunset, waterline beetle) were cut from phone screenshots (black background made transparent; masters in `research/art-drafts/game-art/screenshot-crops/`, runtime PNGs in `public/assets/{wardens,scenes}/`, 96 px and `@2x` 192 px). Code lookup: `src/art/wardens.ts` (`PERSONAS`, `wardenArt(id)` returns null when there is no art, so draw the silhouette; `SCENE_ART`), art list in `src/art/warden-art.json`. D4 and E3 must use these lookups; the habitat scene for a warden's site comes from `SCENE_ART` when one matches, otherwise `art/scenes.ts`. To add more screenshot art: crop, clear the black background, run `prepare_sprite.py` (see R1). Never commit full phone screenshots (public repo), only the cropped art.
+- **Field record / account screen** and other ideas below are reference only.
 - **Field record / account screen (reference only, do not build yet).** A page that sums up a birder's year: a quarterly "field report", habitat pins, and life / year / sites counts. Ideas to borrow later if it is wanted: a Year-in-review view built from encounters (year list, life list, sites visited, habitat mix), shared as an image or file rather than emailed (the app has no server, so no account emails). Revisit after B4 and Phase D when there is real data to show.
 
 ---
