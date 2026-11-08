@@ -65,6 +65,8 @@ Rarities (T9.2, 8 Nov): `/data/obs/geo/recent/notable?lat&lng&dist=50&back=14&de
 
 Site-to-site matrix (F1, 8 Nov, refresh run 42490902428): one ORS matrix request per region with the 40 sites that have the most Starter Dex species reported, as both sources and destinations (omitting `sources` and `destinations` means all-to-all), `metrics: ['duration']`. 1,560 of 1,560 off-diagonal drive times came back known in both locations, no nulls; the request counted as one against the daily 500 (497 left after the whole refresh of 164 eBird calls and 4 ORS calls, 89 s). Published as optional `between: { ids, s }` (seconds, null = unknown, diagonal 0) and validated against the region's sites.
 
+Report history (P1, 8 Nov, refresh run 42504601548): `.cache/bq-data/history.json` (cache only, never published) remembers each report's date and time per site and species for 30 days. First run: 173 sites, 7,315 species-site pairs, 320 KB. eBird calls did not change (164 eBird + 4 ORS, 83 s). Reports gained optional `days` (bitmask, bit 0 = generated day) and `bands`; regions gained optional `historySince`. It starts empty on 8 Nov and fills over the first 14 days, so the app must say "about N of 14 days" and "since 8 Nov". A checklist submitted late, after a newer one for the same species and site, is missed.
+
 Still unverified: eBird hotspot cap on `geo` (900 may or may not be a limit), whether eBird returns more than 14 days for `back`, and eBird quota in practice.
 
 ## Working rules
