@@ -75,3 +75,24 @@ export const openedKeysOf = (docs: readonly GameDoc[]): Set<string> => {
   const d = docs.find(isOpenedDoc)
   return new Set(d?.keys ?? [])
 }
+
+const CallPickSchema = z.strictObject({ key: z.string().regex(SPECIES_ID).max(80), name: z.string().min(1).max(80), pts: z.number().int().min(1).max(4) })
+/** The full Call it record (P11). Points are stored with the call, so later data cannot change them. */
+export const CallRecordSchema = z.strictObject({
+  id: z.string().regex(/^call:.+/).max(80),
+  wardenId: z.string().min(1).max(80),
+  siteId: z.string().min(1).max(40),
+  madeAt: z.string().min(10).max(40),
+  expiresOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  player: z.array(CallPickSchema).min(1).max(5),
+  warden: z.array(CallPickSchema).max(5),
+})
+export type CallRecord = z.infer<typeof CallRecordSchema>
+export type CallPick = z.infer<typeof CallPickSchema>
+
+/** A stored game document as a full Call it record, or null when it is not one (or is damaged). */
+export function asCallRecord(doc: GameDoc | undefined): CallRecord | null {
+  if (!doc || !doc.id.startsWith('call:')) return null
+  const p = CallRecordSchema.safeParse(doc)
+  return p.success ? p.data : null
+}

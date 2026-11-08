@@ -51,7 +51,9 @@ export interface BadgeReport {
 export interface BadgeInput {
   encounters: readonly Encounter[]
   wardens: readonly WardenLike[]
-  /** wardenId -> date of the duel win (prefs `duelWins`, set in E4). */
+  /** wardenId -> date of your first Call it win against her (`callWinsOf`, P11). Gold needs silver plus one of these. */
+  callWins?: Readonly<Record<string, string>>
+  /** Old duel wins, kept only so earlier tests still pass until E4 removes it. Counts the same as a Call it win. */
   duelWins?: Readonly<Record<string, string>>
   /** The calendar year for the year-list badges. */
   year: number
@@ -83,7 +85,7 @@ export function earnedBadges(input: BadgeInput): BadgeReport {
   // Sample history and the demo collection can show up in lists, but never earn anything.
   const real = input.demoCollection ? [] : input.encounters.filter((e) => e.source !== 'sample')
 
-  const wardens = input.wardens.map((w) => wardenBadge(w, real, input.duelWins))
+  const wardens = input.wardens.map((w) => wardenBadge(w, real, { ...input.duelWins, ...input.callWins }))
 
   const recorded = new Set(real.map((e) => e.speciesId))
   const sets = SETS.map((set) => {

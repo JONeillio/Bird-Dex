@@ -75,7 +75,7 @@ Joseph approved rows 1–4 of the design canvas (https://claude.ai/artifact/H8SA
 - [x] P8 Bird News engine (with sunrise and sunset worked out on the phone)
 - [x] P9 Warden jobs and trust
 - [x] P10 Warden notes (a weekly line in each warden's voice)
-- [ ] P11 Call it engine (replaces duels as the warden contest)
+- [x] P11 Call it engine (replaces duels as the warden contest)
 - [ ] P12 Folk: NPC data, home sites, meetings, challenges and keepsakes
 - [ ] P12b NPC dialogue scripts with expressions (Opus)
 - [ ] P13 Year race in share codes; storage persistence check
@@ -284,6 +284,8 @@ Why: Joseph approved the canvas rows for Explore (map, Bird News, Find a bird, P
 - `settle(call, encounters)`: the first real outing at `siteId` dated on or after the call's date and on or before `expiresOn`, whose sightings were added after `madeAt` (so importing an old checklist can't settle it). Your score = points of your calls you logged on that outing; the warden's score = points of her calls you logged on it (she is betting on what you'll find). Result `win | draw | loss | pending | expired`. Tie → draw.
 - Badge rule change: gold = silver plus a Call it win against that warden (replace `duelWins` in `badges.ts` with a `callWins` map derived from settled calls; keep the old option name working for tests until E4).
 - Tests: points frozen at calling, settling outing selection, import of an older checklist doesn't settle, expiry, sample ignored, gold rule.
+
+**P11 notes (built 8 Nov).** `src/domain/callIt.ts`: `callPoints`, `wardenCalls`, `makeCall`, `settle`, `callWinsOf`, `lifeNamesOf`, `reportKey`, `localDate`, `callDate`; `CallRecordSchema`/`asCallRecord` in `src/data/personal/game-schema.ts` (the stored `call:` document keeps its loose schema, so a damaged one is simply not a call). Decisions where the spec was open: (1) the warden's boss is a candidate only if reported on 3 or more days, so with no history yet she never bets on it; (2) birds are called and scored by `reportKey` (Dex id, else the `x-` id from the scientific name), so outside-Dex birds work; (3) `expiresOn` is the phone's local date plus 7, and the call's date is worked back from it, so no extra field is stored; (4) only sightings added after `madeAt` count, but an eBird import added later and dated inside the window does settle it; (5) a 0-0 or level score is a draw; (6) `makeCall` returns `{ok:false, reason}` for none, too many, repeat or unknown bird. Badge change: `earnedBadges` takes `callWins` (from `callWinsOf(docs, encounters, now)`); `duelWins` still works and counts the same until E4. Tests: `tests/call-it.test.ts`.
 
 **P12 Folk: NPCs.** Data: convert `research/art-drafts/npc-pack-v1/encounters.json` into `src/data/npcs.v1.json` (zod in `game.ts`): `id, name, role, habitats: SetId[], band: TimeBand | null, skill: 'ear' | 'count' | 'behaviour' | 'colour' | 'patience' | 'spot', opening, returnLine, keepsake, connections, challenge`. Keep the Erith settings only as flavour text for Location 2 (`placeNote`); NPCs must work in any region.
 - `challenge` kinds and pure checkers in `src/domain/folk.ts`: `pick-phrase` (choose the matching phrase among 3; until licensed recordings exist, phrases are drawn sonograms plus synthesised tones from `src/audio`), `count-flock` (seeded number of birds crossing, answer ±0), `pick-by-pose` (choose a species from 3 silhouettes), `match-swatch` (choose a colour among 4), `spot` (tap a target area index), `choice` (no wrong answer; stored as a choice). `checkAnswer(challenge, seed, answer)`.
