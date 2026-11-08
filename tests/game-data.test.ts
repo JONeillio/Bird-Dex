@@ -70,19 +70,20 @@ import { PERSONAS } from '../src/data/personas'
 import { shortSiteName } from '../src/domain/siteName'
 
 describe('Reserve Wardens data (D2)', () => {
-  it('has eight wardens in each of the two locations', () => {
+  it('has wardens in each area (12 South East London, 5 Southampton, 8 South Manchester)', () => {
     expect(WARDENS_VERSION).toBe('wardens-v1')
     expect(wardensFor('location-1')).toHaveLength(8)
-    expect(wardensFor('location-2')).toHaveLength(8)
+    expect(wardensFor('se-london')).toHaveLength(12)
+    expect(wardensFor('southampton')).toHaveLength(5)
     expect(wardensFor('demo-nowhere')).toEqual([])
   })
   it('uses each persona once per location and finds a warden by its id', () => {
-    for (const r of ['location-1', 'location-2']) {
+    for (const r of ['location-1', 'se-london', 'southampton']) {
       const ps = wardensFor(r).map((w) => w.persona)
       expect(new Set(ps).size).toBe(ps.length)
     }
     expect(wardenById('maud-location-1')?.persona).toBe('maud')
-    expect(wardenById('maud-location-2')?.siteId).not.toBe(wardenById('maud-location-1')?.siteId)
+    expect(wardenById('maud-se-london')?.siteId).not.toBe(wardenById('maud-location-1')?.siteId)
     expect(wardenById('nobody')).toBeUndefined()
   })
   it('every persona has a name and a greeting in plain British English', () => {

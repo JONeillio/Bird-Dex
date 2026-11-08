@@ -2,6 +2,316 @@
   "schema": 1,
   "version": "wardens-v1",
   "locations": {
+    "se-london": [
+      {
+        "id": "maud-se-london",
+        "persona": "maud",
+        "siteId": "L1000253",
+        "siteName": "Rainham Marshes",
+        "habitat": "wetland",
+        "signature": [
+          "barn-swallow",
+          "common-sandpiper",
+          "common-redshank",
+          "common-shelduck",
+          "water-rail",
+          "common-snipe",
+          "reed-bunting",
+          "common-kingfisher"
+        ],
+        "boss": "barn-swallow"
+      },
+      {
+        "id": "bev-se-london",
+        "persona": "bev",
+        "siteId": "L34430360",
+        "siteName": "Dartford Gravel Pits",
+        "habitat": "coast",
+        "signature": [
+          "great-cormorant",
+          "herring-gull",
+          "black-headed-gull",
+          "gadwall",
+          "great-crested-grebe",
+          "tufted-duck",
+          "mute-swan",
+          "eurasian-coot"
+        ],
+        "boss": "gadwall"
+      },
+      {
+        "id": "rowan-se-london",
+        "persona": "rowan",
+        "siteId": "L8895020",
+        "siteName": "Brockwell Park",
+        "habitat": "woodland",
+        "signature": [
+          "brambling",
+          "mistle-thrush",
+          "coal-tit",
+          "goldcrest",
+          "song-thrush",
+          "eurasian-jay",
+          "great-spotted-woodpecker",
+          "common-chaffinch"
+        ],
+        "boss": "brambling"
+      },
+      {
+        "id": "harold-se-london",
+        "persona": "harold",
+        "siteId": "L3341477",
+        "siteName": "Crossness",
+        "habitat": "farmland-upland",
+        "signature": [
+          "eurasian-curlew",
+          "common-snipe",
+          "northern-lapwing",
+          "european-stonechat",
+          "european-goldfinch",
+          "common-wood-pigeon",
+          "eurasian-magpie",
+          "carrion-crow"
+        ],
+        "boss": "eurasian-curlew"
+      },
+      {
+        "id": "pat-se-london",
+        "persona": "pat",
+        "siteId": "L2987472",
+        "siteName": "Weald Park",
+        "habitat": "garden",
+        "signature": [
+          "eurasian-siskin",
+          "eurasian-nuthatch",
+          "coal-tit",
+          "european-greenfinch",
+          "fieldfare",
+          "house-sparrow",
+          "song-thrush",
+          "redwing"
+        ],
+        "boss": "eurasian-siskin"
+      },
+      {
+        "id": "reg-se-london",
+        "persona": "reg",
+        "siteId": "L1367067",
+        "siteName": "Sevenoaks Lakes",
+        "habitat": "wetland",
+        "signature": [
+          "water-rail",
+          "northern-lapwing",
+          "eurasian-wigeon",
+          "common-pochard",
+          "greylag-goose",
+          "gadwall",
+          "grey-wagtail",
+          "little-grebe"
+        ],
+        "boss": "water-rail"
+      },
+      {
+        "id": "fran-se-london",
+        "persona": "fran",
+        "siteId": "L3278538",
+        "siteName": "Victoria Park",
+        "habitat": "garden",
+        "signature": [
+          "mistle-thrush",
+          "coal-tit",
+          "house-sparrow",
+          "goldcrest",
+          "common-chiffchaff",
+          "song-thrush",
+          "redwing",
+          "eurasian-jay"
+        ],
+        "boss": "mistle-thrush"
+      },
+      {
+        "id": "tomasz-se-london",
+        "persona": "tomasz",
+        "siteId": "L2083779",
+        "siteName": "Walthamstow Wetlands",
+        "habitat": "wetland",
+        "signature": [
+          "common-goldeneye",
+          "common-sandpiper",
+          "goosander",
+          "water-rail",
+          "common-snipe",
+          "reed-bunting",
+          "common-kingfisher",
+          "northern-lapwing"
+        ],
+        "boss": "common-goldeneye"
+      },
+      {
+        "id": "agnes-se-london",
+        "persona": "agnes",
+        "siteId": "L10187906",
+        "siteName": "Canvey Point",
+        "habitat": "coast",
+        "signature": [
+          "eurasian-oystercatcher",
+          "common-redshank",
+          "common-shelduck",
+          "eurasian-curlew",
+          "little-egret",
+          "mew-gull",
+          "lesser-black-backed-gull",
+          "great-cormorant"
+        ],
+        "boss": "eurasian-oystercatcher"
+      },
+      {
+        "id": "sunita-se-london",
+        "persona": "sunita",
+        "siteId": "L8841233",
+        "siteName": "Totteridge Valley",
+        "habitat": "woodland",
+        "signature": [
+          "eurasian-bullfinch",
+          "tawny-owl",
+          "brambling",
+          "eurasian-blackcap",
+          "lesser-redpoll",
+          "eurasian-treecreeper",
+          "eurasian-siskin",
+          "eurasian-nuthatch"
+        ],
+        "boss": "eurasian-bullfinch"
+      },
+      {
+        "id": "fergus-se-london",
+        "persona": "fergus",
+        "siteId": "L933593",
+        "siteName": "Elmley Marshes",
+        "habitat": "farmland-upland",
+        "signature": [
+          "western-house-martin",
+          "western-barn-owl",
+          "eurasian-curlew",
+          "common-pheasant",
+          "common-snipe",
+          "rook",
+          "northern-lapwing",
+          "european-stonechat"
+        ],
+        "boss": "western-house-martin"
+      },
+      {
+        "id": "olu-se-london",
+        "persona": "olu",
+        "siteId": "L1006681",
+        "siteName": "Richmond Park",
+        "habitat": "garden",
+        "signature": [
+          "lesser-redpoll",
+          "eurasian-siskin",
+          "eurasian-nuthatch",
+          "mistle-thrush",
+          "coal-tit",
+          "eurasian-sparrowhawk",
+          "european-greenfinch",
+          "fieldfare"
+        ],
+        "boss": "lesser-redpoll"
+      }
+    ],
+    "southampton": [
+      {
+        "id": "maud-southampton",
+        "persona": "maud",
+        "siteId": "L6183980",
+        "siteName": "Fishlake Meadows",
+        "habitat": "wetland",
+        "signature": [
+          "common-pochard",
+          "lesser-black-backed-gull",
+          "tufted-duck",
+          "greylag-goose",
+          "reed-bunting",
+          "water-rail",
+          "common-snipe",
+          "gadwall"
+        ],
+        "boss": "common-pochard"
+      },
+      {
+        "id": "rowan-southampton",
+        "persona": "rowan",
+        "siteId": "L3175788",
+        "siteName": "Weston Shore and Parade",
+        "habitat": "woodland",
+        "signature": [
+          "mistle-thrush",
+          "eurasian-sparrowhawk",
+          "eurasian-nuthatch",
+          "stock-dove",
+          "eurasian-siskin",
+          "redwing",
+          "eurasian-green-woodpecker",
+          "common-chiffchaff"
+        ],
+        "boss": "mistle-thrush"
+      },
+      {
+        "id": "reg-southampton",
+        "persona": "reg",
+        "siteId": "L1327192",
+        "siteName": "Keyhaven and Pennington Marshes",
+        "habitat": "wetland",
+        "signature": [
+          "barn-swallow",
+          "lesser-black-backed-gull",
+          "tufted-duck",
+          "common-shelduck",
+          "greylag-goose",
+          "reed-bunting",
+          "water-rail",
+          "common-snipe"
+        ],
+        "boss": "barn-swallow"
+      },
+      {
+        "id": "olu-southampton",
+        "persona": "olu",
+        "siteId": "L30091416",
+        "siteName": "Bransbury Common",
+        "habitat": "night",
+        "signature": [
+          "tawny-owl",
+          "mistle-thrush",
+          "eurasian-bullfinch",
+          "eurasian-sparrowhawk",
+          "eurasian-nuthatch",
+          "eurasian-treecreeper",
+          "stock-dove",
+          "redwing"
+        ],
+        "boss": "tawny-owl"
+      },
+      {
+        "id": "harold-southampton",
+        "persona": "harold",
+        "siteId": "L28743923",
+        "siteName": "Calshot Spit",
+        "habitat": "farmland-upland",
+        "signature": [
+          "yellowhammer",
+          "red-kite",
+          "stock-dove",
+          "common-pheasant",
+          "eurasian-curlew",
+          "rook",
+          "skylark",
+          "common-linnet"
+        ],
+        "boss": "yellowhammer"
+      }
+    ],
     "location-1": [
       {
         "id": "maud-location-1",
@@ -146,152 +456,6 @@
           "common-snipe"
         ],
         "boss": "common-redshank"
-      }
-    ],
-    "location-2": [
-      {
-        "id": "maud-location-2",
-        "persona": "maud",
-        "siteId": "L15099684",
-        "siteName": "Rainham Marshes",
-        "habitat": "wetland",
-        "signature": [
-          "common-redshank",
-          "common-shelduck",
-          "water-rail",
-          "common-snipe",
-          "reed-bunting",
-          "common-kingfisher",
-          "common-pochard",
-          "eurasian-wigeon"
-        ],
-        "boss": "common-redshank"
-      },
-      {
-        "id": "olu-location-2",
-        "persona": "olu",
-        "siteId": "L10187880",
-        "siteName": "Wakering Stairs",
-        "habitat": "night",
-        "signature": [
-          "western-barn-owl",
-          "common-pheasant",
-          "rook",
-          "fieldfare",
-          "skylark",
-          "european-stonechat",
-          "northern-lapwing",
-          "greylag-goose"
-        ],
-        "boss": "western-barn-owl"
-      },
-      {
-        "id": "pat-location-2",
-        "persona": "pat",
-        "siteId": "L10822105",
-        "siteName": "Holmethorpe Sandpits",
-        "habitat": "garden",
-        "signature": [
-          "eurasian-blackcap",
-          "eurasian-nuthatch",
-          "lesser-redpoll",
-          "eurasian-siskin",
-          "mistle-thrush",
-          "eurasian-collared-dove",
-          "fieldfare",
-          "european-greenfinch"
-        ],
-        "boss": "eurasian-blackcap"
-      },
-      {
-        "id": "fran-location-2",
-        "persona": "fran",
-        "siteId": "L2083779",
-        "siteName": "Walthamstow Wetlands",
-        "habitat": "garden",
-        "signature": [
-          "coal-tit",
-          "eurasian-blackcap",
-          "lesser-redpoll",
-          "eurasian-siskin",
-          "mistle-thrush",
-          "eurasian-collared-dove",
-          "fieldfare",
-          "european-greenfinch"
-        ],
-        "boss": "coal-tit"
-      },
-      {
-        "id": "rowan-location-2",
-        "persona": "rowan",
-        "siteId": "L1006681",
-        "siteName": "Richmond Park",
-        "habitat": "garden",
-        "signature": [
-          "coal-tit",
-          "eurasian-nuthatch",
-          "lesser-redpoll",
-          "eurasian-siskin",
-          "mistle-thrush",
-          "fieldfare",
-          "european-greenfinch",
-          "eurasian-sparrowhawk"
-        ],
-        "boss": "coal-tit"
-      },
-      {
-        "id": "agnes-location-2",
-        "persona": "agnes",
-        "siteId": "L933099",
-        "siteName": "Beddington Farmlands",
-        "habitat": "garden",
-        "signature": [
-          "coal-tit",
-          "eurasian-blackcap",
-          "eurasian-nuthatch",
-          "lesser-redpoll",
-          "eurasian-siskin",
-          "fieldfare",
-          "european-greenfinch",
-          "eurasian-sparrowhawk"
-        ],
-        "boss": "coal-tit"
-      },
-      {
-        "id": "reg-location-2",
-        "persona": "reg",
-        "siteId": "L20781705",
-        "siteName": "East Tilbury River and Marshes",
-        "habitat": "wetland",
-        "signature": [
-          "eurasian-oystercatcher",
-          "common-redshank",
-          "common-shelduck",
-          "water-rail",
-          "common-snipe",
-          "reed-bunting",
-          "common-kingfisher",
-          "common-pochard"
-        ],
-        "boss": "eurasian-oystercatcher"
-      },
-      {
-        "id": "bev-location-2",
-        "persona": "bev",
-        "siteId": "L1267548",
-        "siteName": "Amwell HMWT",
-        "habitat": "wetland",
-        "signature": [
-          "eurasian-oystercatcher",
-          "water-rail",
-          "common-snipe",
-          "reed-bunting",
-          "common-kingfisher",
-          "common-pochard",
-          "eurasian-wigeon",
-          "grey-wagtail"
-        ],
-        "boss": "eurasian-oystercatcher"
       }
     ]
   }
