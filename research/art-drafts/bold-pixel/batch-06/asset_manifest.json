@@ -1,0 +1,45 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 06",
+  "assets": [
+    {
+      "id": "eurasian-sparrowhawk",
+      "file": "bird_eurasian-sparrowhawk_bold_pixel_v1.png",
+      "role": "Perched adult male with slate-blue upperparts, orange cheeks, fine orange breast barring and a long barred tail."
+    },
+    {
+      "id": "red-kite",
+      "file": "bird_red-kite_bold_pixel_v1.png",
+      "role": "Adult in flight with a deeply forked rufous tail, pale streaked head and white panels inside black wingtips."
+    },
+    {
+      "id": "peregrine-falcon",
+      "file": "bird_peregrine-falcon_bold_pixel_v1.png",
+      "role": "Upright adult with slate-blue back, black hood and moustache, barred pale belly, yellow eye-ring and feet."
+    },
+    {
+      "id": "western-barn-owl",
+      "file": "bird_western-barn-owl_bold_pixel_v1.png",
+      "role": "Adult with a white heart-shaped facial disc and underparts, dark eyes and golden-buff and grey upperparts."
+    },
+    {
+      "id": "tawny-owl",
+      "file": "bird_tawny-owl_bold_pixel_v1.png",
+      "role": "Adult of the rich brown form with a rounded head, mottled brown plumage and large dark eyes."
+    },
+    {
+      "id": "little-owl",
+      "file": "bird_little-owl_bold_pixel_v1.png",
+      "role": "Adult with a low flat head, white-spotted brown back, yellow eyes and strong white eyebrows."
+    },
+    {
+      "id": "rook",
+      "file": "bird_rook_bold_pixel_v1.png",
+      "role": "Adult with purple-glossed black plumage, bare pale bill base, peaked crown and shaggy leg feathers."
+    },
+    {
+      "id": "stock-dove",
+      "file": "bird_stock-dove_bold_pixel_v1.png",
+      "role": "Adult with blue-grey plumage, green neck gloss, pink breast, dark eye and two short black wing bars."
+    }
+  ]
+}

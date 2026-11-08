@@ -1,0 +1,50 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 07",
+  "assets": [
+    {
+      "id": "eurasian-nuthatch",
+      "file": "bird_eurasian-nuthatch_bold_pixel_v1.png",
+      "role": "Adult descending head-first, with blue-grey upperparts, a black eye stripe and orange-buff underparts."
+    },
+    {
+      "id": "eurasian-treecreeper",
+      "file": "bird_eurasian-treecreeper_bold_pixel_v1.png",
+      "role": "Clinging adult with streaked brown upperparts, silvery-white underparts, a fine down-curved bill and stiff tail."
+    },
+    {
+      "id": "eurasian-green-woodpecker",
+      "file": "bird_eurasian-green-woodpecker_bold_pixel_v1.png",
+      "role": "Adult male with green back, yellow rump, red crown and a red-centred black moustache."
+    },
+    {
+      "id": "eurasian-bullfinch",
+      "file": "bird_eurasian-bullfinch_bold_pixel_v1.png",
+      "role": "Adult male with rose-pink breast, black cap, grey back, white rump and pale wing bar."
+    },
+    {
+      "id": "eurasian-siskin",
+      "file": "bird_eurasian-siskin_bold_pixel_v1.png",
+      "role": "Adult male with streaked yellow-green plumage, black cap and bib, and yellow wing bars."
+    },
+    {
+      "id": "lesser-redpoll",
+      "file": "bird_lesser-redpoll_bold_pixel_v1.png",
+      "role": "Adult with streaked brown plumage, a red forehead, small black bib, pink breast wash and buff wing bar."
+    },
+    {
+      "id": "brambling",
+      "file": "bird_brambling_bold_pixel_v1.png",
+      "role": "Winter male with a mottled dark head, orange breast and shoulders, and dark-spotted flanks above a white belly."
+    },
+    {
+      "id": "mistle-thrush",
+      "file": "bird_mistle-thrush_bold_pixel_v1.png",
+      "role": "Upright adult with pale grey-brown upperparts and bold round black spots on white underparts."
+    },
+    {
+      "id": "common-pheasant",
+      "file": "bird_common-pheasant_bold_pixel_v1.png",
+      "role": "Adult male with copper-gold plumage, a dark green head, red wattles, white neck ring and long barred tail."
+    }
+  ]
+}

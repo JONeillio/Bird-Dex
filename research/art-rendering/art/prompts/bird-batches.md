@@ -120,6 +120,8 @@ Batch 05. Nine birds:
 
 ### Batch 06: raptors, owls and look-alikes
 
+**Status: done and in the app 8 Nov 2026** (all 8 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-06/`).
+
 ```
 Batch 06. Eight birds:
 1. eurasian-sparrowhawk (Sparrowhawk), male: slate-blue back, fine orange barring on the underparts, orange cheeks, yellow eye, long yellow legs, long barred tail, perched.
@@ -133,6 +135,8 @@ Batch 06. Eight birds:
 ```
 
 ### Batch 07: woodland
+
+**Status: done and in the app 8 Nov 2026** (all 9 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-07/`).
 
 ```
 Batch 07. Nine birds:
@@ -149,6 +153,8 @@ Batch 07. Nine birds:
 
 ### Batch 08: farmland, heath and reeds
 
+**Status: done and in the app 8 Nov 2026** (all 9 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-08/`).
+
 ```
 Batch 08. Nine birds:
 1. skylark (Skylark): streaky brown, short crest, pale stripe over the eye, white outer tail feathers.
@@ -163,6 +169,8 @@ Batch 08. Nine birds:
 ```
 
 ### Batch 09: specialists and winter specials
+
+**Status: done and in the app 8 Nov 2026** (all 8 checked against the field marks below; masters in `research/art-drafts/bold-pixel/batch-09/`).
 
 ```
 Batch 09. Eight birds:

@@ -1,0 +1,50 @@
+{
+  "pack": "Bird-Dex Bold Pixel batch 08",
+  "assets": [
+    {
+      "id": "skylark",
+      "file": "bird_skylark_bold_pixel_v1.png",
+      "role": "Adult with streaked brown plumage, a short crest, pale eyebrow and white outer tail feathers."
+    },
+    {
+      "id": "meadow-pipit",
+      "file": "bird_meadow-pipit_bold_pixel_v1.png",
+      "role": "Adult with olive-brown upperparts, fine bill, streaked breast and pinkish legs."
+    },
+    {
+      "id": "common-linnet",
+      "file": "bird_common-linnet_bold_pixel_v1.png",
+      "role": "Breeding male with crimson forehead and breast, grey head, chestnut back and white wing and tail flashes."
+    },
+    {
+      "id": "yellowhammer",
+      "file": "bird_yellowhammer_bold_pixel_v1.png",
+      "role": "Adult male with yellow head and underparts, chestnut rump, streaked brown back and rusty flank streaks."
+    },
+    {
+      "id": "european-stonechat",
+      "file": "bird_european-stonechat_bold_pixel_v1.png",
+      "role": "Adult male with black head, white half-collar, orange-red breast and a small white wing patch."
+    },
+    {
+      "id": "eurasian-tree-sparrow",
+      "file": "bird_eurasian-tree-sparrow_bold_pixel_v1.png",
+      "role": "Adult with chestnut crown, white cheeks marked by a black spot and a small black bib."
+    },
+    {
+      "id": "grey-partridge",
+      "file": "bird_grey-partridge_bold_pixel_v1.png",
+      "role": "Adult with orange face, grey breast, chestnut belly horseshoe and chestnut-barred flanks."
+    },
+    {
+      "id": "red-legged-partridge",
+      "file": "bird_red-legged-partridge_bold_pixel_v1.png",
+      "role": "Adult with red bill and legs, black-edged white throat, blue-grey breast and boldly barred flanks."
+    },
+    {
+      "id": "reed-bunting",
+      "file": "bird_reed-bunting_bold_pixel_v1.png",
+      "role": "Breeding male with black head and bib, white moustache and collar, and streaked brown upperparts."
+    }
+  ]
+}

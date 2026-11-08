@@ -4,7 +4,7 @@ Everything here is a converted copy of a draft in `research/art-drafts/`. Show s
 
 | Folder | Contents | Size | Lookup | Source drafts |
 | --- | --- | --- | --- | --- |
-| `birds/<id>/` | bird portraits (59 real after batch 05, rest generated in code) | 64x64 | `src/art/portraits.ts`, `draft-portraits.json` | `research/art-drafts/bold-pixel/` (anchors, `expansion-v1/`, `batch-01/`, `batch-02/`, `batch-03/` to `batch-05/` ...) |
+| `birds/<id>/` | bird portraits (93 real after batch 09, rest generated in code) | 64x64 | `src/art/portraits.ts`, `draft-portraits.json` | `research/art-drafts/bold-pixel/` (anchors, `expansion-v1/`, `batch-01/`, `batch-02/`, `batch-03/` to `batch-09/` ...) |
 | `map/{markers,scenery,patterns}/` | pins, flag, trees, bushes, reeds, grass tile | native | `src/art/mapAssets.ts` | `.../bold-pixel/expansion-v1/` |
 | `wardens/`, `scenes/` | All 12 Reserve Warden portraits + unmet silhouette; two marsh scenes | 96 and @2x 192 | `src/art/wardens.ts` | `.../game-art/screenshot-crops/` (4 wardens, scenes) and `.../game-art/set-6-wardens/` (8 wardens, silhouette) |
 | `npcs/` | 12 story NPCs x 3 dialogue portraits (`<id>`, `<id>_talk`, `<id>_delight`) | 256 and @2x 512 | `src/art/npcs.ts` (`npcArt`) | `research/art-drafts/npc-pack-v1/` and `.../game-art/set-c-portrait-expressions/` |
