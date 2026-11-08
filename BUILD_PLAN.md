@@ -405,9 +405,13 @@ Lewis is the most experienced birder testing the app and is based in **Location 
 
 **T9.3 [S] His history and a list that never runs out.** Pull M6 forward (eBird CSV import, idempotent, preview). Add **Year list** mode (resets 1 Jan; "first of the year" reveal) and a **full UK list** beyond the Starter Dex, using eBird taxonomy for birds outside it. Check with his first real export whether Merlin-only saves are in it. Ask Lewis for: his eBird export, and whether he logs in eBird, Merlin or BirdTrack.
 
-**T9.4 [S] Gym badges.** Client-side only, derived from encounters (never from public reports, demo never counts). Each location gets about 8 "gyms": well-known sites, each with a short list of signature birds and a boss bird; log enough of them at that site → badge. Plus set badges (complete Wetland, Raptors…) and year-list milestones (50/100/150). A Badges case screen in the style of the board.
+**T9.4 [S] Field Bond, Reserve Wardens and badges.** Design in `GAME_DESIGN.md` (sections 1–3). First Field Bond: ranks that grow from repeat sightings (new site, new month, new time band, heard-only, first of the year; one Bond per species per site per day), built alongside T9.3 so imports arrive ranked. Then about 8 Reserve Wardens per location (`pipeline/config/wardens.json`: real site, signature list, boss bird; live team = recent reports) and a Badge case. Badge v1 = log 5 signature birds including the boss at that site. Encounters gain optional `siteId` and `time`. Derived on the phone only; public reports and demo never count.
 
 **T9.5 [S] Route planner.** Pick targets (or "most new birds") and a time budget; the Action precomputes an ORS site-to-site matrix for each location's top sites (one request; check the 3,500-route limit); the phone picks an order greedily and opens Google Maps with waypoints (no key). Label it as a plan from recent reports, not a guarantee.
+
+**T9.6 [S] Field Duels** (`GAME_DESIGN.md` section 4): best of 5 against a warden's live team; condition cards from the site and moment; score = trait fit + your affinity from sightings + rank. Needs Starter Dex v2 traits (`size`, `diet`, `status`, `active`).
+
+**T9.7 [C] Rivals** (`GAME_DESIGN.md` section 5): squad share codes/QR and a monthly patch race. No server.
 
 ### Backlog (good ideas, not v1)
 
@@ -459,4 +463,4 @@ Year list and "first of the year" badges; seasonal sets ("Winter visitors" shown
 | M6 Import | not started | |
 | M7 Real art | started | Style locked: Bold Pixel (7 Nov). 12 bird portraits converted to 64×64 and in the app (3 anchors + 9 from `expansion-v1/`), plus converted markers, scenery and a grass tile in `public/assets/map/` (`src/art/mapAssets.ts`). All still drafts: individual approval pending. Missing from the batch: water and woodland textures. 92 birds still use generated placeholders. |
 | M8 Polish + hand-over | not started | |
-| M9 Lewis's feedback | started 8 Nov 2026 | T9.1 Find a bird and T9.2 rarities built. Next: T9.3 import + year list, T9.4 gym badges, T9.5 route planner. |
+| M9 Lewis's feedback | started 8 Nov 2026 | T9.1 Find a bird and T9.2 rarities built. Game design agreed with Joseph (`GAME_DESIGN.md`). Next: T9.3 import + year list with Field Bond, T9.4 wardens and badges, T9.5 route planner, T9.6 duels, T9.7 rivals. |

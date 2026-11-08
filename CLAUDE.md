@@ -8,6 +8,7 @@ Owner: Joseph (manages everything from his phone via the Claude app). Plain Engl
 ## Where things are
 - `BUILD_PLAN.md`: **start here when building.** Design principles from the wireframe, architecture, JSON contracts, milestones M0–M8 with tickets tagged [C] (cheap model fine) or [S] (use a stronger model), gotchas and the status table. Update its status table at the end of each milestone.
 - `PLAN.md`: the strategy and settled decisions behind it.
+- `GAME_DESIGN.md`: the game layer agreed with Joseph on 8 Nov: Field Bond (repeat sightings grow ranks), Reserve Wardens (badges at real sites), Field Duels (condition-card battles scored from traits and your own sightings) and Rivals. Our own mechanics: don't borrow Pokémon terms (gym, trainer, HP, types).
 - `research/BirdQuest_Build_Handoff.md`: the active consolidated brief (terms-of-use findings, architecture, acceptance criteria). Takes precedence over anything older.
 - `research/art-rendering/`: art contract, asset manifest (22 planned, 0 made), map theme rules, agent briefs, read-only validator. Specification only: not a renderer.
 - `skills/`: copied from JONeillio/Evens-model on 7 Nov 2026. Read the relevant one before starting that kind of work (`free-api-budgeting`, `phone-first-pwa`, `github-pages-data-pipeline`, `validate-model-before-trusting`). Hosting is decided: GitHub Pages + scheduled GitHub Action (PLAN.md D1), so `github-pages-data-pipeline` applies in full. Only publish compact derived data, never raw eBird responses.
