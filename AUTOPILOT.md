@@ -54,7 +54,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] N4 Engine readout page `#/dev/engine` (plain text, no styling work)
 - [x] D1 Site character
 - [x] D3 Badge engine (set and year badges now; warden tiers work once D2 exists)
-- [ ] E1 Duel engine
+- [x] E1 Duel engine
 - [ ] F1 Pipeline: site-to-site drive matrix (+1 ORS request per region per refresh)
 - [ ] F2 Route planner engine
 - [ ] D2 Warden draft task and wardens.v1.json
@@ -276,6 +276,8 @@ Screens: `npm run screens -- "#/badges" "#/map >> click:View spot"`.
 - **Rounds**: higher score wins the round; equal scores share it (no point). Best of 5 by rounds won; equal → draw.
 - **Player squad**: up to 6 recorded Starter Dex species (prefs `squad: string[]`; default = top 6 by Bond points). Needs at least 3 to play.
 Tests: fit per rule; affinity counting and caps; draw is deterministic for the same seed and valid for every month; warden holds the boss back; a full scripted duel; ties.
+
+**E1 notes (built 8 Nov).** `src/domain/duel.ts`. The engine is stateless: `setupWardenDuel(...)` returns a `Duel` (or null when fewer than three recorded Dex birds are in your squad); `playRound(duel, results, playerId)` returns the next `RoundResult` (the warden answers by its rule via `chooseOpponent`); `outcome(duel, results)` gives win, lose or draw once every round is played; `bestPlayerPick` is the default for skipping ahead. Choices made: `Duel.rounds` is min(5, cards, your birds, their birds), so a warden with a short live team plays fewer rounds, and the boss counts as "last round" on the final round actually played; a tied round is shared (AUTOPILOT wins over GAME_DESIGN's scarcity tie-break); warden birds have no Bond point; `fitBreakdown` returns the matched rules so E3 can write the flavour line. Rivals (G2) reuse `buildDuel`, `drawCards` (with `siteSets: null`) and `Fighter`s built from coded affinities. Everything is derived from the encounters passed in, sample history included (sample may drive duels, never badges).
 
 **E2 Squad screen** `#/squad` (from Badge case and the warden panel): your recorded birds sorted by Bond, tap to add or remove (max 6), each showing rank and its two best cards for today (card name + score). "Pick for me" = top 6 by Bond.
 
