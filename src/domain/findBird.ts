@@ -3,6 +3,8 @@
 // so a search can find any bird in the reports, not only the 104 in the Dex.
 import type { RegionData, Report, Site } from '../data/published-schema'
 import { driveMinutes } from './ranking'
+import { bestBand, daysReported } from './reliability'
+import type { TimeBand } from './time'
 
 export const birdKey = (r: Pick<Report, 'speciesId' | 'ebirdCode'>): string => r.speciesId ?? `ebird:${r.ebirdCode}`
 
@@ -24,6 +26,10 @@ export interface Sighting {
   site: Site
   report: Report
   minutes: number | null
+  /** Days of the last 14 it was reported here (null = no history yet). Set by whereSeen. */
+  days?: number | null
+  /** The part of the day most of its reports here come in, when clear. Set by whereSeen. */
+  bestBand?: TimeBand | null
 }
 
 /** Every reported bird in the region, one entry each. */
@@ -71,15 +77,22 @@ export function searchBirds(index: readonly BirdHit[], query: string, dexNames: 
     .map((x) => x.h)
 }
 
-/** Where one bird was reported: newest first, then nearest; unknown drive times last among equals. */
+/**
+ * Where one bird was reported. With report history: the places it turns up on most days first, then newest, then nearest.
+ * Without any history yet: newest first, then nearest. Unknown drive times come last among equals.
+ */
 export function whereSeen(region: RegionData, startId: string, key: string): Sighting[] {
   const drive = region.drive.byStart[startId] ?? {}
   const out: Sighting[] = []
   for (const site of region.sites) {
     const report = site.reports.find((r) => birdKey(r) === key)
-    if (report) out.push({ site, report, minutes: driveMinutes(drive[site.id]) })
+    if (report) out.push({ site, report, minutes: driveMinutes(drive[site.id]), days: daysReported(report.days), bestBand: bestBand(report.bands) })
   }
-  return out.sort((a, b) => b.report.obsDate.localeCompare(a.report.obsDate) || (a.minutes ?? 1e9) - (b.minutes ?? 1e9))
+  const anyHistory = out.some((x) => x.days !== null)
+  return out.sort(
+    (a, b) =>
+      (anyHistory ? (b.days ?? 0) - (a.days ?? 0) : 0) || b.report.obsDate.localeCompare(a.report.obsDate) || (a.minutes ?? 1e9) - (b.minutes ?? 1e9),
+  )
 }
 
 /** Rarities flagged by eBird in the window, newest first, one row per bird per site. */
