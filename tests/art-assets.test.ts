@@ -18,7 +18,12 @@ describe('portrait art files', () => {
       expect(existsSync(path), `${path} missing`).toBe(true)
       expect(pngSize(path)).toEqual([64, 64])
     }
-    expect(DRAFT_PORTRAITS.size).toBe(12)
+    expect(DRAFT_PORTRAITS.size).toBeGreaterThanOrEqual(12)
+  })
+  it('the portrait list is a JSON file of unique Dex ids that the app reads as it is', () => {
+    const listed = JSON.parse(readFileSync('src/art/draft-portraits.json', 'utf8')) as string[]
+    expect(new Set(listed).size).toBe(listed.length)
+    expect([...DRAFT_PORTRAITS].sort()).toEqual([...listed].sort())
   })
   it('map markers and scenery exist at their registered sizes', async () => {
     const { MAP_ART } = await import('../src/art/mapAssets')

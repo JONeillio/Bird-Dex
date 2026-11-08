@@ -42,7 +42,7 @@ Art is done elsewhere (Joseph sends briefs to ChatGPT/Astra: `research/art-rende
 - [x] A1 Encounter fields: site, time, outside-Dex birds, source
 - [x] A2 Log sheet fills site and time; edit an existing sighting
 - [x] A3 Game data loaders (traits, duel cards) with zod
-- [ ] A4 Art intake script and data-driven portrait list
+- [x] A4 Art intake script and data-driven portrait list
 
 **Phase B: Lewis's history and lists**
 - [ ] B1 eBird CSV import (preview, idempotent, outside-Dex, needs-review)
@@ -261,7 +261,7 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 
 ### R1 Art intake (whenever Joseph uploads a ZIP)
 
-- Bird batch: `python scripts/art/import_batch.py <zip> batch-NN`, then `npm run build && npm run screens -- "#/dev/art"`, open the screenshots and check each new bird at 64 px and as a silhouette. If a bird looks wrong for its species (wrong colours or missing a field mark listed in `bird-batches.md`), keep the old placeholder for that id and tell Joseph which ones to redo and why. Commit `AP R1: bird batch NN`.
+- Bird batch: `python3 -I scripts/art/import_batch.py <zip> batch-NN` (add `--dry-run` first if unsure), then `npm run build && npm run screens -- "#/dev/art"`, open the screenshots and check each new bird at 64 px and as a silhouette. If a bird looks wrong for its species (wrong colours or missing a field mark listed in `bird-batches.md`), keep the old placeholder for that id and tell Joseph which ones to redo and why. Commit `AP R1: bird batch NN`.
 - Game art set: follow "Notes for Claude when a set arrives" at the end of `game-art-brief.md`; swap fallbacks for the art via the lookups named in the tickets above.
 
 ---

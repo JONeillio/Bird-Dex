@@ -1,17 +1,15 @@
 import type { DexSpecies } from '../data/schema'
 import { placeholderDataUrl } from './birds/placeholder'
+import draftIds from './draft-portraits.json'
 
 /**
  * Portrait loader: a real portrait if one exists, otherwise the generated placeholder.
- * These twelve are Bold Pixel drafts (style approved 7 Nov 2026; individual art not yet signed off).
- * Masters: research/art-drafts/bold-pixel/ (first three) and .../expansion-v1/ (other nine).
- * Move an id out of this list only when the manifest says approved/removed.
+ * The ids are listed in draft-portraits.json (kept up to date by scripts/art/import_batch.py). All are Bold Pixel
+ * drafts (style approved 7 Nov 2026; individual art not yet signed off).
+ * Masters: research/art-drafts/bold-pixel/ (first three), .../expansion-v1/ (next nine), then one folder per batch.
+ * Remove an id only when the manifest says approved/removed.
  */
-export const DRAFT_PORTRAITS = new Set([
-  'european-robin', 'common-kingfisher', 'grey-heron',
-  'eurasian-blue-tit', 'great-tit', 'eurasian-blackbird', 'mallard', 'mute-swan', 'eurasian-wren',
-  'great-spotted-woodpecker', 'common-kestrel', 'common-buzzard',
-])
+export const DRAFT_PORTRAITS: ReadonlySet<string> = new Set<string>(draftIds)
 
 export interface PortraitSource {
   src: string
