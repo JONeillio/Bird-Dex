@@ -1,0 +1,301 @@
+{
+  "pack": "Bird-Dex Dot Lau character art",
+  "version": "1.0",
+  "character": "Dot Lau",
+  "default": "dot-lau-talking-96.png",
+  "celebration": "dot-lau-delighted-96.png",
+  "reduced_motion": "dot-lau-sketching-96.png",
+  "sketch_animation": {
+    "sheet": "dot-lau-sketching-cels-96.png",
+    "cell": [
+      96,
+      96
+    ],
+    "sequence": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "durationMs": [
+      700,
+      260,
+      180,
+      540
+    ]
+  },
+  "assets": [
+    {
+      "file": "dot-lau-archive-casting-board.png",
+      "role": "archive",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "35451e7726fec1f3b5088655796c31c9d6ac4de5541228b761119b799e771e94"
+    },
+    {
+      "file": "dot-lau-archive-casting-detail.png",
+      "role": "archive",
+      "size": [
+        627,
+        627
+      ],
+      "frames": 1,
+      "sha256": "d1ebe6daec17b2b258f5fd2cdd2a0b073dee7f18c9e45ffcdec9bbcfecc10335"
+    },
+    {
+      "file": "dot-lau-archive-early-device-concept.png",
+      "role": "archive",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "db979fafa9971f09959671c873e0d6ea55123d95371730f2ab5b8dc90e7e5ed6"
+    },
+    {
+      "file": "dot-lau-archive-wide-laugh-96.png",
+      "role": "archive",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "541f7550c13f60ec830a873ce30009cc29415dc82897e0049f8bb84722dd8190"
+    },
+    {
+      "file": "dot-lau-archive-wide-laugh-source.png",
+      "role": "archive",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "7565d99e2d85b6badbc412825bb3a70868026641cc82f1d381475b14c88d4616"
+    },
+    {
+      "file": "dot-lau-avatar-32.png",
+      "role": "runtime",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "sha256": "c8bafafe91df4da522746626413a0760ac516b24a2c2dba3f02e876954003ada",
+      "state": "avatar",
+      "use": "Speech-box head icon"
+    },
+    {
+      "file": "dot-lau-delighted-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "982b80d4198e21242f455489618501663670acee59b7fc1d801945cddeb3ae29",
+      "state": "delighted",
+      "use": "Quiet closed-mouth celebration for a lifer"
+    },
+    {
+      "file": "dot-lau-explaining-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "a4c5510d9efeceda1d0a7917ebc70127eebe654b44b183d77d7245f257ea7af5",
+      "state": "explaining",
+      "use": "Showing the wren’s cocked tail"
+    },
+    {
+      "file": "dot-lau-missed-sighting-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "5c6adddb04387afdab6d5b703369d2a93dcc9fdb22236a77d5d5f8efded4f775",
+      "state": "missed-sighting",
+      "use": "Watching the bird leave"
+    },
+    {
+      "file": "dot-lau-pointing-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "172d678596961335ebe587e21a4e50c1d0bc4fcc5554ac9aea9035c839bd65d0",
+      "state": "pointing",
+      "use": "Directing the player to a sighting"
+    },
+    {
+      "file": "dot-lau-sketching-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "af0fa28d869da317800b7f34380f6a6999a4ce40ff5c3a9d3dcc60bef078ca57",
+      "state": "sketching",
+      "use": "Field journal idle and reduced-motion fallback"
+    },
+    {
+      "file": "dot-lau-sketching-cels-96.png",
+      "role": "runtime",
+      "size": [
+        192,
+        96
+      ],
+      "frames": 1,
+      "sha256": "45cf74d2315959d8647429c95defbe593abfd0c5f69fec16f19fdabbc37f873f",
+      "state": "sketching-cels",
+      "use": "Sketch animation frames"
+    },
+    {
+      "file": "dot-lau-sketching-loop-96.gif",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 4,
+      "sha256": "9b0da0dd4351f1947339026eb429198ae39569b73af7f6445852ac38d69933c5",
+      "state": "sketching-loop",
+      "use": "Sketch animation frames"
+    },
+    {
+      "file": "dot-lau-source-avatar.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "e375310c5dbc78d389ddda58622dd9d8185ed0ffdb3ff14f652d69cf8e070892"
+    },
+    {
+      "file": "dot-lau-source-explaining.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "ef6cbb8a8daa89b0fbf6ce01cf5caef0cc7e44c849e6a513a88ba3f329f5a39a"
+    },
+    {
+      "file": "dot-lau-source-missed-sighting.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "d1609aa35b8ca2ba57e86cbda055d6a09b81217b0011516c32e24889c2583976"
+    },
+    {
+      "file": "dot-lau-source-pointing.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "a731b02ffbab03677c4c963a8d48a0f0115c7be456eb65c92559a816e17af30d"
+    },
+    {
+      "file": "dot-lau-source-quiet-celebration.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "a8e70ab3ac267b0c7db8a663e84b3f2d75ed333a6b77eb36259bd8c3abad2ccc"
+    },
+    {
+      "file": "dot-lau-source-sketching-two-cels.png",
+      "role": "source",
+      "size": [
+        1774,
+        887
+      ],
+      "frames": 1,
+      "sha256": "b435094848fb6e87cdd4aa79deb5039802c3915e67c25bdc06874c06083faf5f"
+    },
+    {
+      "file": "dot-lau-source-sympathy.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "a9c8c7e57a299e9a24569b949db55ce5f9f078dc2fae1833896a0581c544e08b"
+    },
+    {
+      "file": "dot-lau-source-talking.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "efe353c122cc87c1d0fae405bc2e966bea750fb821abbfd64dae79b3e757a1fb"
+    },
+    {
+      "file": "dot-lau-source-thinking.png",
+      "role": "source",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 1,
+      "sha256": "2240f4be72f3a545fd8c0bf647baad66bc8bad36d948f10d313dd27a32470690"
+    },
+    {
+      "file": "dot-lau-sympathy-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "53032c0b66ed4dfea424995d932736af9ffb6338a8e252dfb24c6cfe939bd90d",
+      "state": "sympathy",
+      "use": "Reassurance after disappointment"
+    },
+    {
+      "file": "dot-lau-talking-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "d8501cd8932cb2820428eaa56e313414cff3466a6a01d03cb17372354ab71889",
+      "state": "talking",
+      "use": "Opening a conversation"
+    },
+    {
+      "file": "dot-lau-thinking-96.png",
+      "role": "runtime",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "sha256": "1efb48a6830f9114c27fc335fd8777ae6c6befca93a5300877585d1d06d10de9",
+      "state": "thinking",
+      "use": "Considering a field mark"
+    }
+  ]
+}

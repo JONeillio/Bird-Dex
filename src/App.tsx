@@ -27,6 +27,8 @@ import NpcScreen from './features/folk/NpcScreen'
 import PlanScreen from './features/plan/PlanScreen'
 import FindScreen from './features/find/FindScreen'
 import { DevDialogue } from './features/dev/DevDialogue'
+import { TourOverlay } from './features/tour/TourOverlay'
+import { shouldAutoStart, useTour } from './state/tour'
 import type { IconName } from './art/icons'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
@@ -82,7 +84,7 @@ function Screen({ route }: { route: Route }) {
     case 'settings':
       return <SettingsScreen />
     case 'dev':
-      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : route.page === 'dialogue' ? <DevDialogue /> : <DevUi />
+      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : route.page === 'dialogue' || route.page === 'dot' ? <DevDialogue /> : <DevUi />
   }
 }
 
@@ -100,6 +102,16 @@ export default function App() {
   })
 
   useEffect(() => void load().then(() => useGame.getState().load()), [load])
+
+  // Dot's welcome tour starts by itself on a first visit, until it is finished or turned down.
+  const toursDone = useStore((s) => s.prefs.toursDone)
+  const tourOn = useTour((s) => s.tourId !== null)
+  const snoozed = useTour((s) => s.snoozed)
+  useEffect(() => {
+    if (tourOn || !shouldAutoStart('welcome', toursDone, snoozed, route.name)) return
+    const id = window.setTimeout(() => useTour.getState().start('welcome'), 900)
+    return () => window.clearTimeout(id)
+  }, [tourOn, toursDone, snoozed, route.name])
   useWakeLock(keepAwake)
 
   // Browsers keep audio locked until a tap, so the opening jingle plays on the first touch.
@@ -133,6 +145,7 @@ export default function App() {
       <LogSheet />
       <Reveal />
       <Toast />
+      <TourOverlay />
       <nav className="tabbar" aria-label="Main">
         {TABS.map((t) => (
           <a
@@ -140,6 +153,7 @@ export default function App() {
             className="tab"
             href={`#/${t.name}`}
             aria-current={current === t.name ? 'page' : undefined}
+            data-tour={`tab-${t.name}`}
           >
             <span className="tab-icon">
               <PixelIcon name={t.icon} size={28} colour={current === t.name ? '#fffbef' : '#213b32'} />

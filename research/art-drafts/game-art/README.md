@@ -10,6 +10,8 @@ Index of non-bird art sets. Briefs: `research/art-rendering/art/prompts/game-art
 | `set-d-keepsake-icons/` | 12 keepsake icons (32 px), one per NPC | 8 Nov 2026 | `public/assets/keepsakes/` | `src/art/keepsakes.ts` |
 | `set-e-dialogue-kit/` | Dialogue box, nameplate, choice buttons, sheet frame, handle, next arrow, thinking dots (nine-slice) | 8 Nov 2026 | `public/assets/ui/dialogue/` | `src/art/dialogueKit.ts` |
 | `set-6-wardens/` | The other 8 Reserve Warden portraits (96 px) + the unmet silhouette; with the 4 screenshot crops all 12 personas have art | 8 Nov 2026 | `public/assets/wardens/` | `src/art/wardens.ts` (`wardenArt`, `WARDEN_SILHOUETTE`) |
+| `set-f-dot-lau/` | Dot Lau, Keeper of the Dex (tutorial guide, not a warden): 8 poses at 96 px, sketching cels and GIF, 32 px head, 1254 px sources, casting archive | 9 Nov 2026 | `public/assets/guide/dot/` | `src/art/dot.ts` |
+| `set-g-fieldhand-dialogue/` | Fieldhand pixel font (atlases, 212 glyph tiles in `glyphs/`, TTF), paper and gold bubbles, the kit's reference player, example scenes and offline preview (`START-HERE.html`) | 9 Nov 2026 | `public/assets/ui/fieldhand/` | `src/ui/fieldhand/` |
 | `../npc-pack-v1/` | 12 story NPC portraits + stories (`encounters.json`) | 8 Nov 2026 | `public/assets/npcs/` | `src/art/npcs.ts` |
 | `screenshot-crops/` | Warden portraits (Maud, Reg, Agnes, Harold; see also `set-6-wardens/`) and two marsh scenes cut from screenshots | 8 Nov 2026 | `public/assets/{wardens,scenes}/` | `src/art/wardens.ts` |
 

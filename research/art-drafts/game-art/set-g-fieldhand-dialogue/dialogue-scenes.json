@@ -1,0 +1,70 @@
+[
+  {
+    "label": "A field mark",
+    "caption": "Explaining a field mark",
+    "portrait": "explaining",
+    "skin": "paper",
+    "mouth": [
+      65,
+      43
+    ],
+    "text": "See that tail? Sticks up like a teapot handle."
+  },
+  {
+    "label": "A first lifer",
+    "caption": "First wren recorded",
+    "portrait": "delighted",
+    "skin": "lifer",
+    "mouth": [
+      49,
+      43
+    ],
+    "text": "Your first wren. There. I’ll put the date under that one."
+  },
+  {
+    "label": "Meet Dot",
+    "caption": "Meeting Dot",
+    "portrait": "talking",
+    "skin": "paper",
+    "mouth": [
+      49,
+      43
+    ],
+    "text": "Dot Lau. I drew shop signs for years. Birds do fidget more."
+  },
+  {
+    "label": "A bird slips away",
+    "caption": "A missed sighting",
+    "portrait": "missed-sighting",
+    "skin": "paper",
+    "mirror": true,
+    "mouth": [
+      55,
+      36
+    ],
+    "text": "Well. Got the back half of him. That’s the useful half of a wren."
+  },
+  {
+    "label": "A quiet word",
+    "caption": "A little reassurance",
+    "portrait": "sympathy",
+    "skin": "paper",
+    "mouth": [
+      47,
+      44
+    ],
+    "text": "I’ve got a whole book of ones that got away. Sit with me a bit."
+  },
+  {
+    "label": "In the sketchbook",
+    "caption": "Making a field note",
+    "portrait": "sketching",
+    "skin": "paper",
+    "mirror": true,
+    "mouth": [
+      51,
+      49
+    ],
+    "text": "Round body. Tail up. Feet can wait."
+  }
+]

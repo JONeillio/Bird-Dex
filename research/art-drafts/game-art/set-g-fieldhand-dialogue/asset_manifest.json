@@ -1,0 +1,1144 @@
+{
+  "pack": "Bird-Dex Dot Lau dialogue UI & Fieldhand type",
+  "version": "1.0",
+  "start": "START-HERE.html",
+  "characterPack": "Bird-Dex_Dot-Lau_Character-Art.zip",
+  "glyphCount": 106,
+  "glyphStates": [
+    "land",
+    "lock"
+  ],
+  "individualGlyphPNGs": 212,
+  "assets": [
+    {
+      "file": "Dot-Lau-Dialogue-Preview.gif",
+      "role": "motion-preview",
+      "bytes": 58046
+    },
+    {
+      "file": "Fieldhand-Regular.ttf",
+      "role": "installable-font",
+      "bytes": 13396
+    },
+    {
+      "file": "README.md",
+      "role": "integration",
+      "bytes": 3905
+    },
+    {
+      "file": "START-HERE.html",
+      "role": "offline-preview",
+      "bytes": 119001
+    },
+    {
+      "file": "bubble-lifer-9slice.png",
+      "role": "bubble",
+      "bytes": 228
+    },
+    {
+      "file": "bubble-lifer-tail.png",
+      "role": "bubble",
+      "bytes": 204
+    },
+    {
+      "file": "bubble-metrics.json",
+      "role": "bubble",
+      "bytes": 399
+    },
+    {
+      "file": "bubble-paper-9slice.png",
+      "role": "bubble",
+      "bytes": 225
+    },
+    {
+      "file": "bubble-paper-tail.png",
+      "role": "bubble",
+      "bytes": 202
+    },
+    {
+      "file": "dialogue-player.js",
+      "role": "integration",
+      "bytes": 6641
+    },
+    {
+      "file": "dialogue-scenes.json",
+      "role": "integration",
+      "bytes": 1471
+    },
+    {
+      "file": "fieldhand-glyphs.json",
+      "role": "font-runtime",
+      "bytes": 7582
+    },
+    {
+      "file": "fieldhand-land.png",
+      "role": "font-runtime",
+      "bytes": 3334
+    },
+    {
+      "file": "fieldhand-lock.png",
+      "role": "font-runtime",
+      "bytes": 1810
+    },
+    {
+      "file": "glyph-u0020-land.png",
+      "role": "editable-glyph",
+      "bytes": 82
+    },
+    {
+      "file": "glyph-u0020-lock.png",
+      "role": "editable-glyph",
+      "bytes": 82
+    },
+    {
+      "file": "glyph-u0021-land.png",
+      "role": "editable-glyph",
+      "bytes": 107
+    },
+    {
+      "file": "glyph-u0021-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u0022-land.png",
+      "role": "editable-glyph",
+      "bytes": 103
+    },
+    {
+      "file": "glyph-u0022-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u0023-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u0023-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u0024-land.png",
+      "role": "editable-glyph",
+      "bytes": 169
+    },
+    {
+      "file": "glyph-u0024-lock.png",
+      "role": "editable-glyph",
+      "bytes": 130
+    },
+    {
+      "file": "glyph-u0025-land.png",
+      "role": "editable-glyph",
+      "bytes": 155
+    },
+    {
+      "file": "glyph-u0025-lock.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u0026-land.png",
+      "role": "editable-glyph",
+      "bytes": 171
+    },
+    {
+      "file": "glyph-u0026-lock.png",
+      "role": "editable-glyph",
+      "bytes": 138
+    },
+    {
+      "file": "glyph-u0027-land.png",
+      "role": "editable-glyph",
+      "bytes": 98
+    },
+    {
+      "file": "glyph-u0027-lock.png",
+      "role": "editable-glyph",
+      "bytes": 98
+    },
+    {
+      "file": "glyph-u0028-land.png",
+      "role": "editable-glyph",
+      "bytes": 122
+    },
+    {
+      "file": "glyph-u0028-lock.png",
+      "role": "editable-glyph",
+      "bytes": 108
+    },
+    {
+      "file": "glyph-u0029-land.png",
+      "role": "editable-glyph",
+      "bytes": 137
+    },
+    {
+      "file": "glyph-u0029-lock.png",
+      "role": "editable-glyph",
+      "bytes": 106
+    },
+    {
+      "file": "glyph-u002A-land.png",
+      "role": "editable-glyph",
+      "bytes": 148
+    },
+    {
+      "file": "glyph-u002A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 125
+    },
+    {
+      "file": "glyph-u002B-land.png",
+      "role": "editable-glyph",
+      "bytes": 133
+    },
+    {
+      "file": "glyph-u002B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 112
+    },
+    {
+      "file": "glyph-u002C-land.png",
+      "role": "editable-glyph",
+      "bytes": 103
+    },
+    {
+      "file": "glyph-u002C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 103
+    },
+    {
+      "file": "glyph-u002D-land.png",
+      "role": "editable-glyph",
+      "bytes": 104
+    },
+    {
+      "file": "glyph-u002D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 101
+    },
+    {
+      "file": "glyph-u002E-land.png",
+      "role": "editable-glyph",
+      "bytes": 95
+    },
+    {
+      "file": "glyph-u002E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 95
+    },
+    {
+      "file": "glyph-u002F-land.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u002F-lock.png",
+      "role": "editable-glyph",
+      "bytes": 116
+    },
+    {
+      "file": "glyph-u0030-land.png",
+      "role": "editable-glyph",
+      "bytes": 186
+    },
+    {
+      "file": "glyph-u0030-lock.png",
+      "role": "editable-glyph",
+      "bytes": 142
+    },
+    {
+      "file": "glyph-u0031-land.png",
+      "role": "editable-glyph",
+      "bytes": 138
+    },
+    {
+      "file": "glyph-u0031-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u0032-land.png",
+      "role": "editable-glyph",
+      "bytes": 160
+    },
+    {
+      "file": "glyph-u0032-lock.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u0033-land.png",
+      "role": "editable-glyph",
+      "bytes": 157
+    },
+    {
+      "file": "glyph-u0033-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u0034-land.png",
+      "role": "editable-glyph",
+      "bytes": 152
+    },
+    {
+      "file": "glyph-u0034-lock.png",
+      "role": "editable-glyph",
+      "bytes": 132
+    },
+    {
+      "file": "glyph-u0035-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u0035-lock.png",
+      "role": "editable-glyph",
+      "bytes": 136
+    },
+    {
+      "file": "glyph-u0036-land.png",
+      "role": "editable-glyph",
+      "bytes": 161
+    },
+    {
+      "file": "glyph-u0036-lock.png",
+      "role": "editable-glyph",
+      "bytes": 130
+    },
+    {
+      "file": "glyph-u0037-land.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u0037-lock.png",
+      "role": "editable-glyph",
+      "bytes": 122
+    },
+    {
+      "file": "glyph-u0038-land.png",
+      "role": "editable-glyph",
+      "bytes": 161
+    },
+    {
+      "file": "glyph-u0038-lock.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u0039-land.png",
+      "role": "editable-glyph",
+      "bytes": 167
+    },
+    {
+      "file": "glyph-u0039-lock.png",
+      "role": "editable-glyph",
+      "bytes": 126
+    },
+    {
+      "file": "glyph-u003A-land.png",
+      "role": "editable-glyph",
+      "bytes": 98
+    },
+    {
+      "file": "glyph-u003A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 97
+    },
+    {
+      "file": "glyph-u003B-land.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u003B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 103
+    },
+    {
+      "file": "glyph-u003C-land.png",
+      "role": "editable-glyph",
+      "bytes": 115
+    },
+    {
+      "file": "glyph-u003C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 104
+    },
+    {
+      "file": "glyph-u003D-land.png",
+      "role": "editable-glyph",
+      "bytes": 124
+    },
+    {
+      "file": "glyph-u003D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 102
+    },
+    {
+      "file": "glyph-u003E-land.png",
+      "role": "editable-glyph",
+      "bytes": 116
+    },
+    {
+      "file": "glyph-u003E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 103
+    },
+    {
+      "file": "glyph-u003F-land.png",
+      "role": "editable-glyph",
+      "bytes": 145
+    },
+    {
+      "file": "glyph-u003F-lock.png",
+      "role": "editable-glyph",
+      "bytes": 134
+    },
+    {
+      "file": "glyph-u0040-land.png",
+      "role": "editable-glyph",
+      "bytes": 179
+    },
+    {
+      "file": "glyph-u0040-lock.png",
+      "role": "editable-glyph",
+      "bytes": 149
+    },
+    {
+      "file": "glyph-u0041-land.png",
+      "role": "editable-glyph",
+      "bytes": 163
+    },
+    {
+      "file": "glyph-u0041-lock.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0042-land.png",
+      "role": "editable-glyph",
+      "bytes": 166
+    },
+    {
+      "file": "glyph-u0042-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u0043-land.png",
+      "role": "editable-glyph",
+      "bytes": 137
+    },
+    {
+      "file": "glyph-u0043-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u0044-land.png",
+      "role": "editable-glyph",
+      "bytes": 162
+    },
+    {
+      "file": "glyph-u0044-lock.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0045-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u0045-lock.png",
+      "role": "editable-glyph",
+      "bytes": 121
+    },
+    {
+      "file": "glyph-u0046-land.png",
+      "role": "editable-glyph",
+      "bytes": 146
+    },
+    {
+      "file": "glyph-u0046-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u0047-land.png",
+      "role": "editable-glyph",
+      "bytes": 161
+    },
+    {
+      "file": "glyph-u0047-lock.png",
+      "role": "editable-glyph",
+      "bytes": 130
+    },
+    {
+      "file": "glyph-u0048-land.png",
+      "role": "editable-glyph",
+      "bytes": 155
+    },
+    {
+      "file": "glyph-u0048-lock.png",
+      "role": "editable-glyph",
+      "bytes": 114
+    },
+    {
+      "file": "glyph-u0049-land.png",
+      "role": "editable-glyph",
+      "bytes": 142
+    },
+    {
+      "file": "glyph-u0049-lock.png",
+      "role": "editable-glyph",
+      "bytes": 116
+    },
+    {
+      "file": "glyph-u004A-land.png",
+      "role": "editable-glyph",
+      "bytes": 125
+    },
+    {
+      "file": "glyph-u004A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 122
+    },
+    {
+      "file": "glyph-u004B-land.png",
+      "role": "editable-glyph",
+      "bytes": 164
+    },
+    {
+      "file": "glyph-u004B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 141
+    },
+    {
+      "file": "glyph-u004C-land.png",
+      "role": "editable-glyph",
+      "bytes": 129
+    },
+    {
+      "file": "glyph-u004C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 112
+    },
+    {
+      "file": "glyph-u004D-land.png",
+      "role": "editable-glyph",
+      "bytes": 161
+    },
+    {
+      "file": "glyph-u004D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 131
+    },
+    {
+      "file": "glyph-u004E-land.png",
+      "role": "editable-glyph",
+      "bytes": 161
+    },
+    {
+      "file": "glyph-u004E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 131
+    },
+    {
+      "file": "glyph-u004F-land.png",
+      "role": "editable-glyph",
+      "bytes": 155
+    },
+    {
+      "file": "glyph-u004F-lock.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u0050-land.png",
+      "role": "editable-glyph",
+      "bytes": 149
+    },
+    {
+      "file": "glyph-u0050-lock.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u0051-land.png",
+      "role": "editable-glyph",
+      "bytes": 165
+    },
+    {
+      "file": "glyph-u0051-lock.png",
+      "role": "editable-glyph",
+      "bytes": 137
+    },
+    {
+      "file": "glyph-u0052-land.png",
+      "role": "editable-glyph",
+      "bytes": 170
+    },
+    {
+      "file": "glyph-u0052-lock.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0053-land.png",
+      "role": "editable-glyph",
+      "bytes": 152
+    },
+    {
+      "file": "glyph-u0053-lock.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0054-land.png",
+      "role": "editable-glyph",
+      "bytes": 138
+    },
+    {
+      "file": "glyph-u0054-lock.png",
+      "role": "editable-glyph",
+      "bytes": 112
+    },
+    {
+      "file": "glyph-u0055-land.png",
+      "role": "editable-glyph",
+      "bytes": 144
+    },
+    {
+      "file": "glyph-u0055-lock.png",
+      "role": "editable-glyph",
+      "bytes": 112
+    },
+    {
+      "file": "glyph-u0056-land.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u0056-lock.png",
+      "role": "editable-glyph",
+      "bytes": 111
+    },
+    {
+      "file": "glyph-u0057-land.png",
+      "role": "editable-glyph",
+      "bytes": 149
+    },
+    {
+      "file": "glyph-u0057-lock.png",
+      "role": "editable-glyph",
+      "bytes": 111
+    },
+    {
+      "file": "glyph-u0058-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u0058-lock.png",
+      "role": "editable-glyph",
+      "bytes": 109
+    },
+    {
+      "file": "glyph-u0059-land.png",
+      "role": "editable-glyph",
+      "bytes": 141
+    },
+    {
+      "file": "glyph-u0059-lock.png",
+      "role": "editable-glyph",
+      "bytes": 109
+    },
+    {
+      "file": "glyph-u005A-land.png",
+      "role": "editable-glyph",
+      "bytes": 157
+    },
+    {
+      "file": "glyph-u005A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 129
+    },
+    {
+      "file": "glyph-u005B-land.png",
+      "role": "editable-glyph",
+      "bytes": 145
+    },
+    {
+      "file": "glyph-u005B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 115
+    },
+    {
+      "file": "glyph-u005C-land.png",
+      "role": "editable-glyph",
+      "bytes": 129
+    },
+    {
+      "file": "glyph-u005C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 111
+    },
+    {
+      "file": "glyph-u005D-land.png",
+      "role": "editable-glyph",
+      "bytes": 144
+    },
+    {
+      "file": "glyph-u005D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u005E-land.png",
+      "role": "editable-glyph",
+      "bytes": 114
+    },
+    {
+      "file": "glyph-u005E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 106
+    },
+    {
+      "file": "glyph-u005F-land.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u005F-lock.png",
+      "role": "editable-glyph",
+      "bytes": 101
+    },
+    {
+      "file": "glyph-u0060-land.png",
+      "role": "editable-glyph",
+      "bytes": 98
+    },
+    {
+      "file": "glyph-u0060-lock.png",
+      "role": "editable-glyph",
+      "bytes": 97
+    },
+    {
+      "file": "glyph-u0061-land.png",
+      "role": "editable-glyph",
+      "bytes": 157
+    },
+    {
+      "file": "glyph-u0061-lock.png",
+      "role": "editable-glyph",
+      "bytes": 133
+    },
+    {
+      "file": "glyph-u0062-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u0062-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u0063-land.png",
+      "role": "editable-glyph",
+      "bytes": 140
+    },
+    {
+      "file": "glyph-u0063-lock.png",
+      "role": "editable-glyph",
+      "bytes": 114
+    },
+    {
+      "file": "glyph-u0064-land.png",
+      "role": "editable-glyph",
+      "bytes": 148
+    },
+    {
+      "file": "glyph-u0064-lock.png",
+      "role": "editable-glyph",
+      "bytes": 124
+    },
+    {
+      "file": "glyph-u0065-land.png",
+      "role": "editable-glyph",
+      "bytes": 158
+    },
+    {
+      "file": "glyph-u0065-lock.png",
+      "role": "editable-glyph",
+      "bytes": 132
+    },
+    {
+      "file": "glyph-u0066-land.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u0066-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u0067-land.png",
+      "role": "editable-glyph",
+      "bytes": 165
+    },
+    {
+      "file": "glyph-u0067-lock.png",
+      "role": "editable-glyph",
+      "bytes": 129
+    },
+    {
+      "file": "glyph-u0068-land.png",
+      "role": "editable-glyph",
+      "bytes": 147
+    },
+    {
+      "file": "glyph-u0068-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u0069-land.png",
+      "role": "editable-glyph",
+      "bytes": 109
+    },
+    {
+      "file": "glyph-u0069-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u006A-land.png",
+      "role": "editable-glyph",
+      "bytes": 133
+    },
+    {
+      "file": "glyph-u006A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 119
+    },
+    {
+      "file": "glyph-u006B-land.png",
+      "role": "editable-glyph",
+      "bytes": 146
+    },
+    {
+      "file": "glyph-u006B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 137
+    },
+    {
+      "file": "glyph-u006C-land.png",
+      "role": "editable-glyph",
+      "bytes": 142
+    },
+    {
+      "file": "glyph-u006C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u006D-land.png",
+      "role": "editable-glyph",
+      "bytes": 155
+    },
+    {
+      "file": "glyph-u006D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 117
+    },
+    {
+      "file": "glyph-u006E-land.png",
+      "role": "editable-glyph",
+      "bytes": 143
+    },
+    {
+      "file": "glyph-u006E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 114
+    },
+    {
+      "file": "glyph-u006F-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u006F-lock.png",
+      "role": "editable-glyph",
+      "bytes": 116
+    },
+    {
+      "file": "glyph-u0070-land.png",
+      "role": "editable-glyph",
+      "bytes": 160
+    },
+    {
+      "file": "glyph-u0070-lock.png",
+      "role": "editable-glyph",
+      "bytes": 115
+    },
+    {
+      "file": "glyph-u0071-land.png",
+      "role": "editable-glyph",
+      "bytes": 157
+    },
+    {
+      "file": "glyph-u0071-lock.png",
+      "role": "editable-glyph",
+      "bytes": 124
+    },
+    {
+      "file": "glyph-u0072-land.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0072-lock.png",
+      "role": "editable-glyph",
+      "bytes": 121
+    },
+    {
+      "file": "glyph-u0073-land.png",
+      "role": "editable-glyph",
+      "bytes": 148
+    },
+    {
+      "file": "glyph-u0073-lock.png",
+      "role": "editable-glyph",
+      "bytes": 127
+    },
+    {
+      "file": "glyph-u0074-land.png",
+      "role": "editable-glyph",
+      "bytes": 148
+    },
+    {
+      "file": "glyph-u0074-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u0075-land.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0075-lock.png",
+      "role": "editable-glyph",
+      "bytes": 111
+    },
+    {
+      "file": "glyph-u0076-land.png",
+      "role": "editable-glyph",
+      "bytes": 128
+    },
+    {
+      "file": "glyph-u0076-lock.png",
+      "role": "editable-glyph",
+      "bytes": 109
+    },
+    {
+      "file": "glyph-u0077-land.png",
+      "role": "editable-glyph",
+      "bytes": 137
+    },
+    {
+      "file": "glyph-u0077-lock.png",
+      "role": "editable-glyph",
+      "bytes": 109
+    },
+    {
+      "file": "glyph-u0078-land.png",
+      "role": "editable-glyph",
+      "bytes": 136
+    },
+    {
+      "file": "glyph-u0078-lock.png",
+      "role": "editable-glyph",
+      "bytes": 107
+    },
+    {
+      "file": "glyph-u0079-land.png",
+      "role": "editable-glyph",
+      "bytes": 144
+    },
+    {
+      "file": "glyph-u0079-lock.png",
+      "role": "editable-glyph",
+      "bytes": 121
+    },
+    {
+      "file": "glyph-u007A-land.png",
+      "role": "editable-glyph",
+      "bytes": 139
+    },
+    {
+      "file": "glyph-u007A-lock.png",
+      "role": "editable-glyph",
+      "bytes": 121
+    },
+    {
+      "file": "glyph-u007B-land.png",
+      "role": "editable-glyph",
+      "bytes": 149
+    },
+    {
+      "file": "glyph-u007B-lock.png",
+      "role": "editable-glyph",
+      "bytes": 120
+    },
+    {
+      "file": "glyph-u007C-land.png",
+      "role": "editable-glyph",
+      "bytes": 104
+    },
+    {
+      "file": "glyph-u007C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u007D-land.png",
+      "role": "editable-glyph",
+      "bytes": 152
+    },
+    {
+      "file": "glyph-u007D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 119
+    },
+    {
+      "file": "glyph-u007E-land.png",
+      "role": "editable-glyph",
+      "bytes": 125
+    },
+    {
+      "file": "glyph-u007E-lock.png",
+      "role": "editable-glyph",
+      "bytes": 118
+    },
+    {
+      "file": "glyph-u00A3-land.png",
+      "role": "editable-glyph",
+      "bytes": 162
+    },
+    {
+      "file": "glyph-u00A3-lock.png",
+      "role": "editable-glyph",
+      "bytes": 138
+    },
+    {
+      "file": "glyph-u00B7-land.png",
+      "role": "editable-glyph",
+      "bytes": 95
+    },
+    {
+      "file": "glyph-u00B7-lock.png",
+      "role": "editable-glyph",
+      "bytes": 95
+    },
+    {
+      "file": "glyph-u00D7-land.png",
+      "role": "editable-glyph",
+      "bytes": 136
+    },
+    {
+      "file": "glyph-u00D7-lock.png",
+      "role": "editable-glyph",
+      "bytes": 107
+    },
+    {
+      "file": "glyph-u00E9-land.png",
+      "role": "editable-glyph",
+      "bytes": 159
+    },
+    {
+      "file": "glyph-u00E9-lock.png",
+      "role": "editable-glyph",
+      "bytes": 134
+    },
+    {
+      "file": "glyph-u2013-land.png",
+      "role": "editable-glyph",
+      "bytes": 114
+    },
+    {
+      "file": "glyph-u2013-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u2014-land.png",
+      "role": "editable-glyph",
+      "bytes": 113
+    },
+    {
+      "file": "glyph-u2014-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u2018-land.png",
+      "role": "editable-glyph",
+      "bytes": 104
+    },
+    {
+      "file": "glyph-u2018-lock.png",
+      "role": "editable-glyph",
+      "bytes": 100
+    },
+    {
+      "file": "glyph-u2019-land.png",
+      "role": "editable-glyph",
+      "bytes": 105
+    },
+    {
+      "file": "glyph-u2019-lock.png",
+      "role": "editable-glyph",
+      "bytes": 102
+    },
+    {
+      "file": "glyph-u201C-land.png",
+      "role": "editable-glyph",
+      "bytes": 125
+    },
+    {
+      "file": "glyph-u201C-lock.png",
+      "role": "editable-glyph",
+      "bytes": 102
+    },
+    {
+      "file": "glyph-u201D-land.png",
+      "role": "editable-glyph",
+      "bytes": 130
+    },
+    {
+      "file": "glyph-u201D-lock.png",
+      "role": "editable-glyph",
+      "bytes": 104
+    },
+    {
+      "file": "glyph-u2026-land.png",
+      "role": "editable-glyph",
+      "bytes": 119
+    },
+    {
+      "file": "glyph-u2026-lock.png",
+      "role": "editable-glyph",
+      "bytes": 96
+    }
+  ]
+}

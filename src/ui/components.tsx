@@ -52,14 +52,16 @@ export function Segmented<T extends string>({ options, value, onChange, label }:
   )
 }
 
-export function Chip({ children, active, onClick, tone }: {
+export function Chip({ children, active, onClick, tone, tour }: {
   children: ReactNode
   active: boolean
   onClick: () => void
   tone?: 'coral'
+  /** `data-tour` id, so a tour with Dot can point at it. */
+  tour?: string
 }) {
   return (
-    <button type="button" className={`chip ${tone ?? ''}`.trim()} aria-pressed={active} onClick={onClick}>
+    <button type="button" className={`chip ${tone ?? ''}`.trim()} aria-pressed={active} onClick={onClick} data-tour={tour}>
       {children}
     </button>
   )

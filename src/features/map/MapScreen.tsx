@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { usePublished } from '../../data/published'
 import { dexById } from '../../data/catalogue'
-import { ageLabel, filterSites } from '../../domain/ranking'
+import { ageLabel, daysAgo, filterSites } from '../../domain/ranking'
+import { useTour } from '../../state/tour'
 import { shortSiteName } from '../../domain/siteName'
 import { useStore, type DriveLimit } from '../../state/store'
 import { useRecorded } from '../../state/useRecorded'
@@ -73,6 +74,18 @@ export default function MapScreen() {
   // The selected site: your pick if it is still shown, otherwise the best-ranked site.
   const activeIdx = Math.max(0, shown.findIndex((v) => v.site.id === picked))
   const active = shown[activeIdx] ?? null
+  // Live facts for Dot's tour ("This card is today's pick: Rainham Marshes").
+  const setTourFacts = useTour((s) => s.setFacts)
+  useEffect(() => {
+    const lure = active?.lure?.speciesId ? dexById(active.lure.speciesId) : undefined
+    setTourFacts({
+      siteName: active ? shortSiteName(active.site.name) : null,
+      bird: lure?.name ?? null,
+      when: active?.lure ? daysAgo(active.lure.obsDate) : null,
+      minutes: active?.minutes ?? null,
+      newCount: active && active.newIds.length > 1 ? active.newIds.length : null,
+    })
+  }, [active, setTourFacts])
 
   const sites = useMemo<MapSite[]>(
     () =>
@@ -115,20 +128,20 @@ export default function MapScreen() {
             </Chip>
           )}
           {LIMITS.map((l) => (
-            <Chip key={l} active={prefs.driveLimit === l} onClick={() => (setPicked(null), setPref('driveLimit', l))}>
+            <Chip key={l} tour="drive-chips" active={prefs.driveLimit === l} onClick={() => (setPicked(null), setPref('driveLimit', l))}>
               {l} min
             </Chip>
           ))}
           <Chip active={false} onClick={() => (window.location.hash = '#/news')}>
             Bird News{newsDot && <span className="chip-dot" role="img" aria-label="Something new" />}
           </Chip>
-          <Chip active={false} onClick={() => (window.location.hash = '#/plan')}>Plan a day</Chip>
+          <Chip tour="plan-day" active={false} onClick={() => (window.location.hash = '#/plan')}>Plan a day</Chip>
           {unexploredShown.length > 0 && !ready?.region.isDemo && (
             <Chip active={false} onClick={() => { pick(unexploredShown[newIdx % unexploredShown.length].site.id); setNewIdx(newIdx + 1) }}>
               Somewhere new
             </Chip>
           )}
-          <Chip active={false} onClick={() => setFindOpen(true)}>Find a bird</Chip>
+          <Chip tour="find-bird" active={false} onClick={() => setFindOpen(true)}>Find a bird</Chip>
           <Chip active={prefs.unrecordedOnly} onClick={() => setPref('unrecordedOnly', !prefs.unrecordedOnly)}>
             New to me
           </Chip>
@@ -136,7 +149,7 @@ export default function MapScreen() {
         {ready && filtered && start && (
           <div className="map-status small">
             <span>
-              <button type="button" className="linkish" onClick={() => setAreaOpen(true)} aria-label={`Driving from ${start.label}. Change area`}>Driving from {start.label} ▾</button> · {filtered.shown.length} sites
+              <button type="button" className="linkish" data-tour="area" onClick={() => setAreaOpen(true)} aria-label={`Driving from ${start.label}. Change area`}>Driving from {start.label} ▾</button> · {filtered.shown.length} sites
               {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive time)` : ''}
               {focus && filtered.beyondLimit ? ` · ${filtered.beyondLimit} more beyond ${prefs.driveLimit} min` : ''}
               {explore && !ready.region.isDemo ? ` · Explored ${explore.explored.length} of ${explore.total} spots` : ''}

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTour } from '../../state/tour'
 import { DEX_SIZE, STARTER_DEX } from '../../data/catalogue'
 import { SETS, SET_LABELS, type SetId } from '../../data/schema'
 import { useStore } from '../../state/store'
@@ -49,6 +50,9 @@ export default function DexScreen() {
   }, [filter, query, prefs.targets, bonds])
 
   const count = STARTER_DEX.filter((s) => recorded.has(s.id)).length
+  const setTourFacts = useTour((s) => s.setFacts)
+  // Dot only quotes your count once there is one ("0 of 104 so far" would sound like a telling-off).
+  useEffect(() => setTourFacts({ recorded: count > 0 ? count : null, dexSize: DEX_SIZE }), [count, setTourFacts])
   const pct = Math.round((count / DEX_SIZE) * 100)
   const listEntries = tab === 'year' ? yearEntries : lifeEntries
 
@@ -69,7 +73,7 @@ export default function DexScreen() {
         />
         {tab === 'dex' && (
           <>
-            <div className="row spread">
+            <div className="row spread" data-tour="dex-progress">
               <h2 className="h-display">Your BirdDex</h2>
               <Pill tone="good">
                 {count} / {DEX_SIZE} recorded

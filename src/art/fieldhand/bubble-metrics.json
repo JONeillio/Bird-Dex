@@ -1,0 +1,35 @@
+{
+  "bodySize": [
+    28,
+    28
+  ],
+  "sliceInsets": {
+    "left": 7,
+    "right": 7,
+    "top": 7,
+    "bottom": 7
+  },
+  "tailSize": [
+    34,
+    19
+  ],
+  "tailTip": [
+    33,
+    18
+  ],
+  "tailOpenEdge": "left",
+  "tailOverlapPx": 4,
+  "minimumPanelSize": [
+    26,
+    26
+  ],
+  "recommendedTextPadding": [
+    12,
+    14
+  ],
+  "skins": [
+    "paper",
+    "lifer"
+  ],
+  "ink": "#213B32"
+}

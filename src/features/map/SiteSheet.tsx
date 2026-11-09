@@ -62,9 +62,9 @@ export function SiteSheet({ view, region, startLabel, recorded, targets, onClose
         )}
       </div>
 
-      <h3 className="sheet-sub">Reported here ({dex.length})</h3>
+      <h3 className="sheet-sub" data-tour="site-reports">Reported here ({dex.length})</h3>
       {dex.length === 0 && <p className="muted">No Starter Dex birds reported here in this window.</p>}
-      <ul className="report-list">
+      <ul className="report-list" data-tour="site-reports">
         {dex.map((r) => {
           const s = dexById(r.speciesId!)
           const src = birdSrc(r.speciesId!)

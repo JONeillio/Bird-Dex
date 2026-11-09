@@ -44,10 +44,10 @@ export default function JournalScreen() {
         <div className="row spread">
           <h2 className="h-display">Your sightings</h2>
           <span className="row gap">
-            <button type="button" className="btn small" onClick={() => setImporting(true)}>
+            <button type="button" className="btn small" onClick={() => setImporting(true)} data-tour="journal-import">
               Import
             </button>
-            <button type="button" className="btn primary small" onClick={() => openLog()}>
+            <button type="button" className="btn primary small" onClick={() => openLog()} data-tour="journal-log">
               + Log
             </button>
           </span>

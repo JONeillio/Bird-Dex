@@ -99,6 +99,7 @@ Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal
 - [ ] E4 Gold badges, now earned by winning a Call it (see P11)
 - [ ] G1 Share codes (with the year race, P13) · [ ] G2 Rival Call it (optional) · [ ] G3 Patch race (optional)
 - [ ] H1 List view · [ ] H2 Adventure skin
+- Tutorial with Dot: tickets T1-T7 in `TUTORIAL_PLAN.md` §5 (T0 welcome tour done 9 Nov). Do T1 and T2 before Lewis's colleague tries it.
 - [ ] I1 First run · [ ] I2 Credits · [ ] I3 Accessibility · [ ] I4 Hand-over note
 
 **Recurring**

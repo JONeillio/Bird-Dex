@@ -52,7 +52,7 @@ export function SiteCard({ view, position, total, onNext, onDetails, recorded, i
   const reported = lure && when ? `${lure.name} reported ${when}` : when ? `Birds reported ${when}` : 'No recent reports'
 
   return (
-    <div className="site-card panel" ref={box}>
+    <div className="site-card panel" ref={box} data-tour="site-card">
       {isDemo && (
         <span className="card-stamp">
           <DemoStamp />
@@ -71,7 +71,7 @@ export function SiteCard({ view, position, total, onNext, onDetails, recorded, i
       </span>
       <div className="card-count-row">
         <span className="card-count">{n === 0 ? 'Nothing new to you here' : `${n} species new to you`}</span>
-        <button type="button" className="btn primary small card-view" onClick={onDetails}>
+        <button type="button" className="btn primary small card-view" onClick={onDetails} data-tour="site-view">
           View spot ▶
         </button>
       </div>
