@@ -46,7 +46,7 @@ export default function FolkScreen() {
       <Banner title="Folk" right={<SettingsButton />} />
       <main className="screen stack">
         {f.isDemo && <DemoStamp />}
-        <div className="row two">
+        <div className="row two" data-tour="folk-top">
           <a className="btn block" href="#/badges"><BadgePin tier={earned > 0 ? 'gold' : 'none'} size={22} /> Badges ({earned})</a>
           <div className="btn block static">Call it wins: {wins}</div>
         </div>

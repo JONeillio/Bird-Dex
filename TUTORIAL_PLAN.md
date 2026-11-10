@@ -25,7 +25,7 @@ Lewis asked for it (8 Nov): "a pop up when you first open the page and you can s
 
 Tools: `TOUR=1 npm run screens -- "#/"`; `node scripts/dev/tour-walk.mjs` (and `WIDTH=360`) walks the whole tour into `/tmp/tour/`.
 
-## 2. The welcome tour (9 steps, about 2 minutes)
+## 2. The welcome tour (10 steps, about 2 minutes)
 
 | # | Step | Screen | Spotlight | Poses | Teaches |
 |---|---|---|---|---|---|
@@ -37,7 +37,8 @@ Tools: `TOUR=1 npm run screens -- "#/"`; `node scripts/dev/tour-walk.mjs` (and `
 | 6 | sheet | Site sheet | report list | introduce, clarify, aside | Dated reports; other people's birds don't go in your Dex |
 | 7 | dex | Dex | progress | introduce, aside | Your count; grey = still to find |
 | 8 | journal | Journal | Import and + Log | compare, clarify | Two ways to fill the Dex; only your own sightings |
-| 9 | bye | Explore | none | sketching, talking, over-to-you (gold) | She'll draw your new birds (all wrens); where to find her |
+| 9 | folk | Folk | Badges and Call it row | introduce, aside, chat | Wardens at reserves and regulars; "birders do need mates"; visit their patch and they remember you |
+| 10 | bye | Explore | none | sketching, talking, over-to-you (gold) | She'll draw your new birds (all wrens); where to find her |
 
 Moved out of the tour into first-time moments (§3): Plan a day, area switch, map icons and rarity marks, Folk. The tour never logs anything.
 
@@ -90,7 +91,7 @@ Pearl is a semi-retired British Chinese signwriter from Deptford, been birding r
 
 Same session routine as `AUTOPILOT.md` §0.
 
-- [x] **T0 Welcome tour and engine** (9 Nov; cut to 9 steps and revoiced 10 Nov).
+- [x] **T0 Welcome tour and engine** (9 Nov; cut to 9 steps and revoiced 10 Nov; Folk step added, 10 steps).
 - [ ] **T1 Moment triggers.** Add `trigger` (moment id) and `mode: "tour" | "moment"` to `TourSchema`. `src/state/tour.ts`: `fire(event)` queues the matching unseen moment; a `useTourQueue` hook in `App.tsx` plays the head of the queue when idle (no `useUi` sheet, reveal, toast or import open; 600 ms quiet). Moments render without the dim layer, with a light ring only, and close on an outside tap. Prefs `guideTips: boolean` (default true). Tests: queue order, idle gating, once only, tips off, at most one a session apart from new-bird.
 - [ ] **T2 First week moments**: first-lifer (with fact `aBird`; she "draws" it: sketching pose for line 1, then delighted on gold), new-bird variants, first-import, first-parcel, nothing-near. Add the `data-tour` ids they spotlight.
 - [ ] **T3 "Ask Pearl" in Settings**: the tour plus every moment you've seen, each replayable; tips on/off.

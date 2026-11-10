@@ -153,6 +153,25 @@
           ]
         },
         {
+          "id": "folk",
+          "route": "#/folk",
+          "target": "folk-top",
+          "lines": [
+            {
+              "pose": "introduce",
+              "text": "And this is Folk. Wardens at the reserves, and a few regulars."
+            },
+            {
+              "pose": "aside",
+              "text": "Birders do need mates. Hours in a hide, not a word said."
+            },
+            {
+              "pose": "chat",
+              "text": "Pop by their patch and they’ll remember you. Some will set you jobs."
+            }
+          ]
+        },
+        {
           "id": "bye",
           "route": "#/map",
           "lines": [
