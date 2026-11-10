@@ -32,6 +32,11 @@ export function soundLength(notes: readonly Note[]): number {
 
 let ctx: AudioContext | null = null
 
+/** The app's one audio context (sound effects and ambience share it). Null where Web Audio is missing. */
+export function audioContext(): AudioContext | null {
+  return context()
+}
+
 function context(): AudioContext | null {
   if (ctx) return ctx
   const Ctor = typeof window === 'undefined' ? undefined : window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
@@ -66,7 +71,16 @@ export function voicePitch(ch: string): number {
 /** One speech blip (Pokémon-style text sound). Quiet and very short. */
 export function voice(ch: string, enabled: boolean): void {
   const f = voicePitch(ch)
-  if (enabled && f) playNotes([[f, 26]], 0.035)
+  if (enabled && f) {
+    playNotes([[f, 26]], 0.035)
+    onVoice?.()
+  }
+}
+
+let onVoice: (() => void) | null = null
+/** Ambience listens here so it can dip under Pearl's voice. */
+export function setVoiceListener(fn: (() => void) | null): void {
+  onVoice = fn
 }
 
 function playNotes(notes: readonly Note[], level: number, type: OscillatorType = 'square'): void {

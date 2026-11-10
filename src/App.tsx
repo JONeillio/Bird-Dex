@@ -30,6 +30,9 @@ import { DevDialogue } from './features/dev/DevDialogue'
 import { TourOverlay } from './features/tour/TourOverlay'
 import { shouldAutoStart, useTour } from './state/tour'
 import type { IconName } from './art/icons'
+import { ambience } from './audio/ambience'
+import { isCoastal, sceneForRoute } from './audio/ambienceScore'
+import { audioContext } from './audio/sfx'
 
 const MapScreen = lazy(() => import('./features/map/MapScreen'))
 
@@ -102,6 +105,28 @@ export default function App() {
   })
 
   useEffect(() => void load().then(() => useGame.getState().load()), [load])
+
+  // Ambience: field sounds on the map screens, music elsewhere. Starts on the first tap if it was left on.
+  const ambienceOn = useStore((s) => s.prefs.ambienceOn)
+  const ambienceVolume = useStore((s) => s.prefs.ambienceVolume)
+  const regionId = useStore((s) => s.prefs.regionId)
+  useEffect(() => {
+    if (!ambienceOn) {
+      ambience.configure(false, ambienceVolume)
+      return
+    }
+    if (audioContext()?.state === 'running') {
+      ambience.configure(true, ambienceVolume)
+      return
+    }
+    const onFirst = () => {
+      unlockAudio()
+      ambience.configure(true, ambienceVolume)
+    }
+    window.addEventListener('pointerdown', onFirst, { once: true })
+    return () => window.removeEventListener('pointerdown', onFirst)
+  }, [ambienceOn, ambienceVolume])
+  useEffect(() => ambience.setScene(sceneForRoute(route.name), isCoastal(regionId)), [route.name, regionId])
 
   // Pearl's welcome tour starts by itself on a first visit, until it is finished or turned down.
   const toursDone = useStore((s) => s.prefs.toursDone)

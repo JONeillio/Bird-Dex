@@ -10,11 +10,11 @@ import { useRecorded } from '../../state/useRecorded'
 import { useShake } from '../../phone/shake'
 import { play } from '../../audio/sfx'
 import { buzz, BUZZ } from '../../phone/haptics'
-import { Banner, Chip, DemoStamp, Panel, Pill } from '../../ui/components'
-import { SettingsButton } from '../shell/SettingsButton'
+import { Chip, DemoStamp, Panel, PixelIcon } from '../../ui/components'
 import MapCanvas, { type MapSite } from './MapCanvas'
 import { birdSrc } from './birdArt'
 import { SiteCard } from './SiteCard'
+import { FlyBy } from './FlyBy'
 import { SiteSheet } from './SiteSheet'
 import { FindBirdSheet } from './FindBirdSheet'
 import { pickStart } from '../../data/startPoint'
@@ -77,6 +77,7 @@ export default function MapScreen() {
   const active = shown[activeIdx] ?? null
   // Live facts for Pearl's tour ("This card is today's pick: Rainham Marshes").
   const setTourFacts = useTour((s) => s.setFacts)
+  const tourOn = useTour((s) => s.tourId !== null)
   useEffect(() => {
     const lure = active?.lure?.speciesId ? dexById(active.lure.speciesId) : undefined
     setTourFacts({
@@ -121,8 +122,10 @@ export default function MapScreen() {
 
   return (
     <div className="map-screen">
-      <Banner title="Map" right={<SettingsButton />} />
+      {/* No banner on Explore (10 Nov): the map is the centrepiece; settings float over it. */}
+      <h1 className="sr-only">Explore</h1>
       <div className="map-controls">
+        <div className="map-controls-top">
         <div className="chips">
           {focusName && (
             <Chip tone="coral" active onClick={() => setFocus(null)}>
@@ -148,15 +151,21 @@ export default function MapScreen() {
             New to me
           </Chip>
         </div>
+        <a className="map-gear" href="#/settings" aria-label="Settings">
+          <PixelIcon name="gear" colour="#213b32" size={22} />
+        </a>
+        </div>
         {ready && filtered && start && (
           <div className="map-status small">
-            <span>
-              <button type="button" className="linkish" data-tour="area" onClick={() => setAreaOpen(true)} aria-label={`Driving from ${start.label}. Change area`}>Driving from {start.label} ▾</button> · {filtered.shown.length} sites
-              {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive time)` : ''}
-              {focus && filtered.beyondLimit ? ` · ${filtered.beyondLimit} more beyond ${prefs.driveLimit} min` : ''}
-              {explore && !ready.region.isDemo ? ` · Explored ${explore.explored.length} of ${explore.total} spots` : ''}
+            {/* One line that never wraps, so the map keeps its room. The full story is in the aria-label. */}
+            <span className="map-status-text">
+              <button type="button" className="linkish" data-tour="area" onClick={() => setAreaOpen(true)} aria-label={`Driving from ${start.label}. Change area`}>From {start.label} ▾</button> · {filtered.shown.length} sites
+              {filtered.unknownDrive ? ` (+${filtered.unknownDrive} unknown drive)` : ''}
+              {focus && filtered.beyondLimit ? ` · ${filtered.beyondLimit} beyond ${prefs.driveLimit} min` : ''}
+              {explore && !ready.region.isDemo ? ` · explored ${explore.explored.length}/${explore.total}` : ''}
+              {ready.region.isDemo ? '' : ` · ${ageLabel(ready.region.generatedAt)}`}
             </span>
-            {ready.region.isDemo ? <DemoStamp /> : <Pill>Updated {ageLabel(ready.region.generatedAt)}</Pill>}
+            {ready.region.isDemo && <DemoStamp />}
           </div>
         )}
       </div>
@@ -191,6 +200,7 @@ export default function MapScreen() {
             fitKey={fitKey}
             insetBottom={cardH + 10}
           />
+          <FlyBy enabled={prefs.flyBys} busy={detailsOpen || findOpen || areaOpen || tourOn} cardH={cardH} />
           <SiteCard
             view={active}
             position={activeIdx + 1}

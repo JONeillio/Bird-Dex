@@ -100,7 +100,7 @@ Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal
 - [ ] G1 Share codes (with the year race, P13) · [ ] G2 Rival Call it (optional) · [ ] G3 Patch race (optional)
 - [ ] H1 List view · [ ] H2 Adventure skin
 - Tutorial with Pearl (renamed from Dot, 10 Nov): tickets T1-T7 in `TUTORIAL_PLAN.md` §5 (T0 welcome tour done 9 Nov, cut to 9 steps 10 Nov). Do T1 and T2 before Lewis's colleague tries it.
-- Map and sound (Joseph, 10 Nov): [ ] H3 Slimmer Explore chrome · [ ] H4 Fly-bys · [x] S1 Speech blips and button clicks · [ ] S2 Ambience (ask Joseph: field sounds, music or both)
+- Map and sound (Joseph, 10 Nov): [x] H3 Slimmer Explore chrome · [x] H4 Fly-bys · [x] S1 Speech blips and button clicks · [x] S2 Ambience (Joseph chose both: field sounds on the map screens, music elsewhere). Phone review: map share on real tiles, fly-by size, ambience volume on the phone speaker.
 - [ ] I1 First run · [ ] I2 Credits · [ ] I3 Accessibility · [ ] I4 Hand-over note
 
 **Recurring**
@@ -436,7 +436,7 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 
 **H2 Adventure skin.** BUILD_PLAN T4.1–T4.3 as written there, using the converted patterns in `public/assets/map/patterns/` when present (water, woodland and reeds tiles come from game art Set 1) and `pixelSprite` fallbacks otherwise. Segmented control Adventure | Field in map controls; switching keeps camera, selection, sheet and filters. Phone review needed for the look (the sandbox can't load tiles).
 
-**H3 Slimmer Explore chrome (Joseph, 10 Nov: "make the map more the centrepiece", keep the bird icons).** Today at 412×860 the map gets under half the screen. Target: at least 60%, nothing removed.
+**H3 Slimmer Explore chrome (built 10 Nov; Joseph: "make the map more the centrepiece", keep the bird icons).** Today at 412×860 the map gets under half the screen. Target: at least 60%, nothing removed.
 - Explore only: drop the "MAP" banner; the settings gear becomes a 40 px round button floating top-right over the map (with the info button under it).
 - Chips row: 34 px tall, 14 px text, hit area kept at 44 px with transparent padding. Scrolls as now.
 - Status line: one line, ellipsis when long: "From Erith ▾ · 16 sites · explored 0/156 · 7 h ago". The "Updated" and "Demo data" pills fold into it ("Demo" as a small stamp at its end).
@@ -444,7 +444,7 @@ Screens: seed a dev route `#/dev/duel` with fixed encounters and a fixed warden,
 - Spotlight ids (`site-card`, `site-view`, `drive-chips`, `find-bird`, `area`) must survive; the tour tests check them.
 Screens at 412 and 360: `npm run screens -- "#/" "#/ >> click:View spot"`; then a phone review on real tiles.
 
-**H4 Fly-bys (Joseph, 10 Nov: "every now and then a little birdie flies across").** Earlier hopping and flying sprites were removed because they competed with the pins, so these must be rare, small and quiet.
+**H4 Fly-bys (built 10 Nov, `src/domain/flyby.ts` + `src/features/map/FlyBy.tsx`, first one after 15–25 s; Joseph: "every now and then a little birdie flies across").** Earlier hopping and flying sprites were removed because they competed with the pins, so these must be rare, small and quiet.
 - `src/features/map/FlyBy.tsx`, mounted over the map canvas, under the card and controls; `pointer-events: none`, `aria-hidden`.
 - Every 35–70 s (random), only when the map has been still for 5 s, no sheet or tour is open and the page is visible. One bird; 1 in 4 a pair; Nov–Feb, 1 in 10 a small V of 5 geese.
 - A 16×12 two-frame silhouette drawn with `pixelSprite` in code (no new art), ink at 45% opacity, 2× scale. Crosses an empty band of the screen (avoid the card and the selected marker) along a gentle curve in 4–6 s: 3–5 flaps, a glide, 2 flaps, off screen. CSS transforms only, no canvas redraw.
@@ -455,7 +455,7 @@ Screens at 412 and 360: `npm run screens -- "#/" "#/ >> click:View spot"`; then 
 
 **S1 Speech blips and clicks (done 10 Nov).** `src/audio/sfx.ts`: `voice(ch)` plays a 26 ms square blip on every other falling letter of Pearl's speech, its pitch chosen from five notes by the letter (vowels a tone up), so a line sounds the same each time; `press` (one soft click on any button, from a capture listener in `App.tsx`; tabs keep their own blip); `page` (next line). All only with Sound on; the tour bar has its own Sound on/off switch so people find it.
 
-**S2 Ambience (needs Joseph's choice; build after H3).** Separate "Ambience" switch, off by default, its own volume, pauses when the tab is hidden, never plays before a tap. Two layers, both made in code (no audio files, nothing to license):
+**S2 Ambience (built 10 Nov; Joseph chose both layers).** Score (pure, tested): `src/audio/ambienceScore.ts`; engine: `src/audio/ambience.ts` (one shared AudioContext via `audioContext()`, dips under Pearl's voice through `setVoiceListener`); wired in `App.tsx` by route (`sceneForRoute`) and region (`isCoastal`); Settings has the switch and a volume slider. `npx tsx scripts/dev/ambience-preview.ts out.wav` renders a listenable preview from the same score. Original spec: Separate "Ambience" switch, off by default, its own volume, pauses when the tab is hidden, never plays before a tap. Two layers, both made in code (no audio files, nothing to license):
 - **Field sounds** on Explore: very quiet filtered-noise wind, plus a synthesised 8-bit chirp (short pitch sweeps and trills) every 4–12 s, busier at dawn and dusk by the phone's clock, gulls near the coast regions.
 - **Music** on Dex, Journal and Folk: a slow chiptune bed (triangle bass, square arpeggio, pentatonic, about 70 bpm, chord change every 8 bars, seeded so it wanders without looping obviously), ducked under Pearl's voice.
 Ask Joseph which of the two (or both) before building. Scheduler and note generation pure and tested in `src/audio/ambience.ts`.

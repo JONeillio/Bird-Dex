@@ -13,6 +13,7 @@ import { Banner, Chip, Panel } from '../../ui/components'
 import { BackButton } from '../shell/SettingsButton'
 import { GUIDE_AVATAR } from '../../art/guide'
 import { useTour } from '../../state/tour'
+import { ambience } from '../../audio/ambience'
 
 const KNOWN = new Set(STARTER_DEX.map((s) => s.id))
 
@@ -127,7 +128,38 @@ export default function SettingsScreen() {
             >
               {prefs.soundOn ? '8-bit sounds on' : '8-bit sounds off'}
             </Chip>
-            <p className="muted small">Little chiptune blips when you open the app, change tabs and record a bird. Off until you turn it on.</p>
+            <p className="muted small">Chiptune blips for buttons, tabs and new birds, and Pearl’s chatter as she talks. Off until you turn it on.</p>
+          </div>
+          <div className="stack tight">
+            <Chip
+              active={prefs.ambienceOn}
+              onClick={() => {
+                const next = !prefs.ambienceOn
+                setPref('ambienceOn', next)
+                // This tap is what lets the browser start the sound straight away.
+                if (next) {
+                  unlockAudio()
+                  ambience.configure(true, prefs.ambienceVolume)
+                }
+              }}
+            >
+              {prefs.ambienceOn ? 'Ambience on' : 'Ambience off'}
+            </Chip>
+            {prefs.ambienceOn && (
+              <label className="row gap small">
+                Volume
+                <input
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  value={prefs.ambienceVolume}
+                  onChange={(e) => setPref('ambienceVolume', Number(e.target.value))}
+                  aria-label="Ambience volume"
+                />
+              </label>
+            )}
+            <p className="muted small">Wind and 8-bit birdsong on the map (busiest at dawn), and a slow chiptune tune everywhere else. Made on your phone, quiet, and off until you turn it on.</p>
           </div>
           <div className="stack tight">
             <Chip
@@ -140,6 +172,12 @@ export default function SettingsScreen() {
               {prefs.hapticsOn ? 'Vibration on' : 'Vibration off'}
             </Chip>
             <p className="muted small">A short buzz when you catch a bird. Works on Android; iPhones ignore it.</p>
+          </div>
+          <div className="stack tight">
+            <Chip active={prefs.flyBys} onClick={() => setPref('flyBys', !prefs.flyBys)}>
+              {prefs.flyBys ? 'Birds flying over the map on' : 'Birds flying over the map off'}
+            </Chip>
+            <p className="muted small">Every minute or so a little bird crosses the map. Just for fun: they are not sightings. Off if your phone is set to reduce motion.</p>
           </div>
           <div className="stack tight">
             <Chip active={prefs.tiltOn} onClick={() => void turnOnTilt()}>

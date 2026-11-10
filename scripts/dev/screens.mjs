@@ -2,7 +2,7 @@
 // Phone-size screenshots of the built app, for checking UI work in the sandbox (Joseph's phone is ~412 px wide).
 // Usage: npm run build && npm run screens -- "#/dex" "#/map >> click:Find a bird >> type:input[type=search]|gr"
 // Steps after a route, separated by " >> ":
-//   click:<text>              click the first button/link/chip whose text contains <text>
+//   click:<text>              click the first button/link/chip whose text (or else aria-label) contains <text>
 //   type:<css selector>|<text> type into an input
 //   upload:<css selector>|<path> attach a file to a file input (path relative to the repo root)
 //   scroll:<text>             scroll the first heading containing <text> into view
@@ -63,7 +63,8 @@ try {
       const arg = rest.join(':')
       if (kind === 'click') {
         const ok = await page.evaluate((t) => {
-          const el = [...document.querySelectorAll('button, a, [role=button]')].find((e) => e.textContent?.includes(t))
+          const all = [...document.querySelectorAll('button, a, [role=button]')]
+          const el = all.find((e) => e.textContent?.includes(t)) ?? all.find((e) => e.getAttribute('aria-label')?.includes(t))
           if (el) (el).click()
           return !!el
         }, arg)

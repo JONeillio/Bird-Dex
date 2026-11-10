@@ -27,6 +27,12 @@ export interface Prefs {
   areaV2: boolean
   /** Tours with Pearl that were finished or turned down ("Don't show this again"), so they don't start by themselves. */
   toursDone: string[]
+  /** Now and then a small bird flies across the map (decoration). */
+  flyBys: boolean
+  /** Background field sounds on Explore and chiptune music elsewhere. Off until turned on. */
+  ambienceOn: boolean
+  /** 0-1. */
+  ambienceVolume: number
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -45,6 +51,9 @@ export const DEFAULT_PREFS: Prefs = {
   keepAwake: false,
   lastBackupAt: null,
   toursDone: [],
+  flyBys: true,
+  ambienceOn: false,
+  ambienceVolume: 0.5,
 }
 
 const KEY = 'bq.prefs'
