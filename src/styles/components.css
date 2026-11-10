@@ -675,6 +675,8 @@
 .tour-dock > * { pointer-events: auto; }
 .tour-dock.bottom { bottom: calc(var(--safe-bottom) + 8px); }
 .tour-dock.top { top: calc(env(safe-area-inset-top, 0px) + 8px); }
+/* At the top of the screen the buttons sit above Pearl, so her speech and the map under it stay clear. */
+.tour-dock.top .tour-bar, .tour-dock.top .dlg-choices { order: -1; }
 .tour-speech { position: relative; cursor: pointer; border-radius: 8px; -webkit-tap-highlight-color: transparent; }
 .tour-speech:focus-visible { outline: 3px solid var(--discovery); outline-offset: 2px; }
 .fh-canvas { display: block; width: 100%; height: auto; aspect-ratio: 360 / 166; image-rendering: pixelated; }
