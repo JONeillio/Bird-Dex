@@ -35,6 +35,8 @@ export interface Prefs {
   ambienceVolume: number
   /** Set once ambience has been switched on for phones that saved prefs before it became on by default (10 Nov). */
   audioV2: boolean
+  /** Set once Pearl's voice and button sounds were switched on for phones that saved them off (10 Nov). */
+  soundV2: boolean
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -42,7 +44,7 @@ export const DEFAULT_PREFS: Prefs = {
   driveLimit: 60,
   unrecordedOnly: true,
   targetsOnly: false,
-  soundOn: false, // audio is opt-in
+  soundOn: true, // voice blips and button clicks; start on the first tap
   regionId: 'se-london',
   startId: 'erith',
   areaV2: true,
@@ -57,6 +59,7 @@ export const DEFAULT_PREFS: Prefs = {
   ambienceOn: true,
   ambienceVolume: 0.4,
   audioV2: true,
+  soundV2: true,
 }
 
 const KEY = 'bq.prefs'
@@ -74,6 +77,8 @@ export function loadPrefs(): Prefs {
     if (p.areaV2 !== true) merged = { ...merged, regionId: DEFAULT_PREFS.regionId, startId: DEFAULT_PREFS.startId, areaV2: true }
     // One-time: the tune became on by default (10 Nov), so phones that saved "off" before then get it switched on once.
     if (p.audioV2 !== true) merged = { ...merged, ambienceOn: true, ambienceVolume: DEFAULT_PREFS.ambienceVolume, audioV2: true }
+    // One-time: voice blips and button clicks became on by default (10 Nov).
+    if (p.soundV2 !== true) merged = { ...merged, soundOn: true, soundV2: true }
     return merged
   } catch {
     return { ...DEFAULT_PREFS }
