@@ -1,0 +1,54 @@
+{
+  "pack": "Bird-Dex Dot Lau tour dialogue poses",
+  "version": "1.0",
+  "assets": [
+    {
+      "file": "Dot-Lau-Tour-Poses.png",
+      "role": "preview"
+    },
+    {
+      "file": "README.md",
+      "role": "integration-notes"
+    },
+    {
+      "file": "dot-tour-aside-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-chat-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-clarify-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-compare-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-introduce-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-over-to-you-96.png",
+      "role": "portrait",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "file": "dot-tour-scenes.json",
+      "role": "sample-dialogue"
+    }
+  ]
+}

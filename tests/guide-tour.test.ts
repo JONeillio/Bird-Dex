@@ -1,7 +1,9 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { DOT_ART, DOT_AVATAR, DOT_POSES, DOT_SKETCH } from '../src/art/dot'
+import { aBird, birdInSentence } from '../src/domain/speech'
+import { voicePitch } from '../src/audio/sfx'
+import { GUIDE_ART, GUIDE_AVATAR, GUIDE_POSES, GUIDE_SKETCH } from '../src/art/guide'
 import { TOURS } from '../src/data/tours'
 import { EXHIBIT_ART } from '../src/features/tour/exhibits'
 import { routeMatches, unionBox } from '../src/features/tour/spotlight'
@@ -66,16 +68,16 @@ describe('Fieldhand layout', () => {
   })
 })
 
-describe('Dot art', () => {
+describe('Pearl art', () => {
   it('has every pose at 96x96, the head icon at 32x32 and two sketch cels', () => {
-    for (const p of DOT_POSES) {
-      expect(pngSize(publicPath(DOT_ART[p].src))).toEqual([96, 96])
-      const [mx, my] = DOT_ART[p].mouth
+    for (const p of GUIDE_POSES) {
+      expect(pngSize(publicPath(GUIDE_ART[p].src))).toEqual([96, 96])
+      const [mx, my] = GUIDE_ART[p].mouth
       expect(mx).toBeGreaterThan(0)
       expect(my).toBeLessThan(96)
     }
-    expect(pngSize(publicPath(DOT_AVATAR.src))).toEqual([32, 32])
-    expect(pngSize(publicPath(DOT_SKETCH.src))).toEqual([192, 96])
+    expect(pngSize(publicPath(GUIDE_AVATAR.src))).toEqual([32, 32])
+    expect(pngSize(publicPath(GUIDE_SKETCH.src))).toEqual([192, 96])
     for (const f of ['fieldhand-land', 'fieldhand-lock', 'bubble-paper-9slice', 'bubble-lifer-9slice']) expect(existsSync(`public/assets/ui/fieldhand/${f}.png`)).toBe(true)
     expect(pngSize('public/assets/ui/fieldhand/bubble-paper-9slice.png')).toEqual([28, 28])
   })
@@ -96,7 +98,7 @@ describe('tour scripts', () => {
   const tabs = [...src.matchAll(/\{ name: '(\w+)', label: '[^']+', icon:/g)].map((m) => `tab-${m[1]}`)
   const ids = new Set([...src.matchAll(/(?:data-tour|tour)="([a-z0-9-]+)"/g)].map((m) => m[1]).concat(tabs))
   // Long but realistic values, so a line that fits here fits on a phone.
-  const facts = { siteName: 'Rainham Marshes', bird: 'Great Crested Grebe', when: '12 days ago', minutes: 48, newCount: 23, recorded: 104, dexSize: 104 }
+  const facts = { siteName: 'Rainham Marshes', aBird: 'a great crested grebe', theBird: 'the great crested grebe', when: '12 days ago', minutes: 48, newCount: 23, recorded: 104, dexSize: 104 }
   const known = new Set(Object.keys(facts))
 
   for (const [id, tour] of Object.entries(TOURS)) {
@@ -146,5 +148,37 @@ describe('starting the tour', () => {
     expect(unionBox([r(10, 10, 50, 30), r(70, 12, 50, 30)], 400, 800)).toEqual({ x: 10, y: 10, w: 110, h: 32 })
     expect(unionBox([r(380, 10, 50, 30)], 400, 800)).toEqual({ x: 380, y: 10, w: 20, h: 30 })
     expect(unionBox([r(0, 0, 0, 0)], 400, 800)).toBeNull()
+  })
+})
+
+describe('bird names in Pearl’s speech', () => {
+  it('lower-cases names but keeps places and people', () => {
+    expect(birdInSentence('Barn Owl')).toBe('barn owl')
+    expect(birdInSentence('Canada Goose')).toBe('Canada goose')
+    expect(birdInSentence("Cetti's Warbler")).toBe("Cetti's warbler")
+    expect(birdInSentence('Black-headed Gull')).toBe('black-headed gull')
+  })
+  it('picks a or an', () => {
+    expect(aBird('Barn Owl')).toBe('a barn owl')
+    expect(aBird('Avocet')).toBe('an avocet')
+    expect(aBird('Oystercatcher')).toBe('an oystercatcher')
+    expect(aBird('Egyptian Goose')).toBe('an Egyptian goose')
+    expect(aBird('Eurasian Wren')).toBe('a Eurasian wren')
+  })
+})
+
+describe('Pearl’s poses and voice', () => {
+  it('keeps the sketchbook for birds: the welcome tour only shows her drawing at the end', () => {
+    const steps = TOURS.welcome.steps
+    for (const s of steps.slice(0, -1)) for (const l of s.lines) expect(GUIDE_ART[l.pose].drawing, `${s.id}: ${l.text}`).toBe(false)
+  })
+  it('the welcome tour stays short', () => {
+    expect(TOURS.welcome.steps.length).toBeLessThanOrEqual(10)
+  })
+  it('speech blips are steady and only for letters and digits', () => {
+    expect(voicePitch('a')).toBe(voicePitch('a'))
+    expect(voicePitch('a')).toBeGreaterThan(0)
+    expect(voicePitch(' ')).toBe(0)
+    expect(voicePitch('.')).toBe(0)
   })
 })

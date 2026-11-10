@@ -7,7 +7,7 @@
 //   upload:<css selector>|<path> attach a file to a file input (path relative to the repo root)
 //   scroll:<text>             scroll the first heading containing <text> into view
 //   wait:<ms>                 wait
-// WIDTH=360 npm run screens -- ... checks the narrowest phones. TOUR=1 lets Dot's welcome tour start by itself.
+// WIDTH=360 npm run screens -- ... checks the narrowest phones. TOUR=1 lets Pearl's welcome tour start by itself.
 // Saves /tmp/screens/NN.png (one per argument) and prints page errors. Exit code 1 if any page error.
 // Map tiles can't load in the sandbox: the map shows plain grass with demo data. That is expected.
 import { spawn } from 'node:child_process'
@@ -42,7 +42,7 @@ try {
     const [route, ...steps] = spec.split(' >> ')
     const page = await browser.newPage()
     await page.setViewport({ width: Number(process.env.WIDTH ?? 412), height: 860, deviceScaleFactor: 2 })
-    // Dot's welcome tour starts by itself on a fresh phone and would cover every screenshot. TOUR=1 keeps it.
+    // Pearl's welcome tour starts by itself on a fresh phone and would cover every screenshot. TOUR=1 keeps it.
     if (!process.env.TOUR)
       await page.evaluateOnNewDocument(() => {
         try {

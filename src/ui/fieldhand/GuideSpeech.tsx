@@ -1,31 +1,33 @@
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from 'react'
-import { DOT_ART, DOT_NAME, DOT_SKETCH, type DotPose } from '../../art/dot'
+import { GUIDE_ART, GUIDE_NAME, GUIDE_SKETCH, type GuidePose } from '../../art/guide'
 import { useReducedMotion } from '../dialogue/useReducedMotion'
+import { voice } from '../../audio/sfx'
+import { useStore } from '../../state/store'
 import { FieldDialogue, loadFieldhand, loadImage, type DialogueState } from './FieldDialogue'
 
-export interface DotLine {
+export interface GuideLine {
   text: string
-  pose: DotPose
+  pose: GuidePose
   /** Gold paper for big moments (a lifer, the end of a tour). */
   skin?: 'paper' | 'lifer'
   /** Override the pose's own facing. */
   mirror?: boolean
 }
 
-export interface DotSpeechHandle {
+export interface GuideSpeechHandle {
   /** Finish the page, or turn to the next page. False once the whole line is showing. */
   advance: () => boolean
 }
 
 /**
- * Dot's speech bubble: Fieldhand letters fall in one by one and stamp upright. Purely visual: the canvas is hidden
+ * Pearl's speech bubble: Fieldhand letters fall in one by one and stamp upright. Purely visual: the canvas is hidden
  * from screen readers and the full line is announced once through a live region. Taps are handled by the parent
  * (so the whole panel can be the tap target); call `advance` on the handle.
  */
-export function DotSpeech({ line, onState, ref, name = DOT_NAME }: {
-  line: DotLine
+export function GuideSpeech({ line, onState, ref, name = GUIDE_NAME }: {
+  line: GuideLine
   onState?: (s: DialogueState) => void
-  ref?: Ref<DotSpeechHandle>
+  ref?: Ref<GuideSpeechHandle>
   name?: string
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -33,8 +35,11 @@ export function DotSpeech({ line, onState, ref, name = DOT_NAME }: {
   const reduced = useReducedMotion()
   const [failed, setFailed] = useState(false)
   const onStateRef = useRef(onState)
+  const soundOn = useStore((s) => s.prefs.soundOn)
+  const soundRef = useRef(soundOn)
   useEffect(() => {
     onStateRef.current = onState
+    soundRef.current = soundOn
   })
 
   useImperativeHandle(ref, () => ({ advance: () => engine.current?.advance() ?? false }), [])
@@ -42,13 +47,17 @@ export function DotSpeech({ line, onState, ref, name = DOT_NAME }: {
   useEffect(() => {
     let live = true
     let celTimer = 0
-    const art = DOT_ART[line.pose]
+    const art = GUIDE_ART[line.pose]
     const animate = line.pose === 'sketching' && !reduced
-    Promise.all([loadFieldhand(), loadImage(animate ? DOT_SKETCH.src : art.src)])
+    Promise.all([loadFieldhand(), loadImage(animate ? GUIDE_SKETCH.src : art.src)])
       .then(([res, image]) => {
         if (!live || !canvasRef.current) return
         if (!engine.current) engine.current = new FieldDialogue(canvasRef.current, res, (s) => onStateRef.current?.(s))
-        const cel = (i: number) => ({ image, sx: i * DOT_SKETCH.cell, sy: 0, size: DOT_SKETCH.cell })
+        // Her "voice": a soft blip on every other letter as it falls (only with sound on).
+        engine.current.onLetter = (ch, i) => {
+          if (i % 2 === 0) voice(ch, soundRef.current)
+        }
+        const cel = (i: number) => ({ image, sx: i * GUIDE_SKETCH.cell, sy: 0, size: GUIDE_SKETCH.cell })
         engine.current.say({
           text: line.text,
           portrait: animate ? cel(0) : { image },
@@ -61,11 +70,11 @@ export function DotSpeech({ line, onState, ref, name = DOT_NAME }: {
         if (animate) {
           let step = 0
           const tick = () => {
-            step = (step + 1) % DOT_SKETCH.sequence.length
-            engine.current?.setPortrait(cel(DOT_SKETCH.sequence[step][0]))
-            celTimer = window.setTimeout(tick, DOT_SKETCH.sequence[step][1])
+            step = (step + 1) % GUIDE_SKETCH.sequence.length
+            engine.current?.setPortrait(cel(GUIDE_SKETCH.sequence[step][0]))
+            celTimer = window.setTimeout(tick, GUIDE_SKETCH.sequence[step][1])
           }
-          celTimer = window.setTimeout(tick, DOT_SKETCH.sequence[0][1])
+          celTimer = window.setTimeout(tick, GUIDE_SKETCH.sequence[0][1])
         }
       })
       .catch(() => {

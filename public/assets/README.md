@@ -12,7 +12,7 @@ Everything here is a converted copy of a draft in `research/art-drafts/`. Show s
 | `keepsakes/` | 12 keepsake icons | 32x32 | `src/art/keepsakes.ts` | `.../game-art/set-d-keepsake-icons/` |
 | `ui/dialogue/` | Dialogue box, nameplate, buttons, sheet frame, handle, arrow, dots | various, nine-slice | `src/art/dialogueKit.ts` | `.../game-art/set-e-dialogue-kit/` |
 | `stamps/` | Lifer, first of year, explored, new best, rank up, unexplored | 32x32 | `src/art/marks.ts` | `.../game-art/set-a-stamps-tiers/` |
-| `guide/dot/` | Dot Lau, the tutorial guide: 8 poses, sketching cels (192x96), head icon | 96x96, 32x32 | `src/art/dot.ts` | `research/art-drafts/game-art/set-f-dot-lau/` |
+| `guide/dot/` | Pearl, the tutorial guide (art files named dot-lau / dot-tour): 8 sketchbook and 6 everyday poses, sketching cels (192x96), head icon | 96x96, 32x32 | `src/art/guide.ts` | `research/art-drafts/game-art/set-f-dot-lau/`, `set-h-dot-tour-poses/` |
 | `ui/fieldhand/` | Fieldhand bitmap font (falling and stamped atlases, 106 characters) and the paper and gold speech bubbles (nine-slice + tail) | 320x196 atlases, 28x28 bubbles | `src/ui/fieldhand/` (metrics in `src/art/fieldhand/`) | `.../game-art/set-g-fieldhand-dialogue/` |
 | `tiers/` | Rarity tier marks 1-6 | 16x16 | `src/art/marks.ts` | `.../game-art/set-a-stamps-tiers/` |
 

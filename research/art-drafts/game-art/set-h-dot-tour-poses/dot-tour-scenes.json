@@ -1,0 +1,86 @@
+[
+  {
+    "portrait": "dot-tour-chat",
+    "filename": "dot-tour-chat-96.png",
+    "label": "Have a chat",
+    "when": "Greetings, transitions and ordinary narration.",
+    "gesture": "Shoulders square, hands down, a small conversational smile.",
+    "mouth": [
+      47,
+      46
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "Shuffle up. There’s a dry bit of bench just here."
+  },
+  {
+    "portrait": "dot-tour-introduce",
+    "filename": "dot-tour-introduce-96.png",
+    "label": "Introduce a list",
+    "when": "A section enters focus. Use this for the “Reported here” tour step.",
+    "gesture": "Open hand towards the list, with an easy turn of the head.",
+    "mouth": [
+      54,
+      46
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "Here’s what birders have seen lately. Each row has a date and a checklist."
+  },
+  {
+    "portrait": "dot-tour-clarify",
+    "filename": "dot-tour-clarify-96.png",
+    "label": "Flag a detail",
+    "when": "Dates, qualifications and details that are easy to overlook.",
+    "gesture": "Dot peers over her red glasses, one hand on the rim.",
+    "mouth": [
+      46,
+      52
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "See the date? That’s when the gull was seen."
+  },
+  {
+    "portrait": "dot-tour-compare",
+    "filename": "dot-tour-compare-96.png",
+    "label": "Count it out",
+    "when": "Two checks, two values or a short sequence of instructions.",
+    "gesture": "Dot counts on her fingers, eyes following the count.",
+    "mouth": [
+      47,
+      47
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "Six days ago is when. Sixty is how many. Quite a crowd."
+  },
+  {
+    "portrait": "dot-tour-aside",
+    "filename": "dot-tour-aside-96.png",
+    "label": "Slip in an aside",
+    "when": "Optional flavour once the practical point is clear.",
+    "gesture": "A cupped hand at her cheek and a sidelong glance.",
+    "mouth": [
+      34,
+      49
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "Sixty gulls. I’d eat those chips somewhere else."
+  },
+  {
+    "portrait": "dot-tour-over-to-you",
+    "filename": "dot-tour-over-to-you-96.png",
+    "label": "Hand it back",
+    "when": "Choices, questions and the end of a tour.",
+    "gesture": "Dot eases back, folds her arms and waits with a smile.",
+    "mouth": [
+      52,
+      42
+    ],
+    "skin": "paper",
+    "mirror": false,
+    "text": "I fancy the redshank. What about you?"
+  }
+]

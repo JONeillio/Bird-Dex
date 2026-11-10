@@ -11,7 +11,7 @@ import { useStore, type Prefs } from '../../state/store'
 import { useUi } from '../../state/ui'
 import { Banner, Chip, Panel } from '../../ui/components'
 import { BackButton } from '../shell/SettingsButton'
-import { DOT_AVATAR } from '../../art/dot'
+import { GUIDE_AVATAR } from '../../art/guide'
 import { useTour } from '../../state/tour'
 
 const KNOWN = new Set(STARTER_DEX.map((s) => s.id))
@@ -102,12 +102,12 @@ export default function SettingsScreen() {
         <Panel className="stack">
           <h2 className="h-display small-h">Help</h2>
           <div className="row gap">
-            <img className="dot-avatar" src={DOT_AVATAR.src} width={64} height={64} alt="Dot Lau" draggable={false} />
+            <img className="dot-avatar" src={GUIDE_AVATAR.src} width={64} height={64} alt="Pearl" draggable={false} />
             <div className="stack tight">
               <button type="button" className="btn primary small" onClick={() => useTour.getState().start('welcome')}>
-                Take the tour with Dot
+                Take the tour with Pearl
               </button>
-              <p className="muted small">Dot walks you round the map, the Dex and the Journal. About five minutes.</p>
+              <p className="muted small">A quick walk round the map, the Dex and the Journal. About two minutes.</p>
             </div>
           </div>
         </Panel>

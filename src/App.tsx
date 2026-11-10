@@ -84,7 +84,7 @@ function Screen({ route }: { route: Route }) {
     case 'settings':
       return <SettingsScreen />
     case 'dev':
-      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : route.page === 'dialogue' || route.page === 'dot' ? <DevDialogue /> : <DevUi />
+      return route.page === 'art' ? <DevArt /> : route.page === 'engine' ? <DevEngine /> : route.page === 'dialogue' || route.page === 'dot' || route.page === 'guide' ? <DevDialogue /> : <DevUi />
   }
 }
 
@@ -103,7 +103,7 @@ export default function App() {
 
   useEffect(() => void load().then(() => useGame.getState().load()), [load])
 
-  // Dot's welcome tour starts by itself on a first visit, until it is finished or turned down.
+  // Pearl's welcome tour starts by itself on a first visit, until it is finished or turned down.
   const toursDone = useStore((s) => s.prefs.toursDone)
   const tourOn = useTour((s) => s.tourId !== null)
   const snoozed = useTour((s) => s.snoozed)
@@ -129,6 +129,16 @@ export default function App() {
     window.addEventListener('pointerdown', onFirst)
     return () => window.removeEventListener('pointerdown', onFirst)
   }, [soundOn])
+
+  // A soft click on every button press (tabs have their own blip, below). Only with sound on.
+  useEffect(() => {
+    const onPress = (e: PointerEvent) => {
+      const el = (e.target as Element | null)?.closest?.('button, [role="button"], a.chip')
+      if (el && !el.closest('.tabbar') && !(el as HTMLButtonElement).disabled) play('press', soundRef.current, 0.04)
+    }
+    window.addEventListener('pointerdown', onPress, true)
+    return () => window.removeEventListener('pointerdown', onPress, true)
+  }, [])
 
   // A little blip when you move between the main tabs.
   useEffect(() => {

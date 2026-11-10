@@ -1,4 +1,4 @@
-// Canvas renderer for Dot's speech bubble, ported from the kit's dialogue-player.js (set-g-fieldhand-dialogue).
+// Canvas renderer for Pearl's speech bubble, ported from the kit's dialogue-player.js (set-g-fieldhand-dialogue).
 // Differences from the kit: TypeScript; letters fall from above before landing (see MOTION in layout.ts); the
 // portrait can be a cel of a sprite sheet so the sketching pose can animate; a frame loop only runs while letters
 // move and stops when the page settles.
@@ -71,6 +71,10 @@ export class FieldDialogue {
   private page = 0
   private letters: Letter[] = []
   private locked = 0
+  /** Letters that have started to fall (for the speech blips). */
+  private fallen = 0
+  /** Called as each letter starts to fall: the speech sound hangs off this. */
+  onLetter?: (ch: string, index: number) => void
   private started = 0
   private frame = 0
   private timer = 0
@@ -143,7 +147,7 @@ export class FieldDialogue {
     }
     g.drawImage(skin.tail, left, joinY, tipX - left + 1, Math.max(13, rayY(tipX) - joinY + 1))
     // Name tab, lettered with the same bitmap font reversed out of the ink.
-    const who = (scene.name ?? 'Dot Lau').toUpperCase()
+    const who = (scene.name ?? 'Pearl').toUpperCase()
     let tagW = 22
     for (const ch of who) tagW += glyphFor(ch).advance
     g.fillStyle = INK
@@ -171,6 +175,7 @@ export class FieldDialogue {
     this.fixed.getContext('2d')!.clearRect(0, 0, W, H)
     this.letters = scheduleLetters(this.pages[this.page] ?? [])
     this.locked = 0
+    this.fallen = 0
     this.done = false
     this.started = performance.now()
     if (this.scene?.reducedMotion || this.letters.length === 0) this.finish()
@@ -184,6 +189,10 @@ export class FieldDialogue {
     const now = performance.now() - this.started
     // Stamp letters that have finished landing onto the fixed layer, so each frame only draws the moving few.
     const fg = this.fixed.getContext('2d')!
+    while (this.fallen < this.letters.length && this.letters[this.fallen].t <= now) {
+      this.onLetter?.(this.letters[this.fallen].ch, this.fallen)
+      this.fallen++
+    }
     while (this.locked < this.letters.length && letterPhase(this.letters[this.locked], now).state === 'locked') {
       const l = this.letters[this.locked++]
       this.stamp(fg, l.ch, 'lock', l.x, l.y)
@@ -237,6 +246,7 @@ export class FieldDialogue {
     fg.clearRect(0, 0, W, H)
     for (const l of this.letters) this.stamp(fg, l.ch, 'lock', l.x, l.y)
     this.locked = this.letters.length
+    this.fallen = this.letters.length
     this.done = true
     this.paint(Infinity)
     this.emit()

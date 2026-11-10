@@ -1,4 +1,4 @@
-// Walks Dot's whole welcome tour on a fresh phone and saves a screenshot per beat to /tmp/tour/ (run after npm run build).
+// Walks Pearl's whole welcome tour on a fresh phone and saves a screenshot per beat to /tmp/tour/ (run after npm run build).
 // node scripts/dev/tour-walk.mjs   ·   WIDTH=360 node scripts/dev/tour-walk.mjs
 import { spawn } from 'node:child_process'
 import { mkdirSync } from 'node:fs'

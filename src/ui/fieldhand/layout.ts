@@ -1,4 +1,4 @@
-// Fieldhand text layout and letter timing (Dot's dialogue kit, 9 Nov 2026). Pure, so it can be tested without a canvas.
+// Fieldhand text layout and letter timing (Pearl's dialogue kit, 9 Nov 2026). Pure, so it can be tested without a canvas.
 // Ported from research/art-drafts/game-art/set-g-fieldhand-dialogue/dialogue-player.js; the falling drop is ours.
 import glyphData from '../../art/fieldhand/glyphs.json'
 

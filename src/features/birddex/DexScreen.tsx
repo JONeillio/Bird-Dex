@@ -51,7 +51,7 @@ export default function DexScreen() {
 
   const count = STARTER_DEX.filter((s) => recorded.has(s.id)).length
   const setTourFacts = useTour((s) => s.setFacts)
-  // Dot only quotes your count once there is one ("0 of 104 so far" would sound like a telling-off).
+  // Pearl only quotes your count once there is one ("0 of 104 so far" would sound like a telling-off).
   useEffect(() => setTourFacts({ recorded: count > 0 ? count : null, dexSize: DEX_SIZE }), [count, setTourFacts])
   const pct = Math.round((count / DEX_SIZE) * 100)
   const listEntries = tab === 'year' ? yearEntries : lifeEntries

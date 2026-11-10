@@ -5,21 +5,21 @@ import { play } from '../../audio/sfx'
 import { useStore } from '../../state/store'
 import { useTour } from '../../state/tour'
 import { Choices, StripSprite } from '../../ui/dialogue'
-import { DotSpeech, type DotSpeechHandle } from '../../ui/fieldhand/DotSpeech'
+import { GuideSpeech, type GuideSpeechHandle } from '../../ui/fieldhand/GuideSpeech'
 import { resolveText } from '../../ui/fieldhand/layout'
 import { EXHIBIT_ART, exhibitScale } from './exhibits'
 import { findTargets, routeMatches, spotlightRect, type Box } from './spotlight'
 
 const PAD = 6
 
-// Whether the last input was a key press (so focus moves to Dot for keyboard users only).
+// Whether the last input was a key press (so focus moves to Pearl for keyboard users only).
 let keyboardUser = false
 if (typeof window !== 'undefined') {
   window.addEventListener('keydown', () => (keyboardUser = true), true)
   window.addEventListener('pointerdown', () => (keyboardUser = false), true)
 }
 
-/** The tour layer: dims the app, spotlights one thing, and docks Dot's bubble away from it. Mounted once in App. */
+/** The tour layer: dims the app, spotlights one thing, and docks Pearl's bubble away from it. Mounted once in App. */
 export function TourOverlay() {
   const tourId = useTour((s) => s.tourId)
   const step = useTour((s) => s.step)
@@ -34,7 +34,8 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
   const stop = useTour((s) => s.stop)
   const facts = useTour((s) => s.facts)
   const soundOn = useStore((s) => s.prefs.soundOn)
-  const speech = useRef<DotSpeechHandle>(null)
+  const setPref = useStore((s) => s.setPref)
+  const speech = useRef<GuideSpeechHandle>(null)
   const panel = useRef<HTMLDivElement>(null)
   const [lineIdx, setLineIdx] = useState(0)
   const [done, setDone] = useState(false)
@@ -44,7 +45,7 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
   useEffect(() => {
     if (step.route && !routeMatches(window.location.hash, step.route)) window.location.hash = step.route
     play('blip', soundOn)
-    // Keyboard users land on Dot so Enter carries on. Touch users get no focus ring.
+    // Keyboard users land on Pearl so Enter carries on. Touch users get no focus ring.
     if (keyboardUser) panel.current?.focus({ preventScroll: true })
     // Only when the step changes.
     // oxlint-disable-next-line react-hooks/exhaustive-deps
@@ -92,13 +93,14 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
   const advance = useCallback(() => {
     if (speech.current?.advance()) return
     if (!lastLine) {
+      play('page', soundOn, 0.04)
       setDone(false)
       setLineIdx((i) => i + 1)
       return
     }
     if (step.choices) return
     next()
-  }, [lastLine, step.choices, next])
+  }, [lastLine, step.choices, next, soundOn])
 
   // Skip with Escape, carry on with Enter or Space (the panel is focused).
   useEffect(() => {
@@ -128,7 +130,7 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
           <div className="tour-dim" style={{ left: 0, top: hole.y + hole.h, right: 0, bottom: 0 }} onClick={advance} />
           <div className="tour-dim" style={{ left: 0, top: hole.y, width: Math.max(0, hole.x), height: hole.h }} onClick={advance} />
           <div className="tour-dim" style={{ left: hole.x + hole.w, top: hole.y, right: 0, height: hole.h }} onClick={advance} />
-          {/* On "tap Dot" steps the spotlit thing is for looking at, so it can't be pressed by accident. */}
+          {/* On "tap Pearl" steps the spotlit thing is for looking at, so it can't be pressed by accident. */}
           {step.advance !== 'target' && <div className="tour-block" style={rectStyle(hole)} onClick={advance} />}
           <div className="tour-ring" style={rectStyle(hole)} aria-hidden />
         </>
@@ -147,7 +149,7 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
           className="tour-speech"
           role="button"
           tabIndex={0}
-          aria-label={done ? (showChoices ? 'Dot has finished' : 'Next') : 'Show the whole line'}
+          aria-label={done ? (showChoices ? 'Pearl has finished' : 'Next') : 'Show the whole line'}
           onClick={advance}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -156,7 +158,7 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
             }
           }}
         >
-          <DotSpeech ref={speech} line={{ text, pose: line.pose, skin: line.skin, mirror: line.mirror }} onState={(s) => setDone(s.done && s.page + 1 >= s.pages)} />
+          <GuideSpeech ref={speech} line={{ text, pose: line.pose, skin: line.skin, mirror: line.mirror }} onState={(s) => setDone(s.done && s.page + 1 >= s.pages)} />
           {done && !showChoices && (
             <span className="tour-arrow" aria-hidden>
               <StripSprite src={arrow.src} frameW={arrow.frames!.w} frameH={arrow.frames!.h} frames={arrow.frames!.count} fps={2} />
@@ -171,9 +173,21 @@ function StepView({ step, index, total, title }: { step: TourStep; index: number
               Skip tour
             </button>
             <span className="muted small">
-              {step.advance === 'target' && done && step.hint ? `${step.hint} · ` : ''}
-              {index + 1} / {total}
+              {/* On "tap it" steps the hint replaces the count, so the bar never wraps on a narrow phone. */}
+              {step.advance === 'target' && done && step.hint ? step.hint : `${index + 1} / ${total}`}
             </span>
+            <button
+              type="button"
+              className="linkish small"
+              aria-pressed={soundOn}
+              onClick={() => {
+                setPref('soundOn', !soundOn)
+                // Turning sound on is a tap, so the browser lets this first sound through.
+                if (!soundOn) play('blip', true)
+              }}
+            >
+              {soundOn ? 'Sound on' : 'Sound off'}
+            </button>
             <button type="button" className="btn small" onClick={() => (done && lastLine ? next() : advance())}>
               Next ▸
             </button>

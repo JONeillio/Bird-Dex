@@ -1,31 +1,40 @@
 {
   "schema": 1,
-  "version": "tours-v1",
+  "version": "tours-v2",
   "tours": {
     "welcome": {
-      "title": "A walk round with Dot",
+      "title": "A quick walk round with Pearl",
       "auto": true,
       "steps": [
         {
           "id": "hello",
           "lines": [
-            { "pose": "talking", "text": "Oh, hello. Dot Lau. I look after the Dex round here." },
-            { "pose": "explaining", "text": "Forty years painting shop signs in Deptford." },
-            { "pose": "talking", "text": "Birds fidget more than shopkeepers, but they don’t haggle." },
-            { "pose": "talking", "text": "Shall I show you round? Five minutes, and only a few drawings." }
+            {
+              "pose": "chat",
+              "text": "Hello, love. I’m Pearl. Forty years painting shop signs in Deptford."
+            },
+            {
+              "pose": "aside",
+              "text": "Birds are easier. They never argue about how you spell “café”."
+            },
+            {
+              "pose": "over-to-you",
+              "text": "Fancy the quick tour? Two minutes. I’ll talk fast."
+            }
           ],
           "choices": [
-            { "id": "next", "label": "Show me round" },
-            { "id": "later", "label": "Not now" },
-            { "id": "never", "label": "Don’t show this again" }
-          ]
-        },
-        {
-          "id": "explore",
-          "route": "#/map",
-          "lines": [
-            { "pose": "pointing", "text": "This is Explore. Every pin is a real birding spot near you." },
-            { "pose": "talking", "text": "The reports come from birders on eBird, so they’re days old, not years." }
+            {
+              "id": "next",
+              "label": "Go on then"
+            },
+            {
+              "id": "later",
+              "label": "Not now"
+            },
+            {
+              "id": "never",
+              "label": "Don’t show this again"
+            }
           ]
         },
         {
@@ -33,50 +42,52 @@
           "route": "#/map",
           "target": "site-card",
           "lines": [
-            { "pose": "pointing", "text": "This card is today’s pick: {siteName}.", "fallback": "This card is today’s pick: the best spot within your drive." },
-            { "pose": "explaining", "text": "{bird} was seen there {when}. It’s {minutes} minutes away.", "fallback": "It tells you what’s been seen there lately, and how far it is." },
-            { "pose": "talking", "text": "{newCount} birds there aren’t in your Dex yet. That’s the point of going.", "fallback": "The more birds there you haven’t got, the higher it ranks." }
-          ]
-        },
-        {
-          "id": "selected-pin",
-          "route": "#/map",
-          "selector": ".mk-selected",
-          "lines": [{ "pose": "pointing", "text": "The coral pin is that spot on the map. The bird inside is the one worth the petrol." }]
-        },
-        {
-          "id": "icons",
-          "route": "#/map",
-          "lines": [
-            { "pose": "explaining", "exhibit": "pin-site", "text": "Little pins are other spots with fresh reports. Tap one to swap." },
-            { "pose": "pointing", "exhibit": "pin-target", "text": "A flag means a bird you’ve starred as a target has turned up there." },
-            { "pose": "thinking", "exhibit": "stamp-unexplored", "text": "This one means you’ve not been yet. First visits count for extra." },
-            { "pose": "delighted", "exhibit": "tier-rare", "text": "And a gem means scarce round here. Gold’s the one you ring someone about." }
+            {
+              "pose": "introduce",
+              "text": "Today’s pick: {siteName}. {newCount} birds there you’ve not got yet.",
+              "fallback": "This card is today’s pick: the best spot for new birds within your drive."
+            },
+            {
+              "pose": "compare",
+              "text": "Someone saw {aBird} there {when}.",
+              "fallback": "It says what’s been seen there lately."
+            },
+            {
+              "pose": "aside",
+              "text": "It’s {minutes} minutes in the car. I’d take a flask.",
+              "fallback": "And how long the drive is. I’d take a flask."
+            },
+            {
+              "pose": "chat",
+              "text": "Tap any other pin and the card swaps over."
+            }
           ]
         },
         {
           "id": "drive",
           "route": "#/map",
           "target": "drive-chips",
-          "lines": [{ "pose": "thinking", "text": "How far will you drive? I take the bus myself, so I’ll trust you." }]
+          "lines": [
+            {
+              "pose": "aside",
+              "text": "Thirty, sixty, ninety: how far you’ll drive. I get the bus, so I’m no judge."
+            }
+          ]
         },
         {
           "id": "find",
           "route": "#/map",
           "target": "find-bird",
-          "lines": [{ "pose": "explaining", "text": "After one bird in particular? Find a bird searches every recent report for it." }]
-        },
-        {
-          "id": "plan",
-          "route": "#/map",
-          "target": "plan-day",
-          "lines": [{ "pose": "talking", "text": "Plan a day strings a few spots into one trip, then hands it to Google Maps." }]
-        },
-        {
-          "id": "area",
-          "route": "#/map",
-          "target": "area",
-          "lines": [{ "pose": "pointing", "text": "And this is where the drive starts from. Tap it to change area." }]
+          "lines": [
+            {
+              "pose": "introduce",
+              "text": "After one bird in particular? Find a bird looks it up for you."
+            },
+            {
+              "pose": "clarify",
+              "text": "Saves squinting at eBird with your glasses on your head."
+            }
+          ]
         },
         {
           "id": "try-view",
@@ -84,16 +95,30 @@
           "target": "site-view",
           "advance": "target",
           "hint": "Tap View spot",
-          "lines": [{ "pose": "pointing", "text": "Let’s look at a real one. Go on, tap View spot. I’ll wait." }]
+          "lines": [
+            {
+              "pose": "over-to-you",
+              "text": "Go on, have a nose. Tap View spot."
+            }
+          ]
         },
         {
           "id": "sheet",
           "target": "site-reports",
           "dock": "top",
           "lines": [
-            { "pose": "explaining", "text": "Every bird seen there lately, with its date and checklist." },
-            { "pose": "thinking", "text": "Those are other people’s sightings, mind." },
-            { "pose": "talking", "text": "They tell you where to look. They don’t go in your Dex." }
+            {
+              "pose": "introduce",
+              "text": "Here’s what birders have seen there lately, each with a date."
+            },
+            {
+              "pose": "clarify",
+              "text": "Mind, those are other people’s birds. They don’t go in your Dex."
+            },
+            {
+              "pose": "aside",
+              "text": "No pinching. I’d know."
+            }
           ]
         },
         {
@@ -101,45 +126,56 @@
           "route": "#/dex",
           "target": "dex-progress",
           "lines": [
-            { "pose": "talking", "text": "This is your Dex. {recorded} of {dexSize} so far.", "fallback": "This is your Dex: about a hundred birds you can find within a fair drive." },
-            { "pose": "sketching", "text": "Grey ones are still to find. I don’t hide the names." }
+            {
+              "pose": "introduce",
+              "text": "This is your Dex. {recorded} of {dexSize} so far.",
+              "fallback": "This is your Dex: a hundred-odd birds you can find round here."
+            },
+            {
+              "pose": "aside",
+              "text": "Grey ones are still out there. I’ve left the names on, so no excuses."
+            }
           ]
         },
         {
-          "id": "dex-card",
-          "route": "#/dex",
-          "selector": ".card-grid .card",
-          "lines": [{ "pose": "explaining", "text": "Tap a bird for its page: where it’s been seen, and how well you know it." }]
-        },
-        {
-          "id": "import",
+          "id": "journal",
           "route": "#/journal",
-          "target": "journal-import",
-          "lines": [{ "pose": "talking", "text": "Use eBird already? Bring your data in here and your Dex fills itself." }]
-        },
-        {
-          "id": "log",
-          "route": "#/journal",
-          "target": "journal-log",
+          "target": "journal-buttons",
           "lines": [
-            { "pose": "pointing", "text": "Or log a sighting yourself with this." },
-            { "pose": "thinking", "text": "Only birds you’ve seen count. That’s the one rule I’m fussy about." }
+            {
+              "pose": "compare",
+              "text": "Two ways to fill it: bring your eBird history in, or log a bird yourself."
+            },
+            {
+              "pose": "clarify",
+              "text": "Only birds you’ve seen or heard yourself. I’m fussy about that."
+            }
           ]
-        },
-        {
-          "id": "folk",
-          "route": "#/folk",
-          "target": "tab-folk",
-          "lines": [{ "pose": "talking", "text": "Folk is people. Wardens look after the big reserves and set you jobs." }]
         },
         {
           "id": "bye",
           "route": "#/map",
           "lines": [
-            { "pose": "delighted", "skin": "lifer", "text": "That’s the lot. If you forget anything, I’m in Settings." },
-            { "pose": "delighted", "skin": "lifer", "text": "Off you go, then. Bring me something good." }
+            {
+              "pose": "sketching",
+              "text": "When you log a new bird, I’ll draw it for you."
+            },
+            {
+              "pose": "talking",
+              "text": "Fair warning: they all come out looking like this wren."
+            },
+            {
+              "pose": "over-to-you",
+              "text": "Off you go, then. I’m in Settings if you get lost. Bring me something good.",
+              "skin": "lifer"
+            }
           ],
-          "choices": [{ "id": "finish", "label": "Thanks, Dot" }]
+          "choices": [
+            {
+              "id": "finish",
+              "label": "Ta, Pearl"
+            }
+          ]
         }
       ]
     }

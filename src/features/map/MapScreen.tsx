@@ -3,6 +3,7 @@ import { usePublished } from '../../data/published'
 import { dexById } from '../../data/catalogue'
 import { ageLabel, daysAgo, filterSites } from '../../domain/ranking'
 import { useTour } from '../../state/tour'
+import { aBird, theBird } from '../../domain/speech'
 import { shortSiteName } from '../../domain/siteName'
 import { useStore, type DriveLimit } from '../../state/store'
 import { useRecorded } from '../../state/useRecorded'
@@ -74,13 +75,14 @@ export default function MapScreen() {
   // The selected site: your pick if it is still shown, otherwise the best-ranked site.
   const activeIdx = Math.max(0, shown.findIndex((v) => v.site.id === picked))
   const active = shown[activeIdx] ?? null
-  // Live facts for Dot's tour ("This card is today's pick: Rainham Marshes").
+  // Live facts for Pearl's tour ("This card is today's pick: Rainham Marshes").
   const setTourFacts = useTour((s) => s.setFacts)
   useEffect(() => {
     const lure = active?.lure?.speciesId ? dexById(active.lure.speciesId) : undefined
     setTourFacts({
       siteName: active ? shortSiteName(active.site.name) : null,
-      bird: lure?.name ?? null,
+      aBird: lure ? aBird(lure.name) : null,
+      theBird: lure ? theBird(lure.name) : null,
       when: active?.lure ? daysAgo(active.lure.obsDate) : null,
       minutes: active?.minutes ?? null,
       newCount: active && active.newIds.length > 1 ? active.newIds.length : null,

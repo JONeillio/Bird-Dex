@@ -25,7 +25,7 @@ export interface Prefs {
   lastBackupAt: string | null
   /** Set once the default area has moved to South East London, so phones that saved an old area are moved over one time. */
   areaV2: boolean
-  /** Tours with Dot that were finished or turned down ("Don't show this again"), so they don't start by themselves. */
+  /** Tours with Pearl that were finished or turned down ("Don't show this again"), so they don't start by themselves. */
   toursDone: string[]
 }
 

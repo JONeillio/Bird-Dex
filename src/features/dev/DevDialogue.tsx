@@ -4,33 +4,37 @@ import { npcMapSprite } from '../../art/npcs'
 import { Banner, Panel } from '../../ui/components'
 import { Choices, Dialogue, SheetFrame, StripSprite, type DialogueLine } from '../../ui/dialogue'
 import { useRef } from 'react'
-import { DOT_ART, DOT_POSES } from '../../art/dot'
-import { DotSpeech, type DotLine, type DotSpeechHandle } from '../../ui/fieldhand/DotSpeech'
+import { GUIDE_ART, GUIDE_POSES } from '../../art/guide'
+import { GuideSpeech, type GuideLine, type GuideSpeechHandle } from '../../ui/fieldhand/GuideSpeech'
 
 // The kit's own example moments (dialogue-scenes.json), to check the falling letters, both skins and every pose.
-const DOT_SCENES: { label: string; line: DotLine }[] = [
-  { label: 'Meet Dot', line: { pose: 'talking', text: 'Dot Lau. I drew shop signs for years. Birds do fidget more.' } },
+const DOT_SCENES: { label: string; line: GuideLine }[] = [
+  { label: 'Chat', line: { pose: 'chat', text: 'Hello, love. I’m Pearl. Forty years painting shop signs in Deptford.' } },
+  { label: 'Introduce', line: { pose: 'introduce', text: 'Here’s what birders have seen lately. Each row has a date and a checklist.' } },
+  { label: 'Clarify', line: { pose: 'clarify', text: 'See the date? That’s when the gull was seen.' } },
+  { label: 'Compare', line: { pose: 'compare', text: 'Six days ago is when. Sixty is how many. Quite a crowd.' } },
+  { label: 'Aside', line: { pose: 'aside', text: 'Sixty gulls. I’d eat those chips somewhere else.' } },
+  { label: 'Over to you', line: { pose: 'over-to-you', text: 'I fancy the redshank. What about you?' } },
+  { label: 'New bird', line: { pose: 'delighted', skin: 'lifer', text: 'Your first wren. There. I’ll put the date under that one.' } },
   { label: 'A field mark', line: { pose: 'explaining', text: 'See that tail? Sticks up like a teapot handle.' } },
-  { label: 'A first lifer', line: { pose: 'delighted', skin: 'lifer', text: 'Your first wren. There. I’ll put the date under that one.' } },
-  { label: 'A bird slips away', line: { pose: 'missed-sighting', text: 'Well. Got the back half of him. That’s the useful half of a wren.' } },
+  { label: 'Sketching', line: { pose: 'sketching', text: 'Round body. Tail up. Feet can wait.' } },
+  { label: 'Same wren', line: { pose: 'talking', text: 'I drew you a kingfisher. Looks a lot like a wren. They all do, love.' } },
+  { label: 'Slipped away', line: { pose: 'missed-sighting', text: 'Well. Got the back half of him. That’s the useful half of a wren.' } },
   { label: 'A quiet word', line: { pose: 'sympathy', text: 'I’ve got a whole book of ones that got away. Sit with me a bit.' } },
-  { label: 'In the sketchbook', line: { pose: 'sketching', text: 'Round body. Tail up. Feet can wait.' } },
-  { label: 'Pointing', line: { pose: 'pointing', text: 'That one. Tap it and the card swaps over.' } },
-  { label: 'Thinking', line: { pose: 'thinking', text: 'Hm. Longer bill than a sparrow, I’d say. Have another look.' } },
-  { label: 'Two pages', line: { pose: 'talking', text: 'This one is long on purpose, to check that a line which runs past four rows turns over to a second page when you tap, rather than squashing itself up or running out of the bubble at the bottom.' } },
+  { label: 'Two pages', line: { pose: 'chat', text: 'This one is long on purpose, to check that a line which runs past four rows turns over to a second page when you tap, rather than squashing itself up or running out of the bubble at the bottom.' } },
 ]
 
 function DotGallery() {
   const [i, setI] = useState(0)
   const [round, setRound] = useState(0)
   const [state, setState] = useState('')
-  const ref = useRef<DotSpeechHandle>(null)
+  const ref = useRef<GuideSpeechHandle>(null)
   const scene = DOT_SCENES[i]
   return (
     <Panel>
-      <h2 className="h-display">Dot (Fieldhand)</h2>
+      <h2 className="h-display">Pearl (Fieldhand)</h2>
       <div className="tour-speech" role="button" tabIndex={0} onClick={() => ref.current?.advance()} aria-label="Finish or turn the page">
-        <DotSpeech key={`${i}-${round}`} ref={ref} line={scene.line} onState={(s) => setState(s.done ? `Done · page ${s.page + 1} of ${s.pages}` : 'Writing…')} />
+        <GuideSpeech key={`${i}-${round}`} ref={ref} line={scene.line} onState={(s) => setState(s.done ? `Done · page ${s.page + 1} of ${s.pages}` : 'Writing…')} />
       </div>
       <p className="muted small">{state} · tap the bubble to finish</p>
       <div className="chips wrap">
@@ -44,8 +48,8 @@ function DotGallery() {
         </button>
       </div>
       <div className="row gap wrap">
-        {DOT_POSES.map((p) => (
-          <img key={p} src={DOT_ART[p].src} width={96} height={96} alt={p} title={DOT_ART[p].use} style={{ imageRendering: 'pixelated' }} />
+        {GUIDE_POSES.map((p) => (
+          <img key={p} src={GUIDE_ART[p].src} width={96} height={96} alt={p} title={GUIDE_ART[p].use} style={{ imageRendering: 'pixelated' }} />
         ))}
       </div>
     </Panel>

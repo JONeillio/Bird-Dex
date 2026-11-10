@@ -10,7 +10,7 @@ interface TourState {
   step: number
   /** Turned down with "Not now" this visit: don't start again until the app is reopened. */
   snoozed: boolean
-  /** Live values screens publish for {tokens} in Dot's lines (today's site, your Dex count...). */
+  /** Live values screens publish for {tokens} in Pearl's lines (today's site, your Dex count...). */
   facts: Facts
   start: (id: string) => void
   next: () => void

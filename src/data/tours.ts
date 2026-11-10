@@ -1,19 +1,19 @@
-// Guided tours with Dot (9 Nov 2026). The script lives in tours.v1.json so wording can change without touching code.
+// Guided tours with Pearl (9 Nov 2026). The script lives in tours.v1.json so wording can change without touching code.
 // Plan and the tours still to write: TUTORIAL_PLAN.md.
 import { z } from 'zod'
-import { DOT_POSES } from '../art/dot'
+import { GUIDE_POSES } from '../art/guide'
 import data from './tours.v1.json'
 
 export const EXHIBITS = ['pin-site', 'pin-target', 'stamp-unexplored', 'stamp-explored', 'stamp-lifer', 'tier-rare', 'tier-scarce', 'tier-common'] as const
 
 const LineSchema = z.object({
-  pose: z.enum(DOT_POSES),
+  pose: z.enum(GUIDE_POSES),
   text: z.string().min(1).max(160),
   /** Used when a {token} in `text` has no live value (no data yet, demo, an empty Dex). */
   fallback: z.string().min(1).max(160).optional(),
   skin: z.enum(['paper', 'lifer']).optional(),
   mirror: z.boolean().optional(),
-  /** An icon Dot holds up beside the bubble while she explains it. */
+  /** An icon Pearl holds up beside the bubble while she explains it. */
   exhibit: z.enum(EXHIBITS).optional(),
 })
 
@@ -32,7 +32,7 @@ const StepSchema = z
     target: z.string().regex(/^[a-z0-9-]+$/).optional(),
     /** Or a CSS selector, for things drawn by libraries (map markers) or repeated (cards). First match only. */
     selector: z.string().optional(),
-    /** tap: tap Dot to carry on (default) · target: tap the spotlit thing to carry on (Next still works). */
+    /** tap: tap Pearl to carry on (default) · target: tap the spotlit thing to carry on (Next still works). */
     advance: z.enum(['tap', 'target']).default('tap'),
     /** Short instruction shown under the bubble on `target` steps. */
     hint: z.string().max(40).optional(),

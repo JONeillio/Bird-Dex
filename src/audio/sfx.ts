@@ -16,6 +16,10 @@ export const SOUNDS = {
   tick: [[n(28), 22]] as Note[],
   /** A bird recorded: short fanfare. Original tune. */
   catch: [[n(7), 90], [n(12), 90], [n(16), 90], [n(19), 150], [REST, 40], [n(16), 70], [n(19), 70], [n(24), 320]] as Note[],
+  /** A button press: one short, soft click. */
+  press: [[n(31), 14]] as Note[],
+  /** Turning a page of speech. */
+  page: [[n(24), 25], [n(31), 30]] as Note[],
   /** Something didn't work. */
   oops: [[n(-5), 90], [n(-12), 160]] as Note[],
 } satisfies Record<string, Note[]>
@@ -46,23 +50,41 @@ export function unlockAudio(): void {
   if (c && c.state === 'suspended') void c.resume()
 }
 
-export function play(name: SoundName, enabled: boolean): void {
-  if (!enabled) return
+export function play(name: SoundName, enabled: boolean, level = 0.06): void {
+  if (enabled) playNotes(SOUNDS[name], level)
+}
+
+/** Pearl's voice: the pitch of one speech blip for a letter. A small set of notes, chosen by the letter, so a line
+ * "sings" the same way every time and never sounds random. Vowels sit a little higher. Returns 0 for no sound. */
+export function voicePitch(ch: string): number {
+  if (!/[\p{L}\p{N}]/u.test(ch)) return REST
+  const steps = [19, 21, 23, 24, 26]
+  const code = ch.toLowerCase().codePointAt(0) ?? 0
+  return n(steps[code % steps.length] + (/[aeiou]/i.test(ch) ? 2 : 0))
+}
+
+/** One speech blip (Pokémon-style text sound). Quiet and very short. */
+export function voice(ch: string, enabled: boolean): void {
+  const f = voicePitch(ch)
+  if (enabled && f) playNotes([[f, 26]], 0.035)
+}
+
+function playNotes(notes: readonly Note[], level: number, type: OscillatorType = 'square'): void {
   const c = context()
   if (!c) return
   if (c.state === 'suspended') void c.resume()
   let t = c.currentTime + 0.01
-  for (const [freq, ms] of SOUNDS[name]) {
+  for (const [freq, ms] of notes) {
     const dur = ms / 1000
     if (freq > 0) {
       const osc = c.createOscillator()
       const gain = c.createGain()
-      osc.type = 'square'
+      osc.type = type
       osc.frequency.value = freq
       // Short attack and release stop clicks; the level is low so it never blasts in a quiet hide.
       gain.gain.setValueAtTime(0.0001, t)
-      gain.gain.exponentialRampToValueAtTime(0.06, t + 0.005)
-      gain.gain.setValueAtTime(0.06, t + Math.max(0.005, dur - 0.02))
+      gain.gain.exponentialRampToValueAtTime(level, t + 0.005)
+      gain.gain.setValueAtTime(level, t + Math.max(0.005, dur - 0.02))
       gain.gain.exponentialRampToValueAtTime(0.0001, t + dur)
       osc.connect(gain).connect(c.destination)
       osc.start(t)

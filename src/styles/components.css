@@ -646,7 +646,7 @@
 .badge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .badge-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; font-size: 13px; }
 
-/* ---------- Tours with Dot (9 Nov 2026): spotlight, dock and Fieldhand speech ---------- */
+/* ---------- Tours with Pearl (9 Nov 2026): spotlight, dock and Fieldhand speech ---------- */
 .tour { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
 .tour > * { pointer-events: auto; }
 .tour-dim { position: fixed; background: rgba(33, 59, 50, 0.6); animation: fade-in 0.2s ease-out; }

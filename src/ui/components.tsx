@@ -57,7 +57,7 @@ export function Chip({ children, active, onClick, tone, tour }: {
   active: boolean
   onClick: () => void
   tone?: 'coral'
-  /** `data-tour` id, so a tour with Dot can point at it. */
+  /** `data-tour` id, so a tour with Pearl can point at it. */
   tour?: string
 }) {
   return (
