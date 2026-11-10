@@ -9,7 +9,7 @@ import { GuideSpeech, type GuideLine, type GuideSpeechHandle } from '../../ui/fi
 
 // The kit's own example moments (dialogue-scenes.json), to check the falling letters, both skins and every pose.
 const DOT_SCENES: { label: string; line: GuideLine }[] = [
-  { label: 'Chat', line: { pose: 'chat', text: 'Hello, love. I’m Pearl. Forty years painting shop signs in Deptford.' } },
+  { label: 'Chat', line: { pose: 'chat', text: 'Hello, love. I can see you’re new here. I’m Pearl.' } },
   { label: 'Introduce', line: { pose: 'introduce', text: 'Here’s what birders have seen lately. Each row has a date and a checklist.' } },
   { label: 'Clarify', line: { pose: 'clarify', text: 'See the date? That’s when the gull was seen.' } },
   { label: 'Compare', line: { pose: 'compare', text: 'Six days ago is when. Sixty is how many. Quite a crowd.' } },

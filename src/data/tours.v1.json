@@ -11,15 +11,15 @@
           "lines": [
             {
               "pose": "chat",
-              "text": "Hello, love. I’m Pearl. Forty years painting shop signs in Deptford."
+              "text": "Hello, love. I can see you’re new here. I’m Pearl."
             },
             {
               "pose": "aside",
-              "text": "Birds are easier. They never argue about how you spell “café”."
+              "text": "Let me show you round. I’ll do the pointing, you do the nodding."
             },
             {
               "pose": "over-to-you",
-              "text": "Fancy the quick tour? Two minutes. I’ll talk fast."
+              "text": "Two minutes, and I’ll try not to go on. Shall we?"
             }
           ],
           "choices": [

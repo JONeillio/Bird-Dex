@@ -29,7 +29,7 @@ Tools: `TOUR=1 npm run screens -- "#/"`; `node scripts/dev/tour-walk.mjs` (and `
 
 | # | Step | Screen | Spotlight | Poses | Teaches |
 |---|---|---|---|---|---|
-| 1 | hello | any | none | chat, aside, over-to-you | Who she is. Go on then / Not now / Don't show this again |
+| 1 | hello | any | none | chat, aside, over-to-you | Greets the new player and offers a tour (no backstory dump). Go on then / Not now / Don't show this again |
 | 2 | site-card | Explore | site card | introduce, compare, aside, chat | **Live example:** today's pick, how many new birds, what was seen and when, the drive; tap pins to swap |
 | 3 | drive | Explore | 30/60/90 | aside | Drive limit |
 | 4 | find | Explore | Find a bird | introduce, clarify | Search for one species |
