@@ -159,7 +159,7 @@ export default function SettingsScreen() {
                 />
               </label>
             )}
-            <p className="muted small">Wind and 8-bit birdsong on the map (busiest at dawn), and a slow chiptune tune everywhere else. Made on your phone, quiet, and off until you turn it on.</p>
+            <p className="muted small">A soft 8-bit adventure tune, with wind and birdsong over it on the map (busiest at dawn). Made on your phone. Starts when you first tap the app.</p>
           </div>
           <div className="stack tight">
             <Chip

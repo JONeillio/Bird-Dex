@@ -1,6 +1,7 @@
 // Ambience engine (AUTOPILOT S2, 10 Nov 2026). Turns ambienceScore.ts into sound with Web Audio: no files, nothing
-// to license. Field sounds (soft wind and 8-bit birdsong, a gull on the coast) or slow chiptune music, faded between,
-// dipped under Pearl's voice, silent when the page is hidden. Off until the user turns it on, and never before a tap.
+// to license. A soft chiptune tune everywhere (pulse and triangle voices through a gentle filter and an echo); on the
+// map screens it plays quieter with wind and 8-bit birdsong over it (a gull on the coast). Dipped under Pearl's voice,
+// silent when the page is hidden. On by default since 10 Nov, but browsers only allow it to start after a tap.
 import { BEAT_S, barNotes, chirpSong, gullCall, nextSongGapMs, type Chirp, type NoteEvent, type Scene } from './ambienceScore'
 import { audioContext, setVoiceListener } from './sfx'
 
@@ -9,19 +10,32 @@ const LOOKAHEAD_S = 1.0
 const TICK_MS = 250
 
 const LEVEL = {
-  wind: 0.018,
-  chirp: 0.022,
-  gull: 0.016,
-  bass: 0.05,
-  arp: 0.016,
-  melody: 0.02,
+  wind: 0.014,
+  chirp: 0.02,
+  gull: 0.014,
+  bass: 0.045,
+  arp: 0.014,
+  melody: 0.024,
 } as const
+
+/** How loud the tune is on each scene (the map keeps it under the birdsong). */
+const MUSIC_LEVEL = { field: 0.55, music: 1, none: 0 } as const
+
+/** A pulse wave with the given duty cycle: the soft "NES" tone (25% is gentler than a square). */
+function pulseWave(ctx: AudioContext, duty: number): PeriodicWave {
+  const n = 32
+  const real = new Float32Array(n)
+  const imag = new Float32Array(n)
+  for (let k = 1; k < n; k++) real[k] = (2 / (k * Math.PI)) * Math.sin(k * Math.PI * duty)
+  return ctx.createPeriodicWave(real, imag)
+}
 
 class AmbienceEngine {
   private ctx: AudioContext | null = null
   private master: GainNode | null = null
   private fieldBus: GainNode | null = null
   private musicBus: GainNode | null = null
+  private pulse: PeriodicWave | null = null
   private wind: AudioBufferSourceNode | null = null
   private windGain: GainNode | null = null
   private scene: Scene = 'none'
@@ -66,7 +80,22 @@ class AmbienceEngine {
     this.fieldBus.gain.value = 0
     this.musicBus.gain.value = 0
     this.fieldBus.connect(this.master)
-    this.musicBus.connect(this.master)
+    // The tune goes through a gentle low-pass (takes the edge off the pulse tones) and a soft half-beat echo.
+    const soften = ctx.createBiquadFilter()
+    soften.type = 'lowpass'
+    soften.frequency.value = 2600
+    const echo = ctx.createDelay(1)
+    echo.delayTime.value = BEAT_S / 2
+    const feedback = ctx.createGain()
+    feedback.gain.value = 0.28
+    const wet = ctx.createGain()
+    wet.gain.value = 0.3
+    this.musicBus.connect(soften)
+    soften.connect(this.master)
+    soften.connect(echo)
+    echo.connect(feedback).connect(echo)
+    echo.connect(wet).connect(this.master)
+    this.pulse = pulseWave(ctx, 0.25)
     this.startWind()
     this.nextBar = 0
     this.nextBarAt = ctx.currentTime + 0.3
@@ -126,9 +155,9 @@ class AmbienceEngine {
     if (!this.ctx || !this.fieldBus || !this.musicBus) return
     const t = this.ctx.currentTime
     this.fieldBus.gain.setTargetAtTime(this.scene === 'field' ? 1 : 0, t, FADE_S / 3)
-    this.musicBus.gain.setTargetAtTime(this.scene === 'music' ? 1 : 0, t, FADE_S / 3)
+    this.musicBus.gain.setTargetAtTime(MUSIC_LEVEL[this.scene], t, FADE_S / 3)
     // Music picks up at the start of a bar shortly after it fades in.
-    if (this.scene === 'music' && this.nextBarAt < t) this.nextBarAt = t + 0.2
+    if (this.scene !== 'none' && this.nextBarAt < t) this.nextBarAt = t + 0.2
   }
 
   // ---------- music ----------
@@ -136,7 +165,7 @@ class AmbienceEngine {
   private tick() {
     const ctx = this.ctx
     if (!ctx || !this.musicBus || document.visibilityState !== 'visible') return
-    if (this.scene !== 'music') {
+    if (this.scene === 'none') {
       // Keep the clock moving so the tune resumes on a bar line, not mid-phrase.
       while (this.nextBarAt < ctx.currentTime) {
         this.nextBarAt += 4 * BEAT_S
@@ -158,16 +187,32 @@ class AmbienceEngine {
     const dur = n.len * BEAT_S
     const osc = ctx.createOscillator()
     const g = ctx.createGain()
-    osc.type = n.voice === 'arp' ? 'square' : 'triangle'
+    if (n.voice === 'bass' || !this.pulse) osc.type = 'triangle'
+    else osc.setPeriodicWave(this.pulse)
     osc.frequency.value = n.freq
     const peak = LEVEL[n.voice]
     g.gain.setValueAtTime(0.0001, t)
-    g.gain.exponentialRampToValueAtTime(peak, t + (n.voice === 'melody' ? 0.08 : 0.01))
-    g.gain.exponentialRampToValueAtTime(peak * 0.5, t + dur * 0.6)
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur)
+    if (n.voice === 'melody') {
+      // A sung note: soft start, a little vibrato once it settles, a long fade.
+      g.gain.exponentialRampToValueAtTime(peak, t + 0.05)
+      g.gain.setTargetAtTime(peak * 0.6, t + 0.1, dur / 2)
+      g.gain.setTargetAtTime(0.0001, t + Math.max(0.12, dur - 0.08), 0.06)
+      const lfo = ctx.createOscillator()
+      const depth = ctx.createGain()
+      lfo.frequency.value = 5.2
+      depth.gain.setValueAtTime(0, t)
+      depth.gain.linearRampToValueAtTime(n.freq * 0.006, t + Math.min(0.35, dur))
+      lfo.connect(depth).connect(osc.frequency)
+      lfo.start(t)
+      lfo.stop(t + dur + 0.3)
+    } else {
+      g.gain.exponentialRampToValueAtTime(peak, t + 0.012)
+      g.gain.exponentialRampToValueAtTime(peak * 0.4, t + dur * 0.6)
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur)
+    }
     osc.connect(g).connect(this.musicBus!)
     osc.start(t)
-    osc.stop(t + dur + 0.05)
+    osc.stop(t + dur + 0.3)
   }
 
   // ---------- field ----------

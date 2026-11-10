@@ -1,11 +1,11 @@
 // Ambience (AUTOPILOT S2, 10 Nov 2026): what to play, worked out without any audio, so it can be tested.
-// Field sounds on the map screens (soft wind and 8-bit birdsong), slow chiptune music everywhere else.
+// The tune plays everywhere; on the map screens it is quieter, with soft wind and 8-bit birdsong over it.
 // The engine that turns this into sound is ambience.ts.
 
 export type Rng = () => number
 export type Scene = 'field' | 'music' | 'none'
 
-/** Outdoors screens get field sounds; the dev pages stay quiet; the rest get music. */
+/** Outdoors screens get the tune with birdsong over it ('field'); the dev pages stay quiet; the rest get the tune. */
 export function sceneForRoute(name: string): Scene {
   if (name === 'dev') return 'none'
   if (name === 'map' || name === 'find' || name === 'plan' || name === 'news') return 'field'
@@ -18,32 +18,47 @@ export function isCoastal(regionId: string): boolean {
 }
 
 // ---------- Music ----------
+// 10 Nov (Joseph): softer, "like the start of an old adventure game on the map screen". An original tune in that
+// spirit: D major with the odd flattened seventh for an open-air feel, a slow rolling arpeggio, a soft lead melody
+// built from repeating phrases, long bass notes. Echo and filtering are added by the engine.
 
 /** Equal-tempered pitch: MIDI note number to Hz. */
 export const midi = (n: number): number => 440 * 2 ** ((n - 69) / 12)
 
-export const BPM = 70
+export const BPM = 76
 export const BEAT_S = 60 / BPM
 export const BARS_PER_CHORD = 2
 export const BARS_PER_SECTION = 8
 
-/** Chords as MIDI roots in C major, with their triad (major or minor). */
-type Chord = { root: number; minor: boolean }
-const C: Chord = { root: 48, minor: false }
-const Am: Chord = { root: 45, minor: true }
-const F: Chord = { root: 41, minor: false }
-const G: Chord = { root: 43, minor: false }
-const Dm: Chord = { root: 50, minor: true }
-const Em: Chord = { root: 52, minor: true }
+/** A chord: MIDI root (bass octave) and its three notes as semitones above the root. */
+type Chord = { root: number; tones: [number, number, number] }
+const maj = (root: number): Chord => ({ root, tones: [0, 4, 7] })
+const min = (root: number): Chord => ({ root, tones: [0, 3, 7] })
+const D = maj(38)
+const C = maj(36)
+const G = maj(43)
+const A = maj(45)
+const Bm = min(47)
+const Em = min(40)
+const Fsm = min(42)
 
-/** Gentle, folky progressions: four chords, two bars each, so one section is eight bars. */
+/** Four chords, two bars each, so one section is eight bars. The first is the "setting out" one. */
 export const PROGRESSIONS: Chord[][] = [
-  [C, Am, F, G],
-  [F, C, G, Am],
-  [Am, F, C, G],
-  [C, Em, F, C],
-  [Dm, G, C, Am],
+  [D, C, G, D],
+  [Bm, G, D, A],
+  [G, A, Fsm, Bm],
+  [D, Em, G, A],
+  [G, D, C, D],
 ]
+
+/** One random number per integer seed (so bar N always sounds the same in one session). */
+export function hashRand(s: number): number {
+  let x = Math.imul(s ^ 0x9e3779b9, 0x85ebca6b)
+  x ^= x >>> 13
+  x = Math.imul(x, 0xc2b2ae35)
+  x ^= x >>> 16
+  return (x >>> 0) / 4294967296
+}
 
 /** Which progression a section uses: wanders between the five, never the same one twice running. */
 export function progressionIndex(seed: number, section: number, rng: (s: number) => number = hashRand): number {
@@ -56,13 +71,9 @@ export function progressionIndex(seed: number, section: number, rng: (s: number)
   return prev
 }
 
-/** One random number per integer seed (for the music, so bar N always sounds the same in one session). */
-export function hashRand(s: number): number {
-  let x = Math.imul(s ^ 0x9e3779b9, 0x85ebca6b)
-  x ^= x >>> 13
-  x = Math.imul(x, 0xc2b2ae35)
-  x ^= x >>> 16
-  return (x >>> 0) / 4294967296
+export function chordAt(seed: number, bar: number): Chord {
+  const section = Math.floor(bar / BARS_PER_SECTION)
+  return PROGRESSIONS[progressionIndex(seed, section)][Math.floor((bar % BARS_PER_SECTION) / BARS_PER_CHORD)]
 }
 
 export interface NoteEvent {
@@ -74,34 +85,84 @@ export interface NoteEvent {
   freq: number
 }
 
-const triad = (c: Chord) => [c.root, c.root + (c.minor ? 3 : 4), c.root + 7]
-/** C major pentatonic, high (C5 to A5 and the C above): no wrong notes over any of these chords. */
-const PENTA = [72, 74, 76, 79, 81, 84]
+/** The melody's notes: D major plus C natural (the open, folky seventh), from A4 up to A5. */
+export const MELODY_NOTES = [69, 71, 72, 73, 74, 76, 78, 79, 81]
+const SCALE = [69, 71, 73, 74, 76, 78, 79, 81]
 
-/** The notes of one bar. Bass on beats 1 and 3, a soft arpeggio on eighths with a few gaps, a sparse melody. */
+/** Phrase rhythms (two bars = 8 beats); a negative number is a rest. */
+const RHYTHMS = [
+  [1.5, 0.5, 1, 1, 3, -1],
+  [1, 1, 1, 1, 2, 2],
+  [2, 1, 1, 3, -1],
+  [0.5, 0.5, 1, 2, 1, 1, 2],
+]
+
+/** Nearest note in `pool` to `target`. */
+const nearest = (pool: number[], target: number) => pool.reduce((b, n) => (Math.abs(n - target) < Math.abs(b - target) ? n : b))
+
+/** The chord's notes in the melody's range. */
+function chordTonesHigh(c: Chord): number[] {
+  const pcs = c.tones.map((t) => (c.root + t) % 12)
+  const out: number[] = []
+  for (let n = 69; n <= 81; n++) if (pcs.includes(n % 12)) out.push(n)
+  return out
+}
+
+/**
+ * A two-bar melody phrase. Phrases 1 and 3 of a section share a rhythm (a tune you can hum); 2 and 4 differ. It
+ * starts and lands on chord notes, moves mostly by step, and the last phrase of a section comes home to D.
+ */
+export function phraseNotes(seed: number, section: number, phrase: number): { beat: number; len: number; note: number }[] {
+  const r = (k: number) => hashRand(seed * 3_000_017 + section * 977 + phrase * 31 + k)
+  const shape = [0, 1 + Math.floor(r(1) * 3), 0, 1 + Math.floor(r(2) * 3)][phrase]
+  const rhythm = RHYTHMS[shape]
+  const chord = PROGRESSIONS[progressionIndex(seed, section)][phrase]
+  const tones = chordTonesHigh(chord)
+  let note = nearest(tones, 70 + r(3) * 9)
+  const out: { beat: number; len: number; note: number }[] = []
+  let beat = 0
+  let dir = r(4) < 0.5 ? -1 : 1
+  rhythm.forEach((len, i) => {
+    if (len < 0) {
+      beat += -len
+      return
+    }
+    const last = i === rhythm.length - 1 || (i === rhythm.length - 2 && rhythm[rhythm.length - 1] < 0)
+    if (i > 0) {
+      // Step through the scale; change direction now and then, and at the edges.
+      if (r(10 + i) < 0.3) dir = -dir
+      let idx = SCALE.indexOf(nearest(SCALE, note)) + dir * (r(20 + i) < 0.75 ? 1 : 2)
+      if (idx < 0 || idx >= SCALE.length) {
+        dir = -dir
+        idx = Math.max(0, Math.min(SCALE.length - 1, idx + 2 * dir))
+      }
+      note = SCALE[idx]
+      // The C natural colours the C chord only.
+      if (chord.root % 12 === 0 && note === 73 && r(30 + i) < 0.6) note = 72
+    }
+    // Long notes and the phrase ending sit on a chord note; the section's last note is D.
+    if (len >= 2 || last) note = phrase === 3 && last ? nearest([74, 78], note) : nearest(tones, note)
+    out.push({ beat, len, note })
+    beat += len
+  })
+  return out
+}
+
+/** The notes of one bar. Long soft bass, a rolling arpeggio in eighths, and the melody (resting every fourth section). */
 export function barNotes(seed: number, bar: number): NoteEvent[] {
   const section = Math.floor(bar / BARS_PER_SECTION)
-  const chord = PROGRESSIONS[progressionIndex(seed, section)][Math.floor((bar % BARS_PER_SECTION) / BARS_PER_CHORD)]
-  const t = triad(chord)
-  const r = (k: number) => hashRand(seed * 1_000_003 + bar * 101 + k)
-  const out: NoteEvent[] = [
-    { voice: 'bass', beat: 0, len: 1.8, freq: midi(chord.root - 12) },
-    { voice: 'bass', beat: 2, len: 1.8, freq: midi((r(1) < 0.5 ? chord.root : chord.root + 7) - 12) },
-  ]
-  // Arpeggio: up, or up-and-down, one octave up; about one eighth in six is a rest.
-  const shape = r(2) < 0.5 ? [0, 1, 2, 1, 0, 1, 2, 1] : [0, 1, 2, 0, 1, 2, 1, 0]
-  shape.forEach((k, i) => {
-    if (r(10 + i) < 0.17) return
-    out.push({ voice: 'arp', beat: i / 2, len: 0.42, freq: midi(t[k] + 12) })
-  })
-  // Melody: about half the bars get one to three long notes from the pentatonic scale.
-  if (r(3) < 0.5) {
-    const n = 1 + Math.floor(r(4) * 3)
-    let pos = Math.floor(r(5) * 2)
-    for (let i = 0; i < n && pos < 4; i++) {
-      out.push({ voice: 'melody', beat: pos, len: 1.5, freq: midi(PENTA[Math.floor(r(20 + i) * PENTA.length)]) })
-      pos += 1 + Math.floor(r(30 + i) * 2)
-    }
+  const chord = chordAt(seed, bar)
+  const out: NoteEvent[] = [{ voice: 'bass', beat: 0, len: 3.8, freq: midi(chord.root) }]
+  // Arpeggio: root, third, fifth, octave, tenth and back down, around middle C.
+  const up = [0, chord.tones[1], 7, 12, 12 + chord.tones[1]]
+  const order = [0, 1, 2, 3, 4, 3, 2, 1]
+  order.forEach((k, i) => out.push({ voice: 'arp', beat: i / 2, len: 0.6, freq: midi(chord.root + 12 + up[k]) }))
+  // Melody: two-bar phrases. The opening has four bars of arpeggio first, as if setting off; every fourth section rests.
+  const phrase = Math.floor((bar % BARS_PER_SECTION) / 2)
+  if (section % 4 !== 3 && !(section === 0 && phrase < 2)) {
+    const half = (bar % 2) * 4
+    for (const n of phraseNotes(seed, section, phrase))
+      if (n.beat >= half && n.beat < half + 4) out.push({ voice: 'melody', beat: n.beat - half, len: Math.min(n.len, half + 4 - n.beat + 0.5), freq: midi(n.note) })
   }
   return out
 }

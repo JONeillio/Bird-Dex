@@ -375,8 +375,8 @@
 .map-screen { flex: 1; display: flex; flex-direction: column; min-height: 0; padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom)); }
 .map-controls { display: flex; flex-direction: column; gap: 4px; padding: calc(env(safe-area-inset-top, 0px) + 6px) 8px 4px; background: var(--paper); border-bottom: 2px solid var(--ink); }
 .map-controls-top { display: flex; align-items: center; gap: 6px; min-width: 0; }
-.map-controls-top .chips { flex: 1; min-width: 0; }
-.map-gear { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border: 2px solid var(--ink); border-radius: 50%; background: var(--panel); }
+.map-controls-top .chips { flex: 1; min-width: 0; padding-right: 14px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent); }
+.map-gear { flex: none; display: grid; place-items: center; width: 40px; height: 40px; line-height: 0; border: 2px solid var(--ink); border-radius: 50%; background: var(--panel); }
 .map-gear:focus-visible { outline: 3px solid var(--discovery); outline-offset: 2px; }
 .map-controls .segmented { align-self: center; }
 .map-controls .segmented button { min-height: 36px; padding: 0 16px; font-size: 15px; }

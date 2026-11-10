@@ -1,4 +1,5 @@
-// Renders a listenable preview of the ambience (music, then field sounds) from the same score the app plays, to a WAV.
+// Renders a listenable preview of the ambience (the tune, then the map: tune with wind and birdsong) from the same
+// score the app plays, to a WAV.
 // The app makes the sound live with Web Audio (src/audio/ambience.ts); this is a close offline copy for listening.
 // npx tsx scripts/dev/ambience-preview.ts /tmp/ambience-preview.wav
 import { writeFileSync } from 'node:fs'
@@ -6,32 +7,52 @@ import { BEAT_S, barNotes, chirpSong, gullCall, nextSongGapMs, type Chirp } from
 import { mulberry32 } from '../../src/domain/random'
 
 const SR = 44100
-const MUSIC_S = 36
-const FIELD_S = 24
+const MUSIC_S = 44
+const FIELD_S = 26
 const out = new Float32Array(SR * (MUSIC_S + FIELD_S))
-const LEVEL = { bass: 0.05, arp: 0.016, melody: 0.02 }
+const LEVEL = { bass: 0.045, arp: 0.014, melody: 0.024 }
 const VOL = 4 // the app's master volume at 0.5 sits on a quiet phone speaker; louder here so a laptop can hear it
 
 const square = (ph: number) => (ph % 1 < 0.5 ? 1 : -1)
 const triangle = (ph: number) => 4 * Math.abs((ph % 1) - 0.5) - 1
+const pulse25 = (ph: number) => (ph % 1 < 0.25 ? 1 : -0.33)
 
-function tone(start: number, dur: number, f0: number, f1: number, level: number, wave: (p: number) => number, attack = 0.01) {
+function tone(start: number, dur: number, f0: number, f1: number, level: number, wave: (p: number) => number, attack = 0.01, vibrato = 0, buf = out) {
   const a = Math.floor(start * SR)
   const n = Math.floor(dur * SR)
   let ph = 0
-  for (let i = 0; i < n && a + i < out.length; i++) {
+  for (let i = 0; i < n && a + i < buf.length; i++) {
     const t = i / SR
-    const f = f0 * (f1 / f0) ** (t / dur)
+    const f = f0 * (f1 / f0) ** (t / dur) * (1 + vibrato * Math.min(1, t / 0.35) * Math.sin(2 * Math.PI * 5.2 * t))
     ph += f / SR
     const env = t < attack ? t / attack : Math.exp((-3 * (t - attack)) / dur)
-    out[a + i] += wave(ph) * level * env * VOL
+    buf[a + i] += wave(ph) * level * env * VOL
   }
 }
 
-// Music: bars from the score.
+// Music: bars from the score, the whole minute, through the app's 2.6 kHz low-pass and half-beat echo.
+// Full level for the first part (the Dex and Journal), 0.55 for the map part, as in the app.
+const music = new Float32Array(out.length)
 const seed = 1234
-for (let bar = 0, at = 0; at < MUSIC_S - 2; bar++, at += 4 * BEAT_S)
-  for (const n of barNotes(seed, bar)) tone(at + n.beat * BEAT_S, n.len * BEAT_S, n.freq, n.freq, LEVEL[n.voice], n.voice === 'arp' ? square : triangle, n.voice === 'melody' ? 0.08 : 0.01)
+for (let bar = 0, at = 0; at < MUSIC_S + FIELD_S - 1; bar++, at += 4 * BEAT_S)
+  for (const n of barNotes(seed, bar)) {
+    const wave = n.voice === 'bass' ? triangle : pulse25
+    tone(at + n.beat * BEAT_S, n.len * BEAT_S, n.freq, n.freq, LEVEL[n.voice], wave, n.voice === 'melody' ? 0.05 : 0.012, n.voice === 'melody' ? 0.006 : 0, music)
+  }
+const kLp = 1 - Math.exp((-2 * Math.PI * 2600) / SR)
+let y = 0
+for (let i = 0; i < music.length; i++) {
+  y += kLp * (music[i] - y)
+  music[i] = y
+}
+const echo = Math.round((BEAT_S / 2) * SR)
+const withEcho = new Float32Array(music.length)
+for (let i = 0; i < music.length; i++) withEcho[i] = music[i] + (i >= echo ? withEcho[i - echo] * 0.28 : 0)
+for (let i = 0; i < out.length; i++) {
+  const wet = withEcho[i] - music[i]
+  const level = i < MUSIC_S * SR ? 1 : 0.55
+  out[i] += (music[i] + wet * 0.3) * level
+}
 
 // Field: soft brown-noise wind with gusts, and songs at dawn spacing, with one gull.
 const r = mulberry32(5)
@@ -42,7 +63,7 @@ for (let i = SR * MUSIC_S; i < out.length; i++) {
   last = (last + 0.02 * (r() * 2 - 1)) / 1.02
   lp += k * (last * 3.5 - lp)
   const gust = 0.6 + 0.4 * Math.sin((i / SR) * 0.7)
-  out[i] += lp * 0.018 * gust * VOL
+  out[i] += lp * 0.014 * gust * VOL
 }
 const sing = (song: Chirp[], at: number, level: number) => {
   let t = at
@@ -51,7 +72,7 @@ const sing = (song: Chirp[], at: number, level: number) => {
     t += (c.ms + c.gapMs) / 1000
   }
 }
-for (let t = MUSIC_S + 1, k = 0; t < MUSIC_S + FIELD_S - 1.5; t += nextSongGapMs(r, 6) / 1000, k++) sing(k === 3 ? gullCall(r) : chirpSong(r), t, k === 3 ? 0.016 : 0.022)
+for (let t = MUSIC_S + 1, k = 0; t < MUSIC_S + FIELD_S - 1.5; t += nextSongGapMs(r, 6) / 1000, k++) sing(k === 3 ? gullCall(r) : chirpSong(r), t, k === 3 ? 0.014 : 0.02)
 
 // 16-bit mono WAV.
 const pcm = Buffer.alloc(out.length * 2)
@@ -70,4 +91,4 @@ h.writeUInt16LE(16, 34)
 h.write('data', 36)
 h.writeUInt32LE(pcm.length, 40)
 writeFileSync(process.argv[2] ?? '/tmp/ambience-preview.wav', Buffer.concat([h, pcm]))
-console.log(`wrote ${MUSIC_S}s of music then ${FIELD_S}s of field sounds`)
+console.log(`wrote ${MUSIC_S}s of the tune, then ${FIELD_S}s of the map: the tune quieter with wind and birdsong`)

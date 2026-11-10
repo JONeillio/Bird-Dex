@@ -152,7 +152,7 @@ export default function MapScreen() {
           </Chip>
         </div>
         <a className="map-gear" href="#/settings" aria-label="Settings">
-          <PixelIcon name="gear" colour="#213b32" size={22} />
+          <PixelIcon name="gear" colour="#213b32" size={24} />
         </a>
         </div>
         {ready && filtered && start && (

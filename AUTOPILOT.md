@@ -100,7 +100,7 @@ Screens follow the design canvas. Bottom tabs become **Explore · Dex · Journal
 - [ ] G1 Share codes (with the year race, P13) · [ ] G2 Rival Call it (optional) · [ ] G3 Patch race (optional)
 - [ ] H1 List view · [ ] H2 Adventure skin
 - Tutorial with Pearl (renamed from Dot, 10 Nov): tickets T1-T7 in `TUTORIAL_PLAN.md` §5 (T0 welcome tour done 9 Nov, cut to 9 steps 10 Nov). Do T1 and T2 before Lewis's colleague tries it.
-- Map and sound (Joseph, 10 Nov): [x] H3 Slimmer Explore chrome · [x] H4 Fly-bys · [x] S1 Speech blips and button clicks · [x] S2 Ambience (Joseph chose both: field sounds on the map screens, music elsewhere). Phone review: map share on real tiles, fly-by size, ambience volume on the phone speaker.
+- Map and sound (Joseph, 10 Nov): [x] H3 Slimmer Explore chrome · [x] H4 Fly-bys · [x] S1 Speech blips and button clicks · [x] S2 Ambience (Joseph chose both; then asked for a softer, adventure-game-style tune that also plays on the map under the birdsong, on by default). Phone review: map share on real tiles, fly-by size, ambience volume on the phone speaker.
 - [ ] I1 First run · [ ] I2 Credits · [ ] I3 Accessibility · [ ] I4 Hand-over note
 
 **Recurring**
